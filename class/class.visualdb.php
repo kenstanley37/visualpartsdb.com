@@ -34,102 +34,38 @@
             {
                 $stmt = $this->conn->prepare("SELECT * FROM sku WHERE sku_id=:sku ");
                 $stmt->execute(array(':sku'=>$sku));
-                $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
-                // if email if found check password
+
                 if($stmt->rowCount() == 1)
                 {
                 
                     ?>
-                        <article>
+                        
+
+                        <article class="image">
                             <img class="article-img" src="http://placekitten.com/305/205" alt=" " />
                             <h1 class="article-title">
                                 Title of article
                             </h1>
                         </article>
-                        <article>
+                        <article class="info">
                             <img class="article-img" src="http://placekitten.com/320/220" alt=" " />
                             <h1 class="article-title">
                                 Title of article
                             </h1>
                         </article>
-                        <article>
+                        <article class="date">
                             <img class="article-img" src="http://placekitten.com/330/240" alt=" " />
                             <h1 class="article-title">
                                 Title of article
                             </h1>
                         </article>
-                        <article>
+                        <article class="request">
                             <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
                             <h1 class="article-title">
                                 Title of article
                             </h1>
                         </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/310/210" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article>
-                            <img class="article-img" src="http://placekitten.com/430/240" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
+                       
 
                     <?php
                 } else {

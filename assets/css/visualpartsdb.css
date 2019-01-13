@@ -56,34 +56,47 @@ header .name {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 30px;
-    max-width: 960px;
     margin: 0 auto 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .indexSearch{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
-  grid-auto-rows: 200px;
+  grid-auto-rows: 100px;
   grid-template-areas: 
-    ". a a ."
-    ". a a .";
+    "b b b b"
+    "a a a a"
+    "a a a a";
 }
 
-.imageroll {
-  grid-area: a;
-  align-self: center;
-  justify-self: center;
+.indexSearch #slideshow {
+    grid-area: a;
+    width: 100%;
+    align-self: center;
+    justify-self: center;
 }
 
-.searchForm {
-  grid-area: a;
-  align-self: center;
-  justify-self: center;
+.indexSearch .searchForm {
+    grid-area: b;
+    align-self: center;
+    justify-self: center;
+}
+
+.indexSearch article {
+    position: relative;
+}
+
+.indexSearch .article-img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .searchForm button, .searchForm input {
-    font-size: 35px;
+    font-size: 25px;
 }
 
 footer {
@@ -98,6 +111,35 @@ footer {
     position: sticky;
     bottom: 0;
     z-index: 1;
+}
+
+.searchResults .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 100px);
+    height: 600px;
+    width: 500px;
+    grid-gap: 10px;
+    grid-template-areas: 
+        "a a b"
+        "a a b"
+        "c d d";
+}
+
+.searchResults .cards .image {
+    grid-area: a;
+}
+
+.searchResults .cards .info {
+    grid-area: b;
+}
+
+.searchResults .cards .date {
+    grid-area: c;
+}
+
+.searchResults .cards .request {
+    grid-area: d;
 }
 
 /* hyperlink styling */
@@ -140,6 +182,7 @@ a:hover {
     text-shadow: 0px 0px 5px #000;
 }
 
+/*
 article {
     position: relative;
 }
@@ -153,11 +196,12 @@ article {
 .article-title {
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 50%;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+*/
 /* login form style */
 
 :focus {

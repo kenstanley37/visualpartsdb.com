@@ -18,20 +18,27 @@ require_once($path."class/class.user.php");
                 <p class="leading-text">Electrolux, Frigidaire, and more. Start your search today!</p>
             </section>
             <section class="indexSearch">
-                <div class="imageroll">
-                    test
+                <div id="slideshow">
+                    <article>
+                        <img class="article-img" src="/assets/images/slideshow1.jpg">
+                    </article>
+                    <article>
+                        <img class="article-img" src="/assets/images/slideshow2.jpg">
+                    </article>
+                    <article>
+                        <img class="article-img" src="/assets/images/slideshow3.jpg">
+                    </article>
+                    <article>
+                        <img class="article-img" src="/assets/images/slideshow4.jpg">
+                    </article>
                 </div>
                 <form class="searchForm" action="/search.php" method="get">
                     <input type="text" name="search" id="search" placeholder="Enter Part Number">
                     <button type="submit">Search</button>
                 </form>
             </section>
-            
-            
         </main>
         <?php include("inc/inc.footer.php"); ?>
     </div> <!-- end container -->
-    
-    
 </body>
 </html>

@@ -12,11 +12,13 @@
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS sku;
+DROP TABLE IF EXISTS sku_image;
 
 CREATE TABLE role
 (
-	role_id	    		INT       		PRIMARY KEY   	AUTO_INCREMENT,
-	role_name 			VARCHAR(50)		NOT NULL,
+	role_id	    		INT       			PRIMARY KEY   	AUTO_INCREMENT,
+	role_name 			VARCHAR(50)			NOT NULL,
 	role_description	VARCHAR(150)		NOT NULL
 );
 
@@ -37,10 +39,11 @@ CONSTRAINT user_role_id_fk_role_id
 	REFERENCES role(role_id)
 );
 
-CREATE TABLE parts
+CREATE TABLE sku
 (
-	sku							VARCHAR(100)	PRIMARY KEY,
+	sku_id						VARCHAR(100)	PRIMARY KEY,
 	sku_desc					VARCHAR(100),
+	sku_supplier				VARCHAR(100),
 	sku_active					TINYINT(1),
 	sku_sig_length				INT,
 	sku_sig_width				INT,
@@ -55,9 +58,25 @@ CREATE TABLE parts
 	sku_pallet_width			INT,
 	sku_pallet_height			INT,
 	sku_pallet_weight			INT,
-	sku_pallet_case_qty			INT,
+	sku_pallet_case_qty			INT
 
 );
+
+CREATE TABLE sku_image
+(
+	sku_image_id				INT				PRIMARY KEY 	AUTO_INCREMENT,
+	sku_image_sku_id			VARCHAR(100) 	NOT NULL,
+	sku_image_file_name			VARCHAR(100)	NOT NULL,
+	sku_image_url				VARCHAR(150)	NOT NULL,
+	sku_image_description		VARCHAR(100)	NOT NULL,
+	sku_image_width				INT				NOT NULL,
+	sku_image_height			INT				NOT NULL,
+
+CONSTRAINT sku_image_sku_id_fk_sku_id
+	FOREIGN KEY (sku_image_sku_id)
+	REFERENCES sku(sku_id)
+);
+
 
 INSERT INTO role VALUES 
 (NULL,'USER','General User - Can request data update'),
