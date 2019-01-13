@@ -1,0 +1,297 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+}
+
+header {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-gap: 10px;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 2em;
+    color: white;
+    background-color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+header .main-logo {
+    grid-column: 1 / 1;
+}
+
+.main-logo h1 {
+    font-size: 25px;
+}
+
+header .search {
+    grid-column: 11 / 11;
+    text-align: right;
+    font-size: 25px;
+}
+
+header .name {
+    grid-column: 12 / 12;
+    font-size: 25px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 30px;
+    max-width: 960px;
+    margin: 0 auto 30px;
+}
+
+.indexSearch{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: 200px;
+  grid-template-areas: 
+    ". a a ."
+    ". a a .";
+}
+
+.imageroll {
+  grid-area: a;
+  align-self: center;
+  justify-self: center;
+}
+
+.searchForm {
+  grid-area: a;
+  align-self: center;
+  justify-self: center;
+}
+
+.searchForm button, .searchForm input {
+    font-size: 35px;
+}
+
+footer {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 30px;
+    align-items: center;
+    text-align: center;
+    height: 5vh;
+    background-color: #333;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* hyperlink styling */
+
+a {
+	font-size: 20px;
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff0;
+}
+
+/* Generic styles ----------------------------------------------*/
+
+
+.leading {
+    height: 240px;
+    margin-bottom: 30px;
+    padding: 30px;
+    color: white;
+    background: url('/assets/images/warehouse.jpg') center #333 no-repeat;
+    background-size: cover;
+    color: white;
+    text-shadow: 0px 0px 5px #000;
+}
+
+.leading-bigtext {
+    margin-right: 60px;
+    font-weight: bold;
+    font-size: 24vw;
+}
+
+.leading-text {
+    max-width: 900px;
+    font-size: 2.2em;
+    line-height: 1.4em;
+    color: #fff;
+    text-shadow: 0px 0px 5px #000;
+}
+
+article {
+    position: relative;
+}
+
+.article-img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.article-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* login form style */
+
+:focus {
+	outline: none;
+}
+
+form {
+	margin: 10px 35px;
+}
+
+.login-wrap input {
+	border: none;
+}
+
+.login-wrap  a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.login-wrap  a:hover {
+	color: rgba(255, 152, 0, 0.79);
+	text-decoration: underline;
+}
+
+.login-wrap  input[type=text], .login-wrap input[type=password] {
+	width: 200px;
+	height: 38px;
+	border: 1px solid #cbc9c9;
+	padding-left: 5px;
+	margin-left: -5px;
+	margin-top: 3px;
+	border-radius: 0px 3px 3px 0px;
+	-webkit-border-radius: 0px 3px 3px 0px;
+	-moz-border-radius: 0px 3px 3px 0px;
+}
+
+.login-wrap  input[type=submit] {
+	width: 237px;
+	height: 40px;
+	margin-left: 17px;
+	border-radius: 3px;
+	background-color: #ae6a6a;
+	color: #f8f8f8;
+	border-radius: 2px 2px 12px 12px;
+	-webkit-border-radius: 2px 2px 12px 12px;
+	-moz-border-radius: 2px 2px 12px 12px;
+}
+
+.login-wrap  input[type=submit]:hover{
+	background-color: #607d8b;
+	color: #f8f8f8; 
+	cursor: pointer;
+}
+
+.login-wrap  #icon {
+	background-color: #F4F4F4;
+	color: #625864;
+	display: inline-block;
+	font-size: 14px;
+	padding-top: 10px;
+	padding-bottom: 7px;
+	width: 40px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+	text-align: center;
+	border-top: solid 1px #cbc9c9;
+	border-bottom: solid 1px #cbc9c9;
+	border-left: solid 1px #cbc9c9;
+	border-radius: 3px 0 0 3px;
+	-webkit-border-radius: 3px 0 0 3px;
+	-moz-border-radius: 3px 0 0 3px; 
+}
+
+.login-wrap {
+	margin: 50px auto;
+	width: 343px; 
+	height: 280px; 
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.login-wrap h1 {
+	color: #000;
+	letter-spacing: 8px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.login-wrap hr {
+	opacity: 0.2;
+}
+
+.crtacc {
+	margin-left: 75px;
+}
+
+.crtacc a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+} 
+
+
+
+@media (min-width: 700px) {
+    .leading {
+        display: flex;
+        align-items: center;
+    }
+    
+    .leading-bigtext {
+        font-size: 140px;
+    }
+    
+    .heading {
+        padding-right: 10px;
+        font-size: 16px;
+    }
+    
+    .main-logo {
+    height: 25px;
+    margin-right: 20px;
+}
+}
