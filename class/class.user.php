@@ -78,11 +78,15 @@
                         $_SESSION['fname'] = $userRow['user_fName'];
                         $_SESSION['lname'] = $userRow['user_lName'];
                     
+                        if(isset($_SESSION['emailcheck'])){
+                            unset($_SESSION['emailcheck']);
+                        }
                         header('Location: /');
                         return true;
                     }
                     else
                     {
+                        header('Location: /login.php?error=invalidpassword');
                         return false;
                     }
                 }

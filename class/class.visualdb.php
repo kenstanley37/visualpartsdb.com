@@ -32,41 +32,71 @@
         {
             try
             {
-                $stmt = $this->conn->prepare("SELECT * FROM sku WHERE sku_id=:sku ");
+                $stmt = $this->conn->prepare("SELECT * FROM sku 
+                    left join sku_image on sku_image_sku_id = sku_id
+                    WHERE sku_id=:sku and sku_image_feature = 1");
                 $stmt->execute(array(':sku'=>$sku));
-
+                $skuRow=$stmt->fetch(PDO::FETCH_ASSOC);
                 if($stmt->rowCount() == 1)
                 {
                 
                     ?>
                         
-
-                        <article class="image">
-                            <img class="article-img" src="http://placekitten.com/305/205" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article class="info">
-                            <img class="article-img" src="http://placekitten.com/320/220" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article class="date">
-                            <img class="article-img" src="http://placekitten.com/330/240" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                        <article class="request">
-                            <img class="article-img" src="http://placekitten.com/280/250" alt=" " />
-                            <h1 class="article-title">
-                                Title of article
-                            </h1>
-                        </article>
-                       
-
+                        <main class="partInfo">
+                            <section class="partImg">
+                                <img class="article-img" src="<?php echo $skuRow['sku_image_url']; ?>" alt="<?php echo $skuRow['sku_image_description']; ?>" />
+                            </section>
+                            <section class="partDetails">
+                                <table>
+                                    <tr>
+                                        <th>Part #</th>
+                                        <th>Description</th>
+                                        <th>Unit Length</th>
+                                        <th>Unit Width</th>
+                                        <th>Unit Height</th>
+                                    </tr>
+                                    <tr>
+                                        <td><?php echo $skuRow['sku_id']; ?></td>
+                                        <td><?php echo $skuRow['sku_desc']; ?></td>
+                                        <td><?php echo $skuRow['sku_sig_length']; ?></td>
+                                        <td><?php echo $skuRow['sku_sig_width']; ?></td>
+                                        <td><?php echo $skuRow['sku_sig_height']; ?></td>
+                                    </tr>
+                                </table> 
+                            </section>
+                            <section class="partRev">
+                                <table>
+                                    <tr>
+                                        <th>Date Added</th>
+                                        <th>Added By</th>
+                                        <th>Last Updated</th>
+                                        <th>Updated By</th>
+                                    </tr>
+                                    <tr>
+                                        <td><?php echo $skuRow['sku_rec_date']; ?></td>
+                                        <td><?php echo $skuRow['sku_rec_added']; ?></td>
+                                        <td><?php echo $skuRow['sku_rec_update']; ?></td>
+                                        <td><?php echo $skuRow['sku_rec_update_by']; ?></td>
+                                    </tr>
+                                </table> 
+                            </section>
+                            <section class="partSupplier">
+                                <table>
+                                    <tr>
+                                        <th>Supplier</th>
+                                        <th>Business #</th>
+                                        <th>Address</th>
+                                        <th>Email</th>
+                                    </tr>
+                                    <tr>
+                                        <td><?php echo $skuRow['sku_supplier']; ?></td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                    </tr>
+                                </table>  
+                            </section>
+                        </main>
                     <?php
                 } else {
                     ?>

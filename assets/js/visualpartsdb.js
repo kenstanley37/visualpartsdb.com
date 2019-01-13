@@ -1,9 +1,10 @@
 $(document).ready(function(){
-    start();
+   var myIndex = 0;
+    carousel();
 });
 
-function start(){
-    $("#slideshow > article:gt(0)").hide();
+function carousel() {
+ $("#slideshow > article:gt(0)").hide();
 
     setInterval(function() { 
       $('#slideshow > article:first')
@@ -12,5 +13,5 @@ function start(){
         .fadeIn(1000)
         .end()
         .appendTo('#slideshow');
-    },  3000);
+    },  5000);
 }

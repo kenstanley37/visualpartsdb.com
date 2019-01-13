@@ -18,10 +18,60 @@ body {
     grid-template-columns: 100%;
 }
 
+/* Search results style */
+
+.partInfo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-gap: 5px;
+    align-self: center;
+    justify-self: center;
+    box-shadow: 5px 5px 5px 5px #888888;
+    grid-template-areas: 
+        "a a a b"
+        "a a a d"
+        "a a a e";
+}
+
+.partInfo .partImg {
+    grid-area: a;
+}
+
+.partInfo .partImg img {
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.partInfo .partDetails {
+    grid-area: b;
+}
+
+.partInfo .partRev {
+    grid-area: d;
+}
+
+.partInfo .partSupplier {
+    grid-area: e;
+}
+
+.partInfo table, .partInfo th, .partInfo td {
+    border: 1px solid black;
+    border-collapse: collapse;  
+}
+
+.partInfo th, .partInfo td {
+    padding: 15px;  
+}
+
+/* header styling */
 header {
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
+    grid-template-areas: 
+        "a b c d";
     align-items: center;
     width: 100%;
     padding: 10px;
@@ -34,6 +84,7 @@ header {
 }
 
 header .main-logo {
+    grid-area: a;
     grid-column: 1 / 1;
 }
 
@@ -42,125 +93,39 @@ header .main-logo {
 }
 
 header .search {
+    grid-area: c;
     grid-column: 11 / 11;
     text-align: right;
     font-size: 25px;
 }
 
 header .name {
-    grid-column: 12 / 12;
-    font-size: 25px;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-gap: 30px;
-    margin: 0 auto 30px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-.indexSearch{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: 100px;
-  grid-template-areas: 
-    "b b b b"
-    "a a a a"
-    "a a a a";
-}
-
-.indexSearch #slideshow {
-    grid-area: a;
-    width: 100%;
-    align-self: center;
-    justify-self: center;
-}
-
-.indexSearch .searchForm {
-    grid-area: b;
-    align-self: center;
-    justify-self: center;
-}
-
-.indexSearch article {
-    position: relative;
-}
-
-.indexSearch .article-img {
-    height: 300px;
-    width: 100%;
-    object-fit: cover;
-}
-
-.searchForm button, .searchForm input {
-    font-size: 25px;
-}
-
-footer {
-    color: #fff;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 30px;
-    align-items: center;
-    text-align: center;
-    height: 5vh;
-    background-color: #333;
-    position: sticky;
-    bottom: 0;
-    z-index: 1;
-}
-
-.searchResults .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 200px);
-    grid-template-rows: repeat(3, 100px);
-    height: 600px;
-    width: 500px;
-    grid-gap: 10px;
-    grid-template-areas: 
-        "a a b"
-        "a a b"
-        "c d d";
-}
-
-.searchResults .cards .image {
-    grid-area: a;
-}
-
-.searchResults .cards .info {
-    grid-area: b;
-}
-
-.searchResults .cards .date {
-    grid-area: c;
-}
-
-.searchResults .cards .request {
     grid-area: d;
+    grid-column: 12 / 12;
 }
 
-/* hyperlink styling */
-
-a {
-	font-size: 20px;
-	color: #fff;
-	text-decoration: none;
+header .name a {
+    font-size: 15px;
 }
 
-a:hover {
-	color: #ff0;
+/***************************** 
+** index.php grid 
+******************************/
+.searchGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-gap: 5px;
+    grid-template-areas: 
+        "a a a a"
+        "b b b c"
+        "b b b e";
 }
-
-/* Generic styles ----------------------------------------------*/
-
 
 .leading {
+    grid-area: a;
     height: 240px;
-    margin-bottom: 30px;
-    padding: 30px;
+    padding-left: 10px;
     color: white;
     background: url('/assets/images/warehouse.jpg') center #333 no-repeat;
     background-size: cover;
@@ -181,6 +146,75 @@ a:hover {
     color: #fff;
     text-shadow: 0px 0px 5px #000;
 }
+
+.searchGrid #slideshow {
+    grid-area: b;
+    width: 95%;
+    margin-left: 15px;
+}
+
+.searchGrid .searchForm {
+    grid-area: c;
+}
+
+/* index slideshow */
+#slideshow { 
+    position: relative; 
+    top: -35px;
+}
+
+#slideshow > article { 
+    position: absolute; 
+    left: 10px; 
+    right: 10px; 
+    bottom: 10px; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    padding: 10px; 
+}
+
+#slideshow .article-img {
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+    
+}
+
+.searchForm button, .searchForm input {
+    font-size: 20px;
+}
+
+.searchGrid .information {
+    grid-area: e;
+    margin-top: 15px;
+}
+
+footer {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 30px;
+    align-items: center;
+    text-align: center;
+    height: 5vh;
+    background-color: #333;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* hyperlink styling */
+
+a {
+	font-size: 20px;
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff0;
+}
+
+
 
 /*
 article {
@@ -204,120 +238,189 @@ article {
 */
 /* login form style */
 
-:focus {
-	outline: none;
-}
-
-form {
-	margin: 10px 35px;
-}
-
-.login-wrap input {
-	border: none;
-}
-
-.login-wrap  a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-}
-
-.login-wrap  a:hover {
-	color: rgba(255, 152, 0, 0.79);
-	text-decoration: underline;
-}
-
-.login-wrap  input[type=text], .login-wrap input[type=password] {
-	width: 200px;
-	height: 38px;
-	border: 1px solid #cbc9c9;
-	padding-left: 5px;
-	margin-left: -5px;
-	margin-top: 3px;
-	border-radius: 0px 3px 3px 0px;
-	-webkit-border-radius: 0px 3px 3px 0px;
-	-moz-border-radius: 0px 3px 3px 0px;
-}
-
-.login-wrap  input[type=submit] {
-	width: 237px;
-	height: 40px;
-	margin-left: 17px;
-	border-radius: 3px;
-	background-color: #ae6a6a;
-	color: #f8f8f8;
-	border-radius: 2px 2px 12px 12px;
-	-webkit-border-radius: 2px 2px 12px 12px;
-	-moz-border-radius: 2px 2px 12px 12px;
-}
-
-.login-wrap  input[type=submit]:hover{
-	background-color: #607d8b;
-	color: #f8f8f8; 
-	cursor: pointer;
-}
-
-.login-wrap  #icon {
-	background-color: #F4F4F4;
-	color: #625864;
-	display: inline-block;
-	font-size: 14px;
-	padding-top: 10px;
-	padding-bottom: 7px;
-	width: 40px;
-	margin-left: 15px;
-	margin-bottom: 20px;
-	text-align: center;
-	border-top: solid 1px #cbc9c9;
-	border-bottom: solid 1px #cbc9c9;
-	border-left: solid 1px #cbc9c9;
-	border-radius: 3px 0 0 3px;
-	-webkit-border-radius: 3px 0 0 3px;
-	-moz-border-radius: 3px 0 0 3px; 
-}
-
 .login-wrap {
-	margin: 50px auto;
-	width: 343px; 
-	height: 280px; 
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(5, 100px);
+    height: 600px;
+    grid-gap: 10px;
+	align-self: center;
+    justify-self: center;
+	overflow: hidden;
+	text-align: center;
+    grid-template-areas: 
+        "a a a"
+        "b b b"
+        "c c c"
+		"d d d"
+        "e e e";
+}
+
+.login-wrap .a {
+	grid-area: a;
+	width: 100%;
+	align-self: center;
+    justify-self: center;
+	text-align: center;
 }
 
 .login-wrap h1 {
-	color: #000;
-	letter-spacing: 8px;
-	text-align: center;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	font-size: 25px;
 }
 
-.login-wrap hr {
-	opacity: 0.2;
+.login-wrap form {
+	width: 500px;
+	margin-left: 50px;
 }
 
-.crtacc {
-	margin-left: 75px;
+.login-wrap form input {
+	width: 290px;
+	margin-bottom: 20px;
 }
 
-.crtacc a {
-    text-decoration: none;
-    color: #000;
+.login-wrap .b {
+	grid-area: b;
+}
+
+.login-wrap .c {
+	grid-area: c;
+}
+
+.login-wrap .d {
+	grid-area: d;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    margin-left: 100px;
+    margin-bottom: 25px;
+}
+
+.login-wrap .e {
+	grid-area: e;
+    text-align: center;
+}
+
+.login-wrap .f {
+	grid-area: f;
+}
+
+.login-wrap .emailError, .login-wrap .passwordError {
+	position: absolute;
+	margin-left: 10px;
+	color: red;
+}
+
+.login-wrap .captchaError {
+	margin-left: 10px;
+	color: red;
 }
 
 
+
+/***************************************
+*
+*
+* START MEDIA QUERIES
+*
+*
+****************************************/
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-    display: block;
-    float: none;
-  }
-  .cancelbtn {
-    width: 100%;
-  }
+@media screen and (max-width: 700px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    
+    .cancelbtn {
+        width: 100%;
+    }
+    
+    .indexSearch {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: 100px;
+        grid-template-areas: 
+            "b b b b"
+            "a a a a"
+            "a a a a";
+    }
+    
+    .leading-bigtext {
+        margin-right: 60px;
+        font-weight: bold;
+        font-size: 24vw;
+    }
+
+    .leading-text {
+        max-width: 900px;
+        font-size: 1.2em;
+        line-height: 1.4em;
+        color: #fff;
+        text-shadow: 0px 0px 5px #000;
+    }
+    
+    .searchGrid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto auto auto 1fr;
+        grid-gap: 5px;
+        grid-template-areas: 
+            "a a a a"
+            "c c c c"
+            "e e e e"
+            "b b b b";
+    }
+    
+    .searchGrid .searchForm {
+        text-align: center;
+    }
+    
+    .searchGrid .information {
+        margin-left: 15px;
+    }
+    
+    header .main-logo h1 {
+        font-size: 15px;
+    }
+
+    .main-logo h1 {
+        font-size: 25px;
+    }
+    
+    header {
+        grid-template-areas: 
+        "a a a a"
+        "b b b b"
+        "c c c c";
+        grid-template-rows: auto auto auto;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+    }
+    
+    header .main-logo {
+        grid-area: a;
+        justify-content: center;
+    }
+
+    header .search {
+        grid-area: b;
+        font-size: 15px;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+    }
+
+    header .name {
+        grid-area: c;
+        justify-content: center;
+    }
+    
+    header .name a {
+        font-size: 15px;
+    }
 } 
-
-
 
 @media (min-width: 700px) {
     .leading {
@@ -333,9 +436,8 @@ form {
         padding-right: 10px;
         font-size: 16px;
     }
-    
     .main-logo {
     height: 25px;
     margin-right: 20px;
-}
+    }
 }
