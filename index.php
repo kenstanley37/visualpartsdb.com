@@ -14,7 +14,7 @@ require_once($path."class/class.user.php");
         <?php include($path."inc/inc.header.php"); ?>
         <main class="searchGrid">
             <section class="leading">
-                <p class="leading-bigtext">VPD</p>
+                <span class="dot"></span> <p class="leading-bigtext">VPD</p>
                 <p class="leading-text">Electrolux, Frigidaire, and more. Start your search today!</p>
             </section>
             <section id="slideshow">
@@ -31,15 +31,13 @@ require_once($path."class/class.user.php");
                     <img class="article-img" src="/assets/images/slideshow4.jpg">
                 </article>
             </section>
-            <section class="searchForm">
-                <form action="/search.php" method="get">
-                <input type="text" name="search" id="search" placeholder="Enter Part Number">
-                <button type="submit">Search</button>
-            </form>
+            <section id="staticImg">
+                    <img class="article-img a" src="/assets/images/slideshow1.jpg">
+                    <img class="article-img b" src="/assets/images/slideshow2.jpg">
+                    <img class="article-img c" src="/assets/images/slideshow3.jpg">
+                    <img class="article-img d" src="/assets/images/slideshow4.jpg">
             </section>
-            <section class="information">
-                <p>testing out stuff and junk and stuff</p>
-            </section>
+
 
         </main>
         <?php include("inc/inc.footer.php"); ?>

@@ -14,14 +14,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/fontawesome.min.css" > <!--load all styles -->
-    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/visualpartsdb.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/fontawesome.min.css" > <!--load all styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/visualpartsdb.css" />
     
 
     <!-- JavaScript -->
-    <script src="/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="/assets/js/visualpartsdb.js"></script>
+    <script src="/inc/js/jquery-3.3.1.min.js"></script>
+    <script src="/inc/js/visualpartsdb.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132361266-1"></script>
