@@ -12,11 +12,11 @@ require_once($path."class/class.user.php");
 <body>
     <div class="wrapper">
         <?php include($path."inc/inc.header.php"); ?>
-        <main class="searchGrid">
-            <section class="leading">
-                <span class="dot"></span> <p class="leading-bigtext">VPD</p>
-                <p class="leading-text">Electrolux, Frigidaire, and more. Start your search today!</p>
-            </section>
+        <section class="banner">
+            <span class="dot"></span> <p class="banner-bigtext">VPD</p>
+            <p class="banner-text">Electrolux, Frigidaire, and more. Start your search today!</p>
+        </section>
+        <main class="main">
             <section id="slideshow">
                 <article>
                     <img class="article-img" src="/assets/images/slideshow1.jpg">
@@ -32,13 +32,11 @@ require_once($path."class/class.user.php");
                 </article>
             </section>
             <section id="staticImg">
-                    <img class="article-img a" src="/assets/images/slideshow1.jpg">
-                    <img class="article-img b" src="/assets/images/slideshow2.jpg">
-                    <img class="article-img c" src="/assets/images/slideshow3.jpg">
-                    <img class="article-img d" src="/assets/images/slideshow4.jpg">
+                    <img class="article-img img1" src="/assets/images/slideshow1.jpg">
+                    <img class="article-img img2" src="/assets/images/slideshow2.jpg">
+                    <img class="article-img img3" src="/assets/images/slideshow3.jpg">
+                    <img class="article-img img4" src="/assets/images/slideshow4.jpg">
             </section>
-
-
         </main>
         <?php include("inc/inc.footer.php"); ?>
     </div> <!-- end container -->
