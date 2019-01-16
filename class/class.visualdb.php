@@ -42,60 +42,71 @@
                 
                     ?>
                         
-                        <main class="partInfo">
-                            <section class="partImg">
+                        <main class="search-main">
+                            <section class="search-images">
                                 <img class="article-img" src="<?php echo $skuRow['sku_image_url']; ?>" alt="<?php echo $skuRow['sku_image_description']; ?>" />
                             </section>
-                            <section class="partDetails">
-                                <table>
-                                    <tr>
-                                        <th>Part #</th>
-                                        <th>Description</th>
-                                        <th>Unit Length</th>
-                                        <th>Unit Width</th>
-                                        <th>Unit Height</th>
-                                    </tr>
-                                    <tr>
-                                        <td><?php echo $skuRow['sku_id']; ?></td>
-                                        <td><?php echo $skuRow['sku_desc']; ?></td>
-                                        <td><?php echo $skuRow['sku_sig_length']; ?></td>
-                                        <td><?php echo $skuRow['sku_sig_width']; ?></td>
-                                        <td><?php echo $skuRow['sku_sig_height']; ?></td>
-                                    </tr>
-                                </table> 
-                            </section>
-                            <section class="partRev">
-                                <table>
-                                    <tr>
-                                        <th>Date Added</th>
-                                        <th>Added By</th>
-                                        <th>Last Updated</th>
-                                        <th>Updated By</th>
-                                    </tr>
-                                    <tr>
-                                        <td><?php echo $skuRow['sku_rec_date']; ?></td>
-                                        <td><?php echo $skuRow['sku_rec_added']; ?></td>
-                                        <td><?php echo $skuRow['sku_rec_update']; ?></td>
-                                        <td><?php echo $skuRow['sku_rec_update_by']; ?></td>
-                                    </tr>
-                                </table> 
-                            </section>
-                            <section class="partSupplier">
-                                <table>
-                                    <tr>
-                                        <th>Supplier</th>
-                                        <th>Business #</th>
-                                        <th>Address</th>
-                                        <th>Email</th>
-                                    </tr>
-                                    <tr>
-                                        <td><?php echo $skuRow['sku_supplier']; ?></td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                    </tr>
-                                </table>  
-                            </section>
+                            <article>
+                                <section class="search-part-info">
+                                    <table>
+                                        <tr>
+                                            <th>Part #</th>
+                                            <td><?php echo $skuRow['sku_id']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Description</th>
+                                            <td><?php echo $skuRow['sku_desc']; ?></td>
+                                        </tr>
+                                    </table> 
+                                            <th>Description</th>
+                                            <td><?php echo $skuRow['sku_sig_length']; ?></td>
+                                        <tr>
+                                        </tr>
+                                            
+                                            <th>Unit Length</th>
+                                            <th>Unit Width</th>
+                                            <th>Unit Height</th>
+                                        <tr>
+                                            
+                                            
+                                            <td><?php echo $skuRow['sku_sig_width']; ?></td>
+                                            <td><?php echo $skuRow['sku_sig_height']; ?></td>
+                                        </tr>
+                                    
+                                </section>
+                                <section class="partRev">
+                                    <table>
+                                        <tr>
+                                            <th>Date Added</th>
+                                            <th>Added By</th>
+                                            <th>Last Updated</th>
+                                            <th>Updated By</th>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo $skuRow['sku_rec_date']; ?></td>
+                                            <td><?php echo $skuRow['sku_rec_added']; ?></td>
+                                            <td><?php echo $skuRow['sku_rec_update']; ?></td>
+                                            <td><?php echo $skuRow['sku_rec_update_by']; ?></td>
+                                        </tr>
+                                    </table> 
+                                </section>
+                                <section class="partSupplier">
+                                    <table>
+                                        <tr>
+                                            <th>Supplier</th>
+                                            <th>Business #</th>
+                                            <th>Address</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo $skuRow['sku_supplier']; ?></td>
+                                            <td>test</td>
+                                            <td>test</td>
+                                            <td>test</td>
+                                        </tr>
+                                    </table>  
+                                </section>
+                            </article>
                         </main>
                     <?php
                 } else {
