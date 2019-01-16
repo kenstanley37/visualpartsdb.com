@@ -22,7 +22,7 @@ body {
     grid-template-rows: auto auto 1fr auto;
     -ms-grid-columns: 100%;
     grid-template-columns: 100%;
-            grid-template-areas: 
+    grid-template-areas: 
         "header"
         "banner"
         "main"
@@ -38,12 +38,11 @@ header {
     display: -ms-grid;
     -ms-grid-columns: 1fr 10px 1fr 10px 1fr 10px 1fr;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-            grid-template-areas: 
+        grid-template-areas: 
         "a b c d";
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     width: 100%;
     padding: 10px;
     font-size: 2em;
@@ -59,7 +58,6 @@ header .main-logo {
     -ms-grid-row: 1;
     -ms-grid-column: 1;
     grid-area: a;
-    -ms-grid-column: 1;
     grid-column: 1 / 1;
 }
 
@@ -75,6 +73,7 @@ header .search {
     grid-column: 11 / 11;
     text-align: right;
     font-size: 25px;
+    margin: auto;
 }
 
 header .name {
@@ -83,6 +82,7 @@ header .name {
     grid-area: d;
     -ms-grid-column: 12;
     grid-column: 12 / 12;
+    margin-left:  5px;
 }
 
 header .name a {
@@ -151,14 +151,10 @@ header .name a {
     grid-area: main;
     display: grid;
     display: -ms-grid;
-    -ms-grid-columns: 50% 1fr;
+    -ms-grid-columns: (1fr)[2];
     grid-template-columns: repeat(2, 1fr);
-    -ms-grid-rows: auto 5px auto 5px 1fr;
-    grid-template-rows: auto auto 1fr;
     margin-right: 50px;
-    grid-column-gap: 5px;
-    grid-gap: 5px;
-        grid-template-areas: 
+    grid-template-areas: 
         "slide img";
 }
 
@@ -168,10 +164,9 @@ header .name a {
     -ms-grid-column: 1;
     grid-area: slide;
     position: relative; 
-    width: 95%;
+    width: 100%;
     margin-left: 15px;
 }
-
 
 .main #slideshow > article { 
     position: absolute; 
@@ -190,63 +185,55 @@ header .name a {
        object-fit: cover;
 }
 
+
 .main #staticImg {
-    -ms-grid-row: 1;
-    -ms-grid-column: 3;
     grid-area: img;
-    margin-left: 15px;
-    margin-top: 15px;
     display: grid;
     display: -ms-grid;
-    -ms-grid-columns: 1fr 5px 1fr ;
-    grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fill, 400px);
+    -ms-grid-row-align: center;
+    align-self: center;
     -ms-grid-rows: auto 20px 1fr;
     grid-template-rows: auto 1fr;
-    grid-gap: 15px;
-        grid-template-areas: 
-        "img1 img2"
-        "img3 img4";
+    grid-row-gap: 20px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
 }
 
-.main #staticImg img {
-    max-height: 260px;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
-    -ms-grid-column-align: center;
-        justify-self: center;
-    -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.4);
-            box-shadow: 0 0 20px rgba(0,0,0,0.4);
-}
-
-.main #staticImg .img1 {
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    grid-area: img1;
+.main #staticImg > img {
+    height: 250px;
+    width: 95%;
     -o-object-fit: cover;
        object-fit: cover;
 }
 
-.main #staticImg .img2 {
-    -ms-grid-row: 1;
-    -ms-grid-column: 3;
-    grid-area: img2;
+/*
+
+.main #staticImg {
+    grid-area: img;
+    display: grid;
+    display: -ms-grid;
+    -ms-grid-columns: 50% 50%;
+    grid-template-columns: repeat(auto-fill, 400px);
+    -ms-grid-row-align: center;
+    align-self: center;
+    -ms-grid-rows: auto 20px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-row-gap: 20px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
 }
 
-.main #staticImg .img3 {
-    -ms-grid-row: 3;
-    -ms-grid-column: 1;
-    grid-area: img3;
+.main #staticImg > img {
+    height: 250px;
+    width: 95%;
+    -o-object-fit: cover;
+       object-fit: cover;
 }
 
-.main #staticImg .img4 {
-    -ms-grid-row: 3;
-    -ms-grid-column: 3;
-    grid-area: img4;
-}
+*/
 
 .searchForm button, .searchForm input {
     font-size: 20px;
@@ -276,7 +263,7 @@ header .name a {
         justify-self: center;
     -webkit-box-shadow: 5px 5px 5px 5px #888888;
             box-shadow: 5px 5px 5px 5px #888888;
-        grid-template-areas: 
+            grid-template-areas: 
         "a a a b"
         "a a a d"
         "a a a e";
@@ -334,7 +321,7 @@ footer {
     -ms-grid-columns: 1fr ;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 10px;
-            grid-template-areas: 
+                grid-template-areas: 
         "a";
     -ms-grid-row-align: center;
         align-self: center;
@@ -387,7 +374,7 @@ a:hover {
         justify-self: center;
 	overflow: hidden;
 	text-align: center;
-        grid-template-areas: 
+            grid-template-areas: 
         "a a a"
         "b b b"
         "c c c"
@@ -403,8 +390,10 @@ a:hover {
 	grid-area: a;
 	width: 100%;
 	-ms-flex-item-align: center;
+	    -ms-grid-row-align: center;
 	    align-self: center;
-        justify-self: center;
+        -ms-grid-column-align: center;
+            justify-self: center;
 	text-align: center;
 }
 
@@ -442,8 +431,10 @@ a:hover {
 	-ms-grid-column-span: 5;
 	grid-area: d;
     -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
         align-self: center;
-        justify-self: center;
+        -ms-grid-column-align: center;
+            justify-self: center;
     text-align: center;
     margin-left: 100px;
     margin-bottom: 25px;
@@ -499,8 +490,8 @@ a:hover {
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 10px;
         grid-auto-rows: 100px;
-        -ms-grid-rows: auto 10px auto 10px auto;
-            grid-template-areas: 
+            -ms-grid-rows: auto 10px auto 10px auto;
+                grid-template-areas: 
             "b b b b"
             "a a a a"
             "a a a a";
@@ -529,7 +520,7 @@ a:hover {
         -ms-grid-rows: auto 5px auto 5px auto 5px 1fr;
         grid-template-rows: auto auto auto 1fr;
         grid-gap: 5px;
-            grid-template-areas: 
+                grid-template-areas: 
             "a a a a"
             "c c c c"
             "e e e e"
@@ -553,11 +544,11 @@ a:hover {
     }
     
     header {
-            grid-template-areas: 
+                grid-template-areas: 
         "a a a a"
         "b b b b"
         "c c c c";
-        -ms-grid-rows: auto 10px auto 10px auto;
+        -ms-grid-rows: auto auto auto;
         grid-template-rows: auto auto auto;
         -ms-flex-item-align: center;
             -ms-grid-row-align: center;

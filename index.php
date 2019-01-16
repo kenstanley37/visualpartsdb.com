@@ -32,10 +32,10 @@ require_once($path."class/class.user.php");
                 </article>
             </section>
             <section id="staticImg">
-                    <img class="article-img img1" src="/assets/images/slideshow1.jpg">
-                    <img class="article-img img2" src="/assets/images/slideshow2.jpg">
-                    <img class="article-img img3" src="/assets/images/slideshow3.jpg">
-                    <img class="article-img img4" src="/assets/images/slideshow4.jpg">
+                    <img class="article-img" src="/assets/images/slideshow1.jpg">
+                    <img class="article-img" src="/assets/images/slideshow2.jpg">
+                    <img class="article-img" src="/assets/images/slideshow3.jpg">
+                    <img class="article-img" src="/assets/images/slideshow4.jpg">
             </section>
         </main>
         <?php include("inc/inc.footer.php"); ?>
