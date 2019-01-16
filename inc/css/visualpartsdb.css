@@ -120,6 +120,9 @@ header .name a {
     grid-template-rows: auto 1fr;
     grid-gap: 20px;
     margin-top: 20px;
+        justify-content: center;
+    align-self: center;
+    align-items: center;
     grid-template-areas: 
         "big small";
 }
@@ -131,7 +134,7 @@ header .name a {
 }
 
 .main #slideshow > article {
-    width: 95%;
+    width: 100%;
     margin: auto;
 }
 
@@ -145,18 +148,21 @@ header .name a {
 .main #staticImg {
     grid-area: small;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 350px);
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     grid-template-rows: auto 1fr;
     grid-gap: 20px;
     justify-content: center;
     align-self: center;
+    align-items: stretch;
 }
 
-.main #staticImg img {
-    width: 100%;
+.main #staticImg > img {
+    max-width: 100%;
     padding: 10px;
-    object-fit: cover;
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    justify-content: center;
+    align-self: center;
+    align-items: center;
 }
 
 /* Search results style */
@@ -194,7 +200,6 @@ header .name a {
 
 .search-main {
     grid-area: smain;
-    margin-top: 20px;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-areas: 
@@ -213,6 +218,7 @@ header .name a {
 .search-part-info {
     grid-area: sproductinfo;
 }
+
 
 footer {
     grid-area: footer;
@@ -331,7 +337,7 @@ a:hover {
 /* Change styles for span and cancel button on extra small screens */
 
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1600px) {
     span.psw {
         display: block;
         float: none;
