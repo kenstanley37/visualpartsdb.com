@@ -5,6 +5,7 @@
 html, body {
     width: 100%;
     height: 100%;
+    margin: 0;
 }
 
 body {
@@ -12,69 +13,30 @@ body {
 }
 
 .wrapper {
-    min-height: 100%;
+    /*
+    overflow-x: hidden;
+    */
     display: grid;
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 100%;
-}
-
-/* Search results style */
-
-.partInfo {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto 1fr;
-    grid-gap: 5px;
-    align-self: center;
-    justify-self: center;
-    box-shadow: 5px 5px 5px 5px #888888;
+    min-height: 100vh;
+    grid-template-rows: 50px 200px 1fr 50px;
+    grid-template-columns: 100vw;
     grid-template-areas: 
-        "a a a b"
-        "a a a d"
-        "a a a e";
-}
-
-.partInfo .partImg {
-    grid-area: a;
-}
-
-.partInfo .partImg img {
-    max-height: 500px;
-    width: 100%;
-    object-fit: cover;
-}
-
-.partInfo .partDetails {
-    grid-area: b;
-}
-
-.partInfo .partRev {
-    grid-area: d;
-}
-
-.partInfo .partSupplier {
-    grid-area: e;
-}
-
-.partInfo table, .partInfo th, .partInfo td {
-    border: 1px solid black;
-    border-collapse: collapse;  
-}
-
-.partInfo th, .partInfo td {
-    padding: 15px;  
+        "header"
+        "banner"
+        "main"
+        "footer";
 }
 
 /* header styling */
 header {
+    grid-area: header;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: auto auto auto;
     grid-gap: 10px;
     grid-template-areas: 
-        "a b c d";
+        "a c d";
     align-items: center;
     width: 100%;
-    padding: 10px;
     font-size: 2em;
     color: white;
     background-color: #333;
@@ -111,146 +73,156 @@ header .name a {
 /***************************** 
 ** index.php grid 
 ******************************/
-.searchGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto 1fr;
-    grid-gap: 5px;
-    grid-template-areas: 
-        "a a a a"
-        "b b c c"
-        "b b c c";
-}
-
-.leading {
-    grid-area: a;
-    height: 240px;
-    padding-left: 10px;
-    color: white;
+.banner {
+    grid-area: banner;
     background: url('/assets/images/warehouse-2.jpg') center #333 no-repeat;
     background-size: cover;
+    display: grid;
+    grid-template-columns: 15% 70%;
+    grid-template-rows: auto;
+    grid-gap: 5px;
+    grid-template-areas: 
+        "logo text";
+}
+
+.logo {
+    grid-area: logo;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.text {
+    grid-area: text;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.banner-text {
+    font-size: 50px;
     color: white;
     text-shadow: 0px 0px 5px #000;
 }
 
-.dot {
-    margin-top: 50px;
-    position: absolute;
-    height: 200px;
-    width: 200px;
-    background-color: #fff;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 5px 10px #000;
-    background-image: linear-gradient(-90deg, #999, #333);
-    background: url('/inc/images/WF2CB/WF2CB-1.jpg') center #333 no-repeat;
-    background-size: cover;
-}
 
-.leading-bigtext {
-    margin-top: 50px;
-    margin-right: 60px;
+.banner-bigtext {
     font-weight: bold;
     font-size: 5em;
     color: #fff;
     z-index: 1;
-    margin-left: 20px;
 }
 
-.leading-text {
-    margin-top: 50px;
-    max-width: 900px;
-    font-size: 2.2em;
-    line-height: 1.4em;
-    color: #fff;
-    text-shadow: 0px 0px 5px #000;
+.main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 45% 45%;
+    grid-template-rows: auto 1fr;
+    grid-gap: 20px;
+    margin-top: 20px;
+    grid-template-areas: 
+        "big small";
 }
 
 /* index slideshow */
-.searchGrid #slideshow {
-    grid-area: b;
-    position: relative; 
-    top: -25px;
+
+.main #slideshow {
+    grid-area: big;
+}
+
+.main #slideshow > article {
     width: 95%;
-    margin-left: 15px;
-    margin-top: 15px;
+    margin: auto;
 }
 
-
-.searchGrid #slideshow > article { 
-    position: absolute; 
-    left: 10px; 
-    right: 10px; 
-    bottom: 10px; 
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    padding: 10px; 
-}
-
-.searchGrid #slideshow .article-img {
-    max-height: 500px;
+.main #slideshow article img {
     width: 100%;
     object-fit: cover;
-}
-
-.searchGrid #staticImg {
-    grid-area: c;
-    position: relative; 
-    width: 95%;
-    margin-left: 15px;
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: auto 1fr;
-    grid-gap: 5px;
-    grid-template-areas: 
-        "a b"
-        "c d";
-}
-
-.searchGrid #staticImg img {
-    max-height: 260px;
-    align-items: center;
-    align-self: center;
-    justify-self: center;
+    padding: 10px; 
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-.searchGrid #staticImg .a {
-    grid-area: a;
+.main #staticImg {
+    grid-area: small;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
+    grid-template-rows: auto 1fr;
+    grid-gap: 20px;
+    justify-content: center;
+    align-self: center;
 }
 
-.searchGrid #staticImg .b {
-    grid-area: c;
+.main #staticImg img {
+    width: 100%;
+    padding: 10px;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-.searchGrid #staticImg .c {
-    grid-area: b;
+/* Search results style */
+
+.partInfo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-gap: 5px;
+    align-self: center;
+    justify-self: center;
+    box-shadow: 5px 5px 5px 5px #888888;
+    grid-template-areas: 
+        "a a a b"
+        "a a a d"
+        "a a a e";
 }
 
-.searchGrid #staticImg .d {
-    grid-area: d;
+/* search page styling */
+
+.search-wrapper {
+    /*
+    overflow-x: hidden;
+    */
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 50px 50px 1fr 50px;
+    grid-template-columns: 100%;
+    grid-template-areas: 
+        "header"
+        "navbar"
+        "smain"
+        "footer";
 }
 
-.searchForm button, .searchForm input {
-    font-size: 20px;
+.search-main {
+    grid-area: smain;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+        "simages"
+        "sproductinfo";
 }
 
-.searchGrid .information {
-    grid-area: e;
-    margin-top: 15px;
+.search-main * {
+
+}
+
+.search-images {
+    grid-area: simages;
+}
+
+.search-part-info {
+    grid-area: sproductinfo;
 }
 
 footer {
+    grid-area: footer;
     color: #fff;
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-gap: 30px;
     align-items: center;
     text-align: center;
-    height: 5vh;
     background-color: #333;
-    position: sticky;
-    bottom: 0;
     z-index: 1;
 }
 
@@ -357,7 +329,9 @@ a:hover {
 *
 ****************************************/
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 700px) {
+
+
+@media screen and (max-width: 1000px) {
     span.psw {
         display: block;
         float: none;
@@ -367,105 +341,83 @@ a:hover {
         width: 100%;
     }
     
-    .indexSearch {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 10px;
-        grid-auto-rows: 100px;
+    .main {
+        grid-template-columns: auto auto;
+        justify-content: center;
+        align-self: center;
+
         grid-template-areas: 
-            "b b b b"
-            "a a a a"
-            "a a a a";
+            "big"
+            "small";
     }
     
-    .leading-bigtext {
-        margin-right: 60px;
-        font-weight: bold;
-        font-size: 24vw;
+    #slideshow {
+        justify-content: center;
+        align-self: center;
     }
 
-    .leading-text {
-        max-width: 900px;
-        font-size: 1.2em;
-        line-height: 1.4em;
-        color: #fff;
-        text-shadow: 0px 0px 5px #000;
+    .banner-text {
+        font-size: 25px;
     }
     
-    .searchGrid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: auto auto auto 1fr;
-        grid-gap: 5px;
-        grid-template-areas: 
-            "a a a a"
-            "c c c c"
-            "e e e e"
-            "b b b b";
-    }
-    
-    .searchGrid .searchForm {
-        text-align: center;
-    }
-    
-    .searchGrid .information {
-        margin-left: 15px;
-    }
-    
-    header .main-logo h1 {
-        font-size: 15px;
-    }
-
     .main-logo h1 {
         font-size: 25px;
     }
     
     header {
+        grid-area: header;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto;
+        grid-gap: 10px;
         grid-template-areas: 
-        "a a a a"
-        "b b b b"
-        "c c c c";
-        grid-template-rows: auto auto auto;
+            "a" 
+            "c" 
+            "d";
+        align-items: center;
+        justify-content: center;
         align-self: center;
-        justify-self: center;
         text-align: center;
     }
-    
+
     header .main-logo {
         grid-area: a;
-        justify-content: center;
+        text-align: center;
+        grid-column: 1 / 12;
+    }
+
+    .main-logo h1 {
+        font-size: 25px;
     }
 
     header .search {
-        grid-area: b;
-        font-size: 15px;
-        align-self: center;
-        justify-self: center;
+        grid-area: c;
         text-align: center;
+        grid-column: 1 / 12;
+        font-size: 25px;
     }
 
     header .name {
-        grid-area: c;
-        justify-content: center;
+        grid-area: d;
+        text-align: center;
+        grid-column: 1 / 12;
     }
     
-    header .name a {
-        font-size: 15px;
-    }
-} 
-
-@media (min-width: 700px) {
-    .leading {
-        display: flex;
-        align-items: center;
-    }
-    
-    .heading {
-        padding-right: 10px;
-        font-size: 16px;
-    }
-    .main-logo {
-        height: 25px;
-        margin-right: 20px;
-    }
+    .wrapper {
+    /*
+    overflow-x: hidden;
+    */
+    display: grid;
+    grid-template-rows: 100px 200px 1fr auto;
+    grid-template-columns: 100%;
+    grid-template-areas: 
+        "header"
+        "banner"
+        "main"
+        "footer";
 }
+    
+}
+
+
+ 

@@ -24,7 +24,7 @@ if(isset($_GET['search'])){
     <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
 </head>
 <body>
-    <div class="wrapper">
+    <div class="search-wrapper">
         <?php include($path."inc/inc.header.php"); ?>
             <?php $vpd->skuSearch($search); ?>
         <?php include("inc/inc.footer.php"); ?>
