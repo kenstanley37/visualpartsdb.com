@@ -304,8 +304,8 @@ nav a:hover {
     padding: 10px;
 }
 
-.search-part-info thead  {
-
+.skudetails tr {
+    height: 25px;
 }
 
 .search-part-info thead th {

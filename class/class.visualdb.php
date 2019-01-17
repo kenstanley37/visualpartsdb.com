@@ -50,12 +50,10 @@
                 
                 if($stmt->rowCount() == 1)
                 {
-                    $timesSearched = $skuRow['sku_times_searched'] + 1;
                     // lets update the search ticker for this sku
                     try {
-                        $stmt = $this->conn->prepare("UPDATE sku SET sku_times_searched=:timesSearched where sku_id=:skuid");
-                        $stmt->bindparam(":timesSearched", $timesSearched);
-                        $stmt->bindparam(":skuid", $sku);
+                        $stmt = $this->conn->prepare("INSERT INTO sku_search (sku_search_sku) VALUES (:sku_search_id)");
+                        $stmt->bindparam(":sku_search_id", $sku);
                         $stmt->execute();
                     }
                     catch(PDOException $e)
