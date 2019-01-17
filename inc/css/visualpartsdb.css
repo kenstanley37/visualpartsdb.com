@@ -440,7 +440,7 @@ a:hover {
 /* Change styles for span and cancel button on extra small screens */
 
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1300px) {
     span.psw {
         display: block;
         float: none;
