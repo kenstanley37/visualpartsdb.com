@@ -8,6 +8,7 @@ require_once($path."class/class.func.php");
 if(isset($_GET['search'])){
     $vail = new VALIDATE;
     $vpd = new VISUALDB;
+    $user = new USER;
     $search = $_GET['search'];
     $search = $vail->sanitizeString($search);
 }
@@ -27,9 +28,16 @@ if(isset($_GET['search'])){
         <header class="search-header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
+        <?php 
+            if($user->accessCheck() == "ADMIN"){
+                ?>
         <nav class="navbar">
             <?php include($path."inc/inc.navbar.php"); ?>
         </nav>
+                <?php
+            }
+        ?>
+        
         <main class="search-main">
             <?php $vpd->skuSearch($search); ?>
         </main>

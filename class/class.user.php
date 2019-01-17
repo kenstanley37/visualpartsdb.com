@@ -112,7 +112,7 @@
                 {
                     $stmt = $this->conn->prepare("SELECT * FROM user 
                     left join role on user_role_id = role_id
-                    WHERE user_role_id=:uid");
+                    WHERE user_id=:uid");
                     $stmt->execute(array(':uid'=>$uid));
                     $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
                     // if email if found check password

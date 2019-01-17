@@ -83,7 +83,6 @@
                                     ?>
                                     
                                 </section>
-                                
                             </article>
 
                             <article class="search-part-info">
@@ -94,18 +93,18 @@
                                                 <th>Part #</th>
                                                 <td><?php echo $skuRow['sku_id']; ?></td>
                                             </tr>
-                                        <tr>
-                                            <th>Description</th>
-                                            <td><?php echo $skuRow['sku_desc']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Dimension UOM</th>
-                                            <td>Inches</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Weight UOM</th>
-                                            <td>Pounds</td>
-                                        </tr>
+                                            <tr>
+                                                <th>Description</th>
+                                                <td><?php echo $skuRow['sku_desc']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dimension UOM</th>
+                                                <td>Inches</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Weight UOM</th>
+                                                <td>Pounds</td>
+                                            </tr>
                                         </tbody>                                    
                                     </table> 
                                     <?php
