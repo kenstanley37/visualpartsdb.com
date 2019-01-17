@@ -198,33 +198,136 @@ header .name a {
         "footer";
 }
 
-.search-main {
-    grid-area: smain;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-areas: 
-        "simages"
-        "sproductinfo";
+.search-header {
+    grid-area: header;
 }
 
-.search-main * {
+nav {
+    grid-area: navbar;
+    display: grid;
+    grid-template-columns: 30% 30% 35%;
+    grid-gap: 1em;
+    grid-template-areas: 
+        "navpart navother navuser";
+    align-items: center;
+    text-align: center;
+    border-bottom: 4px solid #fff;
+    background: #333;
+}
 
+nav a {
+    width: 175px;
+    border: 1px solid #000;
+    background-color: #4CAF50; /* Green */
+    margin-right: 10px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+nav a:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.navPartManagement {
+    grid-area: navpart;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.navOther {
+    grid-area: navother;
+    text-align: center;
+}
+
+.navUserManagement {
+    grid-area: navuser;
+    text-align: right;
+}
+
+.search-main {
+    grid-area: smain;
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 50% 40%;
+    grid-template-areas: 
+        "simages sproductinfo";
 }
 
 .search-images {
     grid-area: simages;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas: 
+        "skutitle"
+        "skuimages";
+}
+
+.skutitle {
+    grid-area: skutitle;
+    margin-left: 25px;
+}
+
+.skutitle h1 {
+    font-size: 25px;
+}
+
+.skuimage {
+    grid-area: skuimages;
 }
 
 .search-part-info {
     grid-area: sproductinfo;
 }
 
+.skudetails {
+    grid-area: skudetails;
+    box-shadow: 5px 10px #888888;
+    margin:auto;
+}
+
+.search-wrapper table, .search-wrapper table th, .search-wrapper table td,  .search-wrapper table tr{
+    /* order: 5px solid black; */
+    text-align: left;
+}
+
+.search-wrapper table th {
+    width: 200px;
+    padding-right: 15px;
+}
+
+.search-wrapper table {
+    margin-bottom: 25px;
+}
+
+.skudetails {
+    border: 1px solid #000;
+    padding: 10px;
+}
+
+.search-part-info thead  {
+
+}
+
+.search-part-info thead th {
+    font-size: 20px;
+    border-radius: 0 50px 0 0;
+    background-color: #4CAF50;
+    border-color: #000 #000 0 0;
+    vertical-align: middle;
+    height: 30px;
+    color: #fff;
+    padding-left: 10px;
+}
+
+.indent50 {
+    margin-left: 50px;
+}
 
 footer {
     grid-area: footer;
     color: #fff;
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto;
     grid-gap: 30px;
     align-items: center;
     text-align: center;

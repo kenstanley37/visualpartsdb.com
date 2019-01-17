@@ -11,12 +11,14 @@ require_once($path."class/class.user.php");
 </head>
 <body>
     <div class="wrapper">
-        <?php include($path."inc/inc.header.php"); ?>
-        <section class="banner">
+        <header>
+            <?php include($path."inc/inc.header.php"); ?>
+        </header>
+        <article class="banner">
             <section class="text">
                 <h1 class="banner-text">Electrolux, Frigidaire, and more. Start your search today!</h1>
             </section>
-        </section>
+        </article>
         <main class="main">
             <section id="slideshow">
                 <article>
@@ -39,7 +41,9 @@ require_once($path."class/class.user.php");
                     <img class="article-img" src="/assets/images/slideshow4.jpg">
             </section>
         </main>
-        <?php include("inc/inc.footer.php"); ?>
+        <footer>
+            <?php include("inc/inc.footer.php"); ?>
+        </footer>
     </div> <!-- end container -->
 </body>
 </html>

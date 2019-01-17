@@ -10,7 +10,6 @@ if(isset($_GET['search'])){
     $vpd = new VISUALDB;
     $search = $_GET['search'];
     $search = $vail->sanitizeString($search);
-    
 }
 
 ?>
@@ -19,15 +18,24 @@ if(isset($_GET['search'])){
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Visual Parts Database: <?php if(isset($search)){echo $search;} ?></title>
+    <title>Visual Parts Database: <?php if(isset($search)){echo strtoupper($search);} else {echo "Search";} ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
 </head>
 <body>
     <div class="search-wrapper">
-        <?php include($path."inc/inc.header.php"); ?>
+        <header class="search-header">
+            <?php include($path."inc/inc.header.php"); ?>
+        </header>
+        <nav class="navbar">
+            <?php include($path."inc/inc.navbar.php"); ?>
+        </nav>
+        <main class="search-main">
             <?php $vpd->skuSearch($search); ?>
-        <?php include("inc/inc.footer.php"); ?>
+        </main>
+        <footer>
+            <?php include("inc/inc.footer.php"); ?>
+        </footer>    
     </div>
 </body>
 </html>

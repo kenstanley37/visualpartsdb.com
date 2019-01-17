@@ -73,13 +73,14 @@ if(isset($_GET['error'])){
 </head>
 <body>
     <div class="wrapper">
-        <?php include($path."inc/inc.header.php"); ?>
+        <header>
+            <?php include($path."inc/inc.header.php"); ?>
+        </header>
         <main class="searchGrid">
             <section class="leading">
                 <p class="leading-bigtext">VPD</p>
                 <p class="leading-text">Electrolux, Frigidaire, and more. Start your search today!</p>
             </section>
-           
         </main>
         <section class="login-wrap">
              <section class="a">
@@ -108,7 +109,9 @@ if(isset($_GET['error'])){
                     </div>
                 </form>
             </section>
-        <?php include("inc/inc.footer.php"); ?>
+        <footer>
+            <?php include("inc/inc.footer.php"); ?>
+        </footer>
     </div> <!-- end container -->
 </body>
 </html>

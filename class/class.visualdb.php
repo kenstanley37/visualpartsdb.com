@@ -18,6 +18,8 @@
             {
                 echo "Connection error: " . $e->getMessage(); // return error message
             }
+            
+            require_once('class.user.php');
         } // end construct
         
         // *************************************************************
@@ -25,89 +27,186 @@
         // *************************************************************
         public function __destruct()
         {
+            // close connection to the DB
             $this->conn = null;
         } // end destruct
         
+        
+        // *************************************************************
+        // Usage: skuSearch(sku);
+        // searches the database for requested sku and returns information
+        // based on users access.
+        // *************************************************************
         public function skuSearch($sku)
         {
+            $sku = strtoupper($sku);
+            $user = new USER;
             try
             {
                 $stmt = $this->conn->prepare("SELECT * FROM sku 
-                    left join sku_image on sku_image_sku_id = sku_id
-                    WHERE sku_id=:sku and sku_image_feature = 1");
+                    WHERE sku_id=:sku");
                 $stmt->execute(array(':sku'=>$sku));
                 $skuRow=$stmt->fetch(PDO::FETCH_ASSOC);
+                
                 if($stmt->rowCount() == 1)
                 {
+                    $timesSearched = $skuRow['sku_times_searched'] + 1;
+                    // lets update the search ticker for this sku
+                    try {
+                        $stmt = $this->conn->prepare("UPDATE sku SET sku_times_searched=:timesSearched where sku_id=:skuid");
+                        $stmt->bindparam(":timesSearched", $timesSearched);
+                        $stmt->bindparam(":skuid", $sku);
+                        $stmt->execute();
+                    }
+                    catch(PDOException $e)
+                    {
+                        echo $e->getMessage();
+                    }	
+                    
+                    
+                    $skuimages = $this->conn->prepare("SELECT * FROM sku_image 
+                    WHERE sku_image_sku_id=:sku");
+                    $skuimages->execute(array(':sku'=>$sku));
                 
                     ?>
-                        
-                        <main class="search-main">
-                            <section class="search-images">
-                                <img class="article-img" src="<?php echo $skuRow['sku_image_url']; ?>" alt="<?php echo $skuRow['sku_image_description']; ?>" />
-                            </section>
-                            <article>
-                                <section class="search-part-info">
+                            <article class="search-images">
+                                <section class="skutitle">
+                                    <h1><?php echo $skuRow['sku_id']; ?></h1>
+                                </section>
+                                <section class="skuimages">
+                                    <?php 
+                                        while($skuimagerow = $skuimages->fetch()){
+                                            ?>
+                                            <img class="article-img" src="<?php echo $skuimagerow['sku_image_url']; ?>" alt="<?php echo $skuimagerow['sku_image_description']; ?>" />
+                                            <?php
+                                        }
+                                    ?>
+                                    
+                                </section>
+                                
+                            </article>
+
+                            <article class="search-part-info">
+                                <section class="skudetails">
                                     <table>
-                                        <tr>
-                                            <th>Part #</th>
-                                            <td><?php echo $skuRow['sku_id']; ?></td>
-                                        </tr>
+                                        <tbody>
+                                            <tr>
+                                                <th>Part #</th>
+                                                <td><?php echo $skuRow['sku_id']; ?></td>
+                                            </tr>
                                         <tr>
                                             <th>Description</th>
                                             <td><?php echo $skuRow['sku_desc']; ?></td>
                                         </tr>
+                                        <tr>
+                                            <th>Dimension UOM</th>
+                                            <td>Inches</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Weight UOM</th>
+                                            <td>Pounds</td>
+                                        </tr>
+                                        </tbody>                                    
                                     </table> 
-                                            <th>Description</th>
-                                            <td><?php echo $skuRow['sku_sig_length']; ?></td>
-                                        <tr>
-                                        </tr>
-                                            
-                                            <th>Unit Length</th>
-                                            <th>Unit Width</th>
-                                            <th>Unit Height</th>
-                                        <tr>
-                                            
-                                            
-                                            <td><?php echo $skuRow['sku_sig_width']; ?></td>
-                                            <td><?php echo $skuRow['sku_sig_height']; ?></td>
-                                        </tr>
+                                    <?php
+                                        if(!empty($user->accessCheck()))
+                                        {
+                                            ?>
+                                                
+                                            <table class="indent50">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Unit Data</th> 
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Length</th>
+                                                        <td><?php echo $skuRow['sku_sig_length']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Width</th>
+                                                        <td><?php echo $skuRow['sku_sig_width']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Height</th>
+                                                        <td><?php echo $skuRow['sku_sig_height']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Weight LBS</th>
+                                                        <td><?php echo $skuRow['sku_sig_weight']; ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table> 
+
+                                            <table class="indent50">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Case Data</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Length</th>
+                                                        <td><?php echo $skuRow['sku_case_length']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Width</th>
+                                                        <td><?php echo $skuRow['sku_case_width']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Height</th>
+                                                        <td><?php echo $skuRow['sku_case_height']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Weight LBS</th>
+                                                        <td><?php echo $skuRow['sku_case_weight']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Qty Per</th>
+                                                        <td><?php echo $skuRow['sku_case_qty']; ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table> 
+
+                                            <table class="indent50">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Pallet Data</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Length</th>
+                                                        <td><?php echo $skuRow['sku_pallet_length']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Width</th>
+                                                        <td><?php echo $skuRow['sku_pallet_width']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Height</th>
+                                                        <td><?php echo $skuRow['sku_pallet_height']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Weight LBS</th>
+                                                        <td><?php echo $skuRow['sku_pallet_weight']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Qty Per</th>
+                                                        <td><?php echo $skuRow['sku_pallet_qty']; ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table> 
+                                    
+                                            <?php
+                                        }
+                    
+                                    ?>
                                     
                                 </section>
-                                <section class="partRev">
-                                    <table>
-                                        <tr>
-                                            <th>Date Added</th>
-                                            <th>Added By</th>
-                                            <th>Last Updated</th>
-                                            <th>Updated By</th>
-                                        </tr>
-                                        <tr>
-                                            <td><?php echo $skuRow['sku_rec_date']; ?></td>
-                                            <td><?php echo $skuRow['sku_rec_added']; ?></td>
-                                            <td><?php echo $skuRow['sku_rec_update']; ?></td>
-                                            <td><?php echo $skuRow['sku_rec_update_by']; ?></td>
-                                        </tr>
-                                    </table> 
-                                </section>
-                                <section class="partSupplier">
-                                    <table>
-                                        <tr>
-                                            <th>Supplier</th>
-                                            <th>Business #</th>
-                                            <th>Address</th>
-                                            <th>Email</th>
-                                        </tr>
-                                        <tr>
-                                            <td><?php echo $skuRow['sku_supplier']; ?></td>
-                                            <td>test</td>
-                                            <td>test</td>
-                                            <td>test</td>
-                                        </tr>
-                                    </table>  
-                                </section>
                             </article>
-                        </main>
+
                     <?php
                 } else {
                     ?>

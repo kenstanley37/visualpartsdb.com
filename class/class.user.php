@@ -98,6 +98,40 @@
         }
         
         // *************************************************************
+        // Usage: accessCheck();
+        // returns the role of the current user to secure access 
+        // to different sections of the website.
+        // *************************************************************
+        
+        public function accessCheck()
+        {
+            if(isset($_SESSION['user_id']))
+            {
+                $uid = $_SESSION['user_id'];
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT * FROM user 
+                    left join role on user_role_id = role_id
+                    WHERE user_role_id=:uid");
+                    $stmt->execute(array(':uid'=>$uid));
+                    $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+                    // if email if found check password
+                    if($stmt->rowCount() == 1)
+                    {
+                        return $userRow['role_name'];
+                    }
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            }
+            
+            
+        }
+        
+        
+        // *************************************************************
         // Usage: doLogout()
         // unsets and destory sessions. Sends user back to root url
         // *************************************************************
