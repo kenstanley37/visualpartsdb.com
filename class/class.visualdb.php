@@ -1,13 +1,18 @@
 <?php
+    require_once('class.db.php');
+
     class VISUALDB
     {
         private $conn;
+        public $imageMessage;
 
         // *************************************************************
         // Constructor to connect to the database
         // *************************************************************
         public function __construct()
         {
+            $this->imageMessage = '';
+            
             try 
             {
                 $database = new Database();
@@ -30,6 +35,16 @@
             // close connection to the DB
             $this->conn = null;
         } // end destruct
+        
+        
+        // *************************************************************
+        // Usage: imageMessage($message);
+        // sets success or error message of image upload
+        // *************************************************************
+        public function imageMessage($message)
+        {
+            $this->imageMessage = $message;
+        }
         
         
         // *************************************************************
@@ -65,17 +80,35 @@
                     $skuimages = $this->conn->prepare("SELECT * FROM sku_image 
                     WHERE sku_image_sku_id=:sku");
                     $skuimages->execute(array(':sku'=>$sku));
-                
                     ?>
                             <article class="search-images">
                                 <section class="skutitle">
                                     <h1><?php echo $skuRow['sku_id']; ?></h1>
+                                    <?php if($user->accessCheck() == "ADMIN")
+                                    {
+                                        ?>
+                                            <form action="image_upload.php" method="post" enctype="multipart/form-data">
+                                                Select image to upload:
+                                                <input type="file" name="file" id="file">
+                                                <input type="text" name="desc" id="desc" placeholder="Description">
+                                                <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
+                                                <input type="submit" value="Upload Image" name="imageSubmit">
+                                            </form>
+                                            <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
+                                        <?php                                            
+                                    
+                                    }
+                                    ?>
                                 </section>
                                 <section class="skuimages">
                                     <?php 
                                         while($skuimagerow = $skuimages->fetch()){
                                             ?>
-                                            <img class="article-img" src="<?php echo $skuimagerow['sku_image_url']; ?>" alt="<?php echo $skuimagerow['sku_image_description']; ?>" />
+                                        <figure>
+                                            <a href="<?php echo $skuimagerow['sku_image_url']; ?>" target="_blank"><img src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" /></a>
+                                            <figcaption><?php echo $skuimagerow['sku_image_description']; ?></figcaption>
+                                        </figure>
+                                            
                                             <?php
                                         }
                                     ?>
@@ -130,7 +163,7 @@
                                                         <td><?php echo $skuRow['sku_sig_height']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Weight LBS</th>
+                                                        <th>Weight</th>
                                                         <td><?php echo $skuRow['sku_sig_weight']; ?></td>
                                                     </tr>
                                                 </tbody>
@@ -156,7 +189,7 @@
                                                         <td><?php echo $skuRow['sku_case_height']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Weight LBS</th>
+                                                        <th>Weight</th>
                                                         <td><?php echo $skuRow['sku_case_weight']; ?></td>
                                                     </tr>
                                                     <tr>
@@ -186,7 +219,7 @@
                                                         <td><?php echo $skuRow['sku_pallet_height']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Weight LBS</th>
+                                                        <th>Weight</th>
                                                         <td><?php echo $skuRow['sku_pallet_weight']; ?></td>
                                                     </tr>
                                                     <tr>
@@ -223,6 +256,191 @@
             {
                 echo $e->getMessage();
             }
+        } // end skuSearch
+        
+        // *************************************************************
+        // Usage: addImage(sku);
+        // Adds a new image to current sku
+        // *************************************************************
+        public function addImage($sku, $desc, $image)
+        {
+            $sku = strtoupper($sku);  // ensure sku is upper case
+            $desc = strtoupper($desc);
+            $_supportedFormats = ['image/png','image/jpeg','image/gif'];
+            $uploadPath = 'images/'.$sku.'/';
+            $exif = exif_read_data($image['tmp_name']);
+            
+            if (!empty($exif['Orientation'])) {
+                switch ($exif['Orientation']) {
+                case 3:
+                    $angle = 180 ;
+                    break;
+
+                case 6:
+                    $angle = -90;
+                    break;
+
+                case 8:
+                    $angle = 90; 
+                    break;
+                default:
+                    $angle = 0;
+                    break;
+                } 
+            }  else {
+                    $angle = 0;
+                }  
+            
+            if (is_array($image))
+            {
+               if (in_array($image['type'],$_supportedFormats))
+               {
+                   if(!is_dir('images/'.$sku)){
+                        //Directory does not exist, so lets create it.
+                        mkdir('images/'.$sku, 0755, true);
+                    }
+                    $fileName = $image['tmp_name']; 
+                    // get the dims of the image
+                    $sourceProperties = getimagesize($fileName);
+                    // add the time to the image name for a unique file name
+                    $resizeFileName = time();
+                    // get the image extension name
+                    $fileExt = pathinfo($image['tmp_name'], PATHINFO_EXTENSION);
+                    // get image propertities
+                    $uploadImageType = $sourceProperties[2];
+                    $sourceImageWidth = $sourceProperties[0];
+                    $sourceImageHeight = $sourceProperties[1];
+                    switch ($uploadImageType) {
+                        case IMAGETYPE_JPEG:
+                            // create a image in memory
+                            $resourceType = imagecreatefromjpeg($fileName); 
+                            // resize the image
+                            $imageLayerFull = $this->resizeImageFull($resourceType,$sourceImageWidth,$sourceImageHeight);
+                            // make a thumbnail of the image
+                            $imageLayerThumb = $this->resizeImageThumb($resourceType,$sourceImageWidth,$sourceImageHeight);
+                            // rotate the image back to the orignal
+                            $imageLayerFull = imagerotate($imageLayerFull, $angle, 0);
+                            // rotate the thumb back to the orignal
+                            $imageLayerThumb = imagerotate($imageLayerThumb, $angle, 0);
+                            // save new image to disk
+                            imagejpeg($imageLayerFull,$uploadPath.$sku.'-'.$resizeFileName.'_full.jpeg');
+                            // save new thumb to disk
+                            imagejpeg($imageLayerThumb,$uploadPath.$sku.'-'.$resizeFileName.'_thumb.jpeg');
+                            // add image to database
+                            $this->AddImageUrl($sku, '/'.$uploadPath.$sku.'-'.$resizeFileName.'_full.jpeg', '/'.$uploadPath.$sku.'-'.$resizeFileName.'_thumb.jpeg', $desc);
+                            break;
+
+                        case IMAGETYPE_GIF:
+                            $resourceType = imagecreatefromgif($fileName); 
+                            $imageLayerFull = $this->resizeImageFull($resourceType,$sourceImageWidth,$sourceImageHeight);
+                            $imageLayerThumb = $this->resizeImageThumb($resourceType,$sourceImageWidth,$sourceImageHeight);
+                            $imageLayerFull = imagerotate($imageLayerFull, $angle, 0);
+                            $imageLayerThumb = imagerotate($imageLayerThumb, $angle, 0);
+                            imagegif($imageLayerFull,$uploadPath.$sku."full_".$resizeFileName.'.gif');
+                            imagegif($imageLayerThumb,$uploadPath.$sku."thumb_".$resizeFileName.'.gif');
+                            break;
+
+                        case IMAGETYPE_PNG:
+                            $resourceType = imagecreatefrompng($fileName); 
+                            $imageLayerFull = $this->resizeImageFull($resourceType,$sourceImageWidth,$sourceImageHeight);
+                            $imageLayerThumb = $this->resizeImageThumb($resourceType,$sourceImageWidth,$sourceImageHeight);
+                            $imageLayerFull = imagerotate($imageLayerFull, $angle, 0);
+                            $imageLayerThumb = imagerotate($imageLayerThumb, $angle, 0);
+                            imagepng($imageLayerFull,$uploadPath.$sku."full_".$resizeFileName.'.png');
+                            imagepng($imageLayerThumb,$uploadPath.$sku."thumb_".$resizeFileName.'.png');
+                            break;
+
+                        default:
+                            $imageProcess = 0;
+                            break;
+                    }
+                   return 1;
+               } else 
+               {
+                   return 0;
+               }
+            } else 
+            {
+                return 0;
+            }
+        } // end addImage
+        
+        // *************************************************************
+        // Usage: resizeImageThumb($resourceType,$image_width,$image_height)
+        // creates a thumbnail of an image
+        // *************************************************************
+        function resizeImageThumb($resourceType,$image_width,$image_height) {
+            $w = $image_width;
+            $h = $image_height;
+            $max_width = 300;
+            $max_height = 300;
+            //try max width first...
+            
+            //if (($w <= $max_width) && ($h <= $max_height)) { return $image; } //no resizing needed
+            
+            //try max width first...
+            $ratio = $max_width / $w;
+            $new_w = $max_width;
+            $new_h = $h * $ratio;
+
+            //if that didn't work
+            if ($new_h > $max_height) {
+                $ratio = $max_height / $h;
+                $new_h = $max_height;
+                $new_w = $w * $ratio;
+            }
+            
+            $imageLayer = imagecreatetruecolor($new_w,$new_h);
+            imagecopyresampled($imageLayer,$resourceType,0,0,0,0, $new_w, $new_h, $image_width,$image_height);
+            return $imageLayer;
         }
+        
+        // *************************************************************
+        // Usage: resizeImageFull($resourceType,$image_width,$image_height)
+        // Resizes the image to 800x600
+        // *************************************************************
+        function resizeImageFull($resourceType,$image_width,$image_height) {
+            $w = $image_width;
+            $h = $image_height;
+            $max_width = 800;
+            $max_height = 600;
+            //try max width first...
+            
+            //if (($w <= $max_width) && ($h <= $max_height)) { return $image; } //no resizing needed
+            
+            //try max width first...
+            $ratio = $max_width / $w;
+            $new_w = $max_width;
+            $new_h = $h * $ratio;
+
+            //if that didn't work
+            if ($new_h > $max_height) {
+                $ratio = $max_height / $h;
+                $new_h = $max_height;
+                $new_w = $w * $ratio;
+            }
+            
+            $imageLayer = imagecreatetruecolor($new_w,$new_h);
+            imagecopyresampled($imageLayer,$resourceType,0,0,0,0, $new_w, $new_h, $image_width,$image_height);
+            return $imageLayer;
+        }
+        
+        public function AddImageUrl($sku, $url, $thumb, $desc) {
+            
+            try {
+                $stmt = $this->conn->prepare("INSERT INTO sku_image (sku_image_sku_id, sku_image_url, sku_image_thumb, sku_image_description) VALUES (:sku_id, :sku_url, :sku_thumb, :sku_description)");
+                $stmt->bindparam(":sku_id", $sku);
+                $stmt->bindparam(":sku_url", $url);
+                $stmt->bindparam(":sku_thumb", $thumb);
+                $stmt->bindparam(":sku_description", $desc);
+                $stmt->execute();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }	
+        }
+        
+        
     } // end class
 ?>
