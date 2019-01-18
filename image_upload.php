@@ -14,10 +14,7 @@
         $desc = $vail->sanitizeString($desc);
         clearstatcache();
         
-        if($filesize != 0){
-            header('location: /search.php?search='.$skuId.'&imageupload=missingfile');
-            exit;
-        } elseif($desc == ''){
+        if($desc == ''){
             header('location: /search.php?search='.$skuId.'&imageupload=descriptionrequired&file='.$file.'');
             exit;
         }

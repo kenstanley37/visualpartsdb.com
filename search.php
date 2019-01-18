@@ -51,12 +51,16 @@ if(isset($_GET['imageupload'])){
         <header class="search-header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
+        
+        <article class="mainnav">
+            <?php include($path."inc/inc.mainnavbar.php"); ?>
+        </article>
         <?php 
         // check if user is an ADMIN
             if($user->accessCheck() == "ADMIN"){
         ?>
         <nav class="navbar">
-            <?php include($path."inc/inc.navbar.php"); ?>
+            <?php include($path."inc/inc.adminnavbar.php"); ?>
         </nav>
         <?php
         } // end access check

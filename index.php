@@ -14,13 +14,13 @@ require_once($path."class/class.user.php");
         <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <article class="banner">
-            <section class="text">
-                <h1 class="banner-text">Electrolux, Frigidaire, and more. Start your search today!</h1>
-            </section>
+        
+        <article class="mainnav">
+            <?php include($path."inc/inc.mainnavbar.php"); ?>
         </article>
+       
         <main class="main">
-            <section id="slideshow">
+            <section class="intro">
                 <h1>Parts</h1>
                 <p>Our database of parts contains information on over 50,000 components from popular products such as:</p>
                 <ul>

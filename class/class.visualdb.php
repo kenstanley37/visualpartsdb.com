@@ -138,96 +138,95 @@
                                             </tr>
                                         </tbody>                                    
                                     </table> 
+                                                
+                                    <table class="indent50">
+                                        <thead>
+                                            <tr>
+                                                <th>Unit Data</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Length</th>
+                                                <td><?php echo $skuRow['sku_sig_length']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Width</th>
+                                                <td><?php echo $skuRow['sku_sig_width']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Height</th>
+                                                <td><?php echo $skuRow['sku_sig_height']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Weight</th>
+                                                <td><?php echo $skuRow['sku_sig_weight']; ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table> 
                                     <?php
                                         if(!empty($user->accessCheck()))
                                         {
-                                            ?>
-                                                
-                                            <table class="indent50">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Unit Data</th> 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Length</th>
-                                                        <td><?php echo $skuRow['sku_sig_length']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Width</th>
-                                                        <td><?php echo $skuRow['sku_sig_width']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Height</th>
-                                                        <td><?php echo $skuRow['sku_sig_height']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Weight</th>
-                                                        <td><?php echo $skuRow['sku_sig_weight']; ?></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table> 
+                                    ?>
+                                    <table class="indent50">
+                                        <thead>
+                                            <tr>
+                                                <th>Case Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Length</th>
+                                                <td><?php echo $skuRow['sku_case_length']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Width</th>
+                                                <td><?php echo $skuRow['sku_case_width']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Height</th>
+                                                <td><?php echo $skuRow['sku_case_height']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Weight</th>
+                                                <td><?php echo $skuRow['sku_case_weight']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Qty Per</th>
+                                                <td><?php echo $skuRow['sku_case_qty']; ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table> 
 
-                                            <table class="indent50">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Case Data</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Length</th>
-                                                        <td><?php echo $skuRow['sku_case_length']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Width</th>
-                                                        <td><?php echo $skuRow['sku_case_width']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Height</th>
-                                                        <td><?php echo $skuRow['sku_case_height']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Weight</th>
-                                                        <td><?php echo $skuRow['sku_case_weight']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Qty Per</th>
-                                                        <td><?php echo $skuRow['sku_case_qty']; ?></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table> 
-
-                                            <table class="indent50">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Pallet Data</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Length</th>
-                                                        <td><?php echo $skuRow['sku_pallet_length']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Width</th>
-                                                        <td><?php echo $skuRow['sku_pallet_width']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Height</th>
-                                                        <td><?php echo $skuRow['sku_pallet_height']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Weight</th>
-                                                        <td><?php echo $skuRow['sku_pallet_weight']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Qty Per</th>
-                                                        <td><?php echo $skuRow['sku_pallet_qty']; ?></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table> 
+                                    <table class="indent50">
+                                        <thead>
+                                            <tr>
+                                                <th>Pallet Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Length</th>
+                                                <td><?php echo $skuRow['sku_pallet_length']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Width</th>
+                                                <td><?php echo $skuRow['sku_pallet_width']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Height</th>
+                                                <td><?php echo $skuRow['sku_pallet_height']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Weight</th>
+                                                <td><?php echo $skuRow['sku_pallet_weight']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Qty Per</th>
+                                                <td><?php echo $skuRow['sku_pallet_qty']; ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table> 
                                     
                                             <?php
                                         }
