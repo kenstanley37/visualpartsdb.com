@@ -8,6 +8,14 @@
         $useridgtag = "Anonymous";
     }
 ?>
+    <!-- Google Adsense -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-1367051821928582",
+              enable_page_level_ads: true
+         });
+    </script>
     <!-- META -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,3 +40,5 @@
         gtag('set', {'user_id': '<?php echo $useridgtag; ?>'}); // Set the user ID using signed-in user_id.
         gtag('config', 'UA-132361266-1');
     </script>
+
+<link rel="shortcut icon" type="image/png" href="/favicon.png"/>

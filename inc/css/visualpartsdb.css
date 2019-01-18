@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+@import url('https://fonts.googleapis.com/css?family=Catamaran');
+
 * {
   box-sizing: border-box;
 }
@@ -17,14 +20,34 @@ body {
     overflow-x: hidden;
     */
     display: grid;
+    max-width: 100%;
     min-height: 100vh;
     grid-template-rows: 50px 200px 1fr 50px;
-    grid-template-columns: 100vw;
+    grid-template-columns: 100%;
     grid-template-areas: 
         "header"
         "banner"
         "main"
         "footer";
+}
+
+h1 {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 50px;
+}
+
+p {
+    font-family: 'Catamaran', sans-serif;
+    font-size: 25px;
+}
+
+/* hyperlink styling */
+
+a {
+	font-size: 20px;
+	text-decoration: none;
 }
 
 /* header styling */
@@ -45,6 +68,10 @@ header {
     z-index: 1;
 }
 
+header a {
+    color: #fff;
+}
+
 header .main-logo {
     grid-area: a;
     grid-column: 1 / 1;
@@ -52,6 +79,7 @@ header .main-logo {
 
 .main-logo h1 {
     font-size: 25px;
+    margin-left: 15px;
 }
 
 header .search {
@@ -59,6 +87,10 @@ header .search {
     grid-column: 11 / 11;
     text-align: right;
     font-size: 25px;
+}
+
+header .search label {
+    font-size: 15px;
 }
 
 header .name {
@@ -120,9 +152,7 @@ header .name a {
     grid-template-rows: auto 1fr;
     grid-gap: 20px;
     margin-top: 20px;
-        justify-content: center;
-    align-self: center;
-    align-items: center;
+    justify-content: center;
     grid-template-areas: 
         "big small";
 }
@@ -131,15 +161,25 @@ header .name a {
 
 .main #slideshow {
     grid-area: big;
+    position: relative;
+    justify-content: flex-start;
+    align-self: flex-start;
+    align-items: flex-start;
+    line-height: 2em;
+}
+
+.main #slideshow ul {
+    margin-left: 5%;
+    margin-top: 15px;
 }
 
 .main #slideshow > article {
-    width: 100%;
-    margin: auto;
+    max-width: 100%;
 }
 
 .main #slideshow article img {
-    width: 100%;
+    position: relative;
+    max-width: 100%;
     object-fit: cover;
     padding: 10px; 
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
@@ -154,11 +194,12 @@ header .name a {
     justify-content: center;
     align-self: center;
     align-items: stretch;
+    max-width: 100%;
 }
 
 .main #staticImg > img {
     max-width: 100%;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
     justify-content: center;
     align-self: center;
@@ -180,8 +221,6 @@ header .name a {
         "a a a d"
         "a a a e";
 }
-
-/* search page styling */
 
 .search-wrapper {
     /*
@@ -211,21 +250,11 @@ nav {
         "navpart navother navuser";
     align-items: center;
     text-align: center;
-    border-bottom: 4px solid #fff;
-    background: #333;
+    border-bottom: 1px solid #000;
 }
 
 nav a {
-    width: 175px;
-    border: 1px solid #000;
-    background-color: #4CAF50; /* Green */
-    margin-right: 10px;
-    font-size: 15px;
-    padding: 5px;
-}
-
-nav a:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    padding: 10px;
 }
 
 .navPartManagement {
@@ -370,20 +399,6 @@ footer {
     background-color: #333;
     z-index: 1;
 }
-
-/* hyperlink styling */
-
-a {
-	font-size: 20px;
-	color: #fff;
-	text-decoration: none;
-}
-
-a:hover {
-	color: #ff0;
-}
-
-
 
 /* login form style */
 
