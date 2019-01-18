@@ -89,7 +89,12 @@
                         header('Location: /login.php?error=invalidpassword');
                         return false;
                     }
+                } else 
+                {
+                    header('Location: /login.php?error=notregistered');
+                    return false;
                 }
+                
             }
             catch(PDOException $e)
             {

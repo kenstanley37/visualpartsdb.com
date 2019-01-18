@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
             $user->doLogin($email, $pass);
         }
     } else {
-        print_r($response);
+        //print_r($response);
         $captchaError = '<span class="captchaError">CAPTCHA not selected</span>';
     }  
 } // end POST processing
@@ -61,6 +61,8 @@ if(isset($_GET['error'])){
         $emailError = "Your email address is invalid";
     } else if($error == 'invalidpassword'){
         $passwordError = "Your password is incorrect";
+    } else if($error == 'notregistered'){
+        $emailError = "Email not on file";
     }
 } // end error processing
 
@@ -77,14 +79,11 @@ if(isset($_GET['error'])){
             <?php include($path."inc/inc.header.php"); ?>
         </header>
         <main class="searchGrid">
-            <section class="leading">
-                <p class="leading-bigtext">VPD</p>
-                <p class="leading-text">Electrolux, Frigidaire, and more. Start your search today!</p>
-            </section>
+
         </main>
         <section class="login-wrap">
              <section class="a">
-                <h1>Login</h1>
+                <h1>Member Login</h1>
                 <hr>
             </section>
                 <form action="login.php" method="post">
