@@ -81,40 +81,43 @@
                     WHERE sku_image_sku_id=:sku");
                     $skuimages->execute(array(':sku'=>$sku));
                     ?>
-                            <article class="search-images">
-                                <section class="skutitle">
-                                    <h1><?php echo $skuRow['sku_id']; ?></h1>
-                                    <?php if($user->accessCheck() == "ADMIN")
-                                    {
-                                        ?>
-                                            <form action="image_upload.php" method="post" enctype="multipart/form-data">
-                                                Select image to upload:
-                                                <input type="file" name="file" id="file">
-                                                <input type="text" name="desc" id="desc" placeholder="Description">
-                                                <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
-                                                <input type="submit" value="Upload Image" name="imageSubmit">
-                                            </form>
-                                            <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
-                                        <?php                                            
-                                    
-                                    }
+                            
+                        
+
+                            <article class="slogo-search">
+                                <h1><?php echo $skuRow['sku_id']; ?></h1>
+                                <?php if($user->accessCheck() == "ADMIN")
+                                {
                                     ?>
-                                </section>
-                                <section class="skuimages">
-                                    <?php 
-                                        while($skuimagerow = $skuimages->fetch()){
-                                            ?>
-                                        <figure>
-                                            <a href="<?php echo $skuimagerow['sku_image_url']; ?>" target="_blank"><img src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" /></a>
-                                            <figcaption><?php echo $skuimagerow['sku_image_description']; ?></figcaption>
-                                        </figure>
-                                            
-                                            <?php
-                                        }
-                                    ?>
-                                    
-                                </section>
+                                        <form action="image_upload.php" method="post" enctype="multipart/form-data">
+                                            Select image to upload:
+                                            <input type="file" name="file" id="file">
+                                            <input type="text" name="desc" id="desc" placeholder="Description">
+                                            <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
+                                            <input type="submit" value="Upload Image" name="imageSubmit">
+                                        </form>
+                                        <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
+                                    <?php                                            
+
+                                }
+                                ?>
                             </article>
+                        <article class="search-grid">
+                            <article class="skuimages">
+                                <?php 
+                                    while($skuimagerow = $skuimages->fetch()){
+                                        ?>
+                                    <figure>
+                                        <a href="<?php echo $skuimagerow['sku_image_url']; ?>" target="_blank"><img src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" /></a>
+                                        <figcaption><?php echo $skuimagerow['sku_image_description']; ?></figcaption>
+                                    </figure>
+
+                                        <?php
+                                    }
+                                ?>
+
+                            </article>
+
 
                             <article class="search-part-info">
                                 <section class="skudetails">
@@ -235,7 +238,7 @@
                                     
                                 </section>
                             </article>
-
+                        </article>
                     <?php
                 } else {
                     ?>
@@ -424,8 +427,11 @@
             return $imageLayer;
         }
         
+        // *************************************************************
+        // Usage: AddImageUrl($sku, $url, $thumb, $desc)
+        // Adds image to database from the addImage function
+        // *************************************************************
         public function AddImageUrl($sku, $url, $thumb, $desc) {
-            
             try {
                 $stmt = $this->conn->prepare("INSERT INTO sku_image (sku_image_sku_id, sku_image_url, sku_image_thumb, sku_image_description) VALUES (:sku_id, :sku_url, :sku_thumb, :sku_description)");
                 $stmt->bindparam(":sku_id", $sku);
@@ -439,6 +445,29 @@
                 echo $e->getMessage();
             }	
         }
+        
+        // *************************************************************
+        // Usage: randImage
+        // pulls 4 random images from the database to display on home page
+        // *************************************************************
+        public function randImage() 
+        {
+            // lets update the search ticker for this sku
+            try {
+                    $skuimages = $this->conn->prepare("SELECT * FROM sku_image ORDER BY RAND() LIMIT 4;");
+                    $skuimages->execute();
+                    while($skuimagerow = $skuimages->fetch()){
+                    ?>
+                        <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                    <?php
+                    }
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end randImage
+
         
         
     } // end class

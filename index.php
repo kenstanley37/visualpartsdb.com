@@ -2,6 +2,10 @@
 session_start();
 include("inc/inc.path.php");
 require_once($path."class/class.user.php");
+require_once($path."class/class.visualdb.php");
+
+$vpd = new VISUALDB;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,10 +38,7 @@ require_once($path."class/class.user.php");
                 </ul>
             </section>
             <section id="staticImg">
-                    <img class="article-img" src="/assets/images/slideshow1.jpg">
-                    <img class="article-img" src="/assets/images/slideshow2.jpg">
-                    <img class="article-img" src="/assets/images/slideshow3.jpg">
-                    <img class="article-img" src="/assets/images/slideshow4.jpg">
+                <?php echo $vpd->randImage(); ?>
             </section>
         </main>
         <footer>

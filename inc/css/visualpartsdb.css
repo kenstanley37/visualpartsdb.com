@@ -173,20 +173,6 @@ header .name a {
 
 /* Search results style */
 
-.partInfo {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto 1fr;
-    grid-gap: 5px;
-    align-self: center;
-    justify-self: center;
-    box-shadow: 5px 5px 5px 5px #888888;
-    grid-template-areas: 
-        "a a a b"
-        "a a a d"
-        "a a a e";
-}
-
 .search-wrapper {
     display: grid;
     min-height: 100vh;
@@ -250,47 +236,44 @@ nav a {
     grid-area: smain;
     margin-top: 15px;
     display: grid;
-    grid-template-columns: 50% 40%;
+    grid-template-columns: 90%;
+    grid-gap: 20px;
+    grid-template-areas: 
+        "searchname"
+        "searchgrid";
+    justify-content: center;
+}
+
+.slogo-search {
+    grid-area: searchname;
+}
+
+.search-grid {
+    grid-area: searchgrid;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px;
     grid-template-areas: 
         "simages sproductinfo";
-}
-
-.search-images {
-    grid-area: simages;
-    display: grid;
-    grid-template-rows: 50px 1fr;
-    grid-gap: 1em;
-    grid-template-areas: 
-        "skutitle"
-        "skuimages";
-}
-
-.skutitle {
-    grid-area: skutitle;
-    margin-left: 25px;
-}
-
-.skutitle h1 {
-    font-size: 25px;
+    justify-content: center;
 }
 
 .skuimages {
-    grid-area: skuimages;
+    grid-area: simages;
     display: grid;
-    align-items: stretch;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 20px;
-    margin-top: 15px;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    grid-gap: 2.5em;
+    justify-items: center;
+    
 }
 
 .skuimages img {
-    width: 100%;
-    max-height: 100%;
-    object-fit: cover;
+    max-width: 100%;
 }
 
 .skuimages figure {
-    position: relative;
     max-width: 300px;
     max-height: 300px;
     margin-left: 15px;
@@ -299,7 +282,6 @@ nav a {
 }
 
 .skuimages figcaption {
-    position: absolute;
     bottom: 0;
     padding: 2px;
     background-color:  rgb(76,175,80, .8);
@@ -319,10 +301,9 @@ nav a {
     grid-area: sproductinfo;
 }
 
-.skudetails {
+.search-part-info .skudetails {
     grid-area: skudetails;
     box-shadow: 5px 10px #888888;
-    margin: auto;
 }
 
 .search-wrapper table, .search-wrapper table th, .search-wrapper table td,  .search-wrapper table tr{
@@ -502,27 +483,22 @@ footer {
     header {
         grid-area: header;
         display: grid;
-        grid-template-columns: auto auto auto;
-        grid-template-rows: auto;
+        grid-template-columns: auto;
         grid-gap: 10px;
         grid-template-areas: 
-            "a" 
-            "c" 
-            "d";
-        align-items: center;
-        justify-content: center;
-        align-self: center;
-        text-align: center;
+            "a c d";
+
     }
 
     header .main-logo {
         grid-area: a;
-        text-align: center;
+        text-align: left;
         grid-column: 1 / 12;
+        font-size: 5px;
     }
 
     .main-logo h1 {
-        font-size: 25px;
+        font-size: 15px;
     }
 
     header .search {
@@ -534,14 +510,11 @@ footer {
 
     header .name {
         grid-area: d;
-        text-align: center;
+        text-align: right;
         grid-column: 1 / 12;
     }
     
     .wrapper {
-    /*
-    overflow-x: hidden;
-    */
     display: grid;
     grid-template-rows: 100px 200px 1fr auto;
     grid-template-columns: 100%;
@@ -550,7 +523,34 @@ footer {
         "banner"
         "main"
         "footer";
-}
+    }
+    
+  .search-main {
+        grid-area: smain;
+        margin-top: 15px;
+        display: grid;
+        grid-template-columns: 90%;
+        grid-gap: 20px;
+        grid-template-areas: 
+            "searchname"
+            "searchgrid";
+        justify-content: center;
+    }
+
+    .slogo-search {
+        grid-area: searchname;
+    }
+
+    .search-grid {
+        grid-area: searchgrid;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-gap: 20px;
+        grid-template-areas: 
+            "sproductinfo"
+            "simages";
+        justify-content: center;
+    }
     
 }
 
