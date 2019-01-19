@@ -1,5 +1,4 @@
 <section class="navPartManagement">
-    <a href="/addimage.php?image=<?php if(isset($search)){echo strtoupper($search);}?>" class="navLinks">Add Image</a>
     <a href="#" class="navLinks">Edit Data</a>
     <a href="#" class="navLinks">New Part</a>
 </section>

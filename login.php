@@ -15,15 +15,12 @@ $email = '';
 $captchaError = '';
 
 if(isset($_SESSION['user_id'])){
-    header('Location: /index.php');
+    header('Location: /');
 }
 
 if(isset($_SESSION['emailcheck'])){
     $email = $_SESSION['emailcheck'];
 }
-
-
-
 
 // check if form has been submitted then start validation checks and login
 if(isset($_POST['submit'])){

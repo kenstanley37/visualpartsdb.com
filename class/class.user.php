@@ -135,6 +135,71 @@
         
         
         // *************************************************************
+        // Usage: registerRequest($fname, $lname, $email, $phone, $company, $message);
+        // Writes a record to the data base for an ADMIN to approve or deny
+        // *************************************************************
+        
+        public function registerRequest($fname, $lname, $email, $phone, $company, $message)
+        {
+            if(isset($_SESSION['user_id']))
+            {
+                $uid = $_SESSION['user_id'];
+                return 'alreadyregistered';
+            } else {
+                try
+                {
+                    // Lets check if the user is already registered
+                    $stmt = $this->conn->prepare("SELECT * FROM user WHERE user_email=:user_email");
+                    $stmt->bindparam(":user_email", $email);
+                    $stmt->execute();
+                    if($stmt->rowCount() == 1)
+                    {
+                        return 'alreadyregistered';
+                    } else {
+                        // So the user isn't registered. Lets check if they have already requested to register
+                        try
+                        {
+                            $stmt = $this->conn->prepare("SELECT * FROM register_request WHERE rr_email=:user_email");
+                            $stmt->bindparam(":user_email", $email);
+                            $stmt->execute();
+                            if($stmt->rowCount() == 1)
+                            {
+                                return 'alreadyrequested';
+                            } else {
+                                try
+                                {
+                                    $stmt = $this->conn->prepare("INSERT INTO register_request (rr_fname, rr_lname, rr_email, rr_phone, rr_company, rr_message) VALUES (:fname, :lname, :email, :phone, :company, :message)");
+                                    $stmt->bindparam(":fname", $fname);
+                                    $stmt->bindparam(":lname", $lname);
+                                    $stmt->bindparam(":email", $email);
+                                    $stmt->bindparam(":phone", $phone);
+                                    $stmt->bindparam(":company", $company);
+                                    $stmt->bindparam(":message", $message);
+                                    $stmt->execute();
+                                    return 'success';
+
+                                }
+                                catch(PDOException $e)
+                                {
+                                    echo $e->getMessage();
+                                }
+                            }
+                        }
+                        catch(PDOException $e)
+                        {
+                            echo $e->getMessage();
+                        }
+                    }
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            }
+        } // end accessCheck
+        
+        
+        // *************************************************************
         // Usage: doLogout()
         // unsets and destory sessions. Sends user back to root url
         // *************************************************************

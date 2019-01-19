@@ -20,14 +20,20 @@ a, p, li {
     color: #000;
 }
 
+li {
+    line-height: 35px;
+}
+
+ul {
+    margin-left: 5%;
+    margin-top: 15px;
+}
+
 .wrapper {
-    /*
-    overflow-x: hidden;
-    */
     display: grid;
     max-width: 100%;
     min-height: 100%;
-    grid-template-rows: 50px 50px 1fr 50px;
+    grid-template-rows: 50px auto 1fr 35px;;
     grid-template-columns: 100%;
     grid-template-areas: 
         "header"
@@ -36,11 +42,22 @@ a, p, li {
         "footer";
 }
 
-h1 {
+h1, h2, h3 {
     font-family: 'Fjalla One', sans-serif;
-    font-size: 30px;
     font-weight: bold;
     line-height: 50px;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 25px;
+}
+
+h3 {
+    font-size: 20px;
 }
 
 p {
@@ -115,12 +132,12 @@ header .name a {
     display: inline-block;
     padding: 10px;
     text-align: center;
-    line-height: 2em;
+    line-height: 1em;
     border-bottom: 1px solid #000;
 }
 
 .mainnav a {
-    padding: 3em;
+    padding: 1em;
     font-size: 15px;
     text-decoration: none;
     color: #000;
@@ -133,23 +150,73 @@ header .name a {
     max-width: 100%;
     display: grid;
     grid-template-columns: 45% 45%;
-    grid-gap: 20px;
+    grid-gap: 30px;
     grid-template-areas: 
-        "intro introimages";
+        "intro introimages"
+        "member member";
     justify-content: center;
 }
 
-/* index slideshow */
+#member {
+    grid-area: member;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px;
+    grid-template-areas: 
+        "memberheader memberheader"
+        "memberrequest memberinfo";
+    justify-content: center;
+}
+
+#member .memberheader {
+    grid-area: memberheader;
+    text-align: center;
+    border-bottom: 1px solid #000;
+}
+
+#member .memberinfo {
+    grid-area: memberinfo;
+}
+
+#member .memberrequest {
+    grid-area: memberrequest;
+}
+
+.reg-textarea * {
+  vertical-align: top;
+}
+
+#member .memberrequest form.regform {
+    display: table;
+}
+
+#member .memberrequest div.regform {
+    display: table-row;
+}
+
+#member .memberrequest label, #member .memberrequest input {
+    display: table-cell;
+    margin-bottom: 10px;
+}
+
+#member .memberrequest label {
+    padding-right: 10px;
+}
+
+#member .memberrequest i, #member span {
+    padding-left: 10px;
+    color: red;
+    font-size: 9px;
+}
+
+#member span {
+    font-size: 15px;
+}
 
 .main .intro {
     grid-area: intro;
     line-height: 2em;
     max-width: 100%;
-}
-
-.main .intro ul {
-    margin-left: 5%;
-    margin-top: 15px;
 }
 
 .main #staticImg {
@@ -177,12 +244,12 @@ header .name a {
 .search-wrapper {
     display: grid;
     min-height: 100vh;
-    grid-template-rows: 50px 50px 40px 1fr 50px;
+    grid-template-rows: auto auto auto 1fr 50px;
     grid-template-columns: 100%;
     grid-template-areas: 
         "header"
         "mainnav"
-        "navbar"
+        "adminnav"
         "smain"
         "footer";
 }
@@ -196,12 +263,8 @@ header .name a {
 
 }
 
-.search-wrapper .mainnav a {
-    line-height: 10px;
-}
-
-nav {
-    grid-area: navbar;
+.adminnav {
+    grid-area: adminnav;
     display: grid;
     grid-template-columns: 30% 30% 35%;
     grid-gap: 1em;
@@ -210,11 +273,13 @@ nav {
     align-items: center;
     text-align: center;
     border-bottom: 1px solid #000;
+    line-height: 35px;
 }
 
-nav a {
+.adminnav a {
     font-size: 15px;
     padding: 10px;
+    line-height: 5px;
 }
 
 .navPartManagement {
@@ -268,30 +333,26 @@ nav a {
     width: 100%;
     grid-gap: 2.5em;
     justify-items: center;
-    
 }
 
-.skuimages img {
-    max-width: 100%;
+.skuimages figure img {
+    height: 300px;
+    margin-left: 15px;
+    object-fit: cover;
 }
 
 .skuimages figure {
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 100%;
     margin-left: 15px;
     object-fit: cover;
-    
 }
 
 .skuimages figcaption {
-    bottom: 0;
     padding: 2px;
-    background-color: rgb(76,175,80, .8);
     width: 100%;
-    color: #fff;
-    text-shadow: 1px 1px #000;
+    color: #000;
     font-size: 20px;
-    font-weight: bold;
+    text-align: center;
 }
 
 .imagemessage {
@@ -314,14 +375,22 @@ nav a {
 .search-part-info .export-data {
     grid-area: export;
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 70% 30%;
     grid-template-areas: 
-        "excel"
-        "skulist";
+        "excel skulist";
 }
 
-.search-part-info .export-data a {
-    font-size: 15px;
+.search-part-info .export-data * {
+    font-size: 15px !important;
+}
+
+.search-part-info .export-data .excel {
+    grid-area: excel;
+}
+
+.search-part-info .export-data .addtolist {
+    grid-area: skulist;
+    text-align: right;
 }
 
 .search-part-info .export-data .excel {
@@ -329,23 +398,14 @@ nav a {
 }
 
 .search-part-info .export-data .excel li {
-    display:inline;
+    display: inline;
+    line-height: 0;
+    padding-right: 10px;
 }
 
 .search-part-info .export-data .excel ul {
-    list-style: none;
-    text-align: left;
-    padding: 0;
     margin: 0;
-}
-
-.search-part-info .export-data .excel a:link,
-.search-part-info .export-data .excel a:visited {
-	padding: 20px 40px 4px 10px;
-}
-
-.search-part-info .export-data .addtolist {
-    text-align: right;
+    line-height: 0;
 }
 
 .search-part-info .skudetails {

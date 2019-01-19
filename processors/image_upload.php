@@ -1,5 +1,5 @@
 <?php
-    include("inc/inc.path.php");
+    include("../inc/inc.path.php");
     require($path.'class/class.visualdb.php');
     require_once($path."class/class.func.php");
 
@@ -18,8 +18,7 @@
             header('location: /search.php?search='.$skuId.'&imageupload=descriptionrequired&file='.$file.'');
             exit;
         }
-            
-        
+
         $result = $imageUpload->addImage($skuId, $desc, $_FILES['file']);
         
         if($result)
@@ -30,5 +29,4 @@
             header('location: /search.php?search='.$skuId.'&imageupload=notsupported');
         }
     }
-
 ?>

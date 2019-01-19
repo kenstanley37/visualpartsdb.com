@@ -87,7 +87,7 @@
                             <?php if($user->accessCheck() == "ADMIN")
                             {
                                 ?>
-                                    <form action="image_upload.php" method="post" enctype="multipart/form-data">
+                                    <form action="/processors/image_upload.php" method="post" enctype="multipart/form-data">
                                         Select image to upload:
                                         <input type="file" name="file" id="file">
                                         <input type="text" name="desc" id="desc" placeholder="Description">
@@ -281,7 +281,7 @@
             $sku = strtoupper($sku);  // ensure sku is upper case
             $desc = strtoupper($desc);
             $_supportedFormats = ['image/png','image/jpeg','image/gif'];
-            $uploadPath = 'images/'.$sku.'/';
+            $uploadPath = '../images/'.$sku.'/';
             $exif = exif_read_data($image['tmp_name']);
             
             if (!empty($exif['Orientation'])) {
@@ -309,9 +309,9 @@
             {
                if (in_array($image['type'],$_supportedFormats))
                {
-                   if(!is_dir('images/'.$sku)){
+                   if(!is_dir('../images/'.$sku)){
                         //Directory does not exist, so lets create it.
-                        mkdir('images/'.$sku, 0755, true);
+                        mkdir('../images/'.$sku, 0755, true);
                     }
                     $fileName = $image['tmp_name']; 
                     // get the dims of the image
