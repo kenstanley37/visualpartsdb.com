@@ -82,26 +82,24 @@
                     $skuimages->execute(array(':sku'=>$sku));
                     ?>
                             
-                        
-
-                            <article class="slogo-search">
-                                <h1><?php echo $skuRow['sku_id']; ?></h1>
-                                <?php if($user->accessCheck() == "ADMIN")
-                                {
-                                    ?>
-                                        <form action="image_upload.php" method="post" enctype="multipart/form-data">
-                                            Select image to upload:
-                                            <input type="file" name="file" id="file">
-                                            <input type="text" name="desc" id="desc" placeholder="Description">
-                                            <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
-                                            <input type="submit" value="Upload Image" name="imageSubmit">
-                                        </form>
-                                        <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
-                                    <?php                                            
-
-                                }
+                         <article class="slogo-search">
+                            <h1><?php echo $skuRow['sku_id']; ?></h1>
+                            <?php if($user->accessCheck() == "ADMIN")
+                            {
                                 ?>
-                            </article>
+                                    <form action="image_upload.php" method="post" enctype="multipart/form-data">
+                                        Select image to upload:
+                                        <input type="file" name="file" id="file">
+                                        <input type="text" name="desc" id="desc" placeholder="Description">
+                                        <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
+                                        <input type="submit" value="Upload Image" name="imageSubmit">
+                                    </form>
+                                    <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
+                                <?php                                            
+
+                            }
+                            ?>
+                        </article>
                         <article class="search-grid">
                             <article class="skuimages">
                                 <?php 
@@ -117,9 +115,23 @@
                                 ?>
 
                             </article>
-
-
                             <article class="search-part-info">
+                                <section class="export-data">
+                                    <section class="excel">
+                                        <ul>
+                                            <li><a href="/export/generate-xlsx.php?export=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></li>
+                                            <li><a href="search.php?export=pdf&sku=<?php echo $skuRow['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></li>
+                                        </ul>
+                                    </section>
+                                    <section class="addtolist">
+                                        <?php if(isset($_SESSION['user_id'])){ 
+                                            ?>
+                                            <a href="search.php?export=excel&sku=<?php echo $skuRow['sku_id']; ?>">Add to List <i class="fas fa-plus-circle"></i></a>
+                                            <?php
+                                        } ?> 
+                                        
+                                    </section>
+                                </section>
                                 <section class="skudetails">
                                     <table>
                                         <tbody>
@@ -456,7 +468,8 @@
             try {
                     $skuimages = $this->conn->prepare("SELECT * FROM sku_image ORDER BY RAND() LIMIT 4;");
                     $skuimages->execute();
-                    while($skuimagerow = $skuimages->fetch()){
+                    while($skuimagerow = $skuimages->fetch())
+                    {
                     ?>
                         <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
                     <?php
@@ -467,8 +480,6 @@
                     echo $e->getMessage();
                 }	
         } // end randImage
-
-        
         
     } // end class
 ?>

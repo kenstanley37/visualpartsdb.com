@@ -50,7 +50,7 @@
             }
             
             echo $loginCheck;
-        }
+        } // end isLogin
         
         // *************************************************************
         // Usage: login(test@test.com, password)
@@ -100,7 +100,7 @@
             {
                 echo $e->getMessage();
             }
-        }
+        } // end doLogin
         
         // *************************************************************
         // Usage: accessCheck();
@@ -131,9 +131,7 @@
                     echo $e->getMessage();
                 }
             }
-            
-            
-        }
+        } // end accessCheck
         
         
         // *************************************************************
@@ -143,7 +141,6 @@
         
         public function doLogout()
         {   
-            session_unset();
             session_destroy();
             header("Location: /");
             exit();

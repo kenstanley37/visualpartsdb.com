@@ -155,7 +155,7 @@ header .name a {
 .main #staticImg {
     grid-area: introimages;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-template-rows: auto 1fr;
     width: 100%;
     grid-gap: 2.5em;
@@ -300,6 +300,51 @@ nav a {
 
 .search-part-info {
     grid-area: sproductinfo;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 25px 1fr;
+    grid-gap: 0;
+    grid-template-areas: 
+        "export"
+        "skudetails";
+    justify-content: center;
+}
+
+.search-part-info .export-data {
+    grid-area: export;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+        "excel"
+        "skulist";
+}
+
+.search-part-info .export-data a {
+    font-size: 15px;
+}
+
+.search-part-info .export-data .excel {
+    text-align: left;
+}
+
+.search-part-info .export-data .excel li {
+    display:inline;
+}
+
+.search-part-info .export-data .excel ul {
+    list-style: none;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.search-part-info .export-data .excel a:link,
+.search-part-info .export-data .excel a:visited {
+	padding: 20px 40px 4px 10px;
+}
+
+.search-part-info .export-data .addtolist {
+    text-align: right;
 }
 
 .search-part-info .skudetails {

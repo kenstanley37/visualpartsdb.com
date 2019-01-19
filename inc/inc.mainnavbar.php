@@ -1,5 +1,4 @@
-    <a href="#" class="navLinks">Edit Data</a>
-    <a href="#" class="navLinks">New Part</a>
-    <a href="#" class="navLinks">Most Searched</a>
-    <a href="#" class="navLinks">User Management</a>
-    <a href="#" class="navLinks">Analytics</a>
+<a href="/#aboutvpd">About VPD</a>
+<a href="/#member">Become a Member</a>
+<?php if(isset($_SESSION['user_id'])){ echo '<a href="#" class="navLinks">My Searches</a>';} ?> 
+<?php if(isset($_SESSION['user_id'])){ echo '<a href="#" class="navLinks">My Export List</a>';} ?> 
