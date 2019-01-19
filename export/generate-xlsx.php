@@ -38,6 +38,8 @@ if(isset($_GET['export'])){
         )
         ->setKeywords("skus parts dims weights")
         ->setCategory("parts database");
+        $spreadsheet->getActiveSheet()->getPageSetup()
+            ->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
         // set the footer, header, font size, bold, 
         // https://phpspreadsheet.readthedocs.io/en/develop/topics/recipes/
         $spreadsheet->getActiveSheet()->getHeaderFooter()

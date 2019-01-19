@@ -1,0 +1,2 @@
+ErrorDocument 404 /error/index.php
+ErrorDocument 500 /error/internal-server-error.html
