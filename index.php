@@ -134,7 +134,7 @@ if(isset($_GET['result']))
                             </div>
                             <div class="regform reg-textarea">
                                 <label for="messagearea">Message: </label>
-                                <input type="text" name="messagearea" id="messagearea" id="messagearea" <?php if(isset($message)){ echo 'value='.$message;} ?>>
+                                <textarea type="text" name="messagearea" id="messagearea" id="messagearea" rows="4" cols="50"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
                             </div>
                             <div class="regform">
                                 <input type="submit" value="SUBMIT"><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
