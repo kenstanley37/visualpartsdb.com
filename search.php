@@ -62,9 +62,9 @@ if(isset($_GET['export'])){
             <?php include($path."inc/inc.header.php"); ?>
         </header>
         
-        <article class="mainnav">
+        <nav class="mainnav">
             <?php include($path."inc/inc.mainnavbar.php"); ?>
-        </article>
+        </nav>
         <?php 
         // check if user is an ADMIN
             if($user->accessCheck() == "ADMIN"){

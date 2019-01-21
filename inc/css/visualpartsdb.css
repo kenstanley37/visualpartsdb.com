@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
-@import url('https://fonts.googleapis.com/css?family=Catamaran');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 * {
   box-sizing: border-box;
@@ -16,7 +17,7 @@ html, body {
 }
 
 a, p, li {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     color: #000;
 }
 
@@ -29,21 +30,8 @@ ul {
     margin-top: 15px;
 }
 
-.wrapper {
-    display: grid;
-    max-width: 100%;
-    min-height: 100%;
-    grid-template-rows: 50px auto 1fr 35px;;
-    grid-template-columns: 100%;
-    grid-template-areas: 
-        "header"
-        "mainnavbar"
-        "main"
-        "footer";
-}
-
 h1, h2, h3 {
-    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     line-height: 50px;
 }
@@ -60,43 +48,56 @@ h3 {
     font-size: 20px;
 }
 
-p {
-    font-family: 'Catamaran', sans-serif;
-    font-size: 25px;
-}
-
 /* hyperlink styling */
 
 a {
-	font-size: 20px;
 	text-decoration: none;
+}
+
+.shadow {
+    box-shadow: 5px 5px 20px 1px #888888;
+}
+
+.none {
+    display: none;
+}
+
+.button1 {
+    border-radius: 50px 50px 50px 50px;
+    box-shadow: 0 0 5px 1px #888888;
+}
+
+/***************************** 
+** index.php grid 
+******************************/
+.wrapper {
+    display: grid;
+    grid-row-gap: 15px;
+    grid-template-columns: repeat(100%, minmax(100px, 1fr));
+    grid-template-rows: repeat(1, minmax(50px, 1fr));
+    grid-template-areas: 
+        "header"
+        "mainnavbar"
+        "indexsearch"
+        "main"
+        "membership"
+        "footer";
+    align-items: center;
+    align-self: center;
 }
 
 /* header styling */
 header {
     grid-area: header;
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 10px;
-    grid-template-areas: 
-        "a c d";
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 5px;
     align-items: center;
-    width: 100%;
     font-size: 2em;
-    color: white;
-    background-color: #333;
-    position: sticky;
-    top: 0;
-    z-index: 1;
 }
 
-header a {
-    color: #fff;
-}
-
-header .main-logo {
-    grid-area: a;
-    grid-column: 1 / 1;
+header i {
+    color: red;
 }
 
 .main-logo h1 {
@@ -105,9 +106,7 @@ header .main-logo {
 }
 
 header .search {
-    grid-area: c;
-    grid-column: 11 / 11;
-    text-align: right;
+    text-align: center;
     font-size: 25px;
 }
 
@@ -116,24 +115,29 @@ header .search label {
 }
 
 header .name {
-    grid-area: d;
-    grid-column: 12 / 12;
+    text-align: right;
+    margin-right: 15px;
 }
 
 header .name a {
     font-size: 15px;
 }
 
-/***************************** 
-** index.php grid 
-******************************/
 .mainnav {
     grid-area: mainnavbar;
-    display: inline-block;
-    padding: 10px;
+    grid-template-columns: auto 1fr auto;
+    display: grid;
+    padding: 25px;
     text-align: center;
     line-height: 1em;
-    border-bottom: 1px solid #000;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.mainnav .mainNavLogo {
+    color: red;
 }
 
 .mainnav a {
@@ -141,37 +145,105 @@ header .name a {
     font-size: 15px;
     text-decoration: none;
     color: #000;
+    height: 5px;
+    padding: 5px 5px 5px 5px;
+}
+
+.indexsearch {
+    grid-area: indexsearch;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    height: 400px;
+    background-color: azure;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.indexsearch h1 {
+    padding-bottom: 50px;
+}
+
+.indexsearch  ::-webkit-input-placeholder {
+    text-align: center;
+}
+
+.indexsearch  :-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+}
+
+.indexsearch  ::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+}
+
+.indexsearch  :-ms-input-placeholder {  
+    text-align: center; 
+}
+
+.indexsearch input {
+    background-color: #fff;
+    border: none;
+    color: rgba(0,0,0,.87);
+    word-wrap: break-word;
+    outline: none;
+    box-shadow: 0 0 3px 3px #ccc;
+    width: 500px;
+    height: 35px;
 }
 
 .main {
     grid-area: main;
-    margin-top: 25px;
-    margin-bottom: 50px;
-    max-width: 100%;
+    min-width: 100%;
     display: grid;
+    /*grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));*/
     grid-template-columns: 45% 45%;
-    grid-gap: 30px;
+    grid-gap: 5px;
     grid-template-areas: 
-        "intro introimages"
-        "member member";
+        "intro introimages";
     justify-content: center;
 }
 
-#member {
-    grid-area: member;
+.main #staticImg {
+    grid-area: introimages;
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    grid-gap: 2.5em;
+    justify-items: center;
+}
+
+.main #staticImg > img {
+    max-width: 100%;
+    height: 100%;
+    padding: 5px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+}
+
+#member {
+    background-color: antiquewhite;
+    grid-area: membership;
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 45% 45%;
+    grid-gap: 5px;
     grid-template-areas: 
         "memberheader memberheader"
         "memberrequest memberinfo";
     justify-content: center;
 }
 
+#member > h3 {
+    font-family: "Google Sans",Arial,sans-serif;
+}
+
 #member .memberheader {
     grid-area: memberheader;
     text-align: center;
-    border-bottom: 1px solid #000;
 }
 
 #member .memberinfo {
@@ -217,26 +289,6 @@ header .name a {
     grid-area: intro;
     line-height: 2em;
     max-width: 100%;
-}
-
-.main #staticImg {
-    grid-area: introimages;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-template-rows: auto 1fr;
-    width: 100%;
-    grid-gap: 2.5em;
-    justify-items: center;
-}
-
-.main #staticImg > img {
-    max-width: 100%;
-    height: 300px;
-    padding: 5px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    justify-content: center;
-    align-self: center;
-    align-items: center;
 }
 
 /* Search results style */
@@ -542,6 +594,109 @@ footer {
 	color: red;
 }
 
+/************************************
+/ search history style
+/************************************/
+
+.search-history a:link {
+  color: #666;
+  font-weight: bold;
+  text-decoration: none; 
+}
+.search-history a:visited {
+  color: #999999;
+  font-weight: bold;
+  text-decoration:none;
+}
+.search-history a:active,
+.search-history a:hover {
+	color: #bd5a35;
+	text-decoration:underline;
+}
+
+.search-history {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-size:12px;
+	text-shadow: 1px 1px 0px #fff;
+	background:#eaebec;
+	margin:20px;
+	border:#ccc 1px solid;
+
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+
+	-moz-box-shadow: 0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 0 1px 2px #d1d1d1;
+	box-shadow: 0 1px 2px #d1d1d1;
+}
+
+.search-history th {
+	padding:21px 25px 22px 25px;
+	border-top:1px solid #fafafa;
+	border-bottom:1px solid #e0e0e0;
+
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+}
+.search-history th:first-child {
+	text-align: left;
+	padding-left:20px;
+}
+.search-history tr:first-child th:first-child {
+	-moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius:3px;
+	border-top-left-radius:3px;
+}
+.search-history tr:first-child th:last-child {
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px;
+}
+.search-history tr {
+	text-align: center;
+	padding-left:20px;
+}
+.search-history td:first-child {
+	text-align: left;
+	padding-left:20px;
+	border-left: 0;
+}
+.search-history td {
+	padding:18px;
+	border-top: 1px solid #ffffff;
+	border-bottom:1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+
+	background: #fafafa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+.search-history tr.even td {
+	background: #f6f6f6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+.search-history tr:last-child td {
+	border-bottom:0;
+}
+.search-history tr:last-child td:first-child {
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px;
+}
+.search-history tr:last-child td:last-child {
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-bottom-right-radius:3px;
+}
+.search-history tr:hover td {
+	background: #f2f2f2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
+
 
 
 /***************************************
@@ -553,7 +708,7 @@ footer {
 ****************************************/
 /* Change styles for span and cancel button on extra small screens */
 
-
+/*
 @media screen and (max-width: 1300px) {
     span.psw {
         display: block;
@@ -682,6 +837,4 @@ footer {
     }
     
 }
-
-
- 
+/*

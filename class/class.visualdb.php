@@ -54,6 +54,13 @@
         // *************************************************************
         public function skuSearch($sku)
         {
+            if(isset($_SESSION['user_id']))
+            {
+                $userID = $_SESSION['user_id'];
+            } else {
+                $userID = '';
+            }
+            
             $sku = strtoupper($sku);
             $user = new USER;
             try
@@ -67,8 +74,9 @@
                 {
                     // lets update the search ticker for this sku
                     try {
-                        $stmt = $this->conn->prepare("INSERT INTO sku_search (sku_search_sku) VALUES (:sku_search_id)");
+                        $stmt = $this->conn->prepare("INSERT INTO sku_search (sku_search_sku, sku_search_by) VALUES (:sku_search_id, :sku_search_by)");
                         $stmt->bindparam(":sku_search_id", $sku);
+                        $stmt->bindparam(":sku_search_by", $userID);
                         $stmt->execute();
                     }
                     catch(PDOException $e)
@@ -480,6 +488,79 @@
                     echo $e->getMessage();
                 }	
         } // end randImage
+        
+        
+        // *************************************************************
+        // Usage: mySearches($dateFrom, $dateTo, $userID, $recordCount)
+        // returns a table of searches from users search history
+        // my date range (or all if blank)
+        // *************************************************************
+        public function mySearches($dateFrom, $dateTo, $userID, $recordCount)
+        {
+            if(empty($dateFrom) || empty($dateTo))
+            {
+                
+            }
+            // lets update the search ticker for this sku
+            try {
+                    if(empty($dateFrom) || empty($dateTo))
+                    {
+                        $stmt = $this->conn->prepare("SELECT * FROM sku_search WHERE sku_search_by = :userID");
+                        $stmt->bindparam(":userID", $userID);
+                    } else {
+                        $stmt = $this->conn->prepare("SELECT * FROM mysearches 
+                         WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo");
+                        $stmt->bindparam(":userID", $userID);
+                        $stmt->bindparam(":dateFrom", $dateFrom);
+                        $stmt->bindparam(":dateTo", $dateTo);
+                    }
+                    $stmt->execute();
+                    ?>
+                        <h1>My Search History</h1>
+                        <table class="search-history">
+                            <thead>
+                                <tr>
+                                    <th>Part Number</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>ime</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                </tr>
+                            </thead> 
+                             <tbody>
+                    <?php
+                    while($row = $stmt->fetch())
+                    {
+                    ?>
+                            <?php 
+                                $fname = $row['user_fName'];
+                                $lname = $row['user_lName'];
+                                $desc = $row['sku_desc'];
+                                $date = $row['sku_search_date']; 
+                                $newDate = new DateTime($date);
+                                $dateOnly = $newDate->format('Y-m-d'); // pull the date out
+                                $timeOnly = $newDate->format('h:i:s A'); // pull the time out
+                            ?>
+                                <tr>
+                                    <th><a href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></th>
+                                    <th><?php echo $desc; ?></th>
+                                    <th><?php echo $dateOnly; ?></th>
+                                    <th><?php echo $timeOnly; ?></th>
+                                    <th><?php echo $fname; ?></th>
+                                    <th><?php echo $lname; ?></th>
+                                </tr>
+                            
+                    <?php
+                    }
+                        ?></tbody>
+                        </table><?php
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end mySearches
         
     } // end class
 ?>
