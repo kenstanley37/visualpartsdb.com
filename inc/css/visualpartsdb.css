@@ -71,9 +71,9 @@ a {
 ******************************/
 .wrapper {
     display: grid;
-    grid-row-gap: 15px;
+    grid-gap: 15px;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-template-rows: repeat(1, minmax(50px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
     grid-template-areas: 
         "header"
         "mainnavbar"
@@ -248,9 +248,7 @@ header .name a {
 
 .main {
     grid-area: main;
-    min-width: 100%;
     display: grid;
-    /*grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));*/
     grid-template-columns: 45% 45%;
     grid-gap: 5px;
     grid-template-areas: 
@@ -262,10 +260,14 @@ header .name a {
     color: #000;
 }
 
+.main .intro {
+    grid-area: intro;
+}
+
 .main #staticImg {
     grid-area: introimages;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-template-rows: auto 1fr;
     width: 100%;
     grid-gap: 2.5em;
