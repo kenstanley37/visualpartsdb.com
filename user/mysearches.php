@@ -60,7 +60,7 @@ $result = '';
             ?>
         </main>
         <footer>
-            <?php include("inc/inc.footer.php"); ?>
+            <?php include($path."inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

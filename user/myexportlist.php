@@ -26,7 +26,7 @@ $result = '';
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
-    <div class="user-wrapper">
+    <div class="wrapper">
         <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
@@ -35,21 +35,20 @@ $result = '';
             <?php include($path."inc/inc.mainnavbar.php"); ?>
         </nav>
         
-        <article class="user-search">
-            <section>
-                Date From
-            </section>
-            
-            <section>
-                Date To
-            </section>
-            
-            <section>
-                User
-            </section>
-        </article>
-        
-        <main class="user-main">            
+        <main class="main">  
+            <article class="user-search">
+                <section>
+                    Date From
+                </section>
+
+                <section>
+                    Date To
+                </section>
+
+                <section>
+                    User
+                </section>
+            </article>
             <?php 
                     if(isset($_GET['searchhist']))
                     {
@@ -59,7 +58,7 @@ $result = '';
             ?>
         </main>
         <footer>
-            <?php include("inc/inc.footer.php"); ?>
+            <?php include($path."inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

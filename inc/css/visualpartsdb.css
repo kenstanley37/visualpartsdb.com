@@ -71,9 +71,10 @@ a {
 ******************************/
 .wrapper {
     display: grid;
+    min-height: 100%;
     grid-gap: 15px;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto auto auto;
     grid-template-areas: 
         "header"
         "mainnavbar"
@@ -249,6 +250,7 @@ header .name a {
 .main {
     grid-area: main;
     display: grid;
+    min-height: 100%;
     grid-template-columns: 45% 45%;
     grid-gap: 5px;
     grid-template-areas: 
@@ -564,6 +566,7 @@ header .name a {
 
 footer {
     grid-area: footer;
+    min-height: 100%;
     color: #fff;
     display: grid;
     grid-template-columns: auto;
