@@ -20,3 +20,4 @@ This software uses the following open source software
 * [C3](https://c3js.org/)
 * [PHP 7](http://php.net/)
 * [reCAPTCHA](https://developers.google.com/recaptcha/)
+* [Font Awesome](https://fontawesome.com/)
