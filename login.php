@@ -71,13 +71,10 @@ if(isset($_GET['error'])){
     <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
 </head>
 <body>
-    <div class="wrapper">
-        <header>
+    <div class="login-wrapper">
+        <header class="login-header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <main class="searchGrid">
-
-        </main>
         <section class="login-wrap">
              <section class="a">
                 <h1>Member Login</h1>
@@ -105,7 +102,7 @@ if(isset($_GET['error'])){
                     </div>
                 </form>
             </section>
-        <footer>
+        <footer class="login-footer">
             <?php include("inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
