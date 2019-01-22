@@ -18,4 +18,4 @@ This software uses the following open source software
 * [PHPSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet)  
 * [jQuery](https://jquery.com/)
 * [C3](https://c3js.org/)
-
+* [PHP 7](http://php.net/)
