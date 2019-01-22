@@ -13,7 +13,7 @@ A database for viewing part images, dimensions, and weights with a WEB UI.
 
 ### Credits
 
-This software uses the following open source software
+This software uses the following software
 
 * [PHPSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet)  
 * [jQuery](https://jquery.com/)
