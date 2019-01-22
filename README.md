@@ -19,3 +19,4 @@ This software uses the following open source software
 * [jQuery](https://jquery.com/)
 * [C3](https://c3js.org/)
 * [PHP 7](http://php.net/)
+* [reCAPTCHA](https://developers.google.com/recaptcha/)
