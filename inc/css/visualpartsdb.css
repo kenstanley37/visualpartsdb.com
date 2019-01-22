@@ -18,7 +18,6 @@ html, body {
 
 a, p, li {
     font-family: 'Open Sans', sans-serif;
-    color: #000;
 }
 
 li {
@@ -73,7 +72,7 @@ a {
 .wrapper {
     display: grid;
     grid-row-gap: 15px;
-    grid-template-columns: repeat(100%, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-template-rows: repeat(1, minmax(50px, 1fr));
     grid-template-areas: 
         "header"
@@ -90,17 +89,60 @@ a {
 header {
     grid-area: header;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    /*grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));*/
+    grid-template-columns: 25% 55% auto auto;
     grid-gap: 5px;
+    min-height: 75px;
     align-items: center;
-    font-size: 2em;
+    background: #000428;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    grid-template-areas: 
+        "mainlogo navlinks searchboxnav name";
+}
+
+header .main-logo {
+    grid-area: mainlogo;
+}
+
+header .navlinks {
+    grid-area: navlinks;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+header .navlinks section {
+    display: inline-block;
+    padding: 20px;
+}
+
+header .searchbox {
+    grid-area: searchboxnav;
+    position: relative;
+    text-align: right;
+    margin: auto;
+}
+
+header .name {
+    grid-area: name;
+    text-align: right;
+    margin: auto;
 }
 
 header i {
     color: red;
 }
 
-.main-logo h1 {
+header a {
+    color: #fff;
+}
+
+header a:hover {
+    border-bottom: 1px solid #fff;
+}
+
+header .main-logo h1 {
     font-size: 25px;
     margin-left: 15px;
 }
@@ -110,13 +152,24 @@ header .search {
     font-size: 25px;
 }
 
+header .search i {
+    position: absolute;
+    background-color: #fff;
+    font-size: 20px;
+    color: #000;
+    margin-top: 6px;
+    margin-left: -2px;
+
+}
+
 header .search label {
     font-size: 15px;
 }
 
 header .name {
     text-align: right;
-    margin-right: 15px;
+    margin-right: 25px;
+    
 }
 
 header .name a {
@@ -188,6 +241,7 @@ header .name a {
     word-wrap: break-word;
     outline: none;
     box-shadow: 0 0 3px 3px #ccc;
+    border-radius: 15px 15px 15px 15px;
     width: 500px;
     height: 35px;
 }
@@ -202,6 +256,10 @@ header .name a {
     grid-template-areas: 
         "intro introimages";
     justify-content: center;
+}
+
+.main a {
+    color: #000;
 }
 
 .main #staticImg {
@@ -492,7 +550,6 @@ header .name a {
     font-size: 20px;
     border-radius: 0 50px 0 0;
     background-color: #4CAF50;
-    border-color: #000 #000 0 0;
     vertical-align: middle;
     height: 30px;
     color: #fff;
@@ -594,111 +651,6 @@ footer {
 	color: red;
 }
 
-/************************************
-/ search history style
-/************************************/
-
-.search-history a:link {
-  color: #666;
-  font-weight: bold;
-  text-decoration: none; 
-}
-.search-history a:visited {
-  color: #999999;
-  font-weight: bold;
-  text-decoration:none;
-}
-.search-history a:active,
-.search-history a:hover {
-	color: #bd5a35;
-	text-decoration:underline;
-}
-
-.search-history {
-	font-family:Arial, Helvetica, sans-serif;
-	color:#666;
-	font-size:12px;
-	text-shadow: 1px 1px 0px #fff;
-	background:#eaebec;
-	margin:20px;
-	border:#ccc 1px solid;
-
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
-
-	-moz-box-shadow: 0 1px 2px #d1d1d1;
-	-webkit-box-shadow: 0 1px 2px #d1d1d1;
-	box-shadow: 0 1px 2px #d1d1d1;
-}
-
-.search-history th {
-	padding:21px 25px 22px 25px;
-	border-top:1px solid #fafafa;
-	border-bottom:1px solid #e0e0e0;
-
-	background: #ededed;
-	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
-	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
-}
-.search-history th:first-child {
-	text-align: left;
-	padding-left:20px;
-}
-.search-history tr:first-child th:first-child {
-	-moz-border-radius-topleft:3px;
-	-webkit-border-top-left-radius:3px;
-	border-top-left-radius:3px;
-}
-.search-history tr:first-child th:last-child {
-	-moz-border-radius-topright:3px;
-	-webkit-border-top-right-radius:3px;
-	border-top-right-radius:3px;
-}
-.search-history tr {
-	text-align: center;
-	padding-left:20px;
-}
-.search-history td:first-child {
-	text-align: left;
-	padding-left:20px;
-	border-left: 0;
-}
-.search-history td {
-	padding:18px;
-	border-top: 1px solid #ffffff;
-	border-bottom:1px solid #e0e0e0;
-	border-left: 1px solid #e0e0e0;
-
-	background: #fafafa;
-	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
-	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
-}
-.search-history tr.even td {
-	background: #f6f6f6;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
-	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
-}
-.search-history tr:last-child td {
-	border-bottom:0;
-}
-.search-history tr:last-child td:first-child {
-	-moz-border-radius-bottomleft:3px;
-	-webkit-border-bottom-left-radius:3px;
-	border-bottom-left-radius:3px;
-}
-.search-history tr:last-child td:last-child {
-	-moz-border-radius-bottomright:3px;
-	-webkit-border-bottom-right-radius:3px;
-	border-bottom-right-radius:3px;
-}
-.search-history tr:hover td {
-	background: #f2f2f2;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
-	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
-
-
-
 /***************************************
 *
 *
@@ -708,133 +660,117 @@ footer {
 ****************************************/
 /* Change styles for span and cancel button on extra small screens */
 
-/*
-@media screen and (max-width: 1300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    
-    .cancelbtn {
-        width: 100%;
-    }
-    
-    .wrapper {
+
+@media screen and (max-width: 1200px) {
+    header {
+        grid-area: header;
         display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        
+        grid-gap: 5px;
         grid-template-areas: 
-            "header"
-            "mainnavbar"
-            "main"
-            "footer";
-        justify-content: center;
+            "mainlogo"
+            "navlinks" 
+            "searchboxnav" 
+            "name";
     }
     
+    header .main-logo h1{
+        font-size: 15px;
+    }
+
+    header .navlinks {
+        grid-area: navlinks;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    header .navlinks section {
+        display: inline-block;
+        padding: 5px;
+    }
+    
+    header .searchbox {
+        grid-area: searchboxnav;
+        position: relative;
+        text-align: center;
+        margin: 0;
+    }
+
+    header .name {
+        grid-area: name;
+        text-align: center;
+        margin: 0;
+    }
+    
+    .navlinks section {
+        margin: 0;
+        padding: 0;
+    }
     
     .main {
-        grid-area: main;
+        min-width: 100%;
         display: grid;
         grid-template-columns: auto;
-        grid-gap: 20px;
+        grid-gap: 5px;
         grid-template-areas: 
             "intro" 
             "introimages";
         justify-content: center;
     }
     
-    .main .intro {
-        grid-area: intro;
-        line-height: 2em;
-        max-width: 100%;
-        margin-left: 15px;
-    }
-
-    .main .intro ul {
-        margin-left: 5%;
-        margin-top: 15px;
-    }
-
-    .main #staticImg {
-        grid-area: introimages;
+    #member {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        grid-template-columns: auto;
+        grid-gap: 5px;
+        grid-template-areas: 
+            "memberheader"
+            "memberrequest" 
+            "memberinfo";
+        justify-content: center;
+    }
+    
+    .indexsearch input {
+        width: 200px;
+        height: 35px;
+    }
+    
+    .search-grid {
+        grid-template-columns: auto;
+        grid-template-areas: 
+            "sproductinfo"
+            "simages";
+    }
+    
+    .skuimages {
+        grid-area: simages;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-template-rows: auto 1fr;
         width: 100%;
         grid-gap: 2.5em;
         justify-items: center;
     }
-    
-    #slideshow {
-        justify-content: center;
-        align-self: center;
+
+    .skuimages figure img {
+        height: 200px;
+        margin-left: 15px;
+        object-fit: cover;
     }
 
-    .banner-text {
-        font-size: 25px;
-    }
-    
-    .main-logo h1 {
-        font-size: 25px;
-    }
-    
-    header {
-        grid-area: header;
-        display: grid;
-        grid-template-columns: auto;
-        grid-gap: 10px;
-        grid-template-areas: 
-            "a c d";
+    .skuimages figure {
+        max-width: 100%;
+        margin-left: 15px;
+        object-fit: cover;
     }
 
-    header .main-logo {
-        grid-area: a;
-        text-align: left;
-        grid-column: 1 / 12;
-        font-size: 5px;
-    }
-
-    .main-logo h1 {
-        font-size: 15px;
-    }
-
-    header .search {
-        grid-area: c;
+    .skuimages figcaption {
+        padding: 2px;
+        width: 100%;
+        color: #000;
+        font-size: 20px;
         text-align: center;
-        grid-column: 1 / 12;
-        font-size: 25px;
-    }
-
-    header .name {
-        grid-area: d;
-        text-align: right;
-        grid-column: 1 / 12;
-    }
-    
-  .search-main {
-        grid-area: smain;
-        margin-top: 15px;
-        display: grid;
-        grid-template-columns: 90%;
-        grid-gap: 20px;
-        grid-template-areas: 
-            "searchname"
-            "searchgrid";
-        justify-content: center;
-    }
-
-    .slogo-search {
-        grid-area: searchname;
-    }
-
-    .search-grid {
-        grid-area: searchgrid;
-        display: grid;
-        grid-template-columns: 100%;
-        grid-gap: 20px;
-        grid-template-areas: 
-            "sproductinfo"
-            "simages";
-        justify-content: center;
-    }
+}
     
 }
-/*
