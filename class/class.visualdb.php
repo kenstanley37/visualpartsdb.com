@@ -95,7 +95,7 @@
                             <?php if($user->accessCheck() == "ADMIN")
                             {
                                 ?>
-                                    <form action="/processors/image_upload.php" method="post" enctype="multipart/form-data">
+                                    <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
                                         Select image to upload:
                                         <input type="file" name="file" id="file">
                                         <input type="text" name="desc" id="desc" placeholder="Description">
@@ -116,6 +116,13 @@
                                     <figure>
                                         <a href="<?php echo $skuimagerow['sku_image_url']; ?>" target="_blank"><img src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" /></a>
                                         <figcaption><?php echo $skuimagerow['sku_image_description']; ?></figcaption>
+                                        <form method="post" action="/processors/image_handler.php">
+                                            <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
+                                            <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
+                                            <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
+                                            <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
+                                            <input type="submit" value="deleteimg" name="deleteimg">
+                                        </form>
                                     </figure>
 
                                         <?php
@@ -171,19 +178,19 @@
                                         <tbody>
                                             <tr>
                                                 <th>Length</th>
-                                                <td><?php echo $skuRow['sku_sig_length']; ?></td>
+                                                <td><?php echo $skuRow['sku_unit_length']; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Width</th>
-                                                <td><?php echo $skuRow['sku_sig_width']; ?></td>
+                                                <td><?php echo $skuRow['sku_unit_width']; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Height</th>
-                                                <td><?php echo $skuRow['sku_sig_height']; ?></td>
+                                                <td><?php echo $skuRow['sku_unit_height']; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Weight</th>
-                                                <td><?php echo $skuRow['sku_sig_weight']; ?></td>
+                                                <td><?php echo $skuRow['sku_unit_weight']; ?></td>
                                             </tr>
                                         </tbody>
                                     </table> 
@@ -387,6 +394,28 @@
             }
         } // end addImage
         
+        
+        // *************************************************************
+        // Usage: remImage(sku);
+        // Removes image from database and harddrive
+        // *************************************************************
+        public function remImage($image_id, $image_url, $image_thumb)
+        {
+
+            try 
+            {
+                unlink('..'.$image_url);
+                unlink('..'.$image_thumb);
+                $stmt = $this->conn->prepare("DELETE from sku_image where sku_image_id = :image_id");
+                $stmt->bindparam(":image_id", $image_id);
+                $stmt->execute();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }	
+        } // end remImage
+        
         // *************************************************************
         // Usage: resizeImageThumb($resourceType,$image_width,$image_height)
         // creates a thumbnail of an image
@@ -452,12 +481,15 @@
         // Adds image to database from the addImage function
         // *************************************************************
         public function AddImageUrl($sku, $url, $thumb, $desc) {
+            session_start();
+            $userName = $_SESSION['fname'].' '.$_SESSION['lname'];
             try {
-                $stmt = $this->conn->prepare("INSERT INTO sku_image (sku_image_sku_id, sku_image_url, sku_image_thumb, sku_image_description) VALUES (:sku_id, :sku_url, :sku_thumb, :sku_description)");
+                $stmt = $this->conn->prepare("INSERT INTO sku_image (sku_image_sku_id, sku_image_url, sku_image_thumb, sku_image_description, sku_image_added_by) VALUES (:sku_id, :sku_url, :sku_thumb, :sku_description, :sku_added_by)");
                 $stmt->bindparam(":sku_id", $sku);
                 $stmt->bindparam(":sku_url", $url);
                 $stmt->bindparam(":sku_thumb", $thumb);
                 $stmt->bindparam(":sku_description", $desc);
+                $stmt->bindparam(":sku_added_by", $userName);
                 $stmt->execute();
             }
             catch(PDOException $e)
