@@ -76,13 +76,14 @@ if(isset($_GET['noaccess'])){
        ?>
         <main id="aboutvpd" class="index-main">
             <article class="index-search">
-                <section>
-                    <h1>Visual Parts Database</h1>
+                <section><h1>Visual Parts Database</h1></section>
+                <section>                
                     <form class="search" action="/search.php" method="get">
-                    <label hidden for="search">Search</label>
-                    <input class="toupper" type="text" name="search" id="search" placeholder="Part Number or Description">
+                        <label hidden for="search">Search</label>
+                        <input class="toupper" type="text" name="search" id="search" placeholder="Part Number or Description">
                     </form>
                 </section>
+                <section class="records"><?php $vpd->recordCount(); ?></section>
             </article>
             <article class="main-intro">
                 <section class="intro">

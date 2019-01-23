@@ -567,5 +567,39 @@
                 }	
         } // end mySearches
         
+        // *************************************************************
+        // Usage: recordCount();
+        // display counts for records, images, and searches
+        // *************************************************************
+        public function recordCount()
+        {
+            // lets update the search ticker for this sku
+            try {
+                    $stmt = $this->conn->prepare("SELECT count(*) as SKU_Count FROM sku");
+                    $stmt->execute();
+                    $row_sku = $stmt->fetch();
+                    $sku_count = $row_sku['SKU_Count'];
+                
+                    $stmt = $this->conn->prepare("SELECT count(*) as Search_Count FROM sku_search");
+                    $stmt->execute();
+                    $row_search = $stmt->fetch();
+                    $search_count = $row_search['Search_Count'];
+                
+                    $stmt = $this->conn->prepare("SELECT count(*) as Search_Count FROM sku_image");
+                    $stmt->execute();
+                    $row_image = $stmt->fetch();
+                    $image_count = $row_image['Search_Count'];
+                
+                    ?>
+                        <p><?php echo number_format($sku_count);?> Parts, <?php echo number_format($image_count);?> Pictures, and <?php echo number_format($search_count);?> searches</p>
+                    <?php
+                    
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end mySearches
+        
     } // end class
 ?>
