@@ -135,6 +135,33 @@
         
         
         // *************************************************************
+        // Usage: dropdownUser();
+        // returns a list of all users in a select  
+        // *************************************************************
+        
+        public function dropDownUser()
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM user");
+                $stmt->execute();
+                // if email if found check password
+                ?> <option value=""></option><?php
+                while($row = $stmt->fetch())
+                {
+                    ?>
+                    <option value="<?php echo $row['user_id']; ?>"><?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?></option>
+                    <?php
+                }
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end accessCheck
+        
+        
+        // *************************************************************
         // Usage: registerRequest($fname, $lname, $email, $phone, $company, $message);
         // Writes a record to the data base for an ADMIN to approve or deny
         // *************************************************************

@@ -165,7 +165,7 @@
                                     <table class="indent50">
                                         <thead>
                                             <tr>
-                                                <th>Unit Data</th> 
+                                                <th colspan="2">Unit Data</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -194,7 +194,7 @@
                                     <table class="indent50">
                                         <thead>
                                             <tr>
-                                                <th>Case Data</th>
+                                                <th colspan="2">Case Data</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -224,7 +224,7 @@
                                     <table class="indent50">
                                         <thead>
                                             <tr>
-                                                <th>Pallet Data</th>
+                                                <th colspan="2">Pallet Data</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -501,6 +501,11 @@
             {
                 
             }
+            
+            if(empty($userID)){
+                $userID = $_SESSION['user_id'];
+            }
+            
             // lets update the search ticker for this sku
             try {
                     if(empty($dateFrom) || empty($dateTo))
@@ -516,16 +521,16 @@
                     }
                     $stmt->execute();
                     ?>
-                        <h1>My Search History</h1>
-                        <table class="search-history">
+                        <table class="table">
+                            <caption>Search History</caption>
                             <thead>
-                                <tr>
-                                    <th>Part Number</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>ime</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                <tr align="middle">
+                                    <th scope="col">Part Number</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
                                 </tr>
                             </thead> 
                              <tbody>
@@ -542,13 +547,13 @@
                                 $dateOnly = $newDate->format('Y-m-d'); // pull the date out
                                 $timeOnly = $newDate->format('h:i:s A'); // pull the time out
                             ?>
-                                <tr>
-                                    <th><a href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></th>
-                                    <th><?php echo $desc; ?></th>
-                                    <th><?php echo $dateOnly; ?></th>
-                                    <th><?php echo $timeOnly; ?></th>
-                                    <th><?php echo $fname; ?></th>
-                                    <th><?php echo $lname; ?></th>
+                                <tr valign="middle">
+                                    <td scope="row" data-label="SKU"><a href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></td>
+                                    <td data-label="Description"><?php echo $desc; ?></td>
+                                    <td data-label="Date"><?php echo $dateOnly; ?></td>
+                                    <td data-label="Time"><?php echo $timeOnly; ?></td>
+                                    <td data-label="First Name"><?php echo $fname; ?></td>
+                                    <td data-label="Last Name"><?php echo $lname; ?></td>
                                 </tr>
                             
                     <?php

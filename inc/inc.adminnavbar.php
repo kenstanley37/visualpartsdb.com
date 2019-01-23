@@ -1,3 +1,8 @@
+<?php
+// get the php file being used
+$basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
+?>
+
 <section class="navPartManagement">
     <a href="#" class="navLinks">Edit Data</a>
     <a href="#" class="navLinks">New Part</a>

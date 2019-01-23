@@ -48,6 +48,10 @@ if(isset($_GET['result']))
     }
 }
 
+if(isset($_GET['noaccess'])){
+    $error = 'You must be a registered user';
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,11 +64,16 @@ if(isset($_GET['result']))
         <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        
-        <nav class="mainnav">
-            <?php include($path."inc/inc.mainnavbar.php"); ?>
-        </nav>
-       
+        <?php
+        if($user->accessCheck() == "ADMIN")
+        {
+            ?>
+            <nav class="adminnav">
+                <?php include($path."inc/inc.adminnavbar.php"); ?>
+            </nav>
+            <?php
+        }
+       ?>
         <main id="aboutvpd" class="index-main">
             <article class="index-search">
                 <section>

@@ -61,10 +61,6 @@ if(isset($_GET['export'])){
         <header class="search-header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        
-        <nav class="mainnav">
-            <?php include($path."inc/inc.mainnavbar.php"); ?>
-        </nav>
         <?php 
         // check if user is an ADMIN
             if($user->accessCheck() == "ADMIN"){

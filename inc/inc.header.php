@@ -6,7 +6,7 @@
         <a href="/"><h1 class="heading"><i class="fas fa-images"></i> Visual Parts Database</h1></a>
         <i class="fas fa-images none"> <a href="/">VPD</a> </i>
     </section>
-    <section class="navlinks">
+    <nav class="navlinks">
         <section><a href="/">Home</a></section>
         <section>
             <?php if(isset($_SESSION['user_id']))
@@ -24,7 +24,7 @@
             <?php
         } ?>
         </section>
-    </section>
+    </nav>
      <section class="searchbox">
         <form class="search" action="/search.php" method="get">
             <label for="search" hidden>Search</label>
