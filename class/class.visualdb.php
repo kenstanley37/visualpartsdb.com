@@ -121,7 +121,7 @@
                                             <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
                                             <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
                                             <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
-                                            <input type="submit" value="deleteimg" name="deleteimg">
+                                            <input type="submit" value="Delete Image" name="deleteimg">
                                         </form>
                                     </figure>
 
@@ -545,7 +545,9 @@
                         $stmt = $this->conn->prepare("SELECT * FROM sku_search WHERE sku_search_by = :userID");
                         $stmt->bindparam(":userID", $userID);
                     } else {
-                        $stmt = $this->conn->prepare("SELECT * FROM mysearches 
+                        $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                        left join user on user_id = sku_search_by
+                        left join sku on sku_id = sku_search_sku
                          WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo");
                         $stmt->bindparam(":userID", $userID);
                         $stmt->bindparam(":dateFrom", $dateFrom);
