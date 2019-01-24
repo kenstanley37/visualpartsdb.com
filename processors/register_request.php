@@ -49,7 +49,7 @@
         $regfname = $vail->sanitizeString($_POST['regfname']);
         $reglname =  $vail->sanitizeString($_POST['reglname']);
         $regemail =  $vail->sanitizeString($_POST['regemail']);
-        $user->addUserVerify($regfname, $reglname, $regemail, $memName);
+        $user->addUserVerify($regfname, $reglname, $regemail, $memFName, $memLName);
     }
 /*    
         if($result)
