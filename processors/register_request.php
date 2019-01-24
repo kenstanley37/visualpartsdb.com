@@ -44,13 +44,12 @@
 
     if(isset($_POST['regsubmit']))
     {
-        $memName = $_SESSION['user_fName'].' '.$_SESSION['user_lName'];
+        $memFName = ucfirst(strtolower($_SESSION['user_fName']));
+        $memLName = ucfirst(strtolower($_SESSION['user_lName']));
         $regfname = $vail->sanitizeString($_POST['regfname']);
         $reglname =  $vail->sanitizeString($_POST['reglname']);
         $regemail =  $vail->sanitizeString($_POST['regemail']);
-        
-        echo $memName;
-        //$user->addUserVerify($regfname, $reglname, $regemail, $memName);
+        $user->addUserVerify($regfname, $reglname, $regemail, $memName);
     }
 /*    
         if($result)
