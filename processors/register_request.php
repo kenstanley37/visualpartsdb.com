@@ -38,8 +38,15 @@
             header('location: /?result=success#member');
         }
         
-    } else {
-        header('location: /#member');
+    } 
+
+
+    if(isset($_POST['regsubmit']))
+    {
+        $regfname = $_POST['regfname'];
+        $reglname = $_POST['reglname'];
+        $regemail = $_POST['regemail'];
+        $user->addUserVerify($regfname, $reglname, $regemail);
     }
 /*    
         if($result)

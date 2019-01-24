@@ -133,6 +133,71 @@
             }
         } // end accessCheck
         
+        // *************************************************************
+        // Usage: addUserVerify($fname, $lname, $email);
+        // Send new user verification email
+        // *************************************************************
+        
+            public function addUserVerify($fname, $lname, $email)
+            {
+                // for user registeration
+                $code = substr(md5(mt_rand()),0,15);
+                try
+                {
+
+                    $stmt = $this->conn->prepare("INSERT INTO verify (verify_fname, verify_lname, verify_email, verify_code) 
+                           VALUES(:fname, :lname, :email, :code)");
+
+                    $stmt->bindparam(":fname", $fname);
+                    $stmt->bindparam(":lname", $lname);
+                    $stmt->bindparam(":email", $email);
+                    $stmt->bindparam(":code", $code);
+                    $stmt->execute();	
+                    $db_id = $this->conn->lastInsertId();
+
+                    $message = "Your Activation Code is ".$code."";
+                    $to=$email;
+                    $subject="Activation Code For Visual Parts Database";
+                    $from = 'info@visualpartsdb.com';
+                    $body='Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
+
+                  $headers = "From:".$from;
+
+                    mail($to,$subject,$body,$headers);
+
+                    echo "An Activation Code Is Sent To You Check You Emails";
+
+                  //email password = "f1=8Znogk9e3";
+
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+            }
+
+            public function checkVerify($id, $code)
+            {
+                $comp = $this->get_company();
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT * from verify where verify_id=:id and verify_code=:code");							  
+                    $stmt->bindparam(":id", $id);
+                    $stmt->bindparam(":code", $code);
+                    $stmt->execute();	
+                    if($stmt->rowCount() == 1){
+                        return "rock on dude";
+                      return true;
+                    } else {
+                        echo "don't rock on dude";
+                      return false;
+                    }
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+            }
         
         // *************************************************************
         // Usage: dropdownUser();
