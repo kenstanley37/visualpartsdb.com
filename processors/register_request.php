@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("../inc/inc.path.php");
     require_once($path.'class/class.visualdb.php');
     require_once($path."class/class.func.php");
@@ -47,7 +48,9 @@
         $regfname = $vail->sanitizeString($_POST['regfname']);
         $reglname =  $vail->sanitizeString($_POST['reglname']);
         $regemail =  $vail->sanitizeString($_POST['regemail']);
-        $user->addUserVerify($regfname, $reglname, $regemail, $memName);
+        
+        echo $memName;
+        //$user->addUserVerify($regfname, $reglname, $regemail, $memName);
     }
 /*    
         if($result)
