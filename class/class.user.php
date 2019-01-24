@@ -161,7 +161,13 @@
                     $from = 'info@visualpartsdb.com';
                     $body='Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
 
-                  $headers = "From:".$from;
+                  
+                    // Always set content-type when sending HTML email
+                    $headers = "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+                    // More headers
+                    $headers .= 'From: <info@visualpartsdb.com>' . "\r\n";
 
                     mail($to,$subject,$message,$body,$headers);
 
