@@ -533,25 +533,41 @@
                 
             }
             
-            if(empty($userID)){
-                $userID = $_SESSION['user_id'];
-            }
+            if(!empty($userID)){  }
             
             // lets update the search ticker for this sku
             try {
-                    if(empty($dateFrom) || empty($dateTo))
+                    if(!empty($userID))
+                    {  
+                        if(empty($dateFrom) || empty($dateTo))
+                        {
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search WHERE sku_search_by = :userID ORDER BY sku_search_id desc");
+                            $stmt->bindparam(":userID", $userID);
+                        } else {
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo ORDER BY sku_search_id desc");
+                            $stmt->bindparam(":userID", $userID);
+                            $stmt->bindparam(":dateFrom", $dateFrom);
+                            $stmt->bindparam(":dateTo", $dateTo);
+                        }
+                    } else 
                     {
-                        $stmt = $this->conn->prepare("SELECT * FROM sku_search WHERE sku_search_by = :userID ORDER BY sku_search_id desc");
-                        $stmt->bindparam(":userID", $userID);
-                    } else {
-                        $stmt = $this->conn->prepare("SELECT * FROM sku_search 
-                        left join user on user_id = sku_search_by
-                        left join sku on sku_id = sku_search_sku
-                         WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo ORDER BY sku_search_id desc");
-                        $stmt->bindparam(":userID", $userID);
-                        $stmt->bindparam(":dateFrom", $dateFrom);
-                        $stmt->bindparam(":dateTo", $dateTo);
+                        if(empty($dateFrom) || empty($dateTo))
+                        {
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search ORDER BY sku_search_id desc");
+                        } else {
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                              and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo ORDER BY sku_search_id desc");
+                            $stmt->bindparam(":dateFrom", $dateFrom);
+                            $stmt->bindparam(":dateTo", $dateTo);
+                        }
                     }
+                
+                    
                     $stmt->execute();
                     ?>
                         <table class="table">

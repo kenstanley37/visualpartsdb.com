@@ -139,7 +139,7 @@
         // returns a list of all users in a select  
         // *************************************************************
         
-        public function dropDownUser()
+        public function dropDownUser($userID)
         {
             try
             {
@@ -150,7 +150,11 @@
                 while($row = $stmt->fetch())
                 {
                     ?>
-                    <option value="<?php echo $row['user_id']; ?>"><?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?></option>
+                    <option value="<?php echo $row['user_id']; ?>"
+                            <?php 
+                                if($row['user_id'] == $userID ){ echo 'selected';}
+                            ?>
+                            ><?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?></option>
                     <?php
                 }
             }

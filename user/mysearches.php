@@ -19,6 +19,8 @@ $vail = new VALIDATE;
 $dateStart = date("Y-m-d");
 $dateEnd = date("Y-m-d");
 
+$userID = '';
+
 if(isset($_GET['dfrom']))
 {
     $dateStart = $_GET['dfrom'];
@@ -66,7 +68,7 @@ $result = '';
                     <label for="dto">Date To:</label><input type="date" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
                     <label for="users">Select User:</label>
                      <select id="users" name="users">
-                        <?php $user->dropDownUser(); ?>
+                        <?php $user->dropDownUser($userID); ?>
                     </select> 
                     <input type="submit" value="search">
                 </form>
