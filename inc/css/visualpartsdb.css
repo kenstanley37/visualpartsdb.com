@@ -29,7 +29,7 @@ ul {
     margin-top: 15px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     line-height: 50px;
@@ -47,6 +47,10 @@ h3 {
     font-size: 20px;
 }
 
+
+h4 {
+    font-size: 15px;
+}
 /* hyperlink styling */
 
 a {
@@ -76,15 +80,11 @@ a {
 .wrapper {
     display: grid;
     min-height: 100vh;
-    grid-template-columns: 100%;
-    grid-template-rows: auto auto auto auto auto;
+    grid-template-columns: auto 1fr;
     grid-template-areas: 
-        "header"
-        "adminnavbar"
-        "main"
-        "footer";
-    align-items: center;
-    align-self: center;
+        "header header"
+        "adminnavbar main"
+        "footer footer";
 }
 
 /* header styling */
@@ -93,14 +93,37 @@ header {
     display: grid;
     /*grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));*/
     grid-template-columns: auto auto auto auto;
-    grid-gap: 1px;
+    grid-template-rows: auto auto;
+    grid-gap: 10px;
     min-height: 75px;
-    align-items: center;
+    color: #fff;
     background: #000428;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     grid-template-areas: 
-        "mainlogo navlinks searchboxnav name";
+        "mainlogo navlinks searchboxnav name"
+        "adminham admininfo admininfo admininfo";
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    align-items: center;
+}
+
+header .admin-ham {
+    grid-area: adminham;
+    grid-column: 1 / span 1;
+    margin-left: 15px;
+
+}
+
+header .admin-ham i {
+    font-size: 15px;
+    color: #fff;
+}
+
+header .admin-info {
+    grid-area: admininfo;
+    grid-column: 2 / span 12;
 }
 
 header .main-logo {
@@ -178,25 +201,21 @@ header .name a {
 }
 
 .adminnav {
+    position: relative;
     grid-area: adminnavbar;
-    grid-template-columns: auto;
     display: grid;
-    padding: 25px;
-    text-align: center;
-    line-height: 1em;
+    grid-template-rows: auto; 
     background-color: #fff;
-    position: sticky;
-    top: 0;
+    border: 1px solid #000;
     z-index: 1;
 }
 
 .adminnav a {
     padding: 1em;
-    font-size: 15px;
-    text-decoration: none;
-    color: #000;
-    height: 5px;
-    padding: 5px 5px 5px 5px;
+}
+
+.adminnav section a {
+    display: block;
 }
 
 .index-main {
@@ -360,25 +379,6 @@ header .name a {
     grid-area: header;
 }
 
-.navPartManagement {
-    grid-area: navpart;
-    grid-column: 1;
-    text-align: left;
-    margin-left: 10px;
-}
-
-.navOther {
-    grid-area: navother;
-    grid-column: 2;
-    text-align: center;
-}
-
-.navUserManagement {
-    grid-area: navuser;
-    grid-column: 3;
-    text-align: right;
-}
-
 .search-main {
     grid-area: smain;
     margin-top: 15px;
@@ -517,8 +517,13 @@ header .name a {
 .indent50 tr {
 	border: 1px solid #000;
 }
+
 .indent50 td {
 	min-width: 100px;
+}
+
+.indent50 {
+    margin-left: 50px;
 }
 
 .skudetails {
@@ -535,10 +540,6 @@ header .name a {
     border-radius: 0 50px 0 0;
     vertical-align: middle;
     height: 30px;
-}
-
-.indent50 {
-    margin-left: 50px;
 }
 
 footer {
@@ -787,7 +788,7 @@ footer {
         padding-bottom: 15px;
     }
 
-    .navlinks section {
+    header .navlinks section {
         margin: 0;
         padding: 0;
     }

@@ -28,9 +28,18 @@
      <section class="searchbox">
         <form class="search" action="/search.php" method="get">
             <label for="search" hidden>Search</label>
-            <input class="toupper" type="text" name="search" id="search" placeholder="search"><i class="fas fa-search"></i>
+            <input class="toupper" type="search" name="search" id="search" placeholder="search"><i class="fas fa-search"></i>
         </form>
     </section>
     <section class="name">
         <?php $user->isLogin(); ?>
+    </section>
+
+    <section class="admin-ham">
+        <?php if($user->accessCheck() == 'ADMIN'){ echo 'Admin <i class="fas fa-bars adminnavbar"> </i>';} ?>
+        
+    </section>
+
+    <section class="admin-info">
+        <?php if($user->accessCheck() == 'ADMIN'){ echo 'something else here';} ?>
     </section>

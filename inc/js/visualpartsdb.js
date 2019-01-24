@@ -5,8 +5,7 @@ $(document).ready(function(){
 
 function startup(){
     navScroll();
-    navClick();
-    mainNavButton();
+    adminNav();
 }
 
 function navScroll(){
@@ -14,18 +13,16 @@ function navScroll(){
     $(window).scroll(function(){
        var scroll = $(window).scrollTop();
         if(scroll >= 100){
-            $('.adminnav').addClass('shadow');
-            $('.mainnav .mainNavLogo i').removeClass('none');
+            $('header').addClass('shadow');
         } else {
-            $('.adminnav').removeClass('shadow');
-            $('.mainnav .mainNavLogo i').addClass('none');
+            $('header').removeClass('shadow');
         }
     });
 } // end nav scroll
 
-function navClick(){
-    $('.mainNavlinks a').click(function(){
-        $('.mainNavlinks a').removeClass('button1');
-        $(this).addClass('button1');
+function adminNav(){
+    $('.admin-ham').click(function(){
+         $('.adminnav').toggle('slow');
     });
+   
 }

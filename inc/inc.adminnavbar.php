@@ -2,15 +2,15 @@
 // get the php file being used
 $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 ?>
+<section>
+    <h4>Part Mangement</h4>
+    <a href="#">New Part</a>
+    
+    <h4>Information</h4>
+    <a href="#">Most Searched</a>
+    <a href="#">Analytics</a>
+    
+    <h4>User Management</h4>
+    <a href="#">User Management</a>
+</section>
 
-<section class="navPartManagement">
-    <a href="#" class="navLinks">Edit Data</a>
-    <a href="#" class="navLinks">New Part</a>
-</section>
-<section class="navOther">
-    <a href="#" class="navLinks">Most Searched</a>
-</section>
-<section class="navUserManagement">
-    <a href="#" class="navLinks">User Management</a>
-    <a href="#" class="navLinks">Analytics</a>
-</section>

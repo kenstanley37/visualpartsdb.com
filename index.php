@@ -57,30 +57,30 @@ if(isset($_GET['noaccess'])){
 <html>
 <head>
     <title>Visual Parts Database</title>
-    <?php require_once("inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
+    <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
     <div class="wrapper">
         <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
+        <nav class="adminnav">
         <?php
         if($user->accessCheck() == "ADMIN")
         {
             ?>
-            <nav class="adminnav">
                 <?php include($path."inc/inc.adminnavbar.php"); ?>
-            </nav>
             <?php
         }
        ?>
+        </nav>
         <main id="aboutvpd" class="index-main">
             <article class="index-search">
                 <section><h1>Visual Parts Database</h1></section>
                 <section>                
                     <form class="search" action="/search.php" method="get">
                         <label hidden for="search">Search</label>
-                        <input class="toupper" type="text" name="search" id="search" placeholder="Part Number or Description">
+                        <input class="toupper" type="search" name="search" id="search" placeholder="Part Number or Description">
                     </form>
                 </section>
                 <section class="records"><?php $vpd->recordCount(); ?></section>
