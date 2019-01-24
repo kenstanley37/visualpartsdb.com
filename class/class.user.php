@@ -151,7 +151,8 @@
                 // for user registeration
                 $code = substr(md5(mt_rand()),0,15);
                 
-                $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+                $mail = new PHPMailer(true);                              // Passing `true` enables xceptions
+                
                 try {
                     //Server settings
                     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
@@ -165,7 +166,7 @@
 
                     //Recipients
                     $mail->setFrom('info@visualpartsdb.com', 'Visual Parts Database');
-                    $mail->addAddress(''$email'', $fname.' '.$lname);     // Add a recipient
+                    $mail->addAddress('ken@stanleysoft.org', $fname.' '.$lname);     // Add a recipient
                     //$mail->addAddress($email);               // Name is optional
                     $mail->addReplyTo('info@visualpartsdb.com', 'NoReply');
                     //$mail->addCC('cc@example.com');
