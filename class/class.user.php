@@ -145,8 +145,6 @@
         
             public function addUserVerify($fname, $lname, $email, $memFName, $memLName, $memuserID)
             {
-                $memuserID = $_SESSION['']
-                
                 $fname = strtolower($fname);
                 $fname = ucfirst($fname);
                 
