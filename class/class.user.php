@@ -145,6 +145,13 @@
         
             public function addUserVerify($fname, $lname, $email, $memName)
             {
+                $fname = strtolower($fname);
+                $fname = ucfirst($fname);
+                
+                $lname = strtolower($lname);
+                $lname = ucfirst($lname);
+                
+                $email = strtolower($email);
 
                 //Load Composer's autoloader
                 require '../vendor/autoload.php';
