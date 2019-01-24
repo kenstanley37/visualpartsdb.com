@@ -161,8 +161,8 @@
                     $mail->SMTPAuth = true;                               // Enable SMTP authentication
                     $mail->Username = 'info@visualpartsdb.com';                 // SMTP username
                     $mail->Password = '#r.MTs%{@OEy';                           // SMTP password
-                    //$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-                    $mail->Port = 2525;                                    // TCP port to connect to
+                    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 465;                                    // TCP port to connect to
 
                     //Recipients
                     $mail->setFrom('info@visualpartsdb.com', 'Visual Parts Database');
@@ -180,7 +180,7 @@
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Welcome to Visual Parts Database';
                     $mail->Body    = 'Your Activation Code is: <b>'.$code.'</b> Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
-                    $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                    $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/register.php?id='.$db_id.'&code='.$code.' to activate your account.';
 
                     $mail->send();
                     echo 'Message has been sent';
