@@ -166,7 +166,7 @@
 
                     //Recipients
                     $mail->setFrom('info@visualpartsdb.com', 'Visual Parts Database');
-                    $mail->addAddress(@email, $fname.' '.$lname);     // Add a recipient
+                    $mail->addAddress($email, $fname.' '.$lname);     // Add a recipient
                     //$mail->addAddress($email);               // Name is optional
                     $mail->addReplyTo('info@visualpartsdb.com', 'NoReply');
                     //$mail->addCC('cc@example.com');
