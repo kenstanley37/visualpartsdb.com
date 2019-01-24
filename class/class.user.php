@@ -143,7 +143,7 @@
         // Send new user verification email
         // *************************************************************
         
-            public function addUserVerify($fname, $lname, $email)
+            public function addUserVerify($fname, $lname, $email, $memName)
             {
 
                 //Load Composer's autoloader
@@ -166,8 +166,8 @@
 
                     //Recipients
                     $mail->setFrom('info@visualpartsdb.com', 'Visual Parts Database');
-                    //$mail->addAddress('ken@stanleysoft.org', $fname.' '.$lname);     // Add a recipient
-                    $mail->addAddress('kenstanley37@gmail.com');               // Name is optional
+                    $mail->addAddress(@email, $fname.' '.$lname);     // Add a recipient
+                    //$mail->addAddress($email);               // Name is optional
                     $mail->addReplyTo('info@visualpartsdb.com', 'NoReply');
                     //$mail->addCC('cc@example.com');
                     //$mail->addBCC('bcc@example.com');
@@ -179,7 +179,7 @@
                     //Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Welcome to Visual Parts Database';
-                    $mail->Body    = 'Your Activation Code is: <b>'.$code.'</b> Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                    $mail->Body    = 'Hello '.$fname.', <br> You have been invited by '.$memName.' to be a user of Visual Parts Database. <br>Your Activation Code is: <b>'.$code.'</b><br> Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
                     $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/register.php?id='.$db_id.'&code='.$code.' to activate your account.';
 
                     $mail->send();
