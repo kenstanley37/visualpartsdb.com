@@ -143,8 +143,10 @@
         // Send new user verification email
         // *************************************************************
         
-            public function addUserVerify($fname, $lname, $email, $memFName, $memLName)
+            public function addUserVerify($fname, $lname, $email, $memFName, $memLName, $memuserID)
             {
+                $memuserID = $_SESSION['']
+                
                 $fname = strtolower($fname);
                 $fname = ucfirst($fname);
                 
@@ -161,6 +163,17 @@
                 $mail = new PHPMailer(true);                              // Passing `true` enables xceptions
                 
                 try {
+                    $stmt = $this->conn->prepare("INSERT INTO verify (verify_fname, verify_lname, verify_email, verify_code, verify_added_by) VALUES(:fname, :lname, :email, :code, :memuserID)");
+
+                    $stmt->bindparam(":fname", $fname);
+                    $stmt->bindparam(":lname", $lname);
+                    $stmt->bindparam(":email", $email);
+                    $stmt->bindparam(":code", $code);
+                    $stmt->bindparam(":memuserID", $memuserID);
+                    $stmt->execute();	
+                    $db_id = $this->conn->lastInsertId();
+                    
+                    
                     //Server settings
                     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
                     $mail->isSMTP();                                      // Set mailer to use SMTP
