@@ -21,3 +21,4 @@ This software uses the following software
 * [PHP 7](http://php.net/)
 * [reCAPTCHA](https://developers.google.com/recaptcha/)
 * [Font Awesome](https://fontawesome.com/)
+* [PHPMailer](https://github.com/PHPMailer/PHPMailer)
