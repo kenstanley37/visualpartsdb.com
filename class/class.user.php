@@ -163,7 +163,7 @@
 
                   $headers = "From:".$from;
 
-                    mail($to,$subject,$body,$headers);
+                    mail($to,$subject,$message,$body,$headers);
 
                     echo "An Activation Code Is Sent To You Check You Emails";
 
