@@ -33,9 +33,6 @@ if(isset($_GET['dfrom']))
     }
 } 
 
-
-
-
 $result = '';
 //$dateStart = date("Y-m-d");
 ?>
