@@ -1,5 +1,10 @@
 <?php
     require_once('class.db.php');
+    // Import PHPMailer classes into the global namespace
+    // These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
 
     class USER
     {
@@ -140,48 +145,49 @@
         
             public function addUserVerify($fname, $lname, $email)
             {
+
+                //Load Composer's autoloader
+                require '../vendor/autoload.php';
                 // for user registeration
                 $code = substr(md5(mt_rand()),0,15);
-                try
-                {
+                
+                $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+                try {
+                    //Server settings
+                    $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+                    $mail->isSMTP();                                      // Set mailer to use SMTP
+                    $mail->Host = 'visualpartsdb.com';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = false;                               // Enable SMTP authentication
+                    //$mail->Username = 'user@example.com';                 // SMTP username
+                    //$mail->Password = 'secret';                           // SMTP password
+                    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 465;                                    // TCP port to connect to
 
-                    $stmt = $this->conn->prepare("INSERT INTO verify (verify_fname, verify_lname, verify_email, verify_code) 
-                           VALUES(:fname, :lname, :email, :code)");
+                    //Recipients
+                    $mail->setFrom('info@visualpartsdb.com', 'Visual Parts Database');
+                    $mail->addAddress($email, $fname.' '.$lname);     // Add a recipient
+                    //$mail->addAddress($email);               // Name is optional
+                    $mail->addReplyTo('info@visualpartsdb.com', 'NoReply');
+                    //$mail->addCC('cc@example.com');
+                    //$mail->addBCC('bcc@example.com');
 
-                    $stmt->bindparam(":fname", $fname);
-                    $stmt->bindparam(":lname", $lname);
-                    $stmt->bindparam(":email", $email);
-                    $stmt->bindparam(":code", $code);
-                    $stmt->execute();	
-                    $db_id = $this->conn->lastInsertId();
+                    //Attachments
+                    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+                    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
-                    $message = "Your Activation Code is ".$code."";
-                    $to=$email;
-                    $subject="Activation Code For Visual Parts Database";
-                    $from = 'info@visualpartsdb.com';
-                    $body='Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                    //Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Welcome to Visual Parts Database';
+                    $mail->Body    = 'Your Activation Code is: <b>'.$code.'</b> Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                    $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/register_request/verification.php?id='.$db_id.'&code='.$code.' to activate your account.';
 
-                  
-                    // Always set content-type when sending HTML email
-                    $headers = "MIME-Version: 1.0" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-                    // More headers
-                    $headers .= 'From info@visualpartsdb.com' . "\r\n";
-
-                    mail($to,$subject,$message,$body,$headers);
-
-                    echo "An Activation Code Is Sent To You Check You Emails";
-
-                  //email password = "f1=8Znogk9e3";
-
+                    $mail->send();
+                    echo 'Message has been sent';
+                } catch (Exception $e) {
+                    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
                 }
-                catch(PDOException $e)
-                {
-                    echo $e->getMessage();
-                }	
             }
-
+                
             public function checkVerify($id, $code)
             {
                 $comp = $this->get_company();
