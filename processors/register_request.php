@@ -44,8 +44,8 @@
 
     if(isset($_POST['regsubmit']))
     {
-        $memFName = ucfirst(strtolower($_SESSION['user_fName']));
-        $memLName = ucfirst(strtolower($_SESSION['user_lName']));
+        $memFName = ucfirst(strtolower($_SESSION['fname']));
+        $memLName = ucfirst(strtolower($_SESSION['lname']));
         $regfname = $vail->sanitizeString($_POST['regfname']);
         $reglname =  $vail->sanitizeString($_POST['reglname']);
         $regemail =  $vail->sanitizeString($_POST['regemail']);
