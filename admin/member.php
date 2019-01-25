@@ -20,7 +20,7 @@ if(!isset($_SESSION['user_id'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database</title>
+    <title>Visual Parts Database: User Management</title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -32,42 +32,48 @@ if(!isset($_SESSION['user_id'])){
         if($user->accessCheck() == "ADMIN")
         {
             ?>
-            <nav class="admin-nav">
+            <aside class="admin-nav">
                 <?php include($path."inc/inc.adminnavbar.php"); ?>
-            </nav>
+            </aside>
             <?php
         }
        ?>
-        <main id="aboutvpd" class="index-main">
-            <form method="post" action="/processors/register_request.php">
-                <table>
-                    <tr>
-                        <td>
-                            <label for="regfname">First Name</label>
-                            <input type="text" name="regfname" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="reglname">Last Name</label>
-                            <input type="text" name="reglname" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="regemail">Email Address</label>
-                            <input type="email" name="regemail" required>
-                        </td>
-                    </tr>
-                </table>
-                
-                
-                
-                <input type="submit" name="regsubmit" value="Submit">
-            </form>
+        <main id="aboutvpd" class="admin-main">
+            <section class="admin-head">
+                <h1>User Management</h1>
+            </section>
+            <section class="add-user">
+                <form method="post" action="/processors/register_request.php">
+                    <table class="reg-table">
+                        <tbody>
+                            <tr>
+                                <td><label for="regfname">First Name</label></td>
+                                <td><input type="text" name="regfname" required></td>
+                            </tr>
+                        </tbody>
+                        <tr>
+                            <td>
+                                <label for="reglname">Last Name</label>
+                            </td>
+                            <td> 
+                                <input type="text" name="reglname" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="regemail">Email Address</label>
+                            </td>
+                            <td>
+                                <input type="email" name="regemail" required>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="submit" name="regsubmit" value="Submit">
+                </form>
+            </section>
         </main>
         <footer>
-            <?php include("inc/inc.footer.php"); ?>
+            <?php include($path."inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

@@ -9,6 +9,6 @@ $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
     <section class="admin-link"> <i class="fas fa-plus-square"><a href="#">New Part</a></i></section>
     <section class="admin-link"><i class="fas fa-search-plus"><a href="#">Most Searched</a></i></section>
     <section class="admin-link"><i class="fas fa-chart-pie"><a href="#">Analytics</a></i></section>
-    <section class="admin-link"><i class="fas fa-users-cog"><a href="#">User Management</a></i></section>
+    <section class="admin-link"><i class="fas fa-users-cog"><a href="/admin/member.php">User Management</a></i></section>
 </article>
 

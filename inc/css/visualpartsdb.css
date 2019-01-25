@@ -575,7 +575,79 @@ footer {
     z-index: 1;
 }
 
-/* login form style */
+/* ADMIN STYLE */
+.admin-main {
+    grid-area: main;
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 75px auto auto;
+    grid-gap: 15px;
+    grid-template-areas: 
+        "adminhead adminhead adminhead"
+        "adduser showuser showuser"
+        "regwait regwait regwait";
+}
+
+.admin-main .admin-head {
+    grid-area: adminhead;
+}
+
+.admin-main .add-user {
+    grid-area: adduser;
+}
+
+
+/* REGISTER STYLE */
+
+.register-main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 25px 1fr;
+    grid-column-gap: 15px;
+}
+
+.register-fail {
+    margin: auto;
+    margin-top: 100px;
+}
+
+.register-main .reg-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.register-main .reg-table caption {
+    font-size: 1.5em;
+    min-height: 35px;
+    color: #fff;
+    background: #000428;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.register-main .reg-table tr {
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+.register-main .reg-table th,
+.register-main .reg-table td {
+    padding: .625em;
+    text-align: left;
+}
+
+.register-main .reg-table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+/* lLOGIN FORM STYLE */
 .login-wrapper {
     display: grid;
     grid-gap: 15px;

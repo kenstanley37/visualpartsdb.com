@@ -206,10 +206,13 @@
                     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
                 }
             }
-                
+        
+            // *************************************************************
+            // Usage: checkVerify($id, $code);
+            // Used for email verification. Adds record into user table
+            // *************************************************************
             public function checkVerify($id, $code)
             {
-                $comp = $this->get_company();
                 try
                 {
                     $stmt = $this->conn->prepare("SELECT * from verify where verify_id=:id and verify_code=:code");							  
@@ -217,10 +220,32 @@
                     $stmt->bindparam(":code", $code);
                     $stmt->execute();	
                     if($stmt->rowCount() == 1){
-                        return "rock on dude";
+                        $row = $stmt->fetch();
+                        $userFName = $row['verify_fname'];
+                        $userLName = $row['verify_lname'];
+                        $userEmail = $row['verify_email'];
+                        $userActive = 1;
+                        $userPassword = 'temp1';
+                        $userRole = 1;
+                        try
+                        {
+                            $adduser = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_active, user_password, user_role_id) VALUES(:fname, :lname, :email, :active, :password, :role)");
+                            $adduser->bindparam(":fname", $userFName);
+                            $adduser->bindparam(":lname", $userLName);
+                            $adduser->bindparam(":email", $userEmail);
+                            $adduser->bindparam(":active", $userActive);
+                            $adduser->bindparam(":password", $userPassword);
+                            $adduser->bindparam(":role", $userRole);
+                            $adduser->execute();
+                            $db_id = $this->conn->lastInsertId();
+                            $this->setSession($db_id, $userFName, $userLName);
+                        } catch(PDOException $e)
+                        {
+                            return false;
+                        }
                       return true;
                     } else {
-                        echo "don't rock on dude";
+                        echo 'invalid code';
                       return false;
                     }
                 }
@@ -229,6 +254,41 @@
                     echo $e->getMessage();
                 }	
             }
+        
+        
+        // *************************************************************
+        // Usage: updatePassword($userid, $password);
+        // Updates the password for the user
+        // *************************************************************
+        public function updatePassword($userid, $password){
+            $userid = $_SESSION['user_id'];
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            try 
+            {
+                $stmt = $this->conn->prepare("UPDATE user SET user_password=:password where user_id=:userid ");
+                $stmt->bindparam(":userid", $userid);
+                $stmt->bindparam(":password", $password);
+                $stmt->execute();
+                return true;
+            } catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }	
+        }
+        
+        
+        // *************************************************************
+        // Usage: setSession($id, $fname, $lname);
+        // Sets session after registeration and/or user login
+        // *************************************************************
+        
+        public function setSession($id, $fname, $lname)
+        {
+            $_SESSION['user_id'] = $id;
+            $_SESSION['fname'] = $fname;
+            $_SESSION['lname'] = $lname;
+            return true;
+        }
         
         // *************************************************************
         // Usage: dropdownUser();
