@@ -65,9 +65,9 @@ if(isset($_GET['export'])){
         // check if user is an ADMIN
             if($user->accessCheck() == "ADMIN"){
         ?>
-        <nav class="adminnav">
+        <aside class="admin-nav">
             <?php include($path."inc/inc.adminnavbar.php"); ?>
-        </nav>
+        </aside>
         <?php
         } // end access check
         ?>

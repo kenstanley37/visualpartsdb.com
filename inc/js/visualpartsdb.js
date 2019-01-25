@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     startup();
 });
@@ -6,12 +5,42 @@ $(document).ready(function(){
 function startup(){
     navScroll();
     adminNav();
-    if($('.adminnav').is(":visible")){
-        $('.index-main').addClass('index-main-tog');
-    } else  {
-        $('.index-main').removeClass('index-main-tog');
-    }
+    datePickerSetup();
+  
 }
+  
+function datePickerSetup(){
+    $( function() {
+        var dateFormat = "yy-mm-dd",
+          from = $( "#dfrom" )
+            .datepicker({
+              defaultDate: "-1w", 
+              dateFormat: "yy-mm-dd",
+              changeMonth: true
+            })
+            .on( "change", function() {
+              to.datepicker( "option", "minDate", getDate( this ) );
+            }),
+          to = $( "#dto" ).datepicker({
+            changeMonth: true,
+              dateFormat: "yy-mm-dd"
+          })
+          .on( "change", function() {
+            from.datepicker( "option", "maxDate", getDate( this ) );
+          });
+
+        function getDate( element ) {
+          var date;
+          try {
+            date = $.datepicker.parseDate( dateFormat, element.value );
+          } catch( error ) {
+            date = null;
+          }
+          return date;
+        }
+      } );
+}
+    
 
 function navScroll(){
     //change nav bar design on scroll down
@@ -27,19 +56,6 @@ function navScroll(){
 
 function adminNav(){
     $('.admin-ham').click(function(){
-       //$('.adminnav').toggleClass('toggle', 1000);
-        //$('.adminnav').hide('1000');
-        $('.adminnav').toggle(1000, function(){
-            /*
-            if($('.adminnav').is(":visible")){
-                $('main').addClass('index-main-tog');
-            } else  {
-                $('main').removeClass('index-main-tog');
-            }
-            */
-
-        });    
-
+        $('.admin-nav').toggleClass('show');
     });
-   
 }

@@ -32,7 +32,7 @@ if(!isset($_SESSION['user_id'])){
         if($user->accessCheck() == "ADMIN")
         {
             ?>
-            <nav class="adminnav">
+            <nav class="admin-nav">
                 <?php include($path."inc/inc.adminnavbar.php"); ?>
             </nav>
             <?php

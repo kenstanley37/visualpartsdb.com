@@ -64,7 +64,7 @@ if(isset($_GET['noaccess'])){
         <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <nav class="adminnav">
+        <aside class="admin-nav hidden">
         <?php
         if($user->accessCheck() == "ADMIN")
         {
@@ -73,7 +73,7 @@ if(isset($_GET['noaccess'])){
             <?php
         }
        ?>
-        </nav>
+        </aside>
         <main id="aboutvpd" class="index-main">
             <article class="index-search">
                 <section><h1>Visual Parts Database</h1></section>

@@ -29,9 +29,9 @@ if(isset($_GET['register']))
         if($user->accessCheck() == "ADMIN")
         {
             ?>
-            <nav class="adminnav">
+            <aside class="admin-nav">
                 <?php include($path."inc/inc.adminnavbar.php"); ?>
-            </nav>
+            </aside>
             <?php
         }
        ?>

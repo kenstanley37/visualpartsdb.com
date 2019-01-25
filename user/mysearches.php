@@ -52,17 +52,17 @@ $result = '';
         if($user->accessCheck() == "ADMIN")
         {
             ?>
-            <nav class="adminnav">
+            <aside class="admin-nav">
                 <?php include($path."inc/inc.adminnavbar.php"); ?>
-            </nav>
+            </aside>
             <?php
         }
        ?>
         <main class="user-main">   
             <article class="my-search-head">
                 <form action="mysearches.php?searchhist" method="get">
-                    <label for="dfrom">Date From:</label> <input type="date" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
-                    <label for="dto">Date To:</label><input type="date" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
+                    <label for="dfrom">Date From:</label> <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
+                    <label for="dto">Date To:</label><input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
                     <label for="users">Select User:</label>
                      <select id="users" name="users">
                         <?php $user->dropDownUser($userID); ?>

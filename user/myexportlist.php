@@ -31,11 +31,11 @@ $result = '';
             <?php include($path."inc/inc.header.php"); ?>
         </header>
         
-        <nav class="mainnav">
+        <aside class="admin-nav">
             <?php include($path."inc/inc.mainnavbar.php"); ?>
-        </nav>
+        </aside>
         
-        <main class="main">  
+        <main class="index-main">  
             <article class="user-search">
                 <section>
                     Date From

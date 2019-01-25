@@ -34,17 +34,17 @@ $vail = new VALIDATE;
         if($user->accessCheck() == "ADMIN")
         {
             ?>
-            <nav class="adminnav">
+            <aside class="admin-nav">
                 <?php include($path."inc/inc.adminnavbar.php"); ?>
-            </nav>
+            </aside>
             <?php
         }
        ?>
         <main id="aboutvpd" class="index-main">
-
+            
         </main>
         <footer>
-            <?php include("inc/inc.footer.php"); ?>
+            <?php include($path."inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

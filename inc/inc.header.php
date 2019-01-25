@@ -4,7 +4,6 @@
 ?>
     <section class="main-logo">
         <a href="/"><h1 class="heading"><i class="fas fa-images"></i> Visual Parts Database</h1></a>
-        <i class="fas fa-images none"> <a href="/">VPD</a> </i>
     </section>
     <nav class="navlinks">
         <section><a href="/">Home</a></section>
@@ -32,7 +31,7 @@
         </form>
     </section>
     <section class="name">
-        <?php $user->isLogin(); ?>
+        <i class="fas fa-user"></i> <?php $user->isLogin(); ?>
     </section>
 
     <section class="admin-extra">
