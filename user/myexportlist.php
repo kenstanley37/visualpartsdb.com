@@ -20,7 +20,7 @@ $result = '';
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Visual Parts Database : User</title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->

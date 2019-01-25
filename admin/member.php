@@ -18,7 +18,7 @@ if(!isset($_SESSION['user_id'])){
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Visual Parts Database</title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->

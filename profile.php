@@ -4,7 +4,7 @@ include("inc/inc.path.php");
 require_once($path."class/class.user.php");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Visual Parts Database: User Profile</title>
     <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->

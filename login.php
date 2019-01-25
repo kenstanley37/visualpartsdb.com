@@ -65,7 +65,7 @@ if(isset($_GET['error'])){
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Visual Parts Database: Login</title>
     <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->

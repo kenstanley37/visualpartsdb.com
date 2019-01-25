@@ -54,7 +54,7 @@ if(isset($_GET['noaccess'])){
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Visual Parts Database</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
