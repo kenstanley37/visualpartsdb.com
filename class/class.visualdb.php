@@ -88,7 +88,6 @@
                     WHERE sku_image_sku_id=:sku");
                     $skuimages->execute(array(':sku'=>$sku));
                     ?>
-                            
                          <article class="slogo-search">
                             <h1><?php echo $skuRow['sku_id']; ?></h1>
                             <?php if($user->accessCheck() == "ADMIN")

@@ -11,8 +11,6 @@
 }
 
 html, body {
-    width: 100%;
-    height: 100%;
     margin: 0;
 }
 
@@ -80,50 +78,48 @@ a {
 .wrapper {
     display: grid;
     min-height: 100vh;
+    min-width: 100%;
     grid-template-columns: auto 1fr;
     grid-template-areas: 
-        "header header"
+        "adminnavbar header"
         "adminnavbar main"
-        "footer footer";
+        "adminnavbar footer";
 }
 
 /* header styling */
 header {
     grid-area: header;
     display: grid;
-    /*grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));*/
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto;
-    grid-gap: 10px;
-    min-height: 75px;
+    min-width: 100%;
     color: #fff;
     background: #000428;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     grid-template-areas: 
         "mainlogo navlinks searchboxnav name"
-        "adminham admininfo admininfo admininfo";
+        "adminextra adminextra adminextra adminextra";
     position: sticky;
     top: 0;
-    z-index: 1;
     align-items: center;
+    z-index: 1;
 }
 
-header .admin-ham {
-    grid-area: adminham;
-    grid-column: 1 / span 1;
+header .admin-extra {
+    grid-area: adminextra;
     margin-left: 15px;
-
 }
+
+.toggle {
+    left: -250px;
+}
+
 
 header .admin-ham i {
-    font-size: 15px;
+    font-size: 20px;
     color: #fff;
-}
-
-header .admin-info {
-    grid-area: admininfo;
-    grid-column: 2 / span 12;
+    cursor: pointer;
 }
 
 header .main-logo {
@@ -193,7 +189,6 @@ header .search label {
 header .name {
     text-align: right;
     margin-right: 25px;
-    
 }
 
 header .name a {
@@ -201,28 +196,54 @@ header .name a {
 }
 
 .adminnav {
-    position: relative;
     grid-area: adminnavbar;
     display: grid;
-    grid-template-rows: auto; 
-    background-color: #fff;
-    border: 1px solid #000;
-    z-index: 1;
+    grid-template-columns: auto auto;
+    grid-template-areas: 
+        "adminham admininfo";
+    background-color: #424242;
+    color: #fff;
+    position: fixed;
+    min-height: 100vh;
+    top: 77px;
+    bottom:0;
+    box-shadow: 5px 10px 18px blue;
+    z-index: 2;
+}
+
+.adminnav .admin-title {
+    background-color: #000;
+    text-align: center;
+}
+
+.adminnav .admin-links i {
+    text-align: center;
+    font-size: 25px;
+}
+
+.adminnav .admin-links i a {
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 100;
 }
 
 .adminnav a {
     padding: 1em;
+    color: #fff;
 }
 
 .adminnav section a {
     display: block;
 }
 
+main {
+    overflow: auto;
+}
+
 .index-main {
     grid-area: main;
     display: grid;
-    min-height: 100vh;
-    min-width: 100%;
     grid-template-columns: 100%;
     grid-column-gap: 15px;
     grid-template-areas: 
@@ -230,6 +251,11 @@ header .name a {
         "indexintro"
         "indexmembership";
     justify-content: center;
+    align-self: flex-end;
+}
+
+.index-main-tog {
+    margin-left: 150px;
 }
 
 .index-search {
@@ -380,12 +406,13 @@ header .name a {
 }
 
 .search-main {
-    grid-area: smain;
-    margin-top: 15px;
-    margin-bottom: 50px;
-    display: grid;
-    grid-template-columns: 90%;
-    grid-gap: 20px;
+    grid-area: main;
+    margin: auto;
+    min-height: 100vh;
+    min-width: 95%;
+    grid-template-columns: 80%;
+    grid-template-rows: auto 1fr;
+    grid-column-gap: 15px;
     grid-template-areas: 
         "searchname"
         "searchgrid";
@@ -399,7 +426,7 @@ header .name a {
 .search-grid {
     grid-area: searchgrid;
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 45% 45%;
     grid-gap: 20px;
     grid-template-areas: 
         "simages sproductinfo";
@@ -494,17 +521,17 @@ header .name a {
     box-shadow: 5px 10px #888888;
 }
 
-.search-wrapper table, .search-wrapper table th, .search-wrapper table td,  .search-wrapper table tr{
+.search-main table, .search-main table th, .search-main table td,  .search-main table tr{
     /* order: 5px solid black; */
     text-align: left;
 }
 
-.search-wrapper table th {
+.search-main table th {
     width: 200px;
     padding-right: 15px;
 }
 
-.search-wrapper table {
+.search-main table {
     margin-bottom: 25px;
 }
 
@@ -751,7 +778,8 @@ footer {
         grid-template-areas: 
             "mainlogo name"
             "navlinks navlinks" 
-            "searchboxnav searchboxnav";
+            "searchboxnav searchboxnav"
+            "adminextra adminextra";
         justify-content: center;
     }
     
@@ -775,6 +803,7 @@ footer {
         text-align: center;
         padding: 0;
         margin: 0;
+        font-size: 15px;
     }
 
     header .navlinks section {
@@ -889,6 +918,11 @@ footer {
         font-size: 20px;
         text-align: center;
     }
+    
+    .adminnav {
+        min-height: 100vh;
+        top: 143px;
+    }   
     
 }
 

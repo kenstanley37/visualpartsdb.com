@@ -6,6 +6,11 @@ $(document).ready(function(){
 function startup(){
     navScroll();
     adminNav();
+    if($('.adminnav').is(":visible")){
+        $('.index-main').addClass('index-main-tog');
+    } else  {
+        $('.index-main').removeClass('index-main-tog');
+    }
 }
 
 function navScroll(){
@@ -22,7 +27,19 @@ function navScroll(){
 
 function adminNav(){
     $('.admin-ham').click(function(){
-         $('.adminnav').toggle('slow');
+       //$('.adminnav').toggleClass('toggle', 1000);
+        //$('.adminnav').hide('1000');
+        $('.adminnav').toggle(1000, function(){
+            /*
+            if($('.adminnav').is(":visible")){
+                $('main').addClass('index-main-tog');
+            } else  {
+                $('main').removeClass('index-main-tog');
+            }
+            */
+
+        });    
+
     });
    
 }
