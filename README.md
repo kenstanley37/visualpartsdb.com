@@ -18,6 +18,7 @@ This software uses the following software
 * [PHPSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet)  
 * [jQuery](https://jquery.com/)
 * [C3](https://c3js.org/)
+* [D3](https://d3js.org/)
 * [PHP 7](http://php.net/)
 * [reCAPTCHA](https://developers.google.com/recaptcha/)
 * [Font Awesome](https://fontawesome.com/)
