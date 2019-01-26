@@ -63,10 +63,14 @@ $result = '';
                 <form action="mysearches.php?searchhist" method="get">
                     <label for="dfrom">Date From:</label> <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
                     <label for="dto">Date To:</label><input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
+                    <?php if($user->accessCheck() == "ADMIN"){
+                    ?>
                     <label for="users">Select User:</label>
                      <select id="users" name="users">
                         <?php $user->dropDownUser($userID); ?>
                     </select> 
+                    <?php
+                    }; ?>
                     <input type="submit" value="search">
                 </form>
             </article>

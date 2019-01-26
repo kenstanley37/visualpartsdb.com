@@ -3,7 +3,15 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box; /* CSS 3 rec */
+    -moz-box-sizing: border-box; /* Firefox 2 */
+    -ms-box-sizing: border-box; /* Internet Explorer 8 */
+    -webkit-box-sizing: border-box; /* Safari 3 */
+    -khtml-box-sizing: border-box; /* Konqueror */
+}
+
+.navHam {
+    display: none;
 }
 
 .toupper {
@@ -45,7 +53,6 @@ h3 {
     font-size: 20px;
 }
 
-
 h4 {
     font-size: 15px;
 }
@@ -54,6 +61,10 @@ h4 {
 a {
 	text-decoration: none;
 	color: #000;
+}
+
+a:hover {
+    border-bottom: 1px solid #fff;
 }
 
 .shadow {
@@ -202,6 +213,7 @@ header .name a {
     bottom:0;
     box-shadow: 5px 10px 18px blue;
     z-index: 2;
+    opacity: 0.9;
 }
 
 .admin-nav .admin-title {
@@ -261,6 +273,7 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-bottom: 25px;
 }
 
 .index-search h1 {
@@ -309,6 +322,7 @@ main {
     grid-template-areas: 
         "introparts introimages";
     justify-content: center;
+    padding-bottom: 50px;
 }
 
 .index-main .main-intro .intro {
@@ -322,16 +336,33 @@ main {
     grid-area: introimages;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-     grid-template-rows: auto 1fr;
+    grid-template-rows: auto;
     width: 100%;
     grid-gap: 2.5em;
     justify-items: center;
 }
 
-.index-main .main-intro #staticImg img {
-    height: 300px;
-    margin-left: 15px;
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.card figcaption { 
+  padding: 2px 16px;
+    border-top: 1px solid #000;
+}
+
+.card img {
     object-fit: cover;
+    width: 100%;
+    padding: 15px;
 }
 
 .index-main #member {
@@ -410,10 +441,12 @@ main {
         "searchname"
         "searchgrid";
     justify-content: center;
+    padding-top: 10px;
 }
 
 .slogo-search {
     grid-area: searchname;
+    padding-bottom: 25px;
 }
 
 .search-grid {
@@ -434,26 +467,6 @@ main {
     width: 100%;
     grid-gap: 2.5em;
     justify-items: center;
-}
-
-.search-grid  .skuimages figure img {
-    height: 300px;
-    margin-left: 15px;
-    object-fit: cover;
-}
-
-.search-grid .skuimages figure {
-    max-width: 100%;
-    margin-left: 15px;
-    object-fit: cover;
-}
-
-.search-grid  .skuimages figcaption {
-    padding: 2px;
-    width: 100%;
-    color: #000;
-    font-size: 20px;
-    text-align: center;
 }
 
 .imagemessage {
@@ -681,15 +694,16 @@ footer {
 	overflow: hidden;
 	text-align: center;
     grid-template-areas: 
-        "a a a"
-        "b b b"
-        "c c c"
-		"d d d"
-        "e e e";
+        "loghead"
+        "logname"
+        "logpass"
+		"logcaptcha"
+        "logsubmit"
+        "logerror";
 }
 
-.login-wrap .a {
-	grid-area: a;
+.login-wrap .log-head {
+	grid-area: loghead;
 	width: 100%;
 	align-self: center;
     justify-self: center;
@@ -710,16 +724,16 @@ footer {
 	margin-bottom: 20px;
 }
 
-.login-wrap .b {
-	grid-area: b;
+.login-wrap .log-name {
+	grid-area: logname;
 }
 
-.login-wrap .c {
-	grid-area: c;
+.login-wrap .log-pass {
+	grid-area: logpass;
 }
 
-.login-wrap .d {
-	grid-area: d;
+.login-wrap .log-captcha {
+	grid-area: logcaptcha;
     align-self: center;
     justify-self: center;
     text-align: center;
@@ -727,13 +741,13 @@ footer {
     margin-bottom: 25px;
 }
 
-.login-wrap .e {
-	grid-area: e;
+.login-wrap .log-submit {
+	grid-area: logsubmit;
     text-align: center;
 }
 
-.login-wrap .f {
-	grid-area: f;
+.login-wrap .log-error {
+	grid-area: logerror;
 }
 
 .login-wrap .emailError, .login-wrap .passwordError {
@@ -773,12 +787,17 @@ footer {
 .my-search-head {
     grid-area: mysearchhead;
 	text-align: center;
+    margin-top: 25px;
 }
 
 .my-search-body {
     grid-area: mysearchbody;
 	margin-right: 25px;
 	margin-left: 25px;
+}
+
+.my-search-body a:hover {
+	border-bottom: 1px solid #000;
 }
 
 .my-search-foot {
@@ -840,7 +859,7 @@ footer {
     header {
         grid-area: header;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
         grid-gap: 5px;
         grid-template-areas: 
             "mainlogo name"
@@ -856,18 +875,17 @@ footer {
 
     header .main-logo {
         grid-area: mainlogo;
-        grid-column: 1 / span 5;
+        grid-column: 1 / span 6;
     }
     
     header .name {
         grid-area: name;
-        grid-column: 6 / span 12;
+        grid-column: 1 / span 6;
     }
 
     header .navlinks {
         grid-area: navlinks;
-        grid-column: 1 / span 12;
-        text-align: center;
+        grid-column: 1 / span 6;
         padding: 0;
         margin: 0;
         font-size: 15px;
@@ -880,7 +898,7 @@ footer {
 
     header .searchbox {
         grid-area: searchboxnav;
-        grid-column: 1 / span 12;
+        grid-column: 1 / span 6;
         padding-bottom: 15px;
     }
 
@@ -924,7 +942,7 @@ footer {
     .index-main .main-intro #staticImg {
         grid-area: introimages;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         grid-template-rows: auto;
         width: 90%;
         grid-gap: 2.5em;
@@ -960,38 +978,54 @@ footer {
     .skuimages {
         grid-area: simages;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        grid-template-rows: auto 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-rows: auto;
         width: 100%;
         grid-gap: 2.5em;
-        justify-items: center;
-    }
-
-    .skuimages figure img {
-        height: 200px;
-        margin-left: 15px;
-        object-fit: cover;
-    }
-
-    .skuimages figure {
-        max-width: 100%;
-        margin-left: 15px;
-        object-fit: cover;
-    }
-
-    .skuimages figcaption {
-        padding: 2px;
-        width: 100%;
-        color: #000;
-        font-size: 20px;
-        text-align: center;
+        
     }
     
+    .my-search-body {
+        margin: auto;
+        margin-left: 50px;
+    }
+    
+    .card {
+      /* Add shadows to create the "card" effect */
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+        max-width: 200px;
+    }
+
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    /* Add some padding inside the card container */
+    .card figcaption { 
+      padding: 2px 16px;
+        border-top: 1px solid #000;
+    }
+
+    .card img {
+        object-fit: cover;
+        width: 100%;
+        padding: 15px;
+    }
+
     .admin-nav {
         min-height: 100vh;
         top: 143px;
     }   
     
+    .my-search-head form {
+        display: block; 
+        text-align: left;
+        margin: auto;
+        width:50%; 
+        overflow:visible;   
+    }
 }
 
 /* 
@@ -1005,50 +1039,50 @@ only screen and (max-width: 760px),
 
 	/* Force table to not be like tables anymore */
  .table {
-    border: 0;
+        border: 0;
   }
 
   .table caption {
-    font-size: 1.3em;
+        font-size: 1.3em;
   }
   
   .table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
   }
   
   .table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: .625em;
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
   }
   
   .table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: .8em;
-    text-align: right;
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
   }
   
   .table td::before {
-    /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
   }
   
   .table td:last-child {
-    border-bottom: 0;
+        border-bottom: 0;
   }
 }
 

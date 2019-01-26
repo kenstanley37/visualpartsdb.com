@@ -111,22 +111,25 @@
                                 <?php 
                                     while($skuimagerow = $skuimages->fetch()){
                                         ?>
-                                    <figure>
-                                        <a href="<?php echo $skuimagerow['sku_image_url']; ?>" target="_blank"><img src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" /></a>
-                                        <figcaption><?php echo $skuimagerow['sku_image_description']; ?></figcaption>
-                                        <form method="post" action="/processors/image_handler.php">
-                                            <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
-                                            <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
-                                            <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
-                                            <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
-                                            <input type="submit" value="Delete Image" name="deleteimg">
-                                        </form>
+                                    <figure class="card">
+                                        <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
+                                            <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                            <figcaption>
+                                            <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
+                                            <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                            <form method="post" action="/processors/image_handler.php">
+                                                <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
+                                                <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
+                                                <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
+                                                <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
+                                                <input type="submit" value="Delete Image" name="deleteimg">
+                                            </form>
+                                        </figcaption>
+                                        </a>
                                     </figure>
-
                                         <?php
                                     }
                                 ?>
-
                             </article>
                             <article class="search-part-info">
                                 <section class="export-data">
@@ -509,7 +512,15 @@
                     while($skuimagerow = $skuimages->fetch())
                     {
                     ?>
-                        <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                        <figure class="card">
+                            <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
+                                <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                <figcaption>
+                                    <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
+                                    <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                </figcaption>
+                            </a>
+                        </figure>
                     <?php
                     }
                 }   
@@ -527,9 +538,11 @@
         // *************************************************************
         public function mySearches($dateFrom, $dateTo, $userID, $recordCount)
         {
-            if(empty($dateFrom) || empty($dateTo))
-            {
-                
+           require_once('class.user.php');
+            $user = new USER;
+            
+            if($user->accessCheck() != 'ADMIN'){
+                $userID = $_SESSION['user_id'];
             }
             
             if(!empty($userID)){  }

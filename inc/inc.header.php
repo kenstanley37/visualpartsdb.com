@@ -2,6 +2,7 @@
     $user = new USER;
     $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 ?>
+
     <section class="main-logo">
         <a href="/"><h1 class="heading"><i class="fas fa-images"></i> Visual Parts Database</h1></a>
     </section>
