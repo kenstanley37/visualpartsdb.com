@@ -907,6 +907,11 @@ footer {
         padding: 0;
     }
     
+    header .admin-extra {
+        grid-area: adminextra;
+        grid-column: 1 / span 6;
+    }
+    
     .index-main {
         grid-area: main;
         display: grid;
@@ -982,7 +987,6 @@ footer {
         grid-template-rows: auto;
         width: 100%;
         grid-gap: 2.5em;
-        
     }
     
     .my-search-body {
