@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    url = '/processors/ajax.php';
     startup();
 });
 
@@ -6,7 +7,7 @@ function startup(){
     navScroll();
     adminNav();
     datePickerSetup();
-  
+    mySearchCharts();
 }
   
 function datePickerSetup(){
@@ -58,4 +59,46 @@ function adminNav(){
     $('.admin-ham').click(function(){
         $('.admin-nav').toggleClass('show');
     });
+}
+
+function mySearchCharts(){
+    var dfrom = $('#dfrom').val();
+    var dto = $('#dto').val();
+    var userID = $('#users').val();
+    
+    var data ={};
+    data['dfrom'] = dfrom;
+    data['dto'] = dto;
+    data['userID'] = userID;
+    $.ajax({
+       type: "POST",
+       url: url,
+       data: data, // set $_POST.
+       //dataType: 'json',
+       success: function(data)
+       {
+           //dude = jQuery.parseJSON(data);
+           console.log(data);
+           chart = c3.generate({
+                data: {
+        //          x: 'name',
+                  json: data,
+                  type: 'bar',
+                },
+               bar: {
+                width: {
+                    ratio: 0.5 // this makes bar width 50% of length between ticks
+                }
+                // or
+                //width: 100 // this makes bar width 100px
+            }
+
+              });
+       },
+       error: function (data) {
+            console.log('An error occurred.');
+            console.log(data);
+        }
+     });
+    
 }

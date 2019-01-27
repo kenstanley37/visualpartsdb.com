@@ -135,7 +135,7 @@
                                 <section class="export-data">
                                     <section class="excel">
                                         <ul>
-                                            <li><a href="/export/generate-xlsx.php?export=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></li>
+                                            <li><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></li>
                                             <li><a href="search.php?export=pdf&sku=<?php echo $skuRow['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></li>
                                         </ul>
                                     </section>
@@ -544,44 +544,87 @@
             if($user->accessCheck() != 'ADMIN'){
                 $userID = $_SESSION['user_id'];
             }
-            
-            if(!empty($userID)){  }
-            
+                
             // lets update the search ticker for this sku
             try {
                     if(!empty($userID))
                     {  
                         if(empty($dateFrom) || empty($dateTo))
                         {
-                            $stmt = $this->conn->prepare("SELECT * FROM sku_search WHERE sku_search_by = :userID ORDER BY sku_search_id desc");
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            WHERE sku_search_by = :userID ORDER BY sku_search_id desc");
                             $stmt->bindparam(":userID", $userID);
+                            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count  FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            WHERE sku_search_by = :userID 
+                            GROUP by sku_search_sku
+                            ORDER BY sku_search_id desc");
+                            $count->bindparam(":userID", $userID);
+                            
                         } else {
                             $stmt = $this->conn->prepare("SELECT * FROM sku_search 
                             left join user on user_id = sku_search_by
                             left join sku on sku_id = sku_search_sku
-                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo ORDER BY sku_search_id desc");
+                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                             ORDER BY sku_search_id desc");
                             $stmt->bindparam(":userID", $userID);
                             $stmt->bindparam(":dateFrom", $dateFrom);
                             $stmt->bindparam(":dateTo", $dateTo);
+                            
+                            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                             GROUP by sku_search_sku
+                             ORDER BY sku_search_id desc");
+                            $count->bindparam(":userID", $userID);
+                            $count->bindparam(":dateFrom", $dateFrom);
+                            $count->bindparam(":dateTo", $dateTo);
+                            
                         }
                     } else 
                     {
                         if(empty($dateFrom) || empty($dateTo))
                         {
-                            $stmt = $this->conn->prepare("SELECT * FROM sku_search ORDER BY sku_search_id desc");
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            left join user on user_id = sku_search_by
+                            ORDER BY sku_search_id desc");
+                            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            left join user on user_id = sku_search_by
+                            GROUP by sku_search_sku
+                            ORDER BY sku_search_id desc");
                         } else {
                             $stmt = $this->conn->prepare("SELECT * FROM sku_search 
                             left join user on user_id = sku_search_by
                             left join sku on sku_id = sku_search_sku
-                              and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo ORDER BY sku_search_id desc");
+                                WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                              ORDER BY sku_search_id desc");
                             $stmt->bindparam(":dateFrom", $dateFrom);
                             $stmt->bindparam(":dateTo", $dateTo);
+                            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                                WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                              GROUP by sku_search_sku
+                              ORDER BY sku_search_id desc
+                              ");
+                            $count->bindparam(":dateFrom", $dateFrom);
+                            $count->bindparam(":dateTo", $dateTo);
                         }
-                    }
-                
-                    
+                    }    
                     $stmt->execute();
+                    $count->execute();
                     ?>
+                        <section class="my-search-results">
+
+
                         <table class="table">
                             <caption>Search History</caption>
                             <thead>
@@ -609,7 +652,7 @@
                                 $timeOnly = $newDate->format('h:i:s A'); // pull the time out
                             ?>
                                 <tr valign="middle">
-                                    <td scope="row" data-label="SKU"><a href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></td>
+                                    <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></td>
                                     <td data-label="Description"><?php echo $desc; ?></td>
                                     <td data-label="Date"><?php echo $dateOnly; ?></td>
                                     <td data-label="Time"><?php echo $timeOnly; ?></td>
@@ -620,7 +663,36 @@
                     <?php
                     }
                         ?></tbody>
-                        </table><?php
+                        </table>
+                        </section>    
+                        <section class="my-search-count">
+                             <table class="table table-count">
+                            <caption>Search Count</caption>
+                            <thead>
+                                <tr align="middle">
+                                    <th scope="col">Part Number</th>
+                                    <th scope="col">Count</th>
+                                </tr>
+                            </thead> 
+                             <tbody>
+
+                            <?php
+                    
+                    while($countrow = $count->fetch())
+                    {
+                        ?>
+                         <tr valign="middle">
+                            <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $countrow['sku_search_sku']; ?>"><?php echo $countrow['sku_search_sku']; ?></a></td>
+                            <td data-label="Count"><?php echo $countrow['count']; ?></td>
+                        </tr>
+                                 
+                        <?php
+                    }
+                    ?>
+                                 </tbody>
+                            </table>
+                    </section>
+                    <?php
                 }   
                 catch(PDOException $e)
                 {
@@ -660,7 +732,89 @@
                 {
                     echo $e->getMessage();
                 }	
-        } // end mySearches
+        } // end recordCount;
+        
+        
+        // *************************************************************
+        // Usage: mysqlToJson($drom, dto, $user);
+        // display counts for records, images, and searches
+        // sends the data back in JSON format
+        // *************************************************************
+        public function mysqlToJson($fdate, $dto, $userID)
+        {
+            require_once('class.user.php');
+            $user = new USER;
+            
+            if($user->accessCheck() != 'ADMIN'){
+                $userID = $_SESSION['user_id'];
+            }
+                
+            // lets update the search ticker for this sku
+            try {
+                    if(!empty($userID))
+                    {  
+                        if(empty($dateFrom) || empty($dateTo))
+                        {            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count  FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            WHERE sku_search_by = :userID 
+                            GROUP by sku_search_sku
+                            ORDER BY sku_search_id desc");
+                            $count->bindparam(":userID", $userID);
+                            
+                        } else {                
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                             GROUP by sku_search_sku
+                             ORDER BY sku_search_id desc");
+                            $count->bindparam(":userID", $userID);
+                            $count->bindparam(":dateFrom", $dateFrom);
+                            $count->bindparam(":dateTo", $dateTo);
+                            
+                        }
+                    } else 
+                    {
+                        if(empty($dateFrom) || empty($dateTo))
+                        {                
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            left join user on user_id = sku_search_by
+                            GROUP by sku_search_sku
+                            ORDER BY sku_search_id desc");
+                        } else {
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                                WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                              GROUP by sku_search_sku
+                              ORDER BY sku_search_id desc
+                              ");
+                            $count->bindparam(":dateFrom", $dateFrom);
+                            $count->bindparam(":dateTo", $dateTo);
+                        }
+                    }    
+                    $count->execute();
+                    $data = array(); // set an array for JSON output
+                    while($countrow = $count->fetch(PDO::FETCH_ASSOC))
+                    {
+                        //Create an array that C3 can read correctly
+                        $index = $countrow['sku_search_sku'];
+                        $data[$index] = $countrow['count'];                
+                    }
+                    // since we are formatting in JSON we need to set the header before returning the data.
+                    if(!empty($data)){
+                    header("Access-Control-Allow-Origin: *");//this allows coors
+                    header('Content-Type: application/json');
+                    print json_encode($data);
+                    }
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end mySqlToJson
         
     } // end class
 ?>

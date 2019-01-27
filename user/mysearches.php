@@ -16,7 +16,9 @@ require_once($path."class/class.func.php");
 $vpd = new VISUALDB;
 $vail = new VALIDATE;
 
-$dateStart = date("Y-m-d");
+$date = date("Y-m-d");
+$dateStart = strtotime('-1 day', strtotime($date));
+$dateStart = date("Y-m-d", $dateStart);
 $dateEnd = date("Y-m-d");
 
 $userID = '';
@@ -34,7 +36,6 @@ if(isset($_GET['dfrom']))
 } 
 
 $result = '';
-//$dateStart = date("Y-m-d");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +59,8 @@ $result = '';
             <?php
         }
        ?>
-        <main class="user-main">   
+        <main class="my-search-main">  
+            <article id="chart" class="my-search-charts"></article>
             <article class="my-search-head">
                 <form action="mysearches.php?searchhist" method="get">
                     <label for="dfrom">Date From:</label> <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
@@ -74,7 +76,7 @@ $result = '';
                     <input type="submit" value="search">
                 </form>
             </article>
-            <article class="my-search-body">
+            <article class="my-search-body">            
                 <?php 
                     $vpd->mySearches($dateStart, $dateEnd, $userID, 50);
                  ?>
