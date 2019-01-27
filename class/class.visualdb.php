@@ -560,7 +560,7 @@
                             left join sku on sku_id = sku_search_sku
                             WHERE sku_search_by = :userID 
                             GROUP by sku_search_sku
-                            ORDER BY sku_search_id desc");
+                            ORDER BY count desc");
                             $count->bindparam(":userID", $userID);
                             
                         } else {
@@ -579,7 +579,7 @@
                             left join sku on sku_id = sku_search_sku
                              WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
                              GROUP by sku_search_sku
-                             ORDER BY sku_search_id desc");
+                             ORDER BY count desc");
                             $count->bindparam(":userID", $userID);
                             $count->bindparam(":dateFrom", $dateFrom);
                             $count->bindparam(":dateTo", $dateTo);
@@ -598,7 +598,7 @@
                             left join sku on sku_id = sku_search_sku
                             left join user on user_id = sku_search_by
                             GROUP by sku_search_sku
-                            ORDER BY sku_search_id desc");
+                            ORDER BY count desc");
                         } else {
                             $stmt = $this->conn->prepare("SELECT * FROM sku_search 
                             left join user on user_id = sku_search_by
@@ -613,7 +613,7 @@
                             left join sku on sku_id = sku_search_sku
                                 WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
                               GROUP by sku_search_sku
-                              ORDER BY sku_search_id desc
+                              ORDER BY count desc
                               ");
                             $count->bindparam(":dateFrom", $dateFrom);
                             $count->bindparam(":dateTo", $dateTo);
@@ -759,7 +759,7 @@
                             left join sku on sku_id = sku_search_sku
                             WHERE sku_search_by = :userID 
                             GROUP by sku_search_sku
-                            ORDER BY sku_search_id desc");
+                            ORDER BY count desc");
                             $count->bindparam(":userID", $userID);
                             
                         } else {                
@@ -768,7 +768,7 @@
                             left join sku on sku_id = sku_search_sku
                              WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
                              GROUP by sku_search_sku
-                             ORDER BY sku_search_id desc");
+                             ORDER BY count desc");
                             $count->bindparam(":userID", $userID);
                             $count->bindparam(":dateFrom", $dateFrom);
                             $count->bindparam(":dateTo", $dateTo);
@@ -782,14 +782,14 @@
                             left join sku on sku_id = sku_search_sku
                             left join user on user_id = sku_search_by
                             GROUP by sku_search_sku
-                            ORDER BY sku_search_id desc");
+                            ORDER BY count desc");
                         } else {
                             $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
                             left join user on user_id = sku_search_by
                             left join sku on sku_id = sku_search_sku
                                 WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
                               GROUP by sku_search_sku
-                              ORDER BY sku_search_id desc
+                              ORDER BY count desc
                               ");
                             $count->bindparam(":dateFrom", $dateFrom);
                             $count->bindparam(":dateTo", $dateTo);

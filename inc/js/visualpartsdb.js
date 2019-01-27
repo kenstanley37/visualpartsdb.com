@@ -83,7 +83,7 @@ function mySearchCharts(){
                 data: {
         //          x: 'name',
                   json: data,
-                  type: 'bar',
+                  type: 'pie',
                 },
                bar: {
                 width: {
