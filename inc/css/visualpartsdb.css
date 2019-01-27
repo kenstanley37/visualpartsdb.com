@@ -1,8 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
-@import url('https://fonts.googleapis.com/css?family=Catamaran');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box; /* CSS 3 rec */
+    -moz-box-sizing: border-box; /* Firefox 2 */
+    -ms-box-sizing: border-box; /* Internet Explorer 8 */
+    -webkit-box-sizing: border-box; /* Safari 3 */
+    -khtml-box-sizing: border-box; /* Konqueror */
+}
+
+.navHam {
+    display: none;
 }
 
 .toupper {
@@ -10,14 +19,11 @@
 }
 
 html, body {
-    width: 100%;
-    height: 100%;
     margin: 0;
 }
 
 a, p, li {
-    font-family: 'Quicksand', sans-serif;
-    color: #000;
+    font-family: 'Open Sans', sans-serif;
 }
 
 li {
@@ -29,21 +35,8 @@ ul {
     margin-top: 15px;
 }
 
-.wrapper {
-    display: grid;
-    max-width: 100%;
-    min-height: 100%;
-    grid-template-rows: 50px auto 1fr 35px;;
-    grid-template-columns: 100%;
-    grid-template-areas: 
-        "header"
-        "mainnavbar"
-        "main"
-        "footer";
-}
-
-h1, h2, h3 {
-    font-family: 'Fjalla One', sans-serif;
+h1, h2, h3, h4 {
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     line-height: 50px;
 }
@@ -60,55 +53,137 @@ h3 {
     font-size: 20px;
 }
 
-p {
-    font-family: 'Catamaran', sans-serif;
-    font-size: 25px;
+h4 {
+    font-size: 15px;
 }
-
 /* hyperlink styling */
 
 a {
-	font-size: 20px;
 	text-decoration: none;
+	color: #000;
+}
+
+a:hover {
+    border-bottom: 1px solid #fff;
+}
+
+.shadow {
+    box-shadow: 5px 5px 20px 1px #888888;
+}
+
+.button1 {
+	border-bottom: 1px solid #fff;
+}
+
+/***************************** 
+** index.php grid 
+******************************/
+.wrapper {
+    display: grid;
+    min-height: 100vh;
+    min-width: 100%;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "adminnavbar header"
+        "adminnavbar main"
+        "adminnavbar footer";
 }
 
 /* header styling */
 header {
     grid-area: header;
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 10px;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto;
+    min-width: 100%;
+    color: #fff;
+    background: #000428;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     grid-template-areas: 
-        "a c d";
-    align-items: center;
-    width: 100%;
-    font-size: 2em;
-    color: white;
-    background-color: #333;
+        "mainlogo navlinks searchboxnav name"
+        "adminextra adminextra adminextra adminextra";
     position: sticky;
     top: 0;
+    align-items: center;
     z-index: 1;
+}
+
+header .admin-extra {
+    grid-area: adminextra;
+    margin-left: 15px;
+}
+
+.toggle {
+    left: -250px;
+}
+
+
+header .admin-ham i {
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+header .main-logo {
+    grid-area: mainlogo;
+    grid-column: 1 ;
+}
+
+header .navlinks {
+    grid-area: navlinks;
+    grid-column: 6;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+header .navlinks section {
+    display: inline-block;
+    padding: 20px;
+}
+
+header .searchbox {
+    grid-area: searchboxnav;
+    grid-column: 11;
+}
+
+header .name {
+    grid-area: name;
+    grid-column: 12;
+    text-align: right;
+}
+
+header i {
+    color: red;
 }
 
 header a {
     color: #fff;
 }
 
-header .main-logo {
-    grid-area: a;
-    grid-column: 1 / 1;
+header a:hover {
+    border-bottom: 1px solid #fff;
 }
 
-.main-logo h1 {
+header .main-logo h1 {
     font-size: 25px;
     margin-left: 15px;
 }
 
 header .search {
-    grid-area: c;
-    grid-column: 11 / 11;
-    text-align: right;
+    text-align: center;
     font-size: 25px;
+}
+
+header .search i {
+    position: absolute;
+    background-color: #fff;
+    font-size: 20px;
+    color: #000;
+    margin-top: 6px;
+    margin-left: -2px;
 }
 
 header .search label {
@@ -116,69 +191,208 @@ header .search label {
 }
 
 header .name {
-    grid-area: d;
-    grid-column: 12 / 12;
+    text-align: right;
+    margin-right: 25px;
 }
 
 header .name a {
     font-size: 15px;
 }
 
-/***************************** 
-** index.php grid 
-******************************/
-.mainnav {
-    grid-area: mainnavbar;
-    display: inline-block;
-    padding: 10px;
-    text-align: center;
-    line-height: 1em;
-    border-bottom: 1px solid #000;
+.admin-nav {
+    grid-area: adminnavbar;
+    display: none; /* the hidden class will active this in jquery */
+    grid-template-columns: auto auto;
+    grid-template-areas: 
+        "adminham admininfo";
+    background-color: #424242;
+    color: #fff;
+    position: fixed;
+    min-height: 100vh;
+    top: 77px;
+    bottom:0;
+    box-shadow: 5px 10px 18px blue;
+    z-index: 2;
+    opacity: 0.9;
 }
 
-.mainnav a {
-    padding: 1em;
+.admin-nav .admin-title {
+    background-color: #000;
+    text-align: center;
+}
+
+.admin-nav .admin-links i {
+    text-align: center;
+    font-size: 25px;
+}
+
+.admin-nav .admin-links i a {
+    text-align: center;
+    display: inline-block;
     font-size: 15px;
-    text-decoration: none;
+    font-weight: 100;
+}
+
+.admin-nav a {
+    padding: 1em;
+    color: #fff;
+}
+
+.admin-nav section a {
+    display: block;
+}
+
+main {
+    overflow: auto;
+}
+
+.index-main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-column-gap: 15px;
+    grid-template-areas: 
+        "indexsearch"
+        "indexintro"
+        "indexmembership";
+    justify-content: center;
+    align-self: flex-end;
+}
+
+.index-main-tog {
+    margin-left: 150px;
+}
+
+.index-search {
+    grid-area: indexsearch;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    height: 400px;
+    background-color: azure;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.index-search h1 {
+    padding-bottom: 50px;
+}
+
+.index-search  ::-webkit-input-placeholder {
+    text-align: center;
+}
+
+.index-search  :-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+}
+
+.index-search  ::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+}
+
+.index-search  :-ms-input-placeholder {  
+    text-align: center; 
+}
+
+.index-search input {
+    background-color: #fff;
+    border: none;
+    color: rgba(0,0,0,.87);
+    word-wrap: break-word;
+    outline: none;
+    box-shadow: 0 0 3px 3px #ccc;
+    border-radius: 15px 15px 15px 15px;
+    width: 500px;
+    height: 35px;
+}
+
+.main a, .index-main a {
     color: #000;
 }
 
-.main {
-    grid-area: main;
-    margin-top: 25px;
-    margin-bottom: 50px;
-    max-width: 100%;
+.index-main .main-intro {
+    grid-area: indexintro;
+    overflow: hidden;
+    min-width: 100%;
     display: grid;
     grid-template-columns: 45% 45%;
-    grid-gap: 30px;
+    grid-gap: 5px;
     grid-template-areas: 
-        "intro introimages"
-        "member member";
+        "introparts introimages";
     justify-content: center;
+    padding-bottom: 50px;
 }
 
-#member {
-    grid-area: member;
+.index-main .main-intro .intro {
+    grid-area: introparts;
+    line-height: 2em;
+    min-width: 100%;
+    justify-items: center;
+}
+
+.index-main .main-intro #staticImg {
+    grid-area: introimages;
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    width: 100%;
+    grid-gap: 2.5em;
+    justify-items: center;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.card figcaption { 
+  padding: 2px 16px;
+    border-top: 1px solid #000;
+}
+
+.card img {
+    object-fit: cover;
+    width: 100%;
+    padding: 15px;
+}
+
+.index-main #member {
+    background-color: antiquewhite;
+    grid-area: indexmembership;
+    min-width: 100%;
+    margin-top: 50px;
+    padding-top: 15px;
+    display: grid;
+    grid-template-columns: 45% 45%;
     grid-template-areas: 
         "memberheader memberheader"
         "memberrequest memberinfo";
     justify-content: center;
 }
 
-#member .memberheader {
-    grid-area: memberheader;
-    text-align: center;
-    border-bottom: 1px solid #000;
+.index-main #member > h3 {
+    font-family: "Google Sans",Arial,sans-serif;
 }
 
-#member .memberinfo {
+.index-main #member .member-header {
+    grid-area: memberheader;
+    text-align: center;
+}
+
+.index-main #member .member-info {
     grid-area: memberinfo;
 }
 
-#member .memberrequest {
+.index-main #member .member-request {
     grid-area: memberrequest;
 }
 
@@ -186,146 +400,66 @@ header .name a {
   vertical-align: top;
 }
 
-#member .memberrequest form.regform {
+.index-main #member .member-request form.regform {
     display: table;
 }
 
-#member .memberrequest div.regform {
+.index-main #member .member-request div.regform {
     display: table-row;
 }
 
-#member .memberrequest label, #member .memberrequest input {
+.index-main #member .member-request label, .index-main #member .member-request input {
     display: table-cell;
     margin-bottom: 10px;
 }
 
-#member .memberrequest label {
-    padding-right: 10px;
-}
-
-#member .memberrequest i, #member span {
+.index-main #member .member-request i, #member span {
     padding-left: 10px;
     color: red;
     font-size: 9px;
 }
 
-#member span {
+.index-main #member span {
     font-size: 15px;
 }
 
-.main .intro {
-    grid-area: intro;
-    line-height: 2em;
-    max-width: 100%;
-}
-
-.main #staticImg {
-    grid-area: introimages;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-template-rows: auto 1fr;
-    width: 100%;
-    grid-gap: 2.5em;
-    justify-items: center;
-}
-
-.main #staticImg > img {
-    max-width: 100%;
-    height: 300px;
-    padding: 5px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    justify-content: center;
-    align-self: center;
-    align-items: center;
-}
-
 /* Search results style */
-
-.search-wrapper {
-    display: grid;
-    min-height: 100vh;
-    grid-template-rows: auto auto auto 1fr 50px;
-    grid-template-columns: 100%;
-    grid-template-areas: 
-        "header"
-        "mainnav"
-        "adminnav"
-        "smain"
-        "footer";
-}
 
 .search-header {
     grid-area: header;
 }
 
-.search-wrapper .mainnav {
-    grid-area: mainnav;
-
-}
-
-.adminnav {
-    grid-area: adminnav;
-    display: grid;
-    grid-template-columns: 30% 30% 35%;
-    grid-gap: 1em;
-    grid-template-areas: 
-        "navpart navother navuser";
-    align-items: center;
-    text-align: center;
-    border-bottom: 1px solid #000;
-    line-height: 35px;
-}
-
-.adminnav a {
-    font-size: 15px;
-    padding: 10px;
-    line-height: 5px;
-}
-
-.navPartManagement {
-    grid-area: navpart;
-    text-align: left;
-    margin-left: 10px;
-}
-
-.navOther {
-    grid-area: navother;
-    text-align: center;
-}
-
-.navUserManagement {
-    grid-area: navuser;
-    text-align: right;
-}
-
 .search-main {
-    grid-area: smain;
-    margin-top: 15px;
-    margin-bottom: 50px;
-    display: grid;
-    grid-template-columns: 90%;
-    grid-gap: 20px;
+    grid-area: main;
+    margin: auto;
+    min-height: 100vh;
+    min-width: 95%;
+    grid-template-columns: 80%;
+    grid-template-rows: auto 1fr;
+    grid-column-gap: 15px;
     grid-template-areas: 
         "searchname"
         "searchgrid";
     justify-content: center;
+    padding-top: 10px;
 }
 
 .slogo-search {
     grid-area: searchname;
+    padding-bottom: 25px;
 }
 
 .search-grid {
     grid-area: searchgrid;
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 45% 45%;
     grid-gap: 20px;
     grid-template-areas: 
         "simages sproductinfo";
     justify-content: center;
 }
 
-.skuimages {
+.search-grid .skuimages {
     grid-area: simages;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -333,26 +467,6 @@ header .name a {
     width: 100%;
     grid-gap: 2.5em;
     justify-items: center;
-}
-
-.skuimages figure img {
-    height: 300px;
-    margin-left: 15px;
-    object-fit: cover;
-}
-
-.skuimages figure {
-    max-width: 100%;
-    margin-left: 15px;
-    object-fit: cover;
-}
-
-.skuimages figcaption {
-    padding: 2px;
-    width: 100%;
-    color: #000;
-    font-size: 20px;
-    text-align: center;
 }
 
 .imagemessage {
@@ -413,18 +527,36 @@ header .name a {
     box-shadow: 5px 10px #888888;
 }
 
-.search-wrapper table, .search-wrapper table th, .search-wrapper table td,  .search-wrapper table tr{
+.search-main table, .search-main table th, .search-main table td,  .search-main table tr{
     /* order: 5px solid black; */
     text-align: left;
 }
 
-.search-wrapper table th {
+.search-main table th {
     width: 200px;
     padding-right: 15px;
 }
 
-.search-wrapper table {
+.search-main table {
     margin-bottom: 25px;
+}
+
+.indent50 * {
+	border: 1px solid #000;
+	padding: 10px;
+	text-align: left;
+}
+
+.indent50 tr {
+	border: 1px solid #000;
+}
+
+.indent50 td {
+	min-width: 100px;
+}
+
+.indent50 {
+    margin-left: 50px;
 }
 
 .skudetails {
@@ -439,20 +571,13 @@ header .name a {
 .search-part-info thead th {
     font-size: 20px;
     border-radius: 0 50px 0 0;
-    background-color: #4CAF50;
-    border-color: #000 #000 0 0;
     vertical-align: middle;
     height: 30px;
-    color: #fff;
-    padding-left: 10px;
-}
-
-.indent50 {
-    margin-left: 50px;
 }
 
 footer {
     grid-area: footer;
+    min-height: 100%;
     color: #fff;
     display: grid;
     grid-template-columns: auto;
@@ -463,12 +588,105 @@ footer {
     z-index: 1;
 }
 
-/* login form style */
+/* ADMIN STYLE */
+.admin-main {
+    grid-area: main;
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 75px auto auto;
+    grid-gap: 15px;
+    grid-template-areas: 
+        "adminhead adminhead adminhead"
+        "adduser showuser showuser"
+        "regwait regwait regwait";
+}
+
+.admin-main .admin-head {
+    grid-area: adminhead;
+}
+
+.admin-main .add-user {
+    grid-area: adduser;
+}
+
+
+/* REGISTER STYLE */
+
+.register-main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 25px 1fr;
+    grid-column-gap: 15px;
+}
+
+.register-fail {
+    margin: auto;
+    margin-top: 100px;
+}
+
+.register-main .reg-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.register-main .reg-table caption {
+    font-size: 1.5em;
+    min-height: 35px;
+    color: #fff;
+    background: #000428;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.register-main .reg-table tr {
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+.register-main .reg-table th,
+.register-main .reg-table td {
+    padding: .625em;
+    text-align: left;
+}
+
+.register-main .reg-table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+/* lLOGIN FORM STYLE */
+.login-wrapper {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 100%;
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas: 
+        "loginheader"
+        "loginwrap";
+    align-items: center;
+    align-self: center;
+}
+
+.login-header {
+    grid-area: loginheader;
+}
+
+.login-footer {
+    display: none;
+}
+
 
 .login-wrap {
+    grid-area: loginwrap;
 	display: grid;
     grid-template-columns: repeat(3, 200px);
-    grid-template-rows: repeat(5, 100px);
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
     height: 600px;
     grid-gap: 10px;
 	align-self: center;
@@ -476,15 +694,16 @@ footer {
 	overflow: hidden;
 	text-align: center;
     grid-template-areas: 
-        "a a a"
-        "b b b"
-        "c c c"
-		"d d d"
-        "e e e";
+        "loghead"
+        "logname"
+        "logpass"
+		"logcaptcha"
+        "logsubmit"
+        "logerror";
 }
 
-.login-wrap .a {
-	grid-area: a;
+.login-wrap .log-head {
+	grid-area: loghead;
 	width: 100%;
 	align-self: center;
     justify-self: center;
@@ -505,16 +724,16 @@ footer {
 	margin-bottom: 20px;
 }
 
-.login-wrap .b {
-	grid-area: b;
+.login-wrap .log-name {
+	grid-area: logname;
 }
 
-.login-wrap .c {
-	grid-area: c;
+.login-wrap .log-pass {
+	grid-area: logpass;
 }
 
-.login-wrap .d {
-	grid-area: d;
+.login-wrap .log-captcha {
+	grid-area: logcaptcha;
     align-self: center;
     justify-self: center;
     text-align: center;
@@ -522,13 +741,13 @@ footer {
     margin-bottom: 25px;
 }
 
-.login-wrap .e {
-	grid-area: e;
+.login-wrap .log-submit {
+	grid-area: logsubmit;
     text-align: center;
 }
 
-.login-wrap .f {
-	grid-area: f;
+.login-wrap .log-error {
+	grid-area: logerror;
 }
 
 .login-wrap .emailError, .login-wrap .passwordError {
@@ -542,8 +761,107 @@ footer {
 	color: red;
 }
 
+/***************************************
+*
+*
+* START mysearches.php
+*
+*
+****************************************/
 
+.my-search-main {
+    grid-area: main;
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto 1fr auto;
+    grid-column-gap: 55px;
+    grid-template-areas: 
+        "mysearchcharts"
+        "mysearchhead"
+        "mysearchbody"
+        "mysearchfoot";
+    margin-top: 50px;
+}
 
+.my-search-charts {
+    grid-area: mysearchcharts;
+    max-height: 300px;
+}
+
+.my-search-head {
+    grid-area: mysearchhead;
+	text-align: center;
+    margin-top: 25px;
+}
+
+.my-search-body {
+    grid-area: mysearchbody;
+	margin-right: 25px;
+	margin-left: 25px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-areas: 
+        "searchresults searchcount";
+}
+
+.my-search-results {
+    grid-area: searchresults;
+}
+
+.my-search-count {
+    grid-area: searchcount;
+}
+
+.my-search-body a:hover {
+	border-bottom: 1px solid #000;
+}
+
+.my-search-foot {
+    grid-area: mysearchfoot;
+}
+
+.table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    table-layout: fixed;
+}
+
+.table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+.table tr {
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+.table th,
+.table td {
+    padding: .625em;
+    text-align: left;
+}
+
+.table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table thead tr {
+    background: #000428;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+}
 /***************************************
 *
 *
@@ -554,134 +872,241 @@ footer {
 /* Change styles for span and cancel button on extra small screens */
 
 
-@media screen and (max-width: 1300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    
-    .cancelbtn {
-        width: 100%;
-    }
-    
-    .wrapper {
-        display: grid;
-        grid-template-areas: 
-            "header"
-            "mainnavbar"
-            "main"
-            "footer";
-        justify-content: center;
-    }
-    
-    
-    .main {
-        grid-area: main;
-        display: grid;
-        grid-template-columns: auto;
-        grid-gap: 20px;
-        grid-template-areas: 
-            "intro" 
-            "introimages";
-        justify-content: center;
-    }
-    
-    .main .intro {
-        grid-area: intro;
-        line-height: 2em;
-        max-width: 100%;
-        margin-left: 15px;
-    }
-
-    .main .intro ul {
-        margin-left: 5%;
-        margin-top: 15px;
-    }
-
-    .main #staticImg {
-        grid-area: introimages;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        grid-template-rows: auto 1fr;
-        width: 100%;
-        grid-gap: 2.5em;
-        justify-items: center;
-    }
-    
-    #slideshow {
-        justify-content: center;
-        align-self: center;
-    }
-
-    .banner-text {
-        font-size: 25px;
-    }
-    
-    .main-logo h1 {
-        font-size: 25px;
-    }
-    
+@media screen and (max-width: 1200px) {
     header {
         grid-area: header;
         display: grid;
-        grid-template-columns: auto;
-        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+        grid-gap: 5px;
         grid-template-areas: 
-            "a c d";
+            "mainlogo name"
+            "navlinks navlinks" 
+            "searchboxnav searchboxnav"
+            "adminextra adminextra";
+        justify-content: center;
     }
-
-    header .main-logo {
-        grid-area: a;
-        text-align: left;
-        grid-column: 1 / 12;
-        font-size: 5px;
-    }
-
-    .main-logo h1 {
+    
+    header .main-logo h1{
         font-size: 15px;
     }
 
-    header .search {
-        grid-area: c;
-        text-align: center;
-        grid-column: 1 / 12;
-        font-size: 25px;
-    }
-
-    header .name {
-        grid-area: d;
-        text-align: right;
-        grid-column: 1 / 12;
+    header .main-logo {
+        grid-area: mainlogo;
+        grid-column: 1 / span 6;
     }
     
-  .search-main {
-        grid-area: smain;
-        margin-top: 15px;
+    header .name {
+        grid-area: name;
+        grid-column: 1 / span 6;
+    }
+
+    header .navlinks {
+        grid-area: navlinks;
+        grid-column: 1 / span 6;
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+    }
+
+    header .navlinks section {
+        display: inline-block;
+        padding: 20px;
+    }
+
+    header .searchbox {
+        grid-area: searchboxnav;
+        grid-column: 1 / span 6;
+        padding-bottom: 15px;
+    }
+
+    header .navlinks section {
+        margin: 0;
+        padding: 0;
+    }
+    
+    header .admin-extra {
+        grid-area: adminextra;
+        grid-column: 1 / span 6;
+    }
+    
+    .index-main {
+        grid-area: main;
         display: grid;
-        grid-template-columns: 90%;
-        grid-gap: 20px;
+        min-height: 100vh;
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        grid-gap: 15px;
         grid-template-areas: 
-            "searchname"
-            "searchgrid";
+            "indexsearch"
+            "indexintro"
+            "indexmembership";
+        justify-content: center;
+    }
+    
+    .index-main .main-intro {
+        grid-area: indexintro;
+        min-width: 100%;
+        grid-template-columns: auto;
+        grid-template-areas: 
+            "introparts" 
+            "introimages";
         justify-content: center;
     }
 
-    .slogo-search {
-        grid-area: searchname;
+    .index-main .main-intro .intro {
+        grid-area: introparts;
+        line-height: 2em;
+        max-width: 10%;
+        justify-self: center;
+        margin-left: 25px;
+    }
+    
+    .index-main .main-intro #staticImg {
+        grid-area: introimages;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-rows: auto;
+        width: 90%;
+        grid-gap: 2.5em;
+        justify-items: center;
     }
 
-    .search-grid {
-        grid-area: searchgrid;
+    .index-main #member {
         display: grid;
+        min-width: 90%;
         grid-template-columns: 100%;
-        grid-gap: 20px;
+        grid-gap: 5px;
+        grid-template-areas: 
+            "memberheader"
+            "memberrequest" 
+            "memberinfo";
+        justify-content: center;
+        padding-left: 25px;
+    }
+    
+    .index-search input {
+        width: 250px;
+        height: 35px;
+        padding-left: 10px;
+    }
+    
+    .search-grid {
+        grid-template-columns: auto;
         grid-template-areas: 
             "sproductinfo"
             "simages";
-        justify-content: center;
     }
     
+    .skuimages {
+        grid-area: simages;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-rows: auto;
+        width: 100%;
+        grid-gap: 2.5em;
+    }
+    
+    .my-search-body {
+        margin: auto;
+        margin-left: 50px;
+    }
+    
+    .card {
+      /* Add shadows to create the "card" effect */
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+        max-width: 200px;
+    }
+
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    /* Add some padding inside the card container */
+    .card figcaption { 
+      padding: 2px 16px;
+        border-top: 1px solid #000;
+    }
+
+    .card img {
+        object-fit: cover;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .admin-nav {
+        min-height: 100vh;
+        top: 143px;
+    }   
+    
+    .my-search-head form {
+        display: block; 
+        text-align: left;
+        margin: auto;
+        width:50%; 
+        overflow:visible;   
+    }
 }
 
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
 
- 
+	/* Force table to not be like tables anymore */
+ .table {
+        border: 0;
+  }
+
+  .table caption {
+        font-size: 1.3em;
+  }
+  
+  .table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+  }
+  
+  .table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+  }
+  
+  .table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+  }
+  
+  .table td::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+  }
+  
+  .table td:last-child {
+        border-bottom: 0;
+  }
+}
+
+.show {
+    display: grid;
+}

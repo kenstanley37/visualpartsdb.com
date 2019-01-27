@@ -54,6 +54,13 @@
         // *************************************************************
         public function skuSearch($sku)
         {
+            if(isset($_SESSION['user_id']))
+            {
+                $userID = $_SESSION['user_id'];
+            } else {
+                $userID = '';
+            }
+            
             $sku = strtoupper($sku);
             $user = new USER;
             try
@@ -67,8 +74,9 @@
                 {
                     // lets update the search ticker for this sku
                     try {
-                        $stmt = $this->conn->prepare("INSERT INTO sku_search (sku_search_sku) VALUES (:sku_search_id)");
+                        $stmt = $this->conn->prepare("INSERT INTO sku_search (sku_search_sku, sku_search_by) VALUES (:sku_search_id, :sku_search_by)");
                         $stmt->bindparam(":sku_search_id", $sku);
+                        $stmt->bindparam(":sku_search_by", $userID);
                         $stmt->execute();
                     }
                     catch(PDOException $e)
@@ -76,18 +84,16 @@
                         echo $e->getMessage();
                     }	
                     
-                    
                     $skuimages = $this->conn->prepare("SELECT * FROM sku_image 
                     WHERE sku_image_sku_id=:sku");
                     $skuimages->execute(array(':sku'=>$sku));
                     ?>
-                            
                          <article class="slogo-search">
                             <h1><?php echo $skuRow['sku_id']; ?></h1>
                             <?php if($user->accessCheck() == "ADMIN")
                             {
                                 ?>
-                                    <form action="/processors/image_upload.php" method="post" enctype="multipart/form-data">
+                                    <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
                                         Select image to upload:
                                         <input type="file" name="file" id="file">
                                         <input type="text" name="desc" id="desc" placeholder="Description">
@@ -105,21 +111,31 @@
                                 <?php 
                                     while($skuimagerow = $skuimages->fetch()){
                                         ?>
-                                    <figure>
-                                        <a href="<?php echo $skuimagerow['sku_image_url']; ?>" target="_blank"><img src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" /></a>
-                                        <figcaption><?php echo $skuimagerow['sku_image_description']; ?></figcaption>
+                                    <figure class="card">
+                                        <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
+                                            <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                            <figcaption>
+                                            <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
+                                            <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                            <form method="post" action="/processors/image_handler.php">
+                                                <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
+                                                <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
+                                                <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
+                                                <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
+                                                <input type="submit" value="Delete Image" name="deleteimg">
+                                            </form>
+                                        </figcaption>
+                                        </a>
                                     </figure>
-
                                         <?php
                                     }
                                 ?>
-
                             </article>
                             <article class="search-part-info">
                                 <section class="export-data">
                                     <section class="excel">
                                         <ul>
-                                            <li><a href="/export/generate-xlsx.php?export=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></li>
+                                            <li><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></li>
                                             <li><a href="search.php?export=pdf&sku=<?php echo $skuRow['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></li>
                                         </ul>
                                     </section>
@@ -157,25 +173,25 @@
                                     <table class="indent50">
                                         <thead>
                                             <tr>
-                                                <th>Unit Data</th> 
+                                                <th colspan="2">Unit Data</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <th>Length</th>
-                                                <td><?php echo $skuRow['sku_sig_length']; ?></td>
+                                                <td><?php echo $skuRow['sku_unit_length']; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Width</th>
-                                                <td><?php echo $skuRow['sku_sig_width']; ?></td>
+                                                <td><?php echo $skuRow['sku_unit_width']; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Height</th>
-                                                <td><?php echo $skuRow['sku_sig_height']; ?></td>
+                                                <td><?php echo $skuRow['sku_unit_height']; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Weight</th>
-                                                <td><?php echo $skuRow['sku_sig_weight']; ?></td>
+                                                <td><?php echo $skuRow['sku_unit_weight']; ?></td>
                                             </tr>
                                         </tbody>
                                     </table> 
@@ -186,7 +202,7 @@
                                     <table class="indent50">
                                         <thead>
                                             <tr>
-                                                <th>Case Data</th>
+                                                <th colspan="2">Case Data</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -216,7 +232,7 @@
                                     <table class="indent50">
                                         <thead>
                                             <tr>
-                                                <th>Pallet Data</th>
+                                                <th colspan="2">Pallet Data</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -379,6 +395,28 @@
             }
         } // end addImage
         
+        
+        // *************************************************************
+        // Usage: remImage(sku);
+        // Removes image from database and harddrive
+        // *************************************************************
+        public function remImage($image_id, $image_url, $image_thumb)
+        {
+
+            try 
+            {
+                unlink('..'.$image_url);
+                unlink('..'.$image_thumb);
+                $stmt = $this->conn->prepare("DELETE from sku_image where sku_image_id = :image_id");
+                $stmt->bindparam(":image_id", $image_id);
+                $stmt->execute();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }	
+        } // end remImage
+        
         // *************************************************************
         // Usage: resizeImageThumb($resourceType,$image_width,$image_height)
         // creates a thumbnail of an image
@@ -444,12 +482,15 @@
         // Adds image to database from the addImage function
         // *************************************************************
         public function AddImageUrl($sku, $url, $thumb, $desc) {
+            session_start();
+            $userName = $_SESSION['fname'].' '.$_SESSION['lname'];
             try {
-                $stmt = $this->conn->prepare("INSERT INTO sku_image (sku_image_sku_id, sku_image_url, sku_image_thumb, sku_image_description) VALUES (:sku_id, :sku_url, :sku_thumb, :sku_description)");
+                $stmt = $this->conn->prepare("INSERT INTO sku_image (sku_image_sku_id, sku_image_url, sku_image_thumb, sku_image_description, sku_image_added_by) VALUES (:sku_id, :sku_url, :sku_thumb, :sku_description, :sku_added_by)");
                 $stmt->bindparam(":sku_id", $sku);
                 $stmt->bindparam(":sku_url", $url);
                 $stmt->bindparam(":sku_thumb", $thumb);
                 $stmt->bindparam(":sku_description", $desc);
+                $stmt->bindparam(":sku_added_by", $userName);
                 $stmt->execute();
             }
             catch(PDOException $e)
@@ -471,7 +512,15 @@
                     while($skuimagerow = $skuimages->fetch())
                     {
                     ?>
-                        <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                        <figure class="card">
+                            <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
+                                <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                <figcaption>
+                                    <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
+                                    <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                </figcaption>
+                            </a>
+                        </figure>
                     <?php
                     }
                 }   
@@ -480,6 +529,292 @@
                     echo $e->getMessage();
                 }	
         } // end randImage
+        
+        
+        // *************************************************************
+        // Usage: mySearches($dateFrom, $dateTo, $userID, $recordCount)
+        // returns a table of searches from users search history
+        // my date range (or all if blank)
+        // *************************************************************
+        public function mySearches($dateFrom, $dateTo, $userID, $recordCount)
+        {
+           require_once('class.user.php');
+            $user = new USER;
+            
+            if($user->accessCheck() != 'ADMIN'){
+                $userID = $_SESSION['user_id'];
+            }
+                
+            // lets update the search ticker for this sku
+            try {
+                    if(!empty($userID))
+                    {  
+                        if(empty($dateFrom) || empty($dateTo))
+                        {
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            WHERE sku_search_by = :userID ORDER BY sku_search_id desc");
+                            $stmt->bindparam(":userID", $userID);
+                            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count  FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            WHERE sku_search_by = :userID 
+                            GROUP by sku_search_sku
+                            ORDER BY sku_search_id desc");
+                            $count->bindparam(":userID", $userID);
+                            
+                        } else {
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                             ORDER BY sku_search_id desc");
+                            $stmt->bindparam(":userID", $userID);
+                            $stmt->bindparam(":dateFrom", $dateFrom);
+                            $stmt->bindparam(":dateTo", $dateTo);
+                            
+                            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                             GROUP by sku_search_sku
+                             ORDER BY sku_search_id desc");
+                            $count->bindparam(":userID", $userID);
+                            $count->bindparam(":dateFrom", $dateFrom);
+                            $count->bindparam(":dateTo", $dateTo);
+                            
+                        }
+                    } else 
+                    {
+                        if(empty($dateFrom) || empty($dateTo))
+                        {
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            left join user on user_id = sku_search_by
+                            ORDER BY sku_search_id desc");
+                            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            left join user on user_id = sku_search_by
+                            GROUP by sku_search_sku
+                            ORDER BY sku_search_id desc");
+                        } else {
+                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                                WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                              ORDER BY sku_search_id desc");
+                            $stmt->bindparam(":dateFrom", $dateFrom);
+                            $stmt->bindparam(":dateTo", $dateTo);
+                            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                                WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                              GROUP by sku_search_sku
+                              ORDER BY sku_search_id desc
+                              ");
+                            $count->bindparam(":dateFrom", $dateFrom);
+                            $count->bindparam(":dateTo", $dateTo);
+                        }
+                    }    
+                    $stmt->execute();
+                    $count->execute();
+                    ?>
+                        <section class="my-search-results">
+
+
+                        <table class="table">
+                            <caption>Search History</caption>
+                            <thead>
+                                <tr align="middle">
+                                    <th scope="col">Part Number</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                </tr>
+                            </thead> 
+                             <tbody>
+                    <?php
+                    while($row = $stmt->fetch())
+                    {
+                    ?>
+                            <?php 
+                                $fname = $row['user_fName'];
+                                $lname = $row['user_lName'];
+                                $desc = $row['sku_desc'];
+                                $date = $row['sku_search_date']; 
+                                $newDate = new DateTime($date);
+                                $dateOnly = $newDate->format('Y-m-d'); // pull the date out
+                                $timeOnly = $newDate->format('h:i:s A'); // pull the time out
+                            ?>
+                                <tr valign="middle">
+                                    <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></td>
+                                    <td data-label="Description"><?php echo $desc; ?></td>
+                                    <td data-label="Date"><?php echo $dateOnly; ?></td>
+                                    <td data-label="Time"><?php echo $timeOnly; ?></td>
+                                    <td data-label="First Name"><?php echo $fname; ?></td>
+                                    <td data-label="Last Name"><?php echo $lname; ?></td>
+                                </tr>
+                            
+                    <?php
+                    }
+                        ?></tbody>
+                        </table>
+                        </section>    
+                        <section class="my-search-count">
+                             <table class="table table-count">
+                            <caption>Search Count</caption>
+                            <thead>
+                                <tr align="middle">
+                                    <th scope="col">Part Number</th>
+                                    <th scope="col">Count</th>
+                                </tr>
+                            </thead> 
+                             <tbody>
+
+                            <?php
+                    
+                    while($countrow = $count->fetch())
+                    {
+                        ?>
+                         <tr valign="middle">
+                            <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $countrow['sku_search_sku']; ?>"><?php echo $countrow['sku_search_sku']; ?></a></td>
+                            <td data-label="Count"><?php echo $countrow['count']; ?></td>
+                        </tr>
+                                 
+                        <?php
+                    }
+                    ?>
+                                 </tbody>
+                            </table>
+                    </section>
+                    <?php
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end mySearches
+        
+        // *************************************************************
+        // Usage: recordCount();
+        // display counts for records, images, and searches
+        // *************************************************************
+        public function recordCount()
+        {
+            // lets update the search ticker for this sku
+            try {
+                    $stmt = $this->conn->prepare("SELECT count(*) as SKU_Count FROM sku");
+                    $stmt->execute();
+                    $row_sku = $stmt->fetch();
+                    $sku_count = $row_sku['SKU_Count'];
+                
+                    $stmt = $this->conn->prepare("SELECT count(*) as Search_Count FROM sku_search");
+                    $stmt->execute();
+                    $row_search = $stmt->fetch();
+                    $search_count = $row_search['Search_Count'];
+                
+                    $stmt = $this->conn->prepare("SELECT count(*) as Search_Count FROM sku_image");
+                    $stmt->execute();
+                    $row_image = $stmt->fetch();
+                    $image_count = $row_image['Search_Count'];
+                
+                    ?>
+                        <p><?php echo number_format($sku_count);?> Parts, <?php echo number_format($image_count);?> Pictures, and <?php echo number_format($search_count);?> searches</p>
+                    <?php
+                    
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end recordCount;
+        
+        
+        // *************************************************************
+        // Usage: mysqlToJson($drom, dto, $user);
+        // display counts for records, images, and searches
+        // sends the data back in JSON format
+        // *************************************************************
+        public function mysqlToJson($fdate, $dto, $userID)
+        {
+            require_once('class.user.php');
+            $user = new USER;
+            
+            if($user->accessCheck() != 'ADMIN'){
+                $userID = $_SESSION['user_id'];
+            }
+                
+            // lets update the search ticker for this sku
+            try {
+                    if(!empty($userID))
+                    {  
+                        if(empty($dateFrom) || empty($dateTo))
+                        {            
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count  FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            WHERE sku_search_by = :userID 
+                            GROUP by sku_search_sku
+                            ORDER BY sku_search_id desc");
+                            $count->bindparam(":userID", $userID);
+                            
+                        } else {                
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                             GROUP by sku_search_sku
+                             ORDER BY sku_search_id desc");
+                            $count->bindparam(":userID", $userID);
+                            $count->bindparam(":dateFrom", $dateFrom);
+                            $count->bindparam(":dateTo", $dateTo);
+                            
+                        }
+                    } else 
+                    {
+                        if(empty($dateFrom) || empty($dateTo))
+                        {                
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join sku on sku_id = sku_search_sku
+                            left join user on user_id = sku_search_by
+                            GROUP by sku_search_sku
+                            ORDER BY sku_search_id desc");
+                        } else {
+                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            left join user on user_id = sku_search_by
+                            left join sku on sku_id = sku_search_sku
+                                WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                              GROUP by sku_search_sku
+                              ORDER BY sku_search_id desc
+                              ");
+                            $count->bindparam(":dateFrom", $dateFrom);
+                            $count->bindparam(":dateTo", $dateTo);
+                        }
+                    }    
+                    $count->execute();
+                    $data = array(); // set an array for JSON output
+                    while($countrow = $count->fetch(PDO::FETCH_ASSOC))
+                    {
+                        //Create an array that C3 can read correctly
+                        $index = $countrow['sku_search_sku'];
+                        $data[$index] = $countrow['count'];                
+                    }
+                    // since we are formatting in JSON we need to set the header before returning the data.
+                    if(!empty($data)){
+                    header("Access-Control-Allow-Origin: *");//this allows coors
+                    header('Content-Type: application/json');
+                    print json_encode($data);
+                    }
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end mySqlToJson
         
     } // end class
 ?>

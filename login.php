@@ -65,47 +65,44 @@ if(isset($_GET['error'])){
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Visual Parts Database: Login</title>
     <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
 </head>
 <body>
-    <div class="wrapper">
-        <header>
+    <div class="login-wrapper">
+        <header class="login-header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <main class="searchGrid">
-
-        </main>
-        <section class="login-wrap">
-             <section class="a">
-                <h1>Member Login</h1>
-                <hr>
-            </section>
+        <main class="login-wrap">
                 <form action="login.php" method="post">
-                    <div class="b">
+                    <section class="log-head">
+                        <h1>Member Login</h1>
+                        <hr>
+                    </section>
+                    <section class="log-name">
                         <label id="icon" for="email"><i class="fa fa-user"></i></label>
                         <input type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
                         <?php if(isset($emailError)){echo '<span class="emailError">' .$emailError.'</span>';} ?>
-                    </div>
-                    <div class="c">
+                    </section>
+                    <section class="log-pass">
                         <label id="icon" for="password"><i class="fa fa-key"></i></label>
                         <input type="password" placeholder="Password" id="password" name="password">
                         <?php if(isset($emailError)){echo '<span class="passwordError">' .$passwordError.'</span>';} ?>
-                    </div>
-                    <div class="d">
+                    </section>
+                    <section class="log-captcha">
                         <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
-                    </div>
-                    <div class="e">
+                    </section>
+                    <section class="log-submit">
                         <input type="submit" name="submit" value="Sign In">
-                    </div>
-                    <div class="f">
+                    </section>
+                    <section class="log-error">
                         <?php echo $captchaError; ?>
-                    </div>
+                    </section>
                 </form>
-            </section>
-        <footer>
+            </main>
+        <footer class="login-footer">
             <?php include("inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->

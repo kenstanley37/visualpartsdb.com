@@ -1,5 +1,10 @@
 <?php
     require_once('class.db.php');
+    // Import PHPMailer classes into the global namespace
+    // These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
 
     class USER
     {
@@ -130,6 +135,188 @@
                 {
                     echo $e->getMessage();
                 }
+            }
+        } // end accessCheck
+        
+        // *************************************************************
+        // Usage: addUserVerify($fname, $lname, $email);
+        // Send new user verification email
+        // *************************************************************
+        
+            public function addUserVerify($fname, $lname, $email, $memFName, $memLName, $memuserID)
+            {
+                $fname = strtolower($fname);
+                $fname = ucfirst($fname);
+                
+                $lname = strtolower($lname);
+                $lname = ucfirst($lname);
+                
+                $email = strtolower($email);
+
+                //Load Composer's autoloader
+                require '../vendor/autoload.php';
+                // for user registeration
+                $code = substr(md5(mt_rand()),0,15);
+                
+                $mail = new PHPMailer(true);                              // Passing `true` enables xceptions
+                
+                try {
+                    $stmt = $this->conn->prepare("INSERT INTO verify (verify_fname, verify_lname, verify_email, verify_code, verify_added_by) VALUES(:fname, :lname, :email, :code, :memuserID)");
+
+                    $stmt->bindparam(":fname", $fname);
+                    $stmt->bindparam(":lname", $lname);
+                    $stmt->bindparam(":email", $email);
+                    $stmt->bindparam(":code", $code);
+                    $stmt->bindparam(":memuserID", $memuserID);
+                    $stmt->execute();	
+                    $db_id = $this->conn->lastInsertId();
+                    
+                    
+                    //Server settings
+                    $mail->SMTPDebug = 2;                           // Enable verbose debug output
+                    $mail->isSMTP();                                // Set mailer to use SMTP
+                    $mail->Host = 'visualpartsdb.com';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true;                         // Enable SMTP authentication
+                    $mail->Username = 'info@visualpartsdb.com';     // SMTP username
+                    $mail->Password = '#r.MTs%{@OEy';                           // SMTP password
+                    $mail->SMTPSecure = 'ssl';                      // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 465;                              // TCP port to connect to
+
+                    //Recipients
+                    $mail->setFrom('info@visualpartsdb.com', 'Visual Parts Database');
+                    $mail->addAddress($email, $fname.' '.$lname);     // Add a recipient
+                    //$mail->addAddress($email);               // Name is optional
+                    $mail->addReplyTo('info@visualpartsdb.com', 'NoReply');
+                    //$mail->addCC('cc@example.com');
+                    //$mail->addBCC('bcc@example.com');
+
+                    //Attachments
+                    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+                    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+                    //Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Welcome to Visual Parts Database';
+                    $mail->Body    = 'Hello '.$fname.', <br><br> You have been invited by <b>'.$memFName.' '. $memLName.'</b> to be a user of Visual Parts Database. <br><br>Your Activation Code is: <b>'.$code.'</b><br><br> Please click on this link https://visualpartsdb.com/user/register.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                    $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/register.php?id='.$db_id.'&code='.$code.' to activate your account.';
+
+                    $mail->send();
+                    echo 'Message has been sent';
+                } catch (Exception $e) {
+                    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                }
+            }
+        
+            // *************************************************************
+            // Usage: checkVerify($id, $code);
+            // Used for email verification. Adds record into user table
+            // *************************************************************
+            public function checkVerify($id, $code)
+            {
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT * from verify where verify_id=:id and verify_code=:code");							  
+                    $stmt->bindparam(":id", $id);
+                    $stmt->bindparam(":code", $code);
+                    $stmt->execute();	
+                    if($stmt->rowCount() == 1){
+                        $row = $stmt->fetch();
+                        $userFName = $row['verify_fname'];
+                        $userLName = $row['verify_lname'];
+                        $userEmail = $row['verify_email'];
+                        $userActive = 1;
+                        $userPassword = 'temp1';
+                        $userRole = 1;
+                        try
+                        {
+                            $adduser = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_active, user_password, user_role_id) VALUES(:fname, :lname, :email, :active, :password, :role)");
+                            $adduser->bindparam(":fname", $userFName);
+                            $adduser->bindparam(":lname", $userLName);
+                            $adduser->bindparam(":email", $userEmail);
+                            $adduser->bindparam(":active", $userActive);
+                            $adduser->bindparam(":password", $userPassword);
+                            $adduser->bindparam(":role", $userRole);
+                            $adduser->execute();
+                            $db_id = $this->conn->lastInsertId();
+                            $this->setSession($db_id, $userFName, $userLName);
+                        } catch(PDOException $e)
+                        {
+                            return false;
+                        }
+                      return true;
+                    } else {
+                        echo 'invalid code';
+                      return false;
+                    }
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+            }
+        
+        
+        // *************************************************************
+        // Usage: updatePassword($userid, $password);
+        // Updates the password for the user
+        // *************************************************************
+        public function updatePassword($userid, $password){
+            $userid = $_SESSION['user_id'];
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            try 
+            {
+                $stmt = $this->conn->prepare("UPDATE user SET user_password=:password where user_id=:userid ");
+                $stmt->bindparam(":userid", $userid);
+                $stmt->bindparam(":password", $password);
+                $stmt->execute();
+                return true;
+            } catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }	
+        }
+        
+        
+        // *************************************************************
+        // Usage: setSession($id, $fname, $lname);
+        // Sets session after registeration and/or user login
+        // *************************************************************
+        
+        public function setSession($id, $fname, $lname)
+        {
+            $_SESSION['user_id'] = $id;
+            $_SESSION['fname'] = $fname;
+            $_SESSION['lname'] = $lname;
+            return true;
+        }
+        
+        // *************************************************************
+        // Usage: dropdownUser();
+        // returns a list of all users in a select  
+        // *************************************************************
+        
+        public function dropDownUser($userID)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM user");
+                $stmt->execute();
+                // if email if found check password
+                ?> <option value=""></option><?php
+                while($row = $stmt->fetch())
+                {
+                    ?>
+                    <option value="<?php echo $row['user_id']; ?>"
+                            <?php 
+                                if($row['user_id'] == $userID ){ echo 'selected';}
+                            ?>
+                            ><?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?></option>
+                    <?php
+                }
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
             }
         } // end accessCheck
         

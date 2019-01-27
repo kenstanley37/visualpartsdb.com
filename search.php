@@ -46,7 +46,7 @@ if(isset($_GET['export'])){
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,21 +57,17 @@ if(isset($_GET['export'])){
 <body>
     <?php if(isset($result)){echo $result;} ?>
     
-    <div class="search-wrapper">
-        <header class="search-header">
+    <div class="wrapper">
+        <header class="header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        
-        <article class="mainnav">
-            <?php include($path."inc/inc.mainnavbar.php"); ?>
-        </article>
         <?php 
         // check if user is an ADMIN
             if($user->accessCheck() == "ADMIN"){
         ?>
-        <nav class="adminnav">
+        <aside class="admin-nav">
             <?php include($path."inc/inc.adminnavbar.php"); ?>
-        </nav>
+        </aside>
         <?php
         } // end access check
         ?>
