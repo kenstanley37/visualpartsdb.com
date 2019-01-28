@@ -332,7 +332,7 @@
             if(isset($_SESSION['user_id']))
             {
                 $uid = $_SESSION['user_id'];
-                return 'alreadyregistered';
+                return 'alreadyloggedin';
             } else {
                 try
                 {

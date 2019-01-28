@@ -39,6 +39,10 @@
             header('location: /?result=success#member');
         }
         
+        if($result == 'alreadyloggedin'){
+            header('location: /?result=alreadyloggedin#member');
+        }
+                
     } 
 
 

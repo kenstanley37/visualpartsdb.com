@@ -27,6 +27,12 @@ if(isset($_GET['result']))
         $rrSuccess = 'Thank you';
     }
     
+    if($requestResult == 'alreadyloggedin') 
+    {
+        $requestResult = '';
+        $requestResult = 'You are already logged in';
+    }
+    
     
     if(isset($_GET['fname'])){
         $fname = ucfirst($_GET['fname']);
