@@ -65,17 +65,18 @@ function mySearchCharts(){
     var dfrom = $('#dfrom').val();
     var dto = $('#dto').val();
     var usersID = '';
-    usersID = $('#users option:selected').val();
-    if(usersID == ''){
-        usesrID = 'NONE';
+    userID = $('#users option:selected').val();
+    if(userID == ''){
+        userID = $('#tempID').val();
     }
     
-    //alert(usersID);
+   
     
     var data ={};
     data['dfrom'] = dfrom;
     data['dto'] = dto;
-    data['usersID'] = usersID;
+    data['userID'] = userID;
+    //alert(userID);
     $.ajax({
        type: "POST",
        url: url,

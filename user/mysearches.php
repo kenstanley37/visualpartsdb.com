@@ -66,8 +66,11 @@ $result = '';
             <article id="chart" class="my-search-charts"></article>
             <article class="my-search-head">
                 <form action="/user/mysearches.php" method="get">
-                    <label for="dfrom">Date From:</label> <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
-                    <label for="dto">Date To:</label><input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
+                    <label for="dfrom">Date From:</label> 
+                    <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
+                    <label for="dto">Date To:</label>
+                    <input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
+                    <input type="text" name="tempID" id="tempID" value="<?php echo $userID; ?>" hidden>
                     <?php 
                         if($user->accessCheck() == "ADMIN"){
                         ?>

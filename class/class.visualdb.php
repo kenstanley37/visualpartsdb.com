@@ -712,7 +712,7 @@
         // display counts for records, images, and searches
         // sends the data back in JSON format
         // *************************************************************
-        public function mysqlToJson($fdate, $dto, $userID)
+        public function mysqlToJson($dateFrom, $dateTo, $userID)
         {
             require_once('class.user.php');
             $user = new USER;
@@ -769,6 +769,7 @@
                     }    
                     $count->execute();
                     $data = array(); // set an array for JSON output
+               
                     while($countrow = $count->fetch(PDO::FETCH_ASSOC))
                     {
                         //Create an array that C3 can read correctly
