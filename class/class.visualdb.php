@@ -549,21 +549,7 @@
             try {
                     if(!empty($userID))
                     {  
-                        if(empty($dateFrom) || empty($dateTo))
-                        {
-                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
-                            left join sku on sku_id = sku_search_sku
-                            WHERE sku_search_by = :userID ORDER BY sku_search_id desc");
-                            $stmt->bindparam(":userID", $userID);
-                            
-                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count  FROM sku_search 
-                            left join sku on sku_id = sku_search_sku
-                            WHERE sku_search_by = :userID 
-                            GROUP by sku_search_sku
-                            ORDER BY count desc");
-                            $count->bindparam(":userID", $userID);
-                            
-                        } else {
+
                             $stmt = $this->conn->prepare("SELECT * FROM sku_search 
                             left join user on user_id = sku_search_by
                             left join sku on sku_id = sku_search_sku
@@ -583,23 +569,9 @@
                             $count->bindparam(":userID", $userID);
                             $count->bindparam(":dateFrom", $dateFrom);
                             $count->bindparam(":dateTo", $dateTo);
-                            
-                        }
+
                     } else 
                     {
-                        if(empty($dateFrom) || empty($dateTo))
-                        {
-                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
-                            left join sku on sku_id = sku_search_sku
-                            left join user on user_id = sku_search_by
-                            ORDER BY sku_search_id desc");
-                            
-                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
-                            left join sku on sku_id = sku_search_sku
-                            left join user on user_id = sku_search_by
-                            GROUP by sku_search_sku
-                            ORDER BY count desc");
-                        } else {
                             $stmt = $this->conn->prepare("SELECT * FROM sku_search 
                             left join user on user_id = sku_search_by
                             left join sku on sku_id = sku_search_sku
@@ -617,7 +589,7 @@
                               ");
                             $count->bindparam(":dateFrom", $dateFrom);
                             $count->bindparam(":dateTo", $dateTo);
-                        }
+
                     }    
                     $stmt->execute();
                     $count->execute();

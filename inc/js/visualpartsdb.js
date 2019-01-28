@@ -64,12 +64,18 @@ function adminNav(){
 function mySearchCharts(){
     var dfrom = $('#dfrom').val();
     var dto = $('#dto').val();
-    var userID = $('#users').val();
+    var usersID = '';
+    usersID = $('#users option:selected').val();
+    if(usersID == ''){
+        usesrID = 'NONE';
+    }
+    
+    //alert(usersID);
     
     var data ={};
     data['dfrom'] = dfrom;
     data['dto'] = dto;
-    data['userID'] = userID;
+    data['usersID'] = usersID;
     $.ajax({
        type: "POST",
        url: url,

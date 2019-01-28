@@ -12,7 +12,7 @@
     if(isset($_POST['dfrom'])){ 
         $dfrom = $_POST['dfrom'];
         $dto = $_POST['dto'];
-        $userID = $_POST['userID'];
+        $userID = $_POST['usersID'];
         
         $result = $vpd->mysqlToJson($dfrom, $dto, $userID);
         return $result; 

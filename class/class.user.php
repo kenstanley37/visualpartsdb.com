@@ -297,6 +297,7 @@
         
         public function dropDownUser($userID)
         {
+            //$userID = 1;
             try
             {
                 $stmt = $this->conn->prepare("SELECT * FROM user");
