@@ -63,32 +63,70 @@ $result = '';
         }
        ?>
         <main class="my-search-main">  
-            <article id="chart" class="my-search-charts"></article>
+            <article id="my-search-graph" class="my-search-graph"></article>
+            <article id="my-search-pie" class="my-search-pie"></article>
             <article class="my-search-head">
                 <form action="/user/mysearches.php" method="get">
-                    <label for="dfrom">Date From:</label> 
-                    <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
-                    <label for="dto">Date To:</label>
-                    <input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
                     <input type="text" name="tempID" id="tempID" value="<?php echo $userID; ?>" hidden>
-                    <?php 
-                        if($user->accessCheck() == "ADMIN"){
-                        ?>
-                        <label for="users">Select User:</label>
-                         <select id="users" name="usersID">
-                            <?php $user->dropDownUser($userID); ?>
-                        </select> 
-                        <?php
-                        } else
-                        {
-                            ?>
-                            <label for="users" hidden>Select User:</label>
-                             <select id="users" name="usersID" hidden>
-                                <?php $user->dropDownUser($userID); ?>
-                            </select> 
-                            <?php
-                        }; ?>
-                    <input type="submit" value="search">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label for="dfrom">Date From:</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="dto">Date To:</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
+                                </td>
+                            </tr>
+
+                                    <?php 
+                                        if($user->accessCheck() == "ADMIN")
+                                        {
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <label for="users">Select User:</label>
+                                                </td>
+                                                <td>
+                                                    <select id="users" name="usersID">
+                                                        <?php $user->dropDownUser($userID); ?>
+                                                    </select> 
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                            <?php
+                                        } else
+                                        {
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <label for="users" hidden>Select User:</label>
+                                                </td>
+                                                <td>
+                                                    <select id="users" name="usersID" hidden>
+                                                        <?php $user->dropDownUser($userID); ?>
+                                                    </select> 
+                                                </td>
+                                            </tr>
+                                    <?php
+                                    }; ?>
+
+                            <tr>
+                                <td>
+                                    <input class="search-button" type="submit" value="Search">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
             </article>
             <article class="my-search-body">            

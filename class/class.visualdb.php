@@ -88,6 +88,7 @@
                     WHERE sku_image_sku_id=:sku");
                     $skuimages->execute(array(':sku'=>$sku));
                     ?>
+
                          <article class="slogo-search">
                             <h1><?php echo $skuRow['sku_id']; ?></h1>
                             <?php if($user->accessCheck() == "ADMIN")
@@ -270,15 +271,14 @@
                     <?php
                 } else {
                     ?>
-                    <section class="indexSearch">
-                        <div class="imageroll">
-                            test
-                        </div>
-                        <form class="searchForm" action="/search.php" method="get">
-                            <input type="text" name="search" id="search" placeholder="Enter Part Number">
-                            <button type="submit">Search</button>
-                        </form>
-                    </section>
+                    <article class="search-error center">
+                        <h1>Sorry, nothing was found for "<?php echo $sku; ?>"</h1>
+                        <p>Please consider these parts:</p>
+                        <section id="staticImg">
+                            <?php echo $this->randImage(); ?>
+                        </section>
+                        
+                    </article>
                     <?php
                 }
             }
@@ -593,78 +593,90 @@
                     }    
                     $stmt->execute();
                     $count->execute();
-                    ?>
-                        <section class="my-search-results">
-
-
-                        <table class="table">
-                            <caption>Search History</caption>
-                            <thead>
-                                <tr align="middle">
-                                    <th scope="col">Part Number</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Time</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                </tr>
-                            </thead> 
-                             <tbody>
-                    <?php
-                    while($row = $stmt->fetch())
-                    {
-                    ?>
-                            <?php 
-                                $fname = $row['user_fName'];
-                                $lname = $row['user_lName'];
-                                $desc = $row['sku_desc'];
-                                $date = $row['sku_search_date']; 
-                                $newDate = new DateTime($date);
-                                $dateOnly = $newDate->format('Y-m-d'); // pull the date out
-                                $timeOnly = $newDate->format('h:i:s A'); // pull the time out
-                            ?>
-                                <tr valign="middle">
-                                    <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></td>
-                                    <td data-label="Description"><?php echo $desc; ?></td>
-                                    <td data-label="Date"><?php echo $dateOnly; ?></td>
-                                    <td data-label="Time"><?php echo $timeOnly; ?></td>
-                                    <td data-label="First Name"><?php echo $fname; ?></td>
-                                    <td data-label="Last Name"><?php echo $lname; ?></td>
-                                </tr>
-                            
-                    <?php
-                    }
-                        ?></tbody>
-                        </table>
-                        </section>    
-                        <section class="my-search-count">
-                             <table class="table table-count">
-                            <caption>Search Count</caption>
-                            <thead>
-                                <tr align="middle">
-                                    <th scope="col">Part Number</th>
-                                    <th scope="col">Count</th>
-                                </tr>
-                            </thead> 
-                             <tbody>
-
-                            <?php
                     
-                    while($countrow = $count->fetch())
+                    if($stmt->rowCount() >= 1)
                     {
                         ?>
-                         <tr valign="middle">
-                            <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $countrow['sku_search_sku']; ?>"><?php echo $countrow['sku_search_sku']; ?></a></td>
-                            <td data-label="Count"><?php echo $countrow['count']; ?></td>
-                        </tr>
-                                 
+                            <section class="my-search-results">
+
+
+                            <table class="table">
+                                <caption>Search History</caption>
+                                <thead>
+                                    <tr align="middle">
+                                        <th scope="col">Part Number</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                    </tr>
+                                </thead> 
+                                 <tbody>
+                        <?php
+                        while($row = $stmt->fetch())
+                        {
+                        ?>
+                                <?php 
+                                    $fname = $row['user_fName'];
+                                    $lname = $row['user_lName'];
+                                    $desc = $row['sku_desc'];
+                                    $date = $row['sku_search_date']; 
+                                    $newDate = new DateTime($date);
+                                    $dateOnly = $newDate->format('Y-m-d'); // pull the date out
+                                    $timeOnly = $newDate->format('h:i:s A'); // pull the time out
+                                ?>
+                                    <tr valign="middle">
+                                        <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></td>
+                                        <td data-label="Description"><?php echo $desc; ?></td>
+                                        <td data-label="Date"><?php echo $dateOnly; ?></td>
+                                        <td data-label="Time"><?php echo $timeOnly; ?></td>
+                                        <td data-label="First Name"><?php echo $fname; ?></td>
+                                        <td data-label="Last Name"><?php echo $lname; ?></td>
+                                    </tr>
+
+                        <?php
+                        }
+                            ?></tbody>
+                            </table>
+                            </section>    
+                            <section class="my-search-count">
+                                 <table class="table table-count">
+                                <caption>Search Count</caption>
+                                <thead>
+                                    <tr align="middle">
+                                        <th scope="col">Part Number</th>
+                                        <th scope="col">Count</th>
+                                    </tr>
+                                </thead> 
+                                 <tbody>
+
+                                <?php
+
+                        while($countrow = $count->fetch())
+                        {
+                            ?>
+                             <tr valign="middle">
+                                <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $countrow['sku_search_sku']; ?>"><?php echo $countrow['sku_search_sku']; ?></a></td>
+                                <td data-label="Count"><?php echo $countrow['count']; ?></td>
+                            </tr>
+
+                            <?php
+                        }
+                        ?>
+                                     </tbody>
+                                </table>
+                        </section>
+                        <?php
+                    } else 
+                    {
+                        ?>
+                            <section>Sorry, nothing was found for this date range.</section>
                         <?php
                     }
-                    ?>
-                                 </tbody>
-                            </table>
-                    </section>
-                    <?php
+                    
+                
+                    
                 }   
                 catch(PDOException $e)
                 {

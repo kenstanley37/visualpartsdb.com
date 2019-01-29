@@ -71,7 +71,6 @@ if(isset($_GET['export'])){
         <?php
         } // end access check
         ?>
-        
         <main class="search-main">
             <?php $vpd->skuSearch($sku); ?>
         </main>

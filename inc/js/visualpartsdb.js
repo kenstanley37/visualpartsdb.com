@@ -69,32 +69,38 @@ function mySearchCharts(){
     if(userID == ''){
         userID = $('#tempID').val();
     }
-    
-   
-    
+
     var data ={};
     data['dfrom'] = dfrom;
     data['dto'] = dto;
     data['userID'] = userID;
-    //alert(userID);
     $.ajax({
        type: "POST",
        url: url,
        data: data, // set $_POST.
-       //dataType: 'json',
        success: function(data)
        {
-           //dude = jQuery.parseJSON(data);
            console.log(data);
            chart = c3.generate({
+               bindto: '#my-search-pie',
                 data: {
         //          x: 'name',
                   json: data,
                   type: 'pie',
                 },
+
+              });
+           
+           chart = c3.generate({
+               bindto: '#my-search-graph',
+                data: {
+        //          x: 'name',
+                  json: data,
+                  type: 'bar',
+                },
                bar: {
                 width: {
-                    ratio: 0.5 // this makes bar width 50% of length between ticks
+                    ratio: 0.2 // this makes bar width 50% of length between ticks
                 }
                 // or
                 //width: 100 // this makes bar width 100px

@@ -12,7 +12,7 @@
             <?php if(isset($_SESSION['user_id']))
         { 
             ?> 
-            <a href="/user/mysearches.php?searchhist" class="<?php if($basename == 'mysearches.php'){ echo 'button1';}?>">My Searches</a>
+            <a href="/user/mysearches.php" class="<?php if($basename == 'mysearches.php'){ echo 'button1';}?>">My Searches</a>
             <?php
         } ?>
         </section>
@@ -20,7 +20,7 @@
         <?php if(isset($_SESSION['user_id']))
         { 
             ?>
-            <a href="/user/myexportlist.php?mylist" class="<?php if($basename == 'myexportlist.php'){ echo 'button1';}?>">My List</a>
+            <a href="/user/myexportlist.php" class="<?php if($basename == 'myexportlist.php'){ echo 'button1';}?>">My List</a>
             <?php
         } ?>
         </section>
@@ -28,7 +28,8 @@
      <section class="searchbox">
         <form class="search" action="/search.php" method="get">
             <label for="search" hidden>Search</label>
-            <input class="toupper" type="search" name="search" id="search" placeholder="search"><i class="fas fa-search"></i>
+            <input class="toupper" type="search" name="search" id="search" placeholder="search">
+            <input type="submit" class="submit_3" value="Search" />
         </form>
     </section>
     <section class="name">
