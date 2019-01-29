@@ -310,6 +310,7 @@ main {
     border-radius: 15px 15px 15px 15px;
     width: 500px;
     height: 35px;
+    padding-left: 10px;
 }
 
 .main a, .index-main a {
