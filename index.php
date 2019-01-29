@@ -106,7 +106,7 @@ if(isset($_GET['noaccess'])){
                     </ul>
                 </section>
                 <section id="staticImg">
-                    <?php echo $vpd->randImage(); ?>
+                    <?php echo $vpd->randImage('4'); ?>
                 </section>
             </article> <!-- end main-intro -->
             <article id="member">

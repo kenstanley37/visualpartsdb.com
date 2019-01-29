@@ -275,7 +275,7 @@
                         <h1>Sorry, nothing was found for "<?php echo $sku; ?>"</h1>
                         <p>Please consider these parts:</p>
                         <section id="staticImg">
-                            <?php echo $this->randImage(); ?>
+                            <?php echo $this->randImage('10'); ?>
                         </section>
                         
                     </article>
@@ -500,14 +500,15 @@
         }
         
         // *************************************************************
-        // Usage: randImage
-        // pulls 4 random images from the database to display on home page
+        // Usage: randImage($num)
+        // pulls $num random images from the database to display on home page
         // *************************************************************
-        public function randImage() 
+        public function randImage($num) 
         {
             // lets update the search ticker for this sku
             try {
-                    $skuimages = $this->conn->prepare("SELECT * FROM sku_image ORDER BY RAND() LIMIT 4;");
+                    $skuimages = $this->conn->prepare("SELECT * FROM sku_image ORDER BY RAND() LIMIT $num;");
+                    $skuimages->bindparam(":num", $num);
                     $skuimages->execute();
                     while($skuimagerow = $skuimages->fetch())
                     {
