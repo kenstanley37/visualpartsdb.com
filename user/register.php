@@ -67,7 +67,9 @@ if(!isset($_GET['code'])){
                     ?>
                         <section class="register-success">
                             <form>
+                                <label for="password1">Password</label>
                                 <input type="password" name="password1" id="password1">
+                                <label for="password1">Password Again</label>
                                 <input type="password" name="password2" id="password2">
                                 <input type="submit" value="Set Password">
                             </form>

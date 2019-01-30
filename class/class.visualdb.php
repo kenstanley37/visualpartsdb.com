@@ -113,11 +113,14 @@
                                     while($skuimagerow = $skuimages->fetch()){
                                         ?>
                                     <figure class="card">
-                                        <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
+                                        <div class="card-img">
                                             <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
-                                            <figcaption>
+                                        </div>
+                                        <figcaption>
+                                            <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
                                             <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
                                             <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                            </a>
                                             <form method="post" action="/processors/image_handler.php">
                                                 <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
                                                 <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
@@ -126,7 +129,6 @@
                                                 <input type="submit" value="Delete Image" name="deleteimg">
                                             </form>
                                         </figcaption>
-                                        </a>
                                     </figure>
                                         <?php
                                     }
@@ -514,13 +516,17 @@
                     {
                     ?>
                         <figure class="card">
-                            <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
-                                <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
-                                <figcaption>
+                            <div class="card-img">
+                                <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
+                                    <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                </a>
+                            </div>
+                            <figcaption>
+                                <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
                                     <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
                                     <p><?php echo $skuimagerow['sku_image_description'];?></p>
-                                </figcaption>
-                            </a>
+                                </a>
+                            </figcaption>
                         </figure>
                     <?php
                     }

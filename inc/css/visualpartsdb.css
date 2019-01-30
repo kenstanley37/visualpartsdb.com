@@ -345,30 +345,40 @@ main {
     grid-template-rows: auto;
     width: 100%;
     grid-gap: 2.5em;
-    justify-content: center;
-    justify-items: center;
+
 }
 
 .card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
+    position: relative;
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 300px;
+    height: 400px;
+}
+
+.card-img {
+    height: 300px;
 }
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 /* Add some padding inside the card container */
 .card figcaption { 
-  padding: 2px 16px;
+    padding: 2px 16px;
     border-top: 1px solid #000;
 }
 
 .card img {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
     object-fit: cover;
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
     padding: 15px;
 }
 
@@ -448,7 +458,6 @@ main {
         "searcherror"
         "searchname"
         "searchgrid";
-    justify-content: center;
     padding-top: 10px;
 }
 
@@ -478,7 +487,7 @@ main {
     grid-gap: 20px;
     grid-template-areas: 
         "simages sproductinfo";
-    justify-content: center;
+    justify-items: center;
 }
 
 .search-grid .skuimages {
