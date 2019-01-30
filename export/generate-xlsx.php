@@ -91,10 +91,10 @@ if(isset($_GET['unit'])){
                 while ($row = $stmt->fetch(PDO::FETCH_NAMED)) {
                     $sheet->setCellValue('A'.$i, $row['sku_id']);
                     $sheet->setCellValue('B'.$i, $row['sku_desc']);
-                    $sheet->setCellValue('C'.$i, $row['sku_sig_length']);
-                    $sheet->setCellValue('D'.$i, $row['sku_sig_width']);
-                    $sheet->setCellValue('E'.$i, $row['sku_sig_height']);
-                    $sheet->setCellValue('F'.$i, $row['sku_sig_weight']);
+                    $sheet->setCellValue('C'.$i, $row['sku_unit_length']);
+                    $sheet->setCellValue('D'.$i, $row['sku_unit_width']);
+                    $sheet->setCellValue('E'.$i, $row['sku_unit_height']);
+                    $sheet->setCellValue('F'.$i, $row['sku_unit_weight']);
                     $sheet->setCellValue('G'.$i, $row['sku_case_qty']);
                     $sheet->setCellValue('H'.$i, $row['sku_case_length']);
                     $sheet->setCellValue('I'.$i, $row['sku_case_width']);
