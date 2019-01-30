@@ -691,39 +691,28 @@ footer {
     text-transform: uppercase;
 }
 
-/* lLOGIN FORM STYLE */
+/* LOGIN FORM STYLE */
 .login-wrapper {
     display: grid;
     grid-gap: 15px;
+    height: 100vh;
     grid-template-columns: 100%;
-    grid-template-rows: 50px 1fr 50px;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas: 
         "loginheader"
-        "loginwrap";
-    align-items: center;
-    align-self: center;
+        "loginwrap"
+        "footer";
 }
 
 .login-header {
     grid-area: loginheader;
 }
 
-.login-footer {
-    display: none;
-}
-
-
 .login-wrap {
     grid-area: loginwrap;
 	display: grid;
-    grid-template-columns: repeat(3, 200px);
-    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
-    height: 600px;
+    grid-template-columns: 100%;
     grid-gap: 10px;
-	align-self: center;
-    justify-self: center;
-	overflow: hidden;
-	text-align: center;
     grid-template-areas: 
         "loghead"
         "logname"
@@ -731,27 +720,22 @@ footer {
 		"logcaptcha"
         "logsubmit"
         "logerror";
+    justify-items: center;
+	text-align: center;
 }
 
 .login-wrap .log-head {
 	grid-area: loghead;
-	width: 100%;
-	align-self: center;
-    justify-self: center;
-	text-align: center;
-}
-
-.login-wrap h1 {
-	font-size: 25px;
+    margin-bottom: 50px;
 }
 
 .login-wrap form {
-	width: 500px;
+	width: 300px;
 	margin-left: 50px;
 }
 
 .login-wrap form input {
-	width: 290px;
+    width: 200px;
 	margin-bottom: 20px;
 }
 
@@ -765,16 +749,24 @@ footer {
 
 .login-wrap .log-captcha {
 	grid-area: logcaptcha;
-    align-self: center;
-    justify-self: center;
-    text-align: center;
-    margin-left: 100px;
     margin-bottom: 25px;
+}
+
+.g-recaptcha {
+    margin-left: 35px;
+    transform: scale(0.77);
+    -webkit-transform: scale(0.77);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
 }
 
 .login-wrap .log-submit {
 	grid-area: logsubmit;
     text-align: center;
+}
+
+.login-wrap .log-submit input {
+        width: 100px;
 }
 
 .login-wrap .log-error {
@@ -1148,7 +1140,7 @@ only screen and (max-width: 760px),
             "adminextra";
         justify-content: center;
     }    
-    
+
     header .name {
         grid-area: name;
         grid-column: 1 /span 3 ;
@@ -1156,16 +1148,16 @@ only screen and (max-width: 760px),
         margin-bottom: 10px;
         margin-left: 15px;
     }
-	/* Force table to not be like tables anymore */
- .table {
+    /* Force table to not be like tables anymore */
+    .table {
         border: 0;
-  }
+    }
 
-  .table caption {
+    .table caption {
         font-size: 1.3em;
-  }
-  
-  .table thead {
+    }
+
+    .table thead {
         border: none;
         clip: rect(0 0 0 0);
         height: 1px;
@@ -1174,22 +1166,22 @@ only screen and (max-width: 760px),
         padding: 0;
         position: absolute;
         width: 1px;
-  }
-  
-  .table tr {
+    }
+
+    .table tr {
         border-bottom: 3px solid #ddd;
         display: block;
         margin-bottom: .625em;
-  }
-  
-  .table td {
+    }
+
+    .table td {
         border-bottom: 1px solid #ddd;
         display: block;
         font-size: .8em;
         text-align: right;
-  }
-  
-  .table td::before {
+    }
+
+    .table td::before {
         /*
         * aria-label has no advantage, it won't be read inside a table
         content: attr(aria-label);
@@ -1198,11 +1190,44 @@ only screen and (max-width: 760px),
         float: left;
         font-weight: bold;
         text-transform: uppercase;
-  }
+    }
   
-  .table td:last-child {
+    .table td:last-child {
         border-bottom: 0;
-  }
+    }
+    
+    .login-wrap {
+        grid-area: loginwrap;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-gap: 10px;
+        grid-template-areas: 
+            "loghead"
+            "logname"
+            "logpass"
+            "logcaptcha"
+            "logsubmit"
+            "logerror";
+        margin-left: -45px;
+    }
+    
+
+    
+    .login-wrap .log-captcha {
+        grid-area: logcaptcha;
+        margin-bottom: 25px;
+    }
+
+    .g-recaptcha {
+
+        transform: scale(0.77);
+        -webkit-transform: scale(0.77);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+    }
+    
+    
+    
 }
 
 .show {

@@ -76,32 +76,32 @@ if(isset($_GET['error'])){
             <?php include($path."inc/inc.header.php"); ?>
         </header>
         <main class="login-wrap">
-                <form action="login.php" method="post">
-                    <section class="log-head">
-                        <h1>Member Login</h1>
-                        <hr>
-                    </section>
-                    <section class="log-name">
-                        <label id="icon" for="email"><i class="fa fa-user"></i></label>
-                        <input type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
-                        <?php if(isset($emailError)){echo '<span class="emailError">' .$emailError.'</span>';} ?>
-                    </section>
-                    <section class="log-pass">
-                        <label id="icon" for="password"><i class="fa fa-key"></i></label>
-                        <input type="password" placeholder="Password" id="password" name="password">
-                        <?php if(isset($emailError)){echo '<span class="passwordError">' .$passwordError.'</span>';} ?>
-                    </section>
-                    <section class="log-captcha">
-                        <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
-                    </section>
-                    <section class="log-submit">
-                        <input type="submit" name="submit" value="Sign In">
-                    </section>
-                    <section class="log-error">
-                        <?php echo $captchaError; ?>
-                    </section>
-                </form>
-            </main>
+            <form action="login.php" method="post">
+                <section class="log-head">
+                    <h1>Member Login</h1>
+                    <hr>
+                </section>
+                <section class="log-name">
+                    <label id="icon" for="email"><i class="fa fa-user"></i></label>
+                    <input type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
+                    <?php if(isset($emailError)){echo '<span class="emailError">' .$emailError.'</span>';} ?>
+                </section>
+                <section class="log-pass">
+                    <label id="icon" for="password"><i class="fa fa-key"></i></label>
+                    <input type="password" placeholder="Password" id="password" name="password">
+                    <?php if(isset($emailError)){echo '<span class="passwordError">' .$passwordError.'</span>';} ?>
+                </section>
+                <section class="log-captcha">
+                    <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
+                </section>
+                <section class="log-submit">
+                    <input type="submit" name="submit" value="Sign In">
+                </section>
+                <section class="log-error">
+                    <?php echo $captchaError; ?>
+                </section>
+            </form>
+        </main>
         <footer class="login-footer">
             <?php include("inc/inc.footer.php"); ?>
         </footer>
