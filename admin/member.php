@@ -66,7 +66,7 @@ if(isset($_GET['user'])){
                                         <label>Company</label>
                                     </td>
                                     <td>
-                                        <select name="company" form="addUser">
+                                        <select name="company" form="addUser" required>
                                             <?php $user->dropDownCompany(); ?>
                                         </select>
                                     </td>
