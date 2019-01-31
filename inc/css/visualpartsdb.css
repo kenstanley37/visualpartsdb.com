@@ -796,7 +796,7 @@ footer {
     grid-area: main;
     display: grid;
     min-height: 100vh;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 45% 45%;
     grid-template-rows: auto auto 1fr auto;
     grid-column-gap: 55px;
     grid-template-areas: 
@@ -805,6 +805,7 @@ footer {
         "mysearchbody mysearchbody"
         "mysearchfoot mysearchfoot";
     margin-top: 50px;
+    justify-content: center; 
 }
 
 .my-search-pie {
@@ -895,6 +896,58 @@ footer {
     background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: #fff;
 }
+
+/* ADMIN PAGES  STYLE */
+
+.admin-main {
+    grid-area: main;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 95%;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-gap: 10px;
+    grid-template-areas: 
+        "adminusernav"
+        "adminheader"
+        "admintop"
+        "adminmiddle"
+        "adminbottom";
+    justify-content: center;
+}
+
+.admin-main .user-management-nav {
+    grid-area: adminusernav;
+    text-align: center;
+}
+
+.admin-main .admin-head {
+    grid-area: adminheader;
+}
+
+.admin-main .add-user {
+    grid-area: admintop;
+}
+
+.admin-main .add-user {
+    grid-area: admintop;
+}
+
+
+.admin-main .user-management-nav nav li {
+    display: inline-block;
+    list-style-type: none;
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.admin-main .user-management-nav nav ul {
+    list-style-type: none;
+}
+
+.admin-main #addUser tr {
+	padding: 5px;
+}
+
 /***************************************
 *
 *

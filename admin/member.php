@@ -16,11 +16,18 @@ if(!isset($_SESSION['user_id'])){
         header('location: /');
     }
 }
+
+if(isset($_GET['user'])){
+    $title = "User List";
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: User Management</title>
+    <title>Visual Parts Database: <?php echo $title; ?></title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -28,6 +35,7 @@ if(!isset($_SESSION['user_id'])){
         <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
+        <!-- USER SECTION -->
         <?php
         if($user->accessCheck() == "ADMIN")
         {
@@ -38,39 +46,84 @@ if(!isset($_SESSION['user_id'])){
             <?php
         }
        ?>
-        <main id="aboutvpd" class="admin-main">
-            <section class="admin-head">
-                <h1>User Management</h1>
-            </section>
-            <section class="add-user">
-                <form method="post" action="/processors/register_request.php">
-                    <table class="reg-table">
-                        <tbody>
+            <main id="aboutvpd" class="admin-main">
+                <section class="user-management-nav">
+                    <?php include($path."/inc/inc.useradmin.php"); ?>
+                </section>
+                <?php
+                if(isset($_GET['user'])){
+                    ?>
+                        <section class="admin-head">
+                    <h1>User Management</h1>
+                </section>
+                <section class="add-user">
+                    <h1>Add User</h1>
+                    <form id="addUser" method="post" action="/processors/register_request.php">
+                        <table class="reg-table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label>Company</label>
+                                    </td>
+                                    <td>
+                                        <select name="company" form="addUser">
+                                            <?php $user->dropDownCompany(); ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="regfname">First Name</label></td>
+                                    <td><input type="text" name="regfname" required></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="reglname">Last Name</label>
+                                    </td>
+                                    <td> 
+                                        <input type="text" name="reglname" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="regemail">Email Address</label>
+                                    </td>
+                                    <td>
+                                        <input type="email" name="regemail" required>
+                                    </td>
+                                </tr>
+                             </tbody>
+                        </table>
+                        <input type="submit" name="regsubmit" value="Submit">
+                    </form>
+                </section>
+                <section>
+                    <h1>User List</h1>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td><label for="regfname">First Name</label></td>
-                                <td><input type="text" name="regfname" required></td>
+                                <td>Member ID</td>
+                                <td>First Name</td>
+                                <td>Last Name</td>
+                                <td>Email</td>
+                                <td>Company</td>
+                                <td>Active</td>
+                                <td>Role</td>
+                                <td>Member Since</td>
+                                <td>Role</td>
+                                <td></td>
+                                <td></td>
                             </tr>
+                        </thead>
+                        <tbody>
+                            <?php $user->userList(); ?>
                         </tbody>
-                        <tr>
-                            <td>
-                                <label for="reglname">Last Name</label>
-                            </td>
-                            <td> 
-                                <input type="text" name="reglname" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="regemail">Email Address</label>
-                            </td>
-                            <td>
-                                <input type="email" name="regemail" required>
-                            </td>
-                        </tr>
                     </table>
-                    <input type="submit" name="regsubmit" value="Submit">
-                </form>
-            </section>
+                </section>
+            
+                <?php
+            }
+            ?>
+            
         </main>
         <footer>
             <?php include($path."inc/inc.footer.php"); ?>

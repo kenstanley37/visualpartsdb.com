@@ -321,6 +321,70 @@
             }
         } // end accessCheck
         
+        // *************************************************************
+        // Usage: dropdownCompany();
+        // returns a list of all companies in a select  
+        // *************************************************************
+        
+        public function dropDownCompany()
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM company");
+                $stmt->execute();
+                ?> <option value=""></option><?php
+                while($row = $stmt->fetch())
+                {
+                    ?>
+                    <option value="<?php echo $row['company_id']; ?>">
+                        <?php echo $row['company_name']; ?>
+                    </option>
+                    <?php
+                }
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end accessCheck
+        
+        // *************************************************************
+        // Usage: userList();
+        // Return a list of all users in database  
+        // *************************************************************
+        
+        public function userList()
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM user
+                        LEFT JOIN company on company_id = user_company
+                        LEFT JOIN role on role_id = user_role_id");
+                $stmt->execute();
+                while($row = $stmt->fetch())
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $row['user_id']; ?></td>
+                        <td><?php echo $row['user_fName']; ?></td>
+                        <td><?php echo $row['user_lName']; ?></td>
+                        <td><?php echo $row['user_email']; ?></td>
+                        <td><?php echo $row['company_name']; ?></td>
+                        <td><?php echo $row['user_active']; ?></td>
+                        <td><?php echo $row['role_name']; ?></td>
+                        <td><?php echo $row['user_reg_date']; ?></td>
+                        <td><?php echo $row['user_reg_date']; ?></td>
+                    </tr>
+                    <?php
+                }
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end accessCheck
+        
+        
         
         // *************************************************************
         // Usage: registerRequest($fname, $lname, $email, $phone, $company, $message);
