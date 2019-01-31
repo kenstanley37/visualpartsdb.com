@@ -897,7 +897,13 @@ footer {
     color: #fff;
 }
 
-/* ADMIN PAGES  STYLE */
+/***************************************
+*
+*
+* START User Management Style
+*
+*
+****************************************/
 
 .admin-main {
     grid-area: main;
@@ -946,6 +952,14 @@ footer {
 
 .admin-main #addUser tr {
 	padding: 5px;
+}
+
+.admin-main .active {
+	border: 3px solid green;
+}
+
+.admin-main .disabled {
+	border: 3px solid red;
 }
 
 /***************************************

@@ -370,7 +370,14 @@
                         <td><?php echo $row['user_lName']; ?></td>
                         <td><?php echo $row['user_email']; ?></td>
                         <td><?php echo $row['company_name']; ?></td>
-                        <td><?php echo $row['user_active']; ?></td>
+                        <td>
+                            <form method="post" action="/processors/userManagement.php">
+
+                                <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
+                                <button type="submit" class="<?php if($row['user_active'] == 1){ echo "active";} else{ echo "disabled";}; ?>"><?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?></button>
+                            </form>
+                            
+                        </td>
                         <td><?php echo $row['role_name']; ?></td>
                         <td><?php echo $row['user_reg_date']; ?></td>
                         <td><?php echo $row['user_reg_date']; ?></td>
@@ -384,7 +391,45 @@
             }
         } // end accessCheck
         
+        // *************************************************************
+        // Usage: activeSwitch($userID);
+        // Switches user from active to disabled and vice versa
+        // *************************************************************
         
+        public function activeSwitch($userID)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM user where user_id = :userid");
+                $stmt->bindparam(":userid", $userID);
+                $stmt->execute();
+                $row = $stmt->fetch();
+                
+                if($row['user_active'] == 1){
+                    $change = 0;
+                } else {
+                    $change = 1;
+                }
+                
+                try 
+                {
+                    $update = $this->conn->prepare("UPDATE user SET user_active = :change where user_id = :userid");
+                    $update->bindparam(":userid", $userID);
+                    $update->bindparam(":change", $change);
+                    $update->execute();
+                    //echo $change;
+                } 
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+                
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end accessCheck
         
         // *************************************************************
         // Usage: registerRequest($fname, $lname, $email, $phone, $company, $message);
