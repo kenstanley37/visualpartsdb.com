@@ -1249,7 +1249,7 @@ only screen and (max-width: 760px),
     }
     
     .login-main {
-        justify-items: flex-end;
+        justify-items: center;
     }
     
     .login-main .log-captcha {
