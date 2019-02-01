@@ -1267,7 +1267,6 @@ only screen and (max-width: 360px),
         display: grid;
         height: 100vh;
         grid-template-columns: 100%;
-        grid-gap: 10px;
         grid-template-areas: 
             "loghead"
             "logname"
@@ -1275,8 +1274,8 @@ only screen and (max-width: 360px),
             "logcaptcha"
             "logsubmit"
             "logerror";
-        justify-items: flex-end;
-        align-content: flex-start;
+        justify-items: center;
+        overflow: hidden;
     }
  
     
