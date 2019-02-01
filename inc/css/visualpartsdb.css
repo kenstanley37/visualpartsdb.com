@@ -1248,33 +1248,7 @@ only screen and (max-width: 760px),
         border-bottom: 0;
     }
     
-    .login-main {
-        grid-area: main;
-        display: grid;
-        grid-template-columns: 100%;
-        grid-gap: 10px;
-        grid-template-areas: 
-            "loghead"
-            "logname"
-            "logpass"
-            "logcaptcha"
-            "logsubmit"
-            "logerror";
-        justify-items: flex-end;
-    }
-    
-    .login-main .log-captcha {
-        grid-area: logcaptcha;
-        margin-bottom: 25px;
-    }
 
-    .g-recaptcha {
-
-        transform: scale(0.77);
-        -webkit-transform: scale(0.77);
-        transform-origin: 0 0;
-        -webkit-transform-origin: 0 0;
-    }
     
     
     
