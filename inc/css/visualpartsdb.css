@@ -87,7 +87,7 @@ a:hover {
     min-height: 100vh;
     min-width: 100%;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 2fr auto;
     grid-template-areas: 
         "adminnavbar header"
         "adminnavbar main"
@@ -692,24 +692,9 @@ footer {
 }
 
 /* LOGIN FORM STYLE */
-.login-wrapper {
-    display: grid;
-    grid-gap: 15px;
-    height: 100vh;
-    grid-template-columns: 100%;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas: 
-        "loginheader"
-        "loginwrap"
-        "footer";
-}
 
-.login-header {
-    grid-area: loginheader;
-}
-
-.login-wrap {
-    grid-area: loginwrap;
+.login-main {
+    grid-area: main;
 	display: grid;
     grid-template-columns: 100%;
     grid-gap: 10px;
@@ -724,30 +709,30 @@ footer {
 	text-align: center;
 }
 
-.login-wrap .log-head {
+.login-main .log-head {
 	grid-area: loghead;
     margin-bottom: 50px;
 }
 
-.login-wrap form {
+.login-main form {
 	width: 300px;
 	margin-left: 50px;
 }
 
-.login-wrap form input {
+.login-main form input {
     width: 200px;
 	margin-bottom: 20px;
 }
 
-.login-wrap .log-name {
+.login-main .log-name {
 	grid-area: logname;
 }
 
-.login-wrap .log-pass {
+.login-main .log-pass {
 	grid-area: logpass;
 }
 
-.login-wrap .log-captcha {
+.login-main .log-captcha {
 	grid-area: logcaptcha;
     margin-bottom: 25px;
 }
@@ -760,26 +745,26 @@ footer {
     -webkit-transform-origin: 0 0;
 }
 
-.login-wrap .log-submit {
+.login-main .log-submit {
 	grid-area: logsubmit;
     text-align: center;
 }
 
-.login-wrap .log-submit input {
+.login-main .log-submit input {
         width: 100px;
 }
 
-.login-wrap .log-error {
+.login-main .log-error {
 	grid-area: logerror;
 }
 
-.login-wrap .emailError, .login-wrap .passwordError {
+.login-main .emailError, .login-wrap .passwordError {
 	position: absolute;
 	margin-left: 10px;
 	color: red;
 }
 
-.login-wrap .captchaError {
+.login-main .captchaError {
 	margin-left: 10px;
 	color: red;
 }
@@ -1263,8 +1248,8 @@ only screen and (max-width: 760px),
         border-bottom: 0;
     }
     
-    .login-wrap {
-        grid-area: loginwrap;
+    .login-main {
+        grid-area: main;
         display: grid;
         grid-template-columns: 100%;
         grid-gap: 10px;
@@ -1280,7 +1265,7 @@ only screen and (max-width: 760px),
     
 
     
-    .login-wrap .log-captcha {
+    .login-main .log-captcha {
         grid-area: logcaptcha;
         margin-bottom: 25px;
     }

@@ -71,11 +71,11 @@ if(isset($_GET['error'])){
     <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
 </head>
 <body>
-    <div class="login-wrapper">
-        <header class="login-header">
+    <div class="wrapper">
+        <header class="header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <main class="login-wrap">
+        <main class="login-main">
             <form action="login.php" method="post">
                 <section class="log-head">
                     <h1>Member Login</h1>
