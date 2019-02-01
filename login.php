@@ -75,6 +75,16 @@ if(isset($_GET['error'])){
         <header class="header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
+        <aside class="admin-nav hidden">
+        <?php
+        if($user->accessCheck() == "ADMIN")
+        {
+            ?>
+                <?php include($path."inc/inc.adminnavbar.php"); ?>
+            <?php
+        }
+       ?>
+        </aside>
         <main class="login-main">
             <form action="login.php" method="post">
                 <section class="log-head">
