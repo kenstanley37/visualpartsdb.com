@@ -1276,7 +1276,7 @@ only screen and (max-width: 360px),
             "logsubmit"
             "logerror";
         justify-items: flex-end;
-        text-align: center;
+        align-content: flex-start;
     }
  
     
