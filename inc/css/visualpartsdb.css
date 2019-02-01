@@ -1260,10 +1260,8 @@ only screen and (max-width: 760px),
             "logcaptcha"
             "logsubmit"
             "logerror";
-        margin-left: -45px;
+        justify-items: flex-end;
     }
-    
-
     
     .login-main .log-captcha {
         grid-area: logcaptcha;
