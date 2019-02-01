@@ -114,6 +114,98 @@ header {
     z-index: 1;
 }
 
+/***************************************
+*
+*
+* START LOGIN STYLE
+*
+*
+****************************************/
+
+.login-main {
+    grid-area: main;
+	display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 10px;
+    grid-template-areas: 
+        "loghead"
+        "logname"
+        "logpass"
+		"logcaptcha"
+        "logsubmit"
+        "logerror";
+    justify-items: center;
+	text-align: center;
+}
+
+.login-main .log-head {
+	grid-area: loghead;
+    margin-bottom: 50px;
+}
+
+.login-main form {
+	width: 300px;
+	margin-left: 50px;
+}
+
+.login-main form input {
+    width: 200px;
+	margin-bottom: 20px;
+}
+
+.login-main .log-name {
+	grid-area: logname;
+}
+
+.login-main .log-pass {
+	grid-area: logpass;
+}
+
+.login-main .log-captcha {
+	grid-area: logcaptcha;
+    margin-bottom: 25px;
+}
+
+.login-main  .g-recaptcha {
+    margin-left: 35px;
+    transform: scale(0.77);
+    -webkit-transform: scale(0.77);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+}
+
+.login-main .log-submit {
+	grid-area: logsubmit;
+    text-align: center;
+}
+
+.login-main .log-submit input {
+        width: 100px;
+}
+
+.login-main .log-error {
+	grid-area: logerror;
+}
+
+.login-main .emailError, .login-wrap .passwordError {
+	position: absolute;
+	margin-left: 10px;
+	color: red;
+}
+
+.login-main .captchaError {
+	margin-left: 10px;
+	color: red;
+}
+
+
+/***************************************
+*
+*
+* START HEADER Style
+*
+*
+****************************************/
 header .admin-extra {
     grid-area: adminextra;
     margin-left: 15px;
@@ -440,7 +532,13 @@ main {
     font-size: 15px;
 }
 
-/* Search results style */
+/***************************************
+*
+*
+* START SEARCH RESULTS STYLE
+*
+*
+****************************************/
 
 .search-header {
     grid-area: header;
@@ -642,7 +740,13 @@ footer {
 }
 
 
-/* REGISTER STYLE */
+/***************************************
+*
+*
+* START REGISTER STYLE
+*
+*
+****************************************/
 
 .register-main {
     grid-area: main;
@@ -691,83 +795,6 @@ footer {
     text-transform: uppercase;
 }
 
-/* LOGIN FORM STYLE */
-
-.login-main {
-    grid-area: main;
-	display: grid;
-    grid-template-columns: 100%;
-    grid-gap: 10px;
-    grid-template-areas: 
-        "loghead"
-        "logname"
-        "logpass"
-		"logcaptcha"
-        "logsubmit"
-        "logerror";
-    justify-items: center;
-	text-align: center;
-}
-
-.login-main .log-head {
-	grid-area: loghead;
-    margin-bottom: 50px;
-}
-
-.login-main form {
-	width: 300px;
-	margin-left: 50px;
-}
-
-.login-main form input {
-    width: 200px;
-	margin-bottom: 20px;
-}
-
-.login-main .log-name {
-	grid-area: logname;
-}
-
-.login-main .log-pass {
-	grid-area: logpass;
-}
-
-.login-main .log-captcha {
-	grid-area: logcaptcha;
-    margin-bottom: 25px;
-}
-
-.g-recaptcha {
-    margin-left: 35px;
-    transform: scale(0.77);
-    -webkit-transform: scale(0.77);
-    transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-}
-
-.login-main .log-submit {
-	grid-area: logsubmit;
-    text-align: center;
-}
-
-.login-main .log-submit input {
-        width: 100px;
-}
-
-.login-main .log-error {
-	grid-area: logerror;
-}
-
-.login-main .emailError, .login-wrap .passwordError {
-	position: absolute;
-	margin-left: 10px;
-	color: red;
-}
-
-.login-main .captchaError {
-	margin-left: 10px;
-	color: red;
-}
 
 /***************************************
 *
@@ -1292,7 +1319,7 @@ only screen and (max-width: 360px),
     }
 
     
-    .g-recaptcha {
+    .login-main .g-recaptcha {
         margin-left: 0;
         transform: scale(0.67);
         -webkit-transform: scale(0.67);
