@@ -1265,7 +1265,10 @@ only screen and (max-width: 360px),
     .login-main {
         grid-area: main;
         display: grid;
-        height: 100vh;
+        height: 80vh;
+        min-width: 100%;
+        max-width: 100%;
+        margin: 0;
         grid-template-columns: 100%;
         grid-template-areas: 
             "loghead"
@@ -1275,19 +1278,30 @@ only screen and (max-width: 360px),
             "logsubmit"
             "logerror";
         justify-items: center;
-        overflow: hidden;
+        text-align: center;
     }
- 
+    
+    .login-main form {
+        max-width: 200px;
+        margin: 0;
+    }
+    
+    .login-main form input {
+        width: 150px;
+        margin-bottom: 20px;
+    }
+
+    
+    .g-recaptcha {
+        margin-left: 0;
+        transform: scale(0.67);
+        -webkit-transform: scale(0.67);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+    }
+
     
 }
-
-
-
-
-
-
-
-
 
 
 
