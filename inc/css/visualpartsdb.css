@@ -1248,15 +1248,6 @@ only screen and (max-width: 760px),
         border-bottom: 0;
     }
     
-    .login-main {
-        justify-items: center;
-    }
-    
-    .login-main .log-captcha {
-        grid-area: logcaptcha;
-        margin-bottom: 25px;
-    }
-
 }
 
 .show {
