@@ -1250,6 +1250,49 @@ only screen and (max-width: 760px),
     
 }
 
+
+
+
+
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 360px),
+(min-device-width: 1px) and (max-device-width: 360px)  {
+    .login-main {
+        grid-area: main;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-gap: 10px;
+        grid-template-areas: 
+            "loghead"
+            "logname"
+            "logpass"
+            "logcaptcha"
+            "logsubmit"
+            "logerror";
+        justify-items: flex-end;
+        text-align: center;
+    }
+ 
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .show {
     display: grid;
 }
