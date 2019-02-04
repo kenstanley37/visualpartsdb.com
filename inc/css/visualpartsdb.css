@@ -361,11 +361,11 @@ main {
     grid-template-columns: 100%;
     grid-column-gap: 15px;
     grid-template-areas: 
+        "indexbg"
         "indexsearch"
         "indexintro"
         "indexmembership";
-    justify-content: center;
-    align-self: flex-end;
+
 }
 
 .index-main-tog {
@@ -373,22 +373,23 @@ main {
 }
 
 .index-bg {
+    grid-area: indexbg;
     background-image: url(/images/index-background-search.jpg);
           /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
+    background-attachment: scroll;
+    background-position: top;
     background-repeat: no-repeat;
     background-size: contain;
-    height: 400px;
+    min-height: 300px;
     width: 100%;
-    margin-bottom: 25px;
+    margin-top: 50px;
     /*
     filter: blur(4px);
     -webkit-filter: blur(4px);
     */
     position: absolute;
     z-index: 0;
-    top:0;
+    top: 150;
 }
 
 .index-search {
