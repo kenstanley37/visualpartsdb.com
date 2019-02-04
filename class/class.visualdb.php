@@ -90,7 +90,7 @@
                     ?>
 
                          <article class="slogo-search">
-                            <h1><?php echo $skuRow['sku_id']; ?></h1>
+                            <h2><?php echo $skuRow['sku_id']; ?></h2>
                             <?php if($user->accessCheck() == "ADMIN")
                             {
                                 ?>
@@ -715,7 +715,9 @@
                     $image_count = $row_image['Search_Count'];
                 
                     ?>
-                        <p><?php echo number_format($sku_count);?> Parts, <?php echo number_format($image_count);?> Pictures, and <?php echo number_format($search_count);?> searches</p>
+                    <p><?php echo number_format($sku_count);?> Parts </p>
+                    <p><?php echo number_format($image_count);?> Pictures </p>
+                    <p><?php echo number_format($search_count);?> Searches</p>
                     <?php
                     
                 }   

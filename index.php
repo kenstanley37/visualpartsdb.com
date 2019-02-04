@@ -81,29 +81,40 @@ if(isset($_GET['noaccess'])){
        ?>
         </aside>
         <main id="aboutvpd" class="index-main">
+            <section class="index-bg"></section>
             <article class="index-search">
-                <section><h1>Visual Parts Database</h1></section>
-                <section>                
+                <h1>Visual Parts Database</h1>
+                <section class="search-bar">                
                     <form class="search" action="/search.php" method="get">
                         <label hidden for="search">Search</label>
-                        <input class="toupper" type="search" name="search" id="search" placeholder="Part Number or Description">
+                        <input class="toupper" type="search" name="search" id="search" placeholder="Part Number or Description"><button type="submit">SEARCH</button>
                     </form>
                 </section>
-                <section class="records"><?php $vpd->recordCount(); ?></section>
+                <section class="records">
+                    <?php $vpd->recordCount(); ?>
+                </section>
             </article>
             <article class="main-intro">
                 <section class="intro">
-                    <h1>Parts</h1>
+                    <h2>Parts</h2>
                     <p>Our database of parts contains information on over 50,000 components from popular brands such as:</p>
-                    <ul>
-                        <li><a href="https://www.electroluxappliances.com/">Electrolux</a></li>
-                        <li><a href="https://www.frigidaire.com/">Frigidaire</a></li>
-                        <li><a href="https://www.kelvinatorcommercial.com/">Kelvinator</a></li>
-                        <li><a href="https://www.aeg.com/">AEG</a></li>
-                        <li><a href="http://gibson-intl.com/">Gibson</a></li>
-                        <li><a href="https://www.zanussi.com/">Zanussi</a></li>
-                        <li><a href="https://professional.electrolux.com/">Professional</a></li>
-                    </ul>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><a href="https://www.electroluxappliances.com/">Electrolux</a></td>
+                                <td><a href="https://www.frigidaire.com/">Frigidaire</a></td>
+                                <td><a href="https://www.kelvinatorcommercial.com/">Kelvinator</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="https://www.aeg.com/">AEG</a></td>
+                                <td><a href="http://gibson-intl.com/">Gibson</a></td>
+                                <td><a href="https://www.zanussi.com/">Zanussi</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="https://professional.electrolux.com/">Professional</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
                 <section id="staticImg">
                     <?php echo $vpd->randImage('4'); ?>
