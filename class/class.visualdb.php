@@ -91,7 +91,11 @@
 
                          <article class="slogo-search">
                             <h2><?php echo $skuRow['sku_id']; ?></h2>
-                            <?php if($user->accessCheck() == "ADMIN")
+                        </article>
+                        <article class="search-grid">
+                            <section class="skuimage-data">
+                                <h1>SKU Images</h1>
+                                  <?php if($user->accessCheck() == "ADMIN")
                             {
                                 ?>
                                     <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
@@ -106,8 +110,7 @@
 
                             }
                             ?>
-                        </article>
-                        <article class="search-grid">
+                            </section>
                             <article class="skuimages">
                                 <?php 
                                     while($skuimagerow = $skuimages->fetch()){
@@ -138,6 +141,7 @@
                                 <section class="export-data">
                                     <section class="excel">
                                         <ul>
+                                            <li>Export Data:</li>
                                             <li><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></li>
                                             <li><a href="search.php?export=pdf&sku=<?php echo $skuRow['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></li>
                                         </ul>
@@ -148,7 +152,6 @@
                                             <a href="search.php?export=excel&sku=<?php echo $skuRow['sku_id']; ?>">Add to List <i class="fas fa-plus-circle"></i></a>
                                             <?php
                                         } ?> 
-                                        
                                     </section>
                                 </section>
                                 <section class="skudetails">
@@ -172,11 +175,18 @@
                                             </tr>
                                         </tbody>                                    
                                     </table> 
-                                                
-                                    <table class="indent50">
+                                    <section class="sku-dim-information">
+                                        <table class="unit-data">
                                         <thead>
                                             <tr>
-                                                <th colspan="2">Unit Data</th> 
+                                                <th>Unit Data</th> 
+                                                <th>
+                                                    <form method="post" action="/processors/skuUpdateRequest.php">
+                                                        <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
+                                                        <input type="text" name="updateUnit" hidden>
+                                                        <button type="submit">Request Update</button>
+                                                    </form>
+                                                </th> 
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -202,10 +212,17 @@
                                         if(!empty($user->accessCheck()))
                                         {
                                     ?>
-                                    <table class="indent50">
+                                    <table class="case-data">
                                         <thead>
                                             <tr>
                                                 <th colspan="2">Case Data</th>
+                                                <th>
+                                                    <form method="post" action="/processors/skuUpdateRequest.php">
+                                                        <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
+                                                        <input type="text" name="updateCase" hidden>
+                                                        <button type="submit">Request Update</button>
+                                                    </form>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -232,10 +249,17 @@
                                         </tbody>
                                     </table> 
 
-                                    <table class="indent50">
+                                    <table class="pallet-data">
                                         <thead>
                                             <tr>
                                                 <th colspan="2">Pallet Data</th>
+                                                <th>
+                                                    <form method="post" action="/processors/skuUpdateRequest.php">
+                                                        <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
+                                                        <input type="text" name="updatePallet" hidden>
+                                                        <button type="submit">Request Update</button>
+                                                    </form>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -262,11 +286,37 @@
                                         </tbody>
                                     </table> 
                                     
+                                    <table class="user-data">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">User Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>SKU created by</th>
+                                                <td><?php echo $skuRow['sku_rec_added']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>SKU created Date</th>
+                                                <td><?php echo $skuRow['sku_rec_date']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>SKU Last Updated</th>
+                                                <td><?php echo $skuRow['sku_rec_update_by']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>SKU Updated Date</th>
+                                                <td><?php echo $skuRow['sku_rec_update']; ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table> 
+                                    
                                             <?php
                                         }
                     
                                     ?>
-                                    
+                                    </section>            
                                 </section>
                             </article>
                         </article>

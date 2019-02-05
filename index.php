@@ -87,7 +87,7 @@ if(isset($_GET['noaccess'])){
                 <section class="search-bar">                
                     <form class="search" action="/search.php" method="get">
                         <label hidden for="search">Search</label>
-                        <input class="toupper" type="search" name="search" id="search" placeholder="Part Number or Description"><button type="submit">SEARCH</button>
+                        <input class="toupper" type="search" name="search" id="search" placeholder="Part Number"><button type="submit">SEARCH</button>
                     </form>
                 </section>
                 <section class="records">
