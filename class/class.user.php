@@ -143,7 +143,7 @@
         // Send new user verification email
         // *************************************************************
         
-            public function addUserVerify($fname, $lname, $email, $memFName, $memLName, $memuserID)
+            public function addUserVerify($fname, $lname, $email, $memFName, $memLName, $memuserID, $memCompany)
             {
                 $fname = strtolower($fname);
                 $fname = ucfirst($fname);
@@ -152,6 +152,7 @@
                 $lname = ucfirst($lname);
                 
                 $email = strtolower($email);
+                
 
                 //Load Composer's autoloader
                 require '../vendor/autoload.php';
@@ -161,13 +162,14 @@
                 $mail = new PHPMailer(true);                              // Passing `true` enables xceptions
                 
                 try {
-                    $stmt = $this->conn->prepare("INSERT INTO verify (verify_fname, verify_lname, verify_email, verify_code, verify_added_by) VALUES(:fname, :lname, :email, :code, :memuserID)");
+                    $stmt = $this->conn->prepare("INSERT INTO verify (verify_fname, verify_lname, verify_email, verify_code, verify_added_by, verify_comp) VALUES(:fname, :lname, :email, :code, :memuserID, :memcompany)");
 
                     $stmt->bindparam(":fname", $fname);
                     $stmt->bindparam(":lname", $lname);
                     $stmt->bindparam(":email", $email);
                     $stmt->bindparam(":code", $code);
                     $stmt->bindparam(":memuserID", $memuserID);
+                    $stmt->bindparam(":memcompany", $memCompany);
                     $stmt->execute();	
                     $db_id = $this->conn->lastInsertId();
                     
@@ -201,9 +203,9 @@
                     $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/register.php?id='.$db_id.'&code='.$code.' to activate your account.';
 
                     $mail->send();
-                    echo 'Message has been sent';
+                    return true;
                 } catch (Exception $e) {
-                    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                    return false;
                 }
             }
         
@@ -224,30 +226,31 @@
                         $userFName = $row['verify_fname'];
                         $userLName = $row['verify_lname'];
                         $userEmail = $row['verify_email'];
+                        $userComp = $row['verify_comp'];
                         $userActive = 1;
                         $userPassword = 'temp1';
                         $userRole = 1;
                         try
                         {
-                            $adduser = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_active, user_password, user_role_id) VALUES(:fname, :lname, :email, :active, :password, :role)");
+                            $adduser = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_active, user_password, user_role_id, user_company) VALUES(:fname, :lname, :email, :active, :password, :role, :comp)");
                             $adduser->bindparam(":fname", $userFName);
                             $adduser->bindparam(":lname", $userLName);
                             $adduser->bindparam(":email", $userEmail);
                             $adduser->bindparam(":active", $userActive);
                             $adduser->bindparam(":password", $userPassword);
                             $adduser->bindparam(":role", $userRole);
+                            $adduser->bindparam(":comp", $userComp);
                             $adduser->execute();
                             $db_id = $this->conn->lastInsertId();
-                            $this->setSession($db_id, $userFName, $userLName);
+                            //$this->setSession($db_id, $userFName, $userLName);
                         } catch(PDOException $e)
                         {
-                            return false;
+                            echo $e->getMessage();
                         }
-                      return true;
                     } else {
-                        echo 'invalid code';
-                      return false;
+                      echo 'No record found';
                     }
+                     return true;
                 }
                 catch(PDOException $e)
                 {

@@ -573,8 +573,13 @@
                             </div>
                             <figcaption>
                                 <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
-                                    <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
-                                    <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                    <div class="card-sku-num">
+                                        <h4 class="card-sku-num">
+                                            <?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
+                                    </div>
+                                    <div class="card-sku-desc">
+                                        <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                    </div>
                                 </a>
                             </figcaption>
                         </figure>

@@ -19,17 +19,12 @@ if(!isset($_SESSION['user_id']))
     }
 }
 
-if(isset($_GET['user']))
-{
-    $title = "User List";
-}
-
 if(isset($_GET['register']))
 {
     $temp = $_GET['register'];
-    if($temp == 'success')
+    if($temp == 'successful')
     {
-        $register-message == 'Registeration request has been sent';
+        $result = 'Registeration request has been sent';
     }
 }
 
@@ -38,7 +33,7 @@ if(isset($_GET['register']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: <?php echo $title; ?></title>
+    <title>Visual Parts Database: Invite User</title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -61,20 +56,11 @@ if(isset($_GET['register']))
                 <section class="user-management-nav">
                     <?php include($path."/inc/inc.useradmin.php"); ?>
                 </section>
-                <?php
-                if(isset($_GET['user'])){
-                    ?>
-                        <section class="admin-head">
-                    <h1>User Management</h1>
+                <section class="admin-head">
+                    <h1>Invite User</h1>
                 </section>
                 <section class="add-user">
-                    <h1>Add User</h1>
-                    <?php
-                    if(isset($temp))
-                    {
-                        echo $temp;
-                    }
-                    ?>
+                    <h2>Add User</h2>
                     <form id="addUser" method="post" action="/processors/register_request.php">
                         <table class="reg-table">
                             <tbody>
@@ -83,7 +69,7 @@ if(isset($_GET['register']))
                                         <label>Company</label>
                                     </td>
                                     <td>
-                                        <select name="company" form="addUser" required>
+                                        <select name="regcompany" id="regcompany" required>
                                             <?php $user->dropDownCompany(); ?>
                                         </select>
                                     </td>
@@ -112,6 +98,12 @@ if(isset($_GET['register']))
                         </table>
                         <input type="submit" name="regsubmit" value="Submit">
                     </form>
+                                        <?php
+                    if(isset($result))
+                    {
+                        echo '<span>'.$result.'</span>';
+                    }
+                    ?>
                 </section>
                 <section>
                     <h1>User List</h1>
@@ -135,12 +127,7 @@ if(isset($_GET['register']))
                             <?php $user->userList(); ?>
                         </tbody>
                     </table>
-                </section>
-            
-                <?php
-            }
-            ?>
-            
+                </section>    
         </main>
         <footer>
             <?php include($path."inc/inc.footer.php"); ?>

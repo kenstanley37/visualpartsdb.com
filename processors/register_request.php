@@ -45,16 +45,25 @@
                 
     } 
 
-
+    // this comes from invite-user.php
     if(isset($_POST['regsubmit']))
     {
         $memuserID = $_SESSION['user_id'];
         $memFName = ucfirst(strtolower($_SESSION['fname']));
         $memLName = ucfirst(strtolower($_SESSION['lname']));
+        
         $regfname = $vail->sanitizeString($_POST['regfname']);
         $reglname =  $vail->sanitizeString($_POST['reglname']);
         $regemail =  $vail->sanitizeString($_POST['regemail']);
-        $user->addUserVerify($regfname, $reglname, $regemail, $memFName, $memLName, $memuserID);
+        $regcompany =  $vail->sanitizeString($_POST['regcompany']);
+        $user->addUserVerify($regfname, $reglname, $regemail, $memFName, $memLName, $memuserID, $regcompany);
+        if($user == true)
+        {
+            header('location: /admin/invite-user.php?register=successful');
+        } else {
+            header('location: /admin/invite-user.php?register=unsuccessful');
+        }
+        
     }
 /*    
         if($result)

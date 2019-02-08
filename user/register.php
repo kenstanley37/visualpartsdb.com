@@ -19,7 +19,14 @@ if(isset($_GET['code']))
     $recordID = $vail->sanitizeString($_GET['id']);
     $recordCode = $vail->sanitizeString($_GET['code']);
     $result = $user->checkVerify($recordID, $recordCode);
+    echo $result;
+    if($result == 'true'){
+        echo 'im working';
+    } else {
+        echo 'Im not working';
+    }
 }
+
 
 if(!isset($_GET['code'])){
     $result = '';
@@ -31,13 +38,15 @@ if(!isset($_GET['code'])){
             $error = 'Passwords do no match';
         } else {
             $updateResult = $user->updatePassword($userID, $password1);
+            if($updateResult){
+                header('location: /login.php');
+            }
         }
     } else {
         header('location: /');
     }
     
 }
-    
 
 
 ?>

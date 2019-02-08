@@ -83,6 +83,11 @@ a:hover {
 	border-bottom: 1px solid #fff;
 }
 
+span {
+    color: red;
+    margin-top: 55px;
+}
+
 /***************************** 
 ** index.php grid 
 ******************************/
@@ -96,26 +101,6 @@ a:hover {
         "adminnavbar header"
         "adminnavbar main"
         "adminnavbar footer";
-}
-
-/* header styling */
-header {
-    grid-area: header;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto auto;
-    min-width: 100%;
-    color: #fff;
-    background: #000428;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    grid-template-areas: 
-        "mainlogo navlinks searchboxnav name"
-        "adminextra adminextra adminextra adminextra";
-    position: sticky;
-    top: 0;
-    align-items: center;
-    z-index: 10;
 }
 
 /***************************************
@@ -210,6 +195,27 @@ header {
 *
 *
 ****************************************/
+
+/* header styling */
+header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto;
+    min-width: 100%;
+    color: #fff;
+    background: #000428;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    grid-template-areas: 
+        "mainlogo navlinks searchboxnav name"
+        "adminextra adminextra adminextra adminextra";
+    position: sticky;
+    top: 0;
+    align-items: center;
+    z-index: 10;
+}
+
 header .admin-extra {
     grid-area: adminextra;
     margin-left: 15px;
@@ -359,7 +365,7 @@ main {
     grid-area: main;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 400px auto auto auto;
+    grid-template-rows: 435px auto auto auto;
     grid-column-gap: 15px;
     grid-row-gap: 35px;
     grid-template-areas: 
@@ -508,7 +514,7 @@ main {
 .index-main .main-intro #staticImg {
     grid-area: introimages;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-template-rows: auto;
     width: 90%;
     grid-gap: 2.5em;
@@ -516,6 +522,7 @@ main {
 }
 
 .card {
+    background-color: #8ee4af;
     position: relative;
     /* Add shadows to create the "card" effect */
     box-shadow: 8px 1px 8px 4px rgba(0,0,0,0.2);
@@ -536,7 +543,6 @@ main {
 /* Add some padding inside the card container */
 .card figcaption { 
     padding: 2px 16px;
-    border-top: 1px solid #000;
 }
 
 .card img {
@@ -548,6 +554,25 @@ main {
     max-height: 100%;
     padding: 15px;
 }
+
+    .card .card-img {
+        height: auto;
+    }
+    
+    .card figcaption {
+        border: none;
+    }
+    
+    .card .card-sku-num h4 {
+        font-size: 20px;
+        color: #000;
+        font-weight: 100;
+    }
+    
+    .card .card-sku-desc p {
+        font-size: 12px;
+    }
+
 
 .index-main #member {
     background-color: antiquewhite;
@@ -1369,7 +1394,7 @@ only screen and (max-width: 360px),
     }
     
     .index-main {
-                overflow: hidden;
+        overflow: hidden;
         grid-area: main;
         display: grid;
         grid-template-columns: 100%;
@@ -1439,10 +1464,29 @@ only screen and (max-width: 360px),
     }
     
     .card {
-        /* Add shadows to create the "card" effect */
+        /* Add shadows to create the "card" effect 
         box-shadow: 0 4px 8px 40px rgba(0,0,0,0.2);
+        */
         width: 200px;
-        height: 400px;
+        height: 300px;
+    }
+    
+    .card .card-img {
+        height: auto;
+    }
+    
+    .card figcaption {
+        border: none;
+    }
+    
+    .card .card-sku-num h4 {
+        font-size: 20px;
+        color: #000;
+        font-weight: 100;
+    }
+    
+    .card .card-sku-desc p {
+        font-size: 12px;
     }
     
     .member-request textarea {
@@ -1450,7 +1494,6 @@ only screen and (max-width: 360px),
     }
     
 }
-
 
 
 .show {
