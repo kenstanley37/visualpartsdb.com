@@ -42,7 +42,6 @@ function datePickerSetup(){
       } );
 }
     
-
 function navScroll(){
     //change nav bar design on scroll down
     $(window).scroll(function(){
@@ -56,8 +55,10 @@ function navScroll(){
 } // end nav scroll
 
 function adminNav(){
-    $('.admin-ham').click(function(){
-        $('.admin-nav').toggleClass('show');
+    $('.admin-bar').click(function(){
+        //$('.admin-nav-links').toggleClass('nav-bar-show');
+        $('.admin-nav-links').toggle();
+        //$('.admin-nav-links').css('display','block');
     });
 }
 

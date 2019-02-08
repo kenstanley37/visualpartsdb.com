@@ -95,12 +95,13 @@ span {
     display: grid;
     min-height: 100vh;
     min-width: 100%;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 2fr auto;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto 2fr auto;
     grid-template-areas: 
-        "adminnavbar header"
-        "adminnavbar main"
-        "adminnavbar footer";
+        "header"
+        "adminnavbar"
+        "main"
+        "footer";
 }
 
 /***************************************
@@ -201,15 +202,11 @@ header {
     grid-area: header;
     display: grid;
     grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto auto;
     min-width: 100%;
     color: #fff;
-    background: #000428;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #368cbf;  /* fallback for old browsers */
     grid-template-areas: 
-        "mainlogo navlinks searchboxnav name"
-        "adminextra adminextra adminextra adminextra";
+        "mainlogo navlinks searchboxnav name";
     position: sticky;
     top: 0;
     align-items: center;
@@ -305,47 +302,54 @@ header .name a {
     font-size: 15px;
 }
 
-.admin-nav {
+/***************************************
+*
+*
+* START Admin Nav Bar Style
+*
+*
+****************************************/
+
+.admin-nav-bar {
     grid-area: adminnavbar;
-    display: none; /* the hidden class will active this in jquery */
-    grid-template-columns: auto auto;
+    display: grid;
+    grid-template-columns: 100px auto 35px;
     grid-template-areas: 
-        "adminham admininfo";
-    background-color: #424242;
-    color: #fff;
-    position: fixed;
-    min-height: 100vh;
-    top: 77px;
-    bottom:0;
-    box-shadow: 5px 10px 18px blue;
+        "adminnavtitle adminnavlinks adminnavbars";
+    background-color: #fff;
+    color: #000;
     z-index: 2;
-    opacity: 0.9;
+    min-width: 100%;
+}
+    
+.admin-nav-bar .admin-nav-ham {
+    grid-area: adminnavbars;
+    align-self:  center;
+    text-align: right;
+    margin-right: 25px;
+    display: none;
 }
 
-.admin-nav .admin-title {
-    background-color: #000;
-    text-align: center;
+.admin-nav-bar .admin-title {
+    grid-area: adminnavtitle;
+    text-align: left;
+    margin-left: 15px;
 }
 
-.admin-nav .admin-links i {
+.admin-nav-bar .admin-nav-links {
+    grid-area: adminnavlinks;
+    align-self:  center;
     text-align: center;
-    font-size: 25px;
+    margin-left: -115px;
 }
 
-.admin-nav .admin-links i a {
-    text-align: center;
+.admin-nav-bar .admin-nav-links section {
     display: inline-block;
-    font-size: 15px;
+    padding-right: 10px;
+}
+
+.admin-nav-bar .admin-nav-links section a {
     font-weight: 100;
-}
-
-.admin-nav a {
-    padding: 1em;
-    color: #fff;
-}
-
-.admin-nav section a {
-    display: block;
 }
 
 main {
@@ -1209,13 +1213,6 @@ footer {
         margin-left: 50px;
     }
     
-
-    
-    .admin-nav {
-        min-height: 100vh;
-        top: 143px;
-    }   
-    
     .my-search-main {
         grid-area: main;
         display: grid;
@@ -1345,6 +1342,48 @@ only screen and (max-width: 760px),
         padding-left: 10px;
     }
     
+    .admin-nav-bar {
+        grid-area: adminnavbar;
+        display: grid;
+        grid-template-columns: 100px auto;
+        grid-template-areas: 
+            "adminnavtitle adminnavlinks adminnavbars";
+        background-color: #fff;
+        color: #000;
+        z-index: 2;
+        min-width: 100%;
+    }
+    
+    .admin-nav-bar .admin-nav-ham {
+        grid-area: adminnavbars;
+        display: block;
+    }
+
+    .admin-nav-bar .admin-title {
+        grid-area: adminnavtitle;
+        text-align: left;
+        margin-left: 15px;
+    }
+
+    .admin-nav-bar .admin-nav-links {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        width: 243px;
+        right: 0;
+        margin-top: 50px;
+    }
+
+    .admin-nav-bar .admin-nav-links section {
+        display:  block;
+        text-align: left;
+        margin-left: 15px;
+        line-height: 25px;
+    }
+
+    .admin-nav-bar .admin-nav-links section a {
+        font-weight: 100;
+    }
 }
 
 
@@ -1436,7 +1475,6 @@ only screen and (max-width: 360px),
         font-size: 16px;
         display: block;
         padding: 1px;
-        
     }
 
     .index-search .search-bar {
@@ -1492,10 +1530,4 @@ only screen and (max-width: 360px),
     .member-request textarea {
         width: 250px;
     }
-    
-}
-
-
-.show {
-    display: grid;
 }

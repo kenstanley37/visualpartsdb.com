@@ -36,9 +36,3 @@
         <i class="fas fa-user"></i> <?php $user->isLogin(); ?>
         <i class="fas fa-bars adminnavbar"></i>
     </section>
-
-    <section class="admin-extra">
-        <section class="admin-ham">
-            <?php if($user->accessCheck() == 'ADMIN'){ echo '<i class="fas fa-bars adminnavbar"> Admin</i> ';} ?>
-        </section>
-    </section>

@@ -7,6 +7,7 @@ require_once($path."class/class.func.php");
 
 $vpd = new VISUALDB;
 $vail = new VALIDATE;
+$user = new USER;
 
 if(isset($_GET['result']))
 {
@@ -70,15 +71,15 @@ if(isset($_GET['noaccess'])){
         <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <aside class="admin-nav hidden">
+        <aside class="admin-nav-bar hidden">
         <?php
         if($user->accessCheck() == "ADMIN")
         {
-            ?>
-                <?php include($path."inc/inc.adminnavbar.php"); ?>
-            <?php
+        ?>
+            <?php include($path."inc/inc.adminnavbar.php"); ?>
+        <?php
         }
-       ?>
+        ?>
         </aside>
         <main id="aboutvpd" class="index-main">
             <section class="index-bg"></section>

@@ -52,16 +52,16 @@ $result = '';
             <?php include($path."inc/inc.header.php");?>
             
         </header>
+        <aside class="admin-nav-bar hidden">
         <?php
         if($user->accessCheck() == "ADMIN")
         {
-            ?>
-            <aside class="admin-nav">
-                <?php include($path."inc/inc.adminnavbar.php"); ?>
-            </aside>
-            <?php
+        ?>
+            <?php include($path."inc/inc.adminnavbar.php"); ?>
+        <?php
         }
-       ?>
+        ?>
+        </aside>
         <main class="my-search-main">  
             <article id="my-search-graph" class="my-search-graph"></article>
             <article id="my-search-pie" class="my-search-pie"></article>

@@ -61,16 +61,16 @@ if(isset($_GET['export'])){
         <header class="header">
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <?php 
-        // check if user is an ADMIN
-            if($user->accessCheck() == "ADMIN"){
-        ?>
-        <aside class="admin-nav">
-            <?php include($path."inc/inc.adminnavbar.php"); ?>
-        </aside>
+        <aside class="admin-nav-bar hidden">
         <?php
-        } // end access check
+        if($user->accessCheck() == "ADMIN")
+        {
         ?>
+            <?php include($path."inc/inc.adminnavbar.php"); ?>
+        <?php
+        }
+        ?>
+        </aside>
         <main class="search-main">
             <?php $vpd->skuSearch($sku); ?>
         </main>

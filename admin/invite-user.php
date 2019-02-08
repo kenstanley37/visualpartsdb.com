@@ -42,16 +42,16 @@ if(isset($_GET['register']))
             <?php include($path."inc/inc.header.php"); ?>
         </header>
         <!-- USER SECTION -->
+        <aside class="admin-nav-bar hidden">
         <?php
         if($user->accessCheck() == "ADMIN")
         {
-            ?>
-            <aside class="admin-nav">
-                <?php include($path."inc/inc.adminnavbar.php"); ?>
-            </aside>
-            <?php
+        ?>
+            <?php include($path."inc/inc.adminnavbar.php"); ?>
+        <?php
         }
-       ?>
+        ?>
+        </aside>
             <main id="aboutvpd" class="admin-main">
                 <section class="user-management-nav">
                     <?php include($path."/inc/inc.useradmin.php"); ?>
