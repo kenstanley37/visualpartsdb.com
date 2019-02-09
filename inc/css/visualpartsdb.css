@@ -338,6 +338,7 @@ header .name a {
 
 .admin-nav-bar .admin-nav-links {
     grid-area: adminnavlinks;
+    display: block;
     align-self:  center;
     text-align: center;
     margin-left: -115px;
@@ -1055,7 +1056,7 @@ footer {
 
 
 .admin-main .user-management-nav nav li {
-    display: inline-block;
+    display: inline-block !important;
     list-style-type: none;
     padding-left:30px;
     padding-right:30px;
@@ -1085,6 +1086,11 @@ footer {
 *
 ****************************************/
 /* Change styles for span and cancel button on extra small screens */
+
+
+@media screen and (min-width: 1201px){
+    
+}
 
 
 @media screen and (max-width: 1200px) {
@@ -1264,8 +1270,8 @@ This query will take effect for any screen smaller than 760px
 and also iPads specifically.
 */
 @media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
+only screen and (max-width: 900px),
+(min-device-width: 900px) and (max-device-width: 1024px)  {
 
     header {
         grid-area: header;
@@ -1345,13 +1351,14 @@ only screen and (max-width: 760px),
     .admin-nav-bar {
         grid-area: adminnavbar;
         display: grid;
+        overflow: hidden;
         grid-template-columns: 100px auto;
         grid-template-areas: 
             "adminnavtitle adminnavlinks adminnavbars";
         background-color: #fff;
         color: #000;
         z-index: 2;
-        min-width: 100%;
+        width: 100%;
     }
     
     .admin-nav-bar .admin-nav-ham {
@@ -1366,16 +1373,30 @@ only screen and (max-width: 760px),
     }
 
     .admin-nav-bar .admin-nav-links {
-        display: none;
         position: absolute;
         background-color: #fff;
+        opacity: 1;
         width: 243px;
-        right: 0;
         margin-top: 50px;
+        right: 0;
+        visibility: hidden;
+        z-index: 10;
+    }
+    /* Firefox hack for the margin */
+    @-moz-document url-prefix() {
+      .admin-nav-bar .admin-nav-links {
+        margin-top: 150px; /* firefox seems to be different than other browsers */
+      }
+    }
+    
+    @supports (-ms-ime-align: auto) {
+      .admin-nav-bar .admin-nav-links {
+        margin-top: 150px;
+      }
     }
 
     .admin-nav-bar .admin-nav-links section {
-        display:  block;
+        display: block;
         text-align: left;
         margin-left: 15px;
         line-height: 25px;
@@ -1384,6 +1405,34 @@ only screen and (max-width: 760px),
     .admin-nav-bar .admin-nav-links section a {
         font-weight: 100;
     }
+    
+    .index-search .search-bar {
+        width: 300px;
+        height: 35px;
+        margin-top: 25px;
+    }
+    
+    .index-search .search-bar form {
+        display: block;
+    }
+    
+    .index-search .search-bar button {
+        height: 20px;
+        font-size: 12px;
+        position: relative;
+        top: 0;
+    }
+
+    .index-search .search-bar input {
+        width: 170px;
+        height: 25px;
+        padding-left: 10px;
+        position: relative;
+        top: 0;
+    }
+    
+    
+    
 }
 
 
@@ -1488,6 +1537,7 @@ only screen and (max-width: 360px),
     }
     
     .index-search .search-bar button {
+        height: 40px;
         font-size: 12px;
         position: relative;
         top: 35px;
@@ -1530,4 +1580,8 @@ only screen and (max-width: 360px),
     .member-request textarea {
         width: 250px;
     }
+}
+
+.admin-show {
+    visibility: visible !important;
 }

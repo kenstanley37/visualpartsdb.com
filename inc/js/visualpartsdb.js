@@ -55,11 +55,22 @@ function navScroll(){
 } // end nav scroll
 
 function adminNav(){
+    /*
+    if ($(document).width() < 1024) {
+       alert('Less than 960');
+    }
+    else {
+       alert('More than 960');
+    }
+    */
     $('.admin-bar').click(function(){
-        //$('.admin-nav-links').toggleClass('nav-bar-show');
-        $('.admin-nav-links').toggle();
-        //$('.admin-nav-links').css('display','block');
+        $('.admin-nav-links').toggleClass('admin-show');
     });
+}
+
+function checkWidth(){
+    var $window = $('window');
+    var $pane = $('')
 }
 
 function mySearchCharts(){
