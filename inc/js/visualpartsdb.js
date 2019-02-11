@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 function startup(){
     navScroll();
-    adminNav();
+    hamburgerNav();
     datePickerSetup();
     mySearchCharts();
 }
@@ -56,7 +56,7 @@ function navScroll(){
 
 
 // open and close menus on hamburger click;
-function adminNav(){
+function hamburgerNav(){
     $('.admin-bar').click(function(){
         $('.admin-nav-links').toggleClass('nav-show');
     });
