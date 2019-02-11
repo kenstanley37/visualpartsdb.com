@@ -201,37 +201,35 @@ span {
 header {
     grid-area: header;
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 300px auto 25px;
     min-width: 100%;
+    max-width: 100%;
     color: #fff;
+    grid-gap: 0;
     background: #368cbf;  /* fallback for old browsers */
     grid-template-areas: 
-        "mainlogo navlinks searchboxnav name";
+        "mainlogo mainnavbar mainnavham";
     position: sticky;
     top: 0;
     align-items: center;
     z-index: 10;
 }
 
-header .admin-extra {
-    grid-area: adminextra;
-    margin-left: 15px;
-}
-
-.toggle {
-    left: -250px;
-}
-
-
-header .admin-ham i {
-    font-size: 20px;
-    color: #fff;
-    cursor: pointer;
+header .main-nav-ham {
+    grid-area: mainnavham;
+    display: none;
 }
 
 header .main-logo {
     grid-area: mainlogo;
-    grid-column: 1 / span 5 ;
+}
+
+header .main-nav-bar {
+    grid-area: mainnavbar;
+    display: grid;
+    grid-template-areas: 
+        "navlinks searchboxnav name";
+    align-items: center;
 }
 
 header .navlinks {
@@ -1092,38 +1090,29 @@ footer {
     
 }
 
-
 @media screen and (max-width: 1200px) {
-    header {
-        grid-area: header;
+    header .main-logo {
+        grid-area: mainlogo;
+    }
+
+    header .main-nav-bar {
+        grid-area: mainnavbar;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-        grid-gap: 5px;
         grid-template-areas: 
-            "mainlogo name"
-            "navlinks navlinks" 
-            "searchboxnav searchboxnav"
-            "adminextra adminextra";
-        justify-content: center;
+            "navlinks searchboxnav name";
+        align-items: center;
     }
     
     header .main-logo h1{
         font-size: 15px;
     }
 
-    header .main-logo {
-        grid-area: mainlogo;
-        grid-column: 1 / span 6;
-    }
-    
     header .name {
         grid-area: name;
-        grid-column: 1 / span 6;
     }
 
     header .navlinks {
         grid-area: navlinks;
-        grid-column: 1 / span 6;
         padding: 0;
         margin: 0;
         font-size: 15px;
@@ -1136,7 +1125,6 @@ footer {
 
     header .searchbox {
         grid-area: searchboxnav;
-        grid-column: 1 / span 6;
         padding-bottom: 15px;
     }
 
@@ -1273,27 +1261,80 @@ and also iPads specifically.
 only screen and (max-width: 900px),
 (min-device-width: 900px) and (max-device-width: 1024px)  {
 
-    header {
-        grid-area: header;
+    header .main-logo {
+        grid-area: mainlogo;
+    }
+
+    header .main-nav-bar {
+        position: absolute;
+        right: -25px;
+        top: 50px;
+        width: 300px;
+        z-index: 20;
+        background: #368cbf;
+        grid-area: mainnavbar;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-        grid-gap: 5px;
         grid-template-areas: 
-            "mainlogo"
-            "name"
             "navlinks" 
-            "searchboxnav"
-            "adminextra";
-        justify-content: center;
-    }    
+            "searchboxnav" 
+            "name";
+        justify-items: flex-start;
+        visibility: hidden;
+    }
+    
+    header .main-nav-ham {
+        display: block;
+    }
+    
+    header .main-nav-bar {
+        padding-left: 15px;
+        padding-bottom: 15px;
+    }
+    
+    header .main-nav-bar .navlinks section {
+        display: block;
+        text-align: left;
+        line-height: 25px;
+    }
+    
+    
+    header .main-logo h1{
+        font-size: 15px;
+    }
 
     header .name {
         grid-area: name;
-        grid-column: 1 /span 3 ;
-        text-align: left;
-        margin-bottom: 10px;
-        margin-left: 15px;
     }
+
+    header .navlinks {
+        grid-area: navlinks;
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+    }
+
+    header .navlinks section {
+        display: inline-block;
+        padding: 20px;
+    }
+
+    header .searchbox {
+        grid-area: searchboxnav;
+        padding-bottom: 15px;
+    }
+
+    header .navlinks section {
+        margin: 0;
+        padding: 0;
+    }
+    
+    header .admin-extra {
+        grid-area: adminextra;
+        grid-column: 1 / span 6;
+    }
+    
+    
+
     /* Force table to not be like tables anymore */
     .table {
         border: 0;
@@ -1430,8 +1471,6 @@ only screen and (max-width: 900px),
         position: relative;
         top: 0;
     }
-    
-    
     
 }
 
@@ -1582,6 +1621,6 @@ only screen and (max-width: 360px),
     }
 }
 
-.admin-show {
+.nav-show {
     visibility: visible !important;
 }

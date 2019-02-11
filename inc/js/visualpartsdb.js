@@ -54,18 +54,18 @@ function navScroll(){
     });
 } // end nav scroll
 
+
+// open and close menus on hamburger click;
 function adminNav(){
-    /*
-    if ($(document).width() < 1024) {
-       alert('Less than 960');
-    }
-    else {
-       alert('More than 960');
-    }
-    */
     $('.admin-bar').click(function(){
-        $('.admin-nav-links').toggleClass('admin-show');
+        $('.admin-nav-links').toggleClass('nav-show');
     });
+
+    
+    $('.main-nav-bars').click(function(){
+        $('.main-nav-bar').toggleClass('nav-show');
+    });
+    
 }
 
 function checkWidth(){
