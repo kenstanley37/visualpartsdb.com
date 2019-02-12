@@ -86,16 +86,40 @@ $result = '';
                                     <input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label for="users" hidden>Select User:</label>
-                                </td>
-                                <td>
-                                    <select id="users" name="usersID" hidden>
-                                        <?php $user->dropDownUser($userID); ?>
-                                    </select> 
-                                </td>
-                            </tr>
+
+                                    <?php 
+                                        if($user->accessCheck() == "ADMIN")
+                                        {
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <label for="users">Select User:</label>
+                                                </td>
+                                                <td>
+                                                    <select id="users" name="usersID">
+                                                        <?php $user->dropDownUser($userID); ?>
+                                                    </select> 
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                            <?php
+                                        } else
+                                        {
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <label for="users" hidden>Select User:</label>
+                                                </td>
+                                                <td>
+                                                    <select id="users" name="usersID" hidden>
+                                                        <?php $user->dropDownUser($userID); ?>
+                                                    </select> 
+                                                </td>
+                                            </tr>
+                                    <?php
+                                    }; ?>
+
                             <tr>
                                 <td>
                                     <input class="search-button" type="submit" value="Search">
@@ -107,7 +131,6 @@ $result = '';
             </article>
             <article class="my-search-body">            
                 <?php 
-                    // return the top 50 results. Need to change this to a drop down.
                     $vpd->mySearches($dateStart, $dateEnd, $userID, 50);
                  ?>
             </article>

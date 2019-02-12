@@ -48,12 +48,13 @@
         
         
         // *************************************************************
-        // Usage: skuSearch(sku);
+        // Usage: skuSearch(sku, from);
         // searches the database for requested sku and returns information
-        // based on users access.
+        // based on users access and the location of the search 'search' or 'admin'.
         // *************************************************************
-        public function skuSearch($sku)
+        public function skuSearch($sku, $from)
         {
+            
             if(isset($_SESSION['user_id']))
             {
                 $userID = $_SESSION['user_id'];
@@ -95,7 +96,7 @@
                         <article class="search-grid">
                             <section class="skuimage-data">
                                 <h1>SKU Images</h1>
-                                  <?php if($user->accessCheck() == "ADMIN")
+                                  <?php if($from == 'admin' and $user->accessCheck() == "ADMIN")
                             {
                                 ?>
                                     <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
@@ -124,13 +125,21 @@
                                             <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
                                             <p><?php echo $skuimagerow['sku_image_description'];?></p>
                                             </a>
-                                            <form method="post" action="/processors/image_handler.php">
-                                                <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
-                                                <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
-                                                <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
-                                                <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
-                                                <input type="submit" value="Delete Image" name="deleteimg">
-                                            </form>
+                                            <?php
+                                                if($from == 'admin' and $user->accessCheck() == "ADMIN")
+                                                {
+                                                    ?>
+                                                        <form method="post" action="/processors/image_handler.php">
+                                                            <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
+                                                            <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
+                                                            <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
+                                                            <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
+                                                            <input type="submit" value="Delete Image" name="deleteimg">
+                                                        </form>
+                                                    <?php
+                                                }
+                                            
+                                            ?>
                                         </figcaption>
                                     </figure>
                                         <?php
@@ -173,6 +182,25 @@
                                                 <th>Weight UOM</th>
                                                 <td>Pounds</td>
                                             </tr>
+                                             <?php
+                                                if(isset($_SESSION['user_id']))
+                                                {
+                                                    ?>
+                                            <tr>
+                                                <th>
+                                                    Request Data Update 
+                                                </th>
+                                                <td>
+                                                    <form method="post" action="/processors/skuUpdateRequest.php">
+                                                        <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
+                                                        <input type="text" name="updateUnit" hidden>
+                                                        <button type="submit">Request Update</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                             <?php
+                                                }
+                                            ?>
                                         </tbody>                                    
                                     </table> 
                                     <section class="sku-dim-information">
@@ -181,11 +209,7 @@
                                             <tr>
                                                 <th>Unit Data</th> 
                                                 <th>
-                                                    <form method="post" action="/processors/skuUpdateRequest.php">
-                                                        <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
-                                                        <input type="text" name="updateUnit" hidden>
-                                                        <button type="submit">Request Update</button>
-                                                    </form>
+                                                    
                                                 </th> 
                                             </tr>
                                         </thead>
@@ -217,11 +241,7 @@
                                             <tr>
                                                 <th colspan="2">Case Data</th>
                                                 <th>
-                                                    <form method="post" action="/processors/skuUpdateRequest.php">
-                                                        <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
-                                                        <input type="text" name="updateCase" hidden>
-                                                        <button type="submit">Request Update</button>
-                                                    </form>
+                                                    
                                                 </th>
                                             </tr>
                                         </thead>
@@ -254,11 +274,7 @@
                                             <tr>
                                                 <th colspan="2">Pallet Data</th>
                                                 <th>
-                                                    <form method="post" action="/processors/skuUpdateRequest.php">
-                                                        <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
-                                                        <input type="text" name="updatePallet" hidden>
-                                                        <button type="submit">Request Update</button>
-                                                    </form>
+
                                                 </th>
                                             </tr>
                                         </thead>

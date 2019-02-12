@@ -72,7 +72,7 @@ if(isset($_GET['export'])){
         ?>
         </aside>
         <main class="search-main">
-            <?php $vpd->skuSearch($sku, 'search'); ?>
+            <?php $vpd->skuSearch($sku); ?>
         </main>
         <footer>
             <?php include("inc/inc.footer.php"); ?>
