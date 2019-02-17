@@ -57,12 +57,10 @@ h2 {
 
 h3 {
     font-size: 20px;
-        color: green;
 }
 
 h4 {
     font-size: 15px;
-        color: green;
 }
 /* hyperlink styling */
 
@@ -532,6 +530,7 @@ main {
     transition: 0.3s;
     width: 300px;
     height: 400px;
+    margin: 15px;
 }
 
 .card-img {
@@ -798,7 +797,6 @@ main {
 }
 
 .search-part-info .skudetails .sku-dim-information table {
-    border: 1px solid #000;
     height: 200px;
     width: 300px;
     box-shadow: 5px 10px #888888;
@@ -969,6 +967,35 @@ footer {
 
 .my-search-foot {
     grid-area: mysearchfoot;
+}
+
+/***************************************
+*
+*
+* START mylist.php
+*
+*
+****************************************/
+
+.my-list-main {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50px auto;
+    grid-template-areas: 
+        "listnav listnav"
+        "listmylist listshowlist";
+}
+
+.my-list-main .listnav {
+    grid-area: listnav;
+}
+
+.my-list-main .listmylist {
+    grid-area: listmylist;
+}
+
+.my-list-main .listshowlist {
+    grid-area: listshowlist;
 }
 
 .table {

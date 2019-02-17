@@ -90,7 +90,7 @@
                     $skuimages->execute(array(':sku'=>$sku));
                     ?>
 
-                         <article class="slogo-search">
+                        <article class="slogo-search">
                             <h2><?php echo $skuRow['sku_id']; ?></h2>
                         </article>
                         <article class="search-grid">
@@ -118,13 +118,15 @@
                                         ?>
                                     <figure class="card">
                                         <div class="card-img">
-                                            <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                            <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
+                                                <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                            </a>
                                         </div>
                                         <figcaption>
-                                            <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
-                                            <h4><?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
-                                            <p><?php echo $skuimagerow['sku_image_description'];?></p>
-                                            </a>
+                                            <div class="card-sku-num">
+                                                <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                            </div>
+                                            
                                             <?php
                                                 if($from == 'admin' and $user->accessCheck() == "ADMIN")
                                                 {
@@ -590,7 +592,7 @@
                             <figcaption>
                                 <a href="/search.php?search=<?php echo $skuimagerow['sku_image_sku_id']; ?>">
                                     <div class="card-sku-num">
-                                        <h4 class="card-sku-num">
+                                        <h4>
                                             <?php echo $skuimagerow['sku_image_sku_id']; ?></h4>
                                     </div>
                                     <div class="card-sku-desc">
