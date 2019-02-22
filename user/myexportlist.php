@@ -38,7 +38,7 @@ if(!isset($_SESSION['user_id']))
         </aside>
         <main class="my-list-main">
             <section class="listnav">
-                nav here New List
+                 create a navigation here
             </section>
             <section class="listmylist">
                 Clickable list here with delete function
