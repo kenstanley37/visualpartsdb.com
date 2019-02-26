@@ -35,7 +35,7 @@ if(isset($_GET['dfrom']))
 } 
 
 if($user->accessCheck() != 'ADMIN'){
-    $userID = $_SESSION['user_id'];
+    $userID = $_SESSION['user_id']; // check if admin and set $userID
 }
 
 $result = '';
@@ -92,7 +92,7 @@ $result = '';
                                 </td>
                                 <td>
                                     <select id="users" name="usersID" hidden>
-                                        <?php $user->dropDownUser($userID); ?>
+                                        <?php $user->dropDownUser($userID); ?> <!-- list of user names -->
                                     </select> 
                                 </td>
                             </tr>
