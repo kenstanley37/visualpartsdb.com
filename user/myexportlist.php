@@ -38,13 +38,20 @@ if(!isset($_SESSION['user_id']))
         </aside>
         <main class="my-list-main">
             <section class="listnav">
-                 create a navigation here
+                <h1>Part List Management</h1>
             </section>
             <section class="listmylist">
-                Clickable list here with delete function
+                Add List
+                <form action="/processors/userManagement.php" method="post">
+                    <label for="listname">List Name:</label>
+                    <input type="text" id="listname" name="listname" maxlength="10" required>
+                    <label for="listname">List Description:</label>
+                    <input type="text" id="listdescription" name="listdescription" maxlength="30" required>
+                    <button type="submit">Submit</button>
+                </form>
             </section>
             <section class="listshowlist">
-                list table here
+                <?php $user->myList(); ?>
             </section>
         </main>
         <footer>

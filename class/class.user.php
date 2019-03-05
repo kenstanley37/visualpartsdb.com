@@ -498,6 +498,83 @@
             }
         } // end accessCheck
         
+        // *************************************************************
+        // Usage: myList();
+        // Returns each of the users created part list.
+        // *************************************************************
+        
+        public function myList()
+        {
+            $userid = $_SESSION['user_id'];
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM user_part_list
+                        where pl_user_id = :userid ");
+                $stmt->bindparam(":userid", $userid);
+                $stmt->execute();
+                ?> <table class="table">
+                        <thead>
+                            <td>List Name</td>
+                            <td>Description</td>
+                            <td>Date Added</td>
+                            <td></td>
+                        </thead>
+                        <tbody>
+                
+                <?php
+                while($row = $stmt->fetch())
+                {
+                    ?>
+                    <tr>
+                        <td><a href="/user/mypartlistdetails.php?list=<?php echo $row['pl_id'];?>"><?php echo $row['pl_list_name']; ?></a></td>
+                        <td><?php echo $row['pl_list_desc']; ?></td>
+                        <td><?php echo $row['pl_list_added']; ?></td>
+                        <td>
+                            <form action="/processors/userManagement.php" method="post">
+                                <button type="submit" name="deleteList" value="<?php echo $row['pl_id'];?>">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                        </tbody>
+                </table>
+                <?php
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end accessCheck
+        
+        
+        // *************************************************************
+        // Usage: myListAdd();
+        // Adds to the users part list
+        // *************************************************************
+        
+        public function myListAdd($listname, $listdescription)
+        {
+            $userid = $_SESSION['user_id'];
+            $ln = $listname;
+            $ld = $listdescription;
+            try
+            {
+                $stmt = $this->conn->prepare("INSERT INTO user_part_list (pl_user_id, pl_list_name, pl_list_desc) VALUES(:userid, :listname, :listdescription)");
+                $stmt->bindparam(":userid", $userid);
+                $stmt->bindparam(":listname", $ln);
+                $stmt->bindparam(":listdescription", $ld);
+                $stmt->execute();
+                return;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end accessCheck
+        
+        
         
         // *************************************************************
         // Usage: doLogout()

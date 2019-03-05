@@ -21,4 +21,15 @@
         
     }
 
+    if(isset($_POST['listname']))
+    {
+        $listname = $_POST['listname'];
+        $listdescription = $_POST['listdescription'];
+        $listname = $vail->sanitizeString($listname);
+        $listdescription = $vail->sanitizeString($listdescription);
+        $user->MyListAdd($listname, $listdescription);
+        header("location: /user/myexportlist.php");
+        
+    }
+
 ?>
