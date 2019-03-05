@@ -516,6 +516,7 @@
                         <thead>
                             <td>List Name</td>
                             <td>Description</td>
+                            <td>Count</td>
                             <td>Date Added</td>
                             <td></td>
                         </thead>
@@ -523,11 +524,14 @@
                 
                 <?php
                 while($row = $stmt->fetch())
-                {
+                {      
+                    $listid = $row['pl_id'];
+                    $count = $this->myListCount($listid);
                     ?>
                     <tr>
                         <td><a href="/user/mypartlistdetails.php?list=<?php echo $row['pl_id'];?>"><?php echo $row['pl_list_name']; ?></a></td>
                         <td><?php echo $row['pl_list_desc']; ?></td>
+                        <td><?php echo $count; ?></td>
                         <td><?php echo $row['pl_list_added']; ?></td>
                         <td>
                             <form action="/processors/userManagement.php" method="post">
@@ -541,6 +545,30 @@
                         </tbody>
                 </table>
                 <?php
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end accessCheck
+        
+        // *************************************************************
+        // Usage: myListCount($listID);
+        // Returns how many records are in a list
+        // *************************************************************
+        
+        public function myListCount($listID)
+        {
+            $li = $listID;
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT count(*) as count from user_part_list_skus
+                    WHERE pls_list_id = :listid");
+                $stmt->bindparam(":listid", $li);
+                $stmt->execute();
+                $row = $stmt->fetch();
+                
+                return $row['count'];
             }
             catch(PDOException $e)
             {
