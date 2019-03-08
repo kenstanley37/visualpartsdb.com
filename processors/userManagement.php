@@ -32,4 +32,12 @@
         
     }
 
+    if(isset($_POST['deletelist']))
+    {
+        $listID = $_POST['deletelist'];
+        $user->myListDelete($listID);
+        header("location: /user/myexportlist.php");
+        
+    }
+
 ?>

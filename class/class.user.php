@@ -516,7 +516,7 @@
                         <thead>
                             <td>List Name</td>
                             <td>Description</td>
-                            <td>Count</td>
+                            <td>Parts</td>
                             <td>Date Added</td>
                             <td></td>
                         </thead>
@@ -535,7 +535,7 @@
                         <td><?php echo $row['pl_list_added']; ?></td>
                         <td>
                             <form action="/processors/userManagement.php" method="post">
-                                <button type="submit" name="deleteList" value="<?php echo $row['pl_id'];?>">Delete</button>
+                                <button type="submit" name="deletelist" id="deletelist" value="<?php echo $row['pl_id'];?>">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -569,6 +569,34 @@
                 $row = $stmt->fetch();
                 
                 return $row['count'];
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end accessCheck
+        
+        // *************************************************************
+        // Usage: myListDelete($listID);
+        // Deleted a list and all SKUs attached to a list -- DANGEROUS!
+        // *************************************************************
+        
+        public function myListDelete($listID)
+        {
+            $li = $listID;
+            try
+            {
+                $stmt = $this->conn->prepare("DELETE from user_part_list_skus
+                    WHERE pls_list_id = :listid");
+                $stmt->bindparam(":listid", $li);
+                $stmt->execute();
+                
+                 $stmt = $this->conn->prepare("DELETE from user_part_list
+                    WHERE pl_id = :listid");
+                $stmt->bindparam(":listid", $li);
+                $stmt->execute();
+                
+                return true;
             }
             catch(PDOException $e)
             {
