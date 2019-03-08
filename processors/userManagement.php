@@ -21,6 +21,13 @@
         
     }
 
+    /**********************************************
+    
+    Manage "My List" functions
+    
+    ***********************************************/
+
+    // Add a list
     if(isset($_POST['listname']))
     {
         $listname = $_POST['listname'];
@@ -29,15 +36,39 @@
         $listdescription = $vail->sanitizeString($listdescription);
         $user->MyListAdd($listname, $listdescription);
         header("location: /user/myexportlist.php");
-        
     }
 
+    // delete list (dangerous!!)
     if(isset($_POST['deletelist']))
     {
         $listID = $_POST['deletelist'];
         $user->myListDelete($listID);
         header("location: /user/myexportlist.php");
-        
     }
 
+    // Set a list to active
+    if(isset($_POST['makeActive']))
+    {
+        $listID = $_POST['makeActive'];
+        $user->myListActive($listID);
+        header("location: /user/myexportlist.php");
+    }
+
+    // Add SKU to active list
+    if(isset($_POST['addSkuToList']))
+    {
+        $skuID = $_POST['skuID'];
+        $user->myListaddSku($skuID);
+        header("location: /search.php?search=".$skuID);
+    }
+
+    // Remove SKU from active list
+    if(isset($_POST['remSkuFromList']))
+    {
+        $listID = $_POST['listID'];
+        $skuID = $_POST['skuID'];
+        $user->myListRemSku($skuID, $listID);
+        header("location: /search.php?search=".$skuID);
+    }
+    
 ?>

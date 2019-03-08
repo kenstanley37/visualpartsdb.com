@@ -81,6 +81,10 @@ a:hover {
 	border-bottom: 1px solid #fff;
 }
 
+.myListActive {
+	border: 3px solid green;
+}
+
 span {
     color: red;
     margin-top: 55px;
@@ -743,6 +747,7 @@ main {
 .search-part-info .export-data .addtolist {
     grid-area: skulist;
     text-align: right;
+    display: inline-block;
 }
 
 .search-part-info .export-data .excel {

@@ -51,6 +51,7 @@
         // Usage: skuSearch(sku, from);
         // searches the database for requested sku and returns information
         // based on users access and the location of the search 'search' or 'admin'.
+        // 'search' is standard user and 'admin' gives edit rights.
         // *************************************************************
         public function skuSearch($sku, $from)
         {
@@ -64,6 +65,9 @@
             
             $sku = strtoupper($sku);
             $user = new USER;
+            // get the list name of the current active list, if any
+            $activelist = $user->myListReturn('none','name');
+            $activelistID = $user->myListReturn('none','id');
             try
             {
                 $stmt = $this->conn->prepare("SELECT * FROM sku 
@@ -108,7 +112,6 @@
                                     </form>
                                     <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
                                 <?php                                            
-
                             }
                             ?>
                             </section>
@@ -159,9 +162,42 @@
                                     </section>
                                     <section class="addtolist">
                                         <?php if(isset($_SESSION['user_id'])){ 
-                                            ?>
-                                            <a href="search.php?export=excel&sku=<?php echo $skuRow['sku_id']; ?>">Add to List <i class="fas fa-plus-circle"></i></a>
-                                            <?php
+                                                if(empty($activelist)){
+                                                    ?>
+                                                    <a href="/user/myexportlist.php">Create List <i class="fas fa-plus-circle"></i></a>
+                                                    <?php
+                                                }
+                                                else 
+                                                {
+                                                    ?>
+                                                    <table>
+                                                        <td>
+                                                            Active List: <a href="/user/mylistcontents.php?list=<?php echo $activelistID; ?>"><?php echo $activelist; ?></a>
+                                                        </td>
+                                                        <td>
+                                                            <form action="/processors/userManagement.php" method="post">
+                                                                <input type="text" value="<?php echo $skuRow['sku_id']; ?>" name="skuID" id="skuID" hidden>
+                                                                
+                                                                <input type="text" value="<?php echo $activelistID; ?>" name="listID" id="listID" hidden>
+                                                                <?php 
+                                                                    $skucheck = $user->myListSkuCheck($sku);
+                                                                    if($skucheck)
+                                                                    {
+                                                                        ?>
+                                                                        <button type="submit" name="remSkuFromList">Remove From List</button>
+                                                                        <?php
+                                                                    } else 
+                                                                    {
+                                                                        ?>
+                                                                        <button type="submit" name="addSkuToList">Add To List</button>
+                                                                        <?php
+                                                                    }
+                                                                ?>
+                                                            </form>
+                                                        </td>
+                                                    </table>
+                                                    <?php
+                                                }
                                         } ?> 
                                     </section>
                                 </section>

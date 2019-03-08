@@ -322,7 +322,7 @@
             {
                 echo $e->getMessage();
             }
-        } // end accessCheck
+        } // end dropDownUser
         
         // *************************************************************
         // Usage: dropdownCompany();
@@ -349,7 +349,7 @@
             {
                 echo $e->getMessage();
             }
-        } // end accessCheck
+        } // end dropDownCompany
         
         // *************************************************************
         // Usage: userList();
@@ -392,7 +392,7 @@
             {
                 echo $e->getMessage();
             }
-        } // end accessCheck
+        } // end userList
         
         // *************************************************************
         // Usage: activeSwitch($userID);
@@ -432,7 +432,7 @@
             {
                 echo $e->getMessage();
             }
-        } // end accessCheck
+        } // end activeSwitch
         
         // *************************************************************
         // Usage: registerRequest($fname, $lname, $email, $phone, $company, $message);
@@ -496,7 +496,7 @@
                     echo $e->getMessage();
                 }
             }
-        } // end accessCheck
+        } // end registerRequest
         
         // *************************************************************
         // Usage: myList();
@@ -506,6 +506,7 @@
         public function myList()
         {
             $userid = $_SESSION['user_id'];
+            $listactive = '';
             try
             {
                 $stmt = $this->conn->prepare("SELECT * FROM user_part_list
@@ -514,10 +515,12 @@
                 $stmt->execute();
                 ?> <table class="table">
                         <thead>
+                            <td>Active</td>
                             <td>List Name</td>
                             <td>Description</td>
                             <td>Parts</td>
                             <td>Date Added</td>
+                            <td>Export</td>
                             <td></td>
                         </thead>
                         <tbody>
@@ -526,15 +529,35 @@
                 while($row = $stmt->fetch())
                 {      
                     $listid = $row['pl_id'];
+                    if($row['pl_active'] == 1) 
+                    {
+                        $listactive = $row['pl_active'];
+                    } else {
+                        $listactive = 0;
+                    }
+                    
                     $count = $this->myListCount($listid);
                     ?>
                     <tr>
-                        <td><a href="/user/mypartlistdetails.php?list=<?php echo $row['pl_id'];?>"><?php echo $row['pl_list_name']; ?></a></td>
+                        <td>
+                            <form action="/processors/userManagement.php" method="post">
+                                <button <?php 
+                                    if($listactive==1)
+                                    {
+                                        echo 'class="myListActive"';
+                                    } ?> type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive" id="makeActive">Make Active</button>
+                            </form>
+                        </td>
+                        <td><a href="/user/mylistcontents.php?list=<?php echo $row['pl_id'];?>"><?php echo $row['pl_list_name']; ?></a></td>
                         <td><?php echo $row['pl_list_desc']; ?></td>
                         <td><?php echo $count; ?></td>
                         <td><?php echo $row['pl_list_added']; ?></td>
+                        <td>Export code here</td>
                         <td>
-                            <form action="/processors/userManagement.php" method="post">
+                            <form action="/user/deletelist.php" method="post">
+                                <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
+                                <input type="text" hidden value="<?php echo $row['pl_list_name']; ?>" name="listname" id="listname">
+                                <input type="text" hidden value="<?php echo $count; ?>" name="listcount" id="listcount">
                                 <button type="submit" name="deletelist" id="deletelist" value="<?php echo $row['pl_id'];?>">Delete</button>
                             </form>
                         </td>
@@ -574,7 +597,7 @@
             {
                 echo $e->getMessage();
             }
-        } // end accessCheck
+        } // end myListCount
         
         // *************************************************************
         // Usage: myListDelete($listID);
@@ -602,12 +625,12 @@
             {
                 echo $e->getMessage();
             }
-        } // end accessCheck
+        } // end myListDelete
         
         
         // *************************************************************
-        // Usage: myListAdd();
-        // Adds to the users part list
+        // Usage: myListAdd($listname, $listdescription);
+        // Adds a new list and description to the users part list
         // *************************************************************
         
         public function myListAdd($listname, $listdescription)
@@ -615,12 +638,15 @@
             $userid = $_SESSION['user_id'];
             $ln = $listname;
             $ld = $listdescription;
+            $active = 1;
+            $this->myListDeActive();
             try
             {
-                $stmt = $this->conn->prepare("INSERT INTO user_part_list (pl_user_id, pl_list_name, pl_list_desc) VALUES(:userid, :listname, :listdescription)");
+                $stmt = $this->conn->prepare("INSERT INTO user_part_list (pl_user_id, pl_list_name, pl_list_desc, pl_active) VALUES(:userid, :listname, :listdescription, :pl_active)");
                 $stmt->bindparam(":userid", $userid);
                 $stmt->bindparam(":listname", $ln);
                 $stmt->bindparam(":listdescription", $ld);
+                $stmt->bindparam(":pl_active", $active);
                 $stmt->execute();
                 return;
             }
@@ -628,8 +654,213 @@
             {
                 echo $e->getMessage();
             }
-        } // end accessCheck
+        } // end myListAdd
         
+        // *************************************************************
+        // Usage: myListActive($listid);
+        // Set or change the active list
+        // *************************************************************
+        
+        public function myListActive($listid)
+        {
+            $userid = $_SESSION['user_id'];
+            $this->myListDeActive();
+            try
+            {
+                $stmt = $this->conn->prepare("UPDATE user_part_list set pl_active = 1
+                    WHERE pl_user_id = :userid and pl_id = :listid");
+                $stmt->bindparam(":userid", $userid);
+                $stmt->bindparam(":listid", $listid);
+                $stmt->execute();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+
+        } // end myListActive
+        
+        // *************************************************************
+        // Usage: myListDeActive();
+        // Unsets all active list - internal use only
+        // *************************************************************
+        
+        public function myListDeActive()
+        {
+            $userid = $_SESSION['user_id'];
+            try
+            {
+                $stmt = $this->conn->prepare("UPDATE user_part_list set pl_active = null
+                    WHERE pl_user_id = :userid");
+                $stmt->bindparam(":userid", $userid);
+                $stmt->execute();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListDeActive
+        
+        // *************************************************************
+        // Usage: myListReturnActive($type); $type can = name, id
+        // Returns the name or id of the active sku
+        // *************************************************************
+        
+        public function myListReturn($listid, $type)
+        {
+            $userid = $_SESSION['user_id'];
+            try
+            {
+                if($listid == 'none')
+                {
+                    $stmt = $this->conn->prepare("SELECT * from user_part_list
+                    WHERE pl_user_id = :userid and pl_active = 1");
+                } else 
+                {
+                    $stmt = $this->conn->prepare("SELECT * from user_part_list
+                    WHERE pl_user_id = :userid and pl_id = :pl_id");
+                }
+                
+                $stmt->bindparam(":userid", $userid);
+                if($listid != 'none')
+                {
+                    $stmt->bindparam(":pl_id", $listid);
+                }
+                $stmt->execute();
+                $row = $stmt->fetch();
+                if($type == 'id')
+                {
+                    return $row['pl_id'];
+                } elseif($type == 'name')
+                {
+                    return $row['pl_list_name'];
+                }
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListReturnActive
+        
+        // *************************************************************
+        // Usage: myListAddSku($sku);
+        // Add a SKU to the active list
+        // *************************************************************
+        
+        public function myListAddSku($sku)
+        {
+            $listid = $this->myListReturn('none','id');
+            try
+            {
+                $stmt = $this->conn->prepare("INSERT INTO user_part_list_skus (pls_list_id, pls_list_sku) VALUES(:pl_list_id, :pl_list_sku )");
+                $stmt->bindparam(":pl_list_id", $listid);
+                $stmt->bindparam(":pl_list_sku", $sku);
+                $stmt->execute();
+                return;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListAddSku
+        
+        // *************************************************************
+        // Usage: myListSkuCheck($sku);
+        // Checks if sku is already in active list. Returns true or false
+        // *************************************************************
+        
+        public function myListSkuCheck($sku)
+        {
+            $listid = $this->myListReturn('none','id');
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * from user_part_list_skus WHERE pls_list_sku = :pl_list_sku and pls_list_id = :pl_list_id");
+                $stmt->bindparam(":pl_list_id", $listid);
+                $stmt->bindparam(":pl_list_sku", $sku);
+                $stmt->execute();
+                $rowcount = $stmt->rowCount();
+                if($rowcount < 1)
+                {
+                    return false;
+                } else 
+                {
+                    return true;
+                }
+                
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListSkuCheck
+        
+        // *************************************************************
+        // Usage: myListRemSku($sku);
+        // Removes Sku from Active List
+        // *************************************************************
+        
+        public function myListRemSku($sku, $list)
+        {
+            $listid = $this->myListReturn('none','id');
+            try
+            {
+                $stmt = $this->conn->prepare("DELETE from user_part_list_skus WHERE pls_list_sku = :pl_list_sku and pls_list_id = :pl_list_id");
+                $stmt->bindparam(":pl_list_id", $listid);
+                $stmt->bindparam(":pl_list_sku", $sku);
+                $stmt->execute();
+                return;
+                
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListSkuCheck
+        
+         // *************************************************************
+        // Usage: myListContent($listid); $listid = The list ID
+        // Returns a table with a list and sku contents
+        // *************************************************************
+        
+        public function myListContent($listid)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * from user_part_list 
+                    LEFT JOIN user_part_list_skus on pl_id = pls_list_id
+                    LEFT JOIN sku on sku_id = pls_list_sku
+                    WHERE pl_id = :pl_id");
+                $stmt->bindparam(":pl_id", $listid);
+                $stmt->execute();
+                
+                ?>
+                <table class="table">
+                    <thead>
+                        <td>List Name</td>
+                        <td>Description</td>
+                    </thead>
+                    <tbody>
+                <?php
+                while($row = $stmt->fetch())
+                {
+                    ?>
+                        <tr>
+                            <td><?php echo $row['pls_list_sku']; ?></td>
+                            <td><?php echo $row['sku_desc']; ?></td>
+                        </tr>  
+                    <?php
+                }
+                ?>
+                    </tbody>
+                </table>
+                <?php
+             
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListContent
         
         
         // *************************************************************
