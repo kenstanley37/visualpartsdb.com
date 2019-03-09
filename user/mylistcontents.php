@@ -46,10 +46,13 @@ if(isset($_GET['list']))
         ?>
         </aside>
         <main class="my-list-main">
-            <section class="listnav">
-                <h1>Content of List <?php echo strtoupper($user->myListReturn($listid, 'name')); ?> </h1>
+            <section class="listtitle">
+                <h1>List: <?php echo strtoupper($user->myListReturn($listid, 'name')); ?></h1>
             </section>
-            <section class="mypartlist">
+            <section class="listmylist">
+                Insert Export Links Here
+            </section>
+            <section class="listshowlist">
                 <?php $user->myListContent($listid); ?>
             </section>
         </main>

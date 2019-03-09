@@ -51,8 +51,6 @@ h1 {
 
 h2 {
     font-size: 25px;
-    color: dodgerblue;
-    text-shadow: 1px 1px #000;
 }
 
 h3 {
@@ -72,6 +70,15 @@ a {
 a:hover {
     border-bottom: 1px solid #fff;
 }
+
+.t300 {
+    width: 300px;
+}
+
+.t500 {
+    width: 500px;
+}
+
 
 .shadow {
     box-shadow: 5px 5px 20px 1px #888888;
@@ -478,7 +485,7 @@ main {
 
 .index-search > .search-bar {
     display: grid;
-    background-color: rgba(0,4,40,.67);
+    background-color: rgba(54,140,191,.67);
     border: 1px solid #fff;
     box-shadow: 0 0 3px 3px #ccc;
     width: 700px;
@@ -561,7 +568,10 @@ main {
 }
 
 .card {
+    background-color: navajowhite;
+    /*
     background: #368cbf;
+    */
     position: relative;
     /* Add shadows to create the "card" effect */
     box-shadow: 4px 1px 4px 4px rgba(0,0,0,0.2);
@@ -569,6 +579,7 @@ main {
     width: 300px;
     height: 400px;
     margin: 15px;
+    border: 1px solid gray;
 }
 
 .card-img {
@@ -582,7 +593,6 @@ main {
 
 /* Add some padding inside the card container */
 .card figcaption { 
-    color: #fff;
     padding: 2px 16px;
 }
 
@@ -606,13 +616,13 @@ main {
 
 .card .card-sku-num h4 {
     font-size: 20px;
-    color: #fff;
-    font-weight: 100;
+    color: #000;
+    font-weight: 900;
 }
 
 .card .card-sku-desc p {
     font-size: 12px;
-    color: #fff;
+    color: #303030;
 }
 
 
@@ -1019,14 +1029,22 @@ footer {
 .my-list-main {
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 50px auto;
+    grid-template-rows: 50px 100px auto;
     grid-template-areas: 
-        "listnav listnav"
-        "listmylist listshowlist";
+        "listtitle"
+        "listmylist" 
+        "listshowlist";
+    justify-items: center;
 }
 
-.my-list-main .listnav {
-    grid-area: listnav;
+.my-list-main .listtitle {
+    grid-area: listtitle;
+    position: absolute;
+    left: 15px;
+}
+
+.my-list-main .listtitle h1{
+    text-align: left;
 }
 
 .my-list-main .listmylist {
@@ -1040,7 +1058,7 @@ footer {
 .table {
     border: 1px solid #ccc;
     border-collapse: collapse;
-    box-shadow: 10px 10px 5px grey;
+    box-shadow: 5px 5px 10px grey;
     margin: 0;
     padding: 0;
     max-width: 100%;
@@ -1693,7 +1711,6 @@ only screen and (max-width: 360px),
     
     .card .card-sku-num h4 {
         font-size: 20px;
-
         font-weight: 100;
     }
     

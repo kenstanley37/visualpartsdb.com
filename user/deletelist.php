@@ -48,18 +48,18 @@ if(isset($_POST['deletelist']))
         ?>
         </aside>
         <main class="my-list-main">
-            <section class="listnav">
+            <section class="listtitle">
                 <h1>Delete List</h1>
             </section>
-            <section class="deletemylist">
-                <table class="table">
-                    <caption>This will delete the list that contains <?php echo $listcount; ?> parts </caption>
+            <section class="listmylist">
+                <table class="table t300">
+                    <caption>Delete list and <?php echo $listcount; ?> parts? </caption>
                     <thead>
                         <td>List Name</td>
                         <td>Parts</td>
                     </thead>
                     <tbody>
-                        <td><?php echo $listname; ?></td>
+                        <td><?php echo strtoupper($listname); ?></td>
                         <td><?php echo $listcount; ?></td>
                     </tbody>
                     <tfoot>

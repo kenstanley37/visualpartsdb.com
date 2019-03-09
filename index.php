@@ -97,7 +97,7 @@ if(isset($_GET['noaccess'])){
             </article>
             <article class="main-intro">
                 <section class="intro">
-                    <h2>Parts</h2>
+                    <h2>Brands</h2>
                     <p>Our database of parts contains information on over 50,000 components from popular brands such as:</p>
                     <table>
                         <tbody>
@@ -113,6 +113,24 @@ if(isset($_GET['noaccess'])){
                             </tr>
                             <tr>
                                 <td><a href="https://professional.electrolux.com/">Professional</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2>Information</h2>
+                    <p>We record part information such as weight, length, height, and depth. We record this data at the different stages of the product</p>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>UNIT</td>
+                                <td>Individual piece information</td>
+                            </tr>
+                            <tr>
+                                <td>CASE</td>
+                                <td>Case quantity, weight, and size</td>
+                            </tr>
+                            <tr>
+                                <td>PALLET</td>
+                                <td>Pallet quantity, weight, and size</td>
                             </tr>
                         </tbody>
                     </table>

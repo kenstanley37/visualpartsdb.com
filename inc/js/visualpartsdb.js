@@ -100,7 +100,9 @@ function mySearchCharts(){
                   json: data,
                   type: 'pie',
                 },
-
+                legend: {
+                    show: false
+                },
               });
            
            chart = c3.generate({
@@ -109,6 +111,9 @@ function mySearchCharts(){
         //          x: 'name',
                   json: data,
                   type: 'bar',
+                },
+               legend: {
+                    show: false
                 },
                bar: {
                 width: {

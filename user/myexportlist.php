@@ -37,8 +37,8 @@ if(!isset($_SESSION['user_id']))
         ?>
         </aside>
         <main class="my-list-main">
-            <section class="listnav">
-                <h1>Part List Management</h1>
+            <section class="listtitle">
+                <h1>My List</h1>
             </section>
             <section class="listmylist">
                 Add List
