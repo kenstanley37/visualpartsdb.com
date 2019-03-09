@@ -37,7 +37,7 @@
             <i class="fas fa-user"></i> <?php $user->isLogin(); ?>
         </section>
     </section>
-<section class="main-nav-ham">
-    <i class="fas fa-bars main-nav-bars"></i>
-</section>
+    <section class="main-nav-ham">
+        <i class="fas fa-bars main-nav-bars"></i>
+    </section>
     

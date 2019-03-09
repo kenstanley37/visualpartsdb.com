@@ -120,6 +120,10 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    box-shadow: 2px 2px 8px 1px #888888;
+}
+
 /***************************** 
 ** index.php grid 
 ******************************/
@@ -1078,6 +1082,10 @@ footer {
     color: #0000EE;
 }
 
+.table a:hover {
+    border-bottom: 1px solid #000;
+}
+
 /***************************************
 *
 *
@@ -1400,8 +1408,6 @@ only screen and (max-width: 900px),
         grid-column: 1 / span 6;
     }
     
-    
-
     /* Force table to not be like tables anymore */
     .table {
         border: 0;
@@ -1558,6 +1564,10 @@ and also iPads specifically.
 @media 
 only screen and (max-width: 360px),
 (min-device-width: 1px) and (max-device-width: 360px)  {
+    header {
+        grid-template-columns: 240px auto 25px;
+    }
+
     .login-main {
         grid-area: main;
         display: grid;
