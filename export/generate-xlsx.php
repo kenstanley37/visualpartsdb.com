@@ -60,8 +60,18 @@ if(isset($_GET['unit'])){
             $db = $database->dbConnection();
             $conn = $db;
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Sets the error mode
-            $stmt = $conn->prepare("SELECT * FROM sku WHERE sku_id = :sku_id");
-            $stmt->bindparam(":sku_id", $sku);
+            if(isset($_GET['list']))
+            {
+                $list = $_GET['list'];
+                $stmt = $conn->prepare("SELECT * FROM sku 
+                    RIGHT JOIN user_part_list_skus on pls_list_sku = sku_id
+                    WHERE pls_list_id = :list_id");
+                $stmt->bindparam(":list_id", $list);
+            } else 
+            {
+                $stmt = $conn->prepare("SELECT * FROM sku WHERE sku_id = :sku_id");
+                $stmt->bindparam(":sku_id", $sku);
+            }
             $stmt->execute();
             $user = new USER;
             $i = 2;
