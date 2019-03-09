@@ -172,6 +172,7 @@ if(isset($_GET['unit'])){
             
             // OUTPUT
             $writer = new Xlsx($spreadsheet);
+            $writer->setPreCalculateFormulas(false);
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment;filename="visualpartdb-'.$sku.'-'.$today.'.xlsx"');
             header('Cache-Control: max-age=0');

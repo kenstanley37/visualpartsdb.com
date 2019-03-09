@@ -82,12 +82,18 @@ a:hover {
 }
 
 .myListActive {
-	border: 3px solid green;
+	border: 1px solid red;
 }
 
 span {
     color: red;
     margin-top: 55px;
+}
+
+.active {
+	color: green;
+	font-size: 13px;
+	font-weight: 600;
 }
 
 /***************************** 

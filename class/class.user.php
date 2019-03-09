@@ -86,7 +86,14 @@
                         if(isset($_SESSION['emailcheck'])){
                             unset($_SESSION['emailcheck']);
                         }
-                        header('Location: /');
+                        $access = $this->accessCheck();
+                        if($access == 'ADMIN')
+                        {
+                            header('Location: /admin');
+                        } else 
+                        {
+                            header('Location: /user/myexportlist.php');
+                        }
                         return true;
                     }
                     else
@@ -541,18 +548,27 @@
                     <tr>
                         <td>
                             <form action="/processors/userManagement.php" method="post">
-                                <button <?php 
+                                <?php 
                                     if($listactive==1)
                                     {
-                                        echo 'class="myListActive"';
-                                    } ?> type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive" id="makeActive">Make Active</button>
+                                        ?>
+                                       <span class="active">ACTIVE</span>
+                                        <?php
+                                    } else 
+                                    {
+                                        ?>
+                                        <button class="myListActive" type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive" id="makeActive">Make Active</button>
+                                        <?php
+                                    }
+                                
+                                ?> 
                             </form>
                         </td>
                         <td><a href="/user/mylistcontents.php?list=<?php echo $row['pl_id'];?>"><?php echo $row['pl_list_name']; ?></a></td>
                         <td><?php echo $row['pl_list_desc']; ?></td>
                         <td><?php echo $count; ?></td>
                         <td><?php echo $row['pl_list_added']; ?></td>
-                        <td>Export code here</td>
+                        <td><a href="/export/generate-xlsx.php?unit=excel&list=<?php echo $row['pl_id']; ?>">Excel <i class="far fa-file-excel"></i></a></td>
                         <td>
                             <form action="/user/deletelist.php" method="post">
                                 <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
@@ -702,13 +718,19 @@
         } // end myListDeActive
         
         // *************************************************************
-        // Usage: myListReturnActive($type); $type can = name, id
-        // Returns the name or id of the active sku
+        // Usage: myListReturnActive($listid, $type); 
+        // $type can be 'name' or 'id'
+        // $listid is the list ID
+        // Returns the name or id of the requested list
         // *************************************************************
         
         public function myListReturn($listid, $type)
         {
-            $userid = $_SESSION['user_id'];
+            if(isset($_SESSION['user_id']))
+            {
+                $userid = $_SESSION['user_id'];
+            }
+            
             try
             {
                 if($listid == 'none')
@@ -837,7 +859,7 @@
                 <table class="table">
                     <thead>
                         <td>List Name</td>
-                        <td>Description</td>
+                        <td colspan="2">Description</td>
                     </thead>
                     <tbody>
                 <?php
@@ -847,6 +869,14 @@
                         <tr>
                             <td><?php echo $row['pls_list_sku']; ?></td>
                             <td><?php echo $row['sku_desc']; ?></td>
+                            <td>
+                                <form action="/processors/userManagement.php" method="post">
+                                    <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
+                                    <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
+                                    <input name="myListContent" value="myListContent" hidden>
+                                    <button type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
+                                </form>
+                            </td>
                         </tr>  
                     <?php
                 }

@@ -65,6 +65,7 @@
             
             $sku = strtoupper($sku);
             $user = new USER;
+            
             // get the list name of the current active list, if any
             $activelist = $user->myListReturn('none','name');
             $activelistID = $user->myListReturn('none','id');
@@ -758,14 +759,14 @@
                             </section>    
                             <section class="my-search-count">
                                  <table class="table table-count">
-                                <caption>Search Count</caption>
-                                <thead>
-                                    <tr align="middle">
-                                        <th scope="col">Part Number</th>
-                                        <th scope="col">Count</th>
-                                    </tr>
-                                </thead> 
-                                 <tbody>
+                                    <caption>Search Count</caption>
+                                    <thead>
+                                        <tr align="middle">
+                                            <th scope="col">Part Number</th>
+                                            <th scope="col">Count</th>
+                                        </tr>
+                                    </thead> 
+                                     <tbody>
 
                                 <?php
 
@@ -776,7 +777,6 @@
                                 <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $countrow['sku_search_sku']; ?>"><?php echo $countrow['sku_search_sku']; ?></a></td>
                                 <td data-label="Count"><?php echo $countrow['count']; ?></td>
                             </tr>
-
                             <?php
                         }
                         ?>

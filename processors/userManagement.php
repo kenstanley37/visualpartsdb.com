@@ -62,13 +62,19 @@
         header("location: /search.php?search=".$skuID);
     }
 
-    // Remove SKU from active list
+    // Remove SKU from list
     if(isset($_POST['remSkuFromList']))
     {
         $listID = $_POST['listID'];
         $skuID = $_POST['skuID'];
         $user->myListRemSku($skuID, $listID);
-        header("location: /search.php?search=".$skuID);
+        if(isset($_POST['myListContent']))
+        {
+            header("location: /user/mylistcontents.php?list=".$listID);
+        } else
+        {
+            header("location: /search.php?search=".$skuID);
+        }
     }
     
 ?>
