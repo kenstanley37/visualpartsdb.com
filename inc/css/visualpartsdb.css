@@ -81,19 +81,43 @@ a:hover {
 	border-bottom: 1px solid #fff;
 }
 
-.myListActive {
-	border: 1px solid red;
-}
-
 span {
     color: red;
     margin-top: 55px;
 }
 
-.active {
-	color: green;
+.inactive{
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    background-color: #87CEFA; 
+    color: black;
 	font-size: 13px;
 	font-weight: 600;
+    /*box-shadow: 2px 2px 8px 1px #888888;*/
+}
+
+.active {
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    background-color: #90EE90; 
+    color: black;
+	font-size: 13px;
+	font-weight: 600;
+    /*box-shadow: 2px 2px 8px 1px #888888;*/
+}
+
+.danger {
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    background-color: #f44b42; 
+    color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+    /*box-shadow: 2px 2px 8px 1px #888888;*/
+}
+
+button {
+    cursor: pointer;
 }
 
 /***************************** 
@@ -1012,6 +1036,7 @@ footer {
 .table {
     border: 1px solid #ccc;
     border-collapse: collapse;
+    box-shadow: 10px 10px 5px grey;
     margin: 0;
     padding: 0;
     max-width: 100%;
@@ -1045,10 +1070,12 @@ footer {
 }
 
 .table thead tr {
-    background: #000428;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #4682B4;  /* fallback for old browsers */
     color: #fff;
+}
+
+.table a {
+    color: #0000EE;
 }
 
 /***************************************

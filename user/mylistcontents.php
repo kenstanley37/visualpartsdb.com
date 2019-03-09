@@ -27,7 +27,7 @@ if(isset($_GET['list']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: My Parts List</title>
+    <title>Visual Parts Database: My List Content</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -47,7 +47,7 @@ if(isset($_GET['list']))
         </aside>
         <main class="my-list-main">
             <section class="listnav">
-                <h1>SKUs for List <?php echo $user->myListReturn($listid, 'name'); ?> </h1>
+                <h1>Content of List <?php echo strtoupper($user->myListReturn($listid, 'name')); ?> </h1>
             </section>
             <section class="mypartlist">
                 <?php $user->myListContent($listid); ?>
