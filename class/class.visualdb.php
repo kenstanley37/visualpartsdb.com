@@ -94,72 +94,73 @@
                     WHERE sku_image_sku_id=:sku");
                     $skuimages->execute(array(':sku'=>$sku));
                     ?>
-
                         <article class="slogo-search">
                             <h2><?php echo $skuRow['sku_id']; ?></h2>
-                        </article>
-                        <article class="search-grid">
-                            <section class="skuimage-data">
-                                <h1>SKU Images</h1>
-                                  <?php if($from == 'admin' and $user->accessCheck() == "ADMIN")
-                            {
-                                ?>
-                                    <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
-                                        Select image to upload:
-                                        <input type="file" name="file" id="file">
-                                        <input type="text" name="desc" id="desc" placeholder="Description">
-                                        <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
-                                        <input type="submit" value="Upload Image" name="imageSubmit">
-                                    </form>
-                                    <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
-                                <?php                                            
-                            }
-                            ?>
-                            </section>
-                            <article class="skuimages">
-                                <?php 
-                                    while($skuimagerow = $skuimages->fetch()){
-                                        ?>
-                                    <figure class="card">
-                                        <div class="card-img">
-                                            <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
-                                                <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
-                                            </a>
-                                        </div>
-                                        <figcaption>
-                                            <div class="card-sku-num">
-                                                <p><?php echo $skuimagerow['sku_image_description'];?></p>
-                                            </div>
-                                            
-                                            <?php
-                                                if($from == 'admin' and $user->accessCheck() == "ADMIN")
+                            <section class="sku-part-desc">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Part #</th>
+                                            <td><?php echo $skuRow['sku_id']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Description</th>
+                                            <td><?php echo $skuRow['sku_desc']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Dimension UOM</th>
+                                            <td>Inches</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Weight UOM</th>
+                                            <td>Pounds</td>
+                                        </tr>
+                                         <?php
+                                            if(isset($_SESSION['user_id']))
+                                            {
+                                                ?>
+                                        <tr>
+                                            <th>
+                                                Request Data Update 
+                                            </th>
+                                            <?php 
+                                                if($user->requestUpdateCheck($sku))
                                                 {
                                                     ?>
-                                                        <form method="post" action="/processors/image_handler.php">
-                                                            <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
-                                                            <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
-                                                            <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
-                                                            <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
-                                                            <input type="submit" value="Delete Image" name="deleteimg">
+                                                    <td>
+                                                        <button class="active" type="submit" disabled>Requested</button>
+                                                    </td>
+                                                    <?php
+                                                } else
+                                                {
+                                                    ?>
+                                                    <td>
+                                                        <form method="post" action="/processors/userManagement.php">
+                                                            <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
+                                                            <button class="info" type="submit" name="requestUpdate">Request</button>
                                                         </form>
+                                                    </td>
                                                     <?php
                                                 }
-                                            
                                             ?>
-                                        </figcaption>
-                                    </figure>
-                                        <?php
-                                    }
-                                ?>
-                            </article>
+
+                                        </tr>
+                                         <?php
+                                            }
+                                        ?>
+                                    </tbody>                                    
+                                </table> 
+                            </section>
+                        </article>
+                        <article class="search-grid rounded">
                             <article class="search-part-info">
                                 <section class="export-data">
-                                    <section class="excel">
-                                        <ul>
-                                            <li>Export Data:</li>
-                                            <li><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></li>
-                                            <li><a href="search.php?export=pdf&sku=<?php echo $skuRow['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></li>
-                                        </ul>
+                                    <section class="export">
+                                        <table>
+                                            <td>Export Data:</td>
+                                            <td><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></td>
+                                            <td><a href="search.php?export=pdf&sku=<?php echo $skuRow['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></td>
+                                        </table>
                                     </section>
                                     <section class="addtolist">
                                         <?php if(isset($_SESSION['user_id'])){ 
@@ -185,12 +186,12 @@
                                                                     if($skucheck)
                                                                     {
                                                                         ?>
-                                                                        <button type="submit" name="remSkuFromList">Remove From List</button>
+                                                                        <button class="danger" type="submit" name="remSkuFromList">Remove From List</button>
                                                                         <?php
                                                                     } else 
                                                                     {
                                                                         ?>
-                                                                        <button type="submit" name="addSkuToList">Add To List</button>
+                                                                        <button class="active" type="submit" name="addSkuToList">Add To List</button>
                                                                         <?php
                                                                     }
                                                                 ?>
@@ -202,178 +203,188 @@
                                         } ?> 
                                     </section>
                                 </section>
-                                <section class="skudetails">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <th>Part #</th>
-                                                <td><?php echo $skuRow['sku_id']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Description</th>
-                                                <td><?php echo $skuRow['sku_desc']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Dimension UOM</th>
-                                                <td>Inches</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Weight UOM</th>
-                                                <td>Pounds</td>
-                                            </tr>
-                                             <?php
-                                                if(isset($_SESSION['user_id']))
-                                                {
-                                                    ?>
-                                            <tr>
-                                                <th>
-                                                    Request Data Update 
-                                                </th>
-                                                <td>
-                                                    <form method="post" action="/processors/skuUpdateRequest.php">
-                                                        <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
-                                                        <input type="text" name="updateUnit" hidden>
-                                                        <button type="submit">Request Update</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                             <?php
-                                                }
-                                            ?>
-                                        </tbody>                                    
-                                    </table> 
-                                    <section class="sku-dim-information">
-                                        <table class="unit-data">
-                                        <thead>
-                                            <tr>
-                                                <th>Unit Data</th> 
-                                                <th>
-                                                    
-                                                </th> 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Length</th>
-                                                <td><?php echo $skuRow['sku_unit_length']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Width</th>
-                                                <td><?php echo $skuRow['sku_unit_width']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Height</th>
-                                                <td><?php echo $skuRow['sku_unit_height']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Weight</th>
-                                                <td><?php echo $skuRow['sku_unit_weight']; ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                    <?php
-                                        if(!empty($user->accessCheck()))
-                                        {
-                                    ?>
-                                    <table class="case-data">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2">Case Data</th>
-                                                <th>
-                                                    
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Length</th>
-                                                <td><?php echo $skuRow['sku_case_length']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Width</th>
-                                                <td><?php echo $skuRow['sku_case_width']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Height</th>
-                                                <td><?php echo $skuRow['sku_case_height']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Weight</th>
-                                                <td><?php echo $skuRow['sku_case_weight']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Qty Per</th>
-                                                <td><?php echo $skuRow['sku_case_qty']; ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
+                                <section class="sku-dim-information">
+                                    <section class="sku-unit-data">
+                                        <table class="unit-data bg-white shadow">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">Unit Data</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Length</th>
+                                                    <td><?php echo $skuRow['sku_unit_length']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Width</th>
+                                                    <td><?php echo $skuRow['sku_unit_width']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Height</th>
+                                                    <td><?php echo $skuRow['sku_unit_height']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Weight</th>
+                                                    <td><?php echo $skuRow['sku_unit_weight']; ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table> 
+                                    </section>
+                                <?php
+                                    if(!empty($user->accessCheck()))
+                                    {
+                                ?>
+                                    <section class="sku-case-data">
+                                        <table class="case-data bg-white shadow">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">Case Data</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Length</th>
+                                                    <td><?php echo $skuRow['sku_case_length']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Width</th>
+                                                    <td><?php echo $skuRow['sku_case_width']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Height</th>
+                                                    <td><?php echo $skuRow['sku_case_height']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Weight</th>
+                                                    <td><?php echo $skuRow['sku_case_weight']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Qty Per</th>
+                                                    <td><?php echo $skuRow['sku_case_qty']; ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table> 
+                                    </section>
+                                
+                                    <section class="sku-pallet-data">
+                                        <table class="pallet-data bg-white shadow">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">Pallet Data</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Length</th>
+                                                    <td><?php echo $skuRow['sku_pallet_length']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Width</th>
+                                                    <td><?php echo $skuRow['sku_pallet_width']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Height</th>
+                                                    <td><?php echo $skuRow['sku_pallet_height']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Weight</th>
+                                                    <td><?php echo $skuRow['sku_pallet_weight']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Qty Per</th>
+                                                    <td><?php echo $skuRow['sku_pallet_qty']; ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table> 
+                                    </section>
+                                    <section class="sku-user-data">
+                                        <table class="user-data bg-white shadow">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">User Data</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>SKU created by</th>
+                                                    <td><?php echo $skuRow['sku_rec_added']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>SKU created Date</th>
+                                                    <td><?php echo $skuRow['sku_rec_date']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>SKU Last Updated</th>
+                                                    <td><?php echo $skuRow['sku_rec_update_by']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>SKU Updated Date</th>
+                                                    <td><?php echo $skuRow['sku_rec_update']; ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table> 
+                                    </section>
+                                        <?php
+                                    }
 
-                                    <table class="pallet-data">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2">Pallet Data</th>
-                                                <th>
+                                ?>
+                                </section> <!-- end sku-dim-information -->       
 
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Length</th>
-                                                <td><?php echo $skuRow['sku_pallet_length']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Width</th>
-                                                <td><?php echo $skuRow['sku_pallet_width']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Height</th>
-                                                <td><?php echo $skuRow['sku_pallet_height']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Weight</th>
-                                                <td><?php echo $skuRow['sku_pallet_weight']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Qty Per</th>
-                                                <td><?php echo $skuRow['sku_pallet_qty']; ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                    
-                                    <table class="user-data">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2">User Data</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>SKU created by</th>
-                                                <td><?php echo $skuRow['sku_rec_added']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>SKU created Date</th>
-                                                <td><?php echo $skuRow['sku_rec_date']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>SKU Last Updated</th>
-                                                <td><?php echo $skuRow['sku_rec_update_by']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>SKU Updated Date</th>
-                                                <td><?php echo $skuRow['sku_rec_update']; ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                    
-                                            <?php
-                                        }
-                    
-                                    ?>
-                                    </section>            
-                                </section>
                             </article>
+                            <section class="sku-image-data">
+                                <h2>SKU Images</h2>
+                                <?php if($from == 'admin' and $user->accessCheck() == "ADMIN")
+                                {
+                                ?>
+                                <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
+                                    Select image to upload:
+                                    <input type="file" name="file" id="file">
+                                    <input type="text" name="desc" id="desc" placeholder="Description">
+                                    <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
+                                    <input type="submit" value="Upload Image" name="imageSubmit">
+                                </form>
+                                <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
+                                <?php                                            
+                                }
+                                ?>
+                            </section>
+                            <section class="sku-images">
+                                <?php 
+                                while($skuimagerow = $skuimages->fetch()){
+                                    ?>
+                                <figure class="card bg-white shadow">
+                                    <div class="card-img">
+                                        <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
+                                            <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                        </a>
+                                    </div>
+                                    <figcaption>
+                                        <div class="card-sku-num">
+                                            <p><?php echo $skuimagerow['sku_image_description'];?></p>
+                                        </div>
+
+                                        <?php
+                                            if($from == 'admin' and $user->accessCheck() == "ADMIN")
+                                            {
+                                                ?>
+                                                    <form method="post" action="/processors/image_handler.php">
+                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
+                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
+                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
+                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
+                                                        <input type="submit" value="Delete Image" name="deleteimg">
+                                                    </form>
+                                                <?php
+                                            }
+
+                                        ?>
+                                    </figcaption>
+                                </figure>
+                                    <?php
+                                }
+                                ?>
+                            </section>
                         </article>
                     <?php
                 } else {
@@ -620,7 +631,7 @@
                     while($skuimagerow = $skuimages->fetch())
                     {
                     ?>
-                        <figure class="card">
+                        <figure class="card shadow">
                             <div class="card-img">
                                 <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
                                     <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
@@ -790,9 +801,6 @@
                             <section>Sorry, nothing was found for this date range.</section>
                         <?php
                     }
-                    
-                
-                    
                 }   
                 catch(PDOException $e)
                 {

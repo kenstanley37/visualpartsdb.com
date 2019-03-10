@@ -76,5 +76,13 @@
             header("location: /search.php?search=".$skuID);
         }
     }
+
+    // Request SKU data update
+    if(isset($_POST['requestUpdate']))
+    {
+        $skuID = $_POST['skuID'];
+        $user->requestUpdate($skuID);
+        header("location: /search.php?search=".$skuID);
+    }
     
 ?>

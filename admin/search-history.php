@@ -66,7 +66,7 @@ $result = '';
             <article id="my-search-graph" class="my-search-graph"></article>
             <article id="my-search-pie" class="my-search-pie"></article>
             <article class="my-search-head">
-                <form action="/user/mysearches.php" method="get">
+                <form action="/admin/search-history.php" method="get">
                     <input type="text" name="tempID" id="tempID" value="<?php echo $userID; ?>" hidden>
                     <table>
                         <tbody>

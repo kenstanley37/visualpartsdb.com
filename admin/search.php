@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("inc/inc.path.php");
+include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
 require_once($path."class/class.visualdb.php");
 require_once($path."class/class.func.php");
@@ -52,7 +52,7 @@ if(isset($_GET['export'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Visual Parts Database: <?php if(isset($sku)){echo strtoupper($sku);} else {echo "Search";} ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
+    <?php include($path."inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
 </head>
 <body>
     <?php if(isset($result)){echo $result;} ?>
@@ -72,10 +72,10 @@ if(isset($_GET['export'])){
         ?>
         </aside>
         <main class="search-main">
-            <?php $vpd->skuSearch($sku); ?>
+            <?php $vpd->skuSearch($sku, 'admin'); ?>
         </main>
         <footer>
-            <?php include("inc/inc.footer.php"); ?>
+            <?php include($path."inc/inc.footer.php"); ?>
         </footer>    
     </div>
 </body>

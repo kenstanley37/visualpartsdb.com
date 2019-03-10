@@ -851,7 +851,8 @@
                 $stmt = $this->conn->prepare("SELECT * from user_part_list 
                     LEFT JOIN user_part_list_skus on pl_id = pls_list_id
                     LEFT JOIN sku on sku_id = pls_list_sku
-                    WHERE pl_id = :pl_id");
+                    WHERE pl_id = :pl_id
+                    ORDER by pls_list_sku");
                 $stmt->bindparam(":pl_id", $listid);
                 $stmt->execute();
                 
@@ -867,7 +868,7 @@
                 {
                     ?>
                         <tr>
-                            <td><?php echo $row['pls_list_sku']; ?></td>
+                            <td><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
                             <td><?php echo $row['sku_desc']; ?></td>
                             <td>
                                 <form action="/processors/userManagement.php" method="post">
@@ -891,6 +892,62 @@
                 echo $e->getMessage();
             }
         } // end myListContent
+        
+        
+        // *************************************************************
+        // Usage: requestUpdate($sku);
+        // User request information update on a SKU. 
+        // Adds sku to users update list
+        // *************************************************************
+        
+        public function requestUpdate($sku)
+        {
+            $user = $_SESSION['user_id'];
+            try
+            {
+                $stmt = $this->conn->prepare("INSERT INTO sku_update_request (update_sku, update_request_by) VALUES(:update_sku, :update_request_by )");
+                $stmt->bindparam(":update_sku", $sku);
+                $stmt->bindparam(":update_request_by", $user);
+                $stmt->execute();
+                return;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListAddSku
+        
+        // *************************************************************
+        // Usage: requestUpdateCheck($sku);
+        // Internal use only. Checks if the user has already requested an update.
+        // Use this to prevent user from requesting multiple updates on the same SKU
+        // *************************************************************
+        
+        public function requestUpdateCheck($sku)
+        {
+            $user = $_SESSION['user_id'];
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * from sku_update_request
+                    WHERE update_request_by = :userid and update_sku = :skuID");
+                $stmt->bindparam(":userid", $user);
+                $stmt->bindparam(":skuID", $sku);
+                $stmt->execute();
+                $rowcount = $stmt->rowCount();
+                if($rowcount < 1)
+                {
+                    return false;
+                } else 
+                {
+                    return true;
+                }
+                return;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListAddSku
         
         
         // *************************************************************

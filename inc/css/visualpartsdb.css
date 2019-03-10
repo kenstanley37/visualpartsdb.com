@@ -81,7 +81,23 @@ a:hover {
 
 
 .shadow {
-    box-shadow: 5px 5px 20px 1px #888888;
+    box-shadow: 5px 5px 10px grey;
+}
+
+.rounded {
+    border-radius: 5px;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-offwhite {
+    background-color: navajowhite;
+}
+
+.bg-white {
+    background-color: #fff;
 }
 
 .button1 {
@@ -98,9 +114,8 @@ span {
     border-radius: 10px;
     background-color: #87CEFA; 
     color: black;
-	font-size: 13px;
+	font-size: 10px;
 	font-weight: 600;
-    /*box-shadow: 2px 2px 8px 1px #888888;*/
 }
 
 .active {
@@ -108,9 +123,8 @@ span {
     border-radius: 10px;
     background-color: #90EE90; 
     color: black;
-	font-size: 13px;
+	font-size: 10px;
 	font-weight: 600;
-    /*box-shadow: 2px 2px 8px 1px #888888;*/
 }
 
 .danger {
@@ -118,7 +132,17 @@ span {
     border-radius: 10px;
     background-color: #f44b42; 
     color: #fff;
-	font-size: 13px;
+	font-size: 10px;
+	font-weight: 600;
+    /*box-shadow: 2px 2px 8px 1px #888888;*/
+}
+
+.info {
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    background-color: #FFA500; 
+    color: #000;
+	font-size: 10px;
 	font-weight: 600;
     /*box-shadow: 2px 2px 8px 1px #888888;*/
 }
@@ -568,18 +592,12 @@ main {
 }
 
 .card {
-    background-color: navajowhite;
-    /*
-    background: #368cbf;
-    */
     position: relative;
     /* Add shadows to create the "card" effect */
-    box-shadow: 4px 1px 4px 4px rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 300px;
     height: 400px;
     margin: 15px;
-    border: 1px solid gray;
 }
 
 .card-img {
@@ -692,29 +710,25 @@ main {
 *
 ****************************************/
 
-.search-header {
-    grid-area: header;
-}
-
 .search-main {
     grid-area: main;
     margin: auto;
     min-height: 100vh;
-    min-width: 95%;
-    grid-template-columns: 80%;
-    grid-template-rows: auto auto 1fr;
+    min-width: 100%;
     grid-column-gap: 15px;
     grid-template-areas: 
         "searcherror"
         "searchname"
-        "searchgrid";
-    padding-top: 10px;
+        "searchexportlist"
+        "searchpartdetails"
+        "searchimage";
+    padding: 10px;
+    justify-items: center;
 }
 
 .search-error {
     grid-area: searcherror;
     min-height: 100vh;
-    justify-items: center;
 }
 
 .search-error #staticImg {
@@ -724,136 +738,97 @@ main {
     grid-template-rows: auto;
 }
 
-.slogo-search {
-    grid-area: searchname;
-    padding-bottom: 25px;
-}
-
-.search-grid {
-    grid-area: searchgrid;
+.search-main .export-data {
+    grid-area: searchexportlist;
     display: grid;
-    min-height: 100vh;
-    grid-template-columns: 100%;
-    grid-gap: 20px;
     grid-template-areas: 
-        "sproductinfo"
-        "simagedata"
-        "simages";
+        "export list";
+    grid-template-columns: 80% 20%;
+    font-size: 12px !important;
 }
 
-.search-grid .skuimages {
-    grid-area: simages;
+.search-main .sku-dim-information {
+    grid-area: searchpartdetails;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-template-rows: auto 1fr;
-    width: 100%;
-    grid-gap: 2.5em;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 10px;
     justify-items: center;
 }
 
-.skuimage-data {
-    grid-area: simagedata;
-}
-
-.imagemessage {
-    color: red;
-    font-weight: 600;
-}
-
-.search-part-info {
-    grid-area: sproductinfo;
+.search-main .sku-images {
+    grid-area: searchimage;
     display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 25px 1fr;
-    grid-gap: 0;
-    grid-template-areas: 
-        "export"
-        "skudetails";
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    justify-items: center;
 }
 
-.search-part-info .export-data {
+.search-main .export {
     grid-area: export;
-    display: grid;
-    grid-template-columns: 70% 30%;
-    grid-template-areas: 
-        "excel skulist";
 }
 
-.search-part-info .export-data * {
-    font-size: 15px !important;
+.search-main .addtolist {
+    grid-area: list;
 }
 
-.search-part-info .export-data .excel {
-    grid-area: excel;
+.slogo-search {
+    grid-area: searchname;
 }
 
-.search-part-info .export-data .addtolist {
-    grid-area: skulist;
-    text-align: right;
-    display: inline-block;
-}
-
-.search-part-info .export-data .excel {
-    text-align: left;
-}
-
-.search-part-info .export-data .excel li {
-    display: inline;
-    line-height: 0;
-    padding-right: 10px;
-}
-
-.search-part-info .export-data .excel ul {
-    margin: 0;
-    line-height: 0;
-}
-
-.search-main table, .search-main table th, .search-main table td,  .search-main table tr{
+.search-main table, .search-main table th, .search-main table td,  .search-main table tr {
     /* order: 5px solid black; */
     text-align: left;
-        padding: 5px;
+    padding: 5px;
 }
 
 .search-main table th {
     width: 200px;
     padding-right: 5px;
+    font-weight: 600;
 }
 
 .search-main table {
     margin-bottom: 25px;
 }
 
-.search-part-info .skudetails .sku-dim-information {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-template-rows: auto;
-    grid-gap: 30px;
-}
-
-.search-part-info .skudetails tr {
+.sku-dim-information tr {
     height: 15px;
 }
 
-.search-part-info .skudetails .sku-dim-information thead th {
-    font-size: 15px;
+.sku-dim-information table thead th {
     font-weight: bold;
-    color: dodgerblue;
+    color: #fff;
+    background-color: grey;
+    font-weight: 800;
+    font-size: 16px;
 }
 
-.search-part-info .skudetails .sku-dim-information thead td {
+.sku-dim-information thead td {
     font-size: 10px;
 }
 
-.search-part-info .skudetails .sku-dim-information table {
+.sku-dim-information table {
     height: 200px;
-    width: 300px;
-    box-shadow: 5px 10px #888888;
+    width: 250px;
 }
 
-.search-part-info .skudetails .sku-dim-information td, .search-part-info .skudetails .sku-dim-information th {
+.sku-dim-information td, .sku-dim-information th {
     font-size: 12px;
 }
+
+.sku-dim-information table tbody td {
+    text-align: left;
+}
+
+/***************************************
+*
+*
+* START FOOTER RESULTS STYLE
+*
+*
+****************************************/
 
 footer {
     grid-area: footer;
@@ -1058,7 +1033,7 @@ footer {
 .table {
     border: 1px solid #ccc;
     border-collapse: collapse;
-    box-shadow: 5px 5px 10px grey;
+    
     margin: 0;
     padding: 0;
     max-width: 100%;
