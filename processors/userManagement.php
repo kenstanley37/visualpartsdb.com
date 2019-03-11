@@ -12,12 +12,9 @@
     if(isset($_POST['activeSwitch']))
     {
         $userID = $_POST['activeSwitch'];
-
         $result = $user->activeSwitch($userID);
-        
         echo $result;
-        
-        header("location: /admin/member.php?user");
+        header("location: /admin/user.php");
         
     }
 
