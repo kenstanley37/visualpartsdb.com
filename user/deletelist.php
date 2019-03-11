@@ -47,11 +47,11 @@ if(isset($_POST['deletelist']))
         }
         ?>
         </aside>
-        <main class="my-list-main">
-            <section class="listtitle">
+        <main class="main">
+            <section class="title">
                 <h1>Delete List</h1>
             </section>
-            <section class="listmylist">
+            <section class="form">
                 <table class="table t300">
                     <caption>Delete list and <?php echo $listcount; ?> parts? </caption>
                     <thead>
@@ -66,12 +66,12 @@ if(isset($_POST['deletelist']))
                         <td>
                             <form action="/processors/userManagement.php" method="post">
                                 <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
-                                <button type="submit" name="deletelist" id="deletelist" value="<?php echo $listid;?>">Delete</button>
+                                <button class="danger" type="submit" name="deletelist" id="deletelist" value="<?php echo $listid;?>">Delete</button>
                             </form>
                         </td>
                         <td>
                             <form action="/user/myexportlist.php">
-                                <button type="submit">Cancel</button>
+                                <button class="info" type="submit">Cancel</button>
                             </form>
                         </td>
                     </tfoot>
