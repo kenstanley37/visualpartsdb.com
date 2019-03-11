@@ -371,8 +371,31 @@
                         LEFT JOIN company on company_id = user_company
                         LEFT JOIN role on role_id = user_role_id");
                 $stmt->execute();
+                ?>
+                <h2>User List</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Member ID</td>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Email</td>
+                            <td>Company</td>
+                            <td>Active</td>
+                            <td>Role</td>
+                            <td>Member Since</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+
+                <?php
+                
+                
                 while($row = $stmt->fetch())
                 {
+                    $regdate = $row['user_reg_date'];
+                    $regdate = date('m/d/Y');
                     ?>
                     <tr>
                         <td><?php echo $row['user_id']; ?></td>
@@ -384,16 +407,19 @@
                             <form method="post" action="/processors/userManagement.php">
 
                                 <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
-                                <button type="submit" class="<?php if($row['user_active'] == 1){ echo "active";} else{ echo "disabled";}; ?>"><?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?></button>
+                                <button type="submit" class="<?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>"><?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?></button>
                             </form>
                             
                         </td>
                         <td><?php echo $row['role_name']; ?></td>
-                        <td><?php echo $row['user_reg_date']; ?></td>
-                        <td><?php echo $row['user_reg_date']; ?></td>
+                        <td><?php echo $regdate; ?></td> 
                     </tr>
                     <?php
                 }
+                ?>
+                    </tbody>
+                </table> 
+                <?php
             }
             catch(PDOException $e)
             {
@@ -839,9 +865,9 @@
             }
         } // end myListSkuCheck
         
-         // *************************************************************
+        // *************************************************************
         // Usage: myListContent($listid); $listid = The list ID
-        // Returns a table with a list and sku contents
+        // Returns a table with a list and the skus assoicated
         // *************************************************************
         
         public function myListContent($listid)

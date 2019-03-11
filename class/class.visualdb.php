@@ -174,7 +174,7 @@
                                                     ?>
                                                     <table>
                                                         <td>
-                                                            Active List: <a href="/user/mylistcontents.php?list=<?php echo $activelistID; ?>"><?php echo $activelist; ?></a>
+                                                            Active List: <a href="/user/mylistcontents.php?list=<?php echo $activelistID; ?>"><?php echo strtoupper($activelist); ?></a>
                                                         </td>
                                                         <td>
                                                             <form action="/processors/userManagement.php" method="post">
@@ -926,6 +926,145 @@
                     echo $e->getMessage();
                 }	
         } // end mySqlToJson
+        
+        
+        // *************************************************************
+        // Usage: skuUpdateRequest($type); 
+        // $type can be:
+        // 'active' = returns a list of skus that have been requested and how many times requested
+        // 'complete' = returns a list of skus that have been requested and updated by an admin
+        // 'sku#' IE: 9911: = returns a list of users who have requested the sku update and when it was requested
+        // *************************************************************
+        
+        public function skuUpdateRequest($type)
+        {
+            if($type == 'active') 
+            {
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT distinct(update_sku), count(update_sku) as count, sku_desc from sku_update_request
+                        LEFT JOIN sku on sku_id = update_sku
+                        WHERE update_updated_by = '' 
+                        GROUP BY update_sku
+                        ORDER BY count(update_sku) desc
+                        ");
+                    $stmt->execute();
+                    
+                    ?>
+                    <table class="table">
+                        <thead>
+                            <td>SKU</td>
+                            <td>Description</td>
+                            <td>Count</td>
+                        </thead>
+                        <tbody>
+                    <?php
+                    while($row = $stmt->fetch())
+                    {
+                        $skuID = $row['update_sku'];
+                        ?>
+                            <tr>
+                                <td><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
+                                <td><?php echo $row['sku_desc']; ?></td>
+                                <td class="align-right"><a href="/admin/update-request.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
+                            </tr>  
+                        <?php
+                    }
+                ?>
+                    </tbody>
+                </table>
+                <?php
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            } elseif($type == 'complete') 
+            {
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT distinct(update_sku), count(update_sku) as count, sku_desc from sku_update_request
+                        LEFT JOIN sku on sku_id = update_sku
+                        WHERE update_updated_by <> '' 
+                        GROUP BY update_sku
+                        ORDER BY count(update_sku) desc
+                        ");
+                    $stmt->execute();
+                    
+                    ?>
+                    <table class="table">
+                        <thead>
+                            <td>SKU</td>
+                            <td>Description</td>
+                            <td>Count</td>
+                        </thead>
+                        <tbody>
+                    <?php
+                    while($row = $stmt->fetch())
+                    {
+                        $skuID = $row['update_sku'];
+                        ?>
+                            <tr>
+                                <td><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
+                                <td><?php echo $row['sku_desc']; ?></td>
+                                <td class="align-right"><a href="/admin/update-request.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
+                            </tr>  
+                        <?php
+                    }
+                ?>
+                    </tbody>
+                </table>
+                <?php
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            } else
+            {
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT * from sku_update_request
+                        LEFT JOIN user on user_id = update_request_by
+                        LEFT JOIN sku on sku_id = update_sku
+                        where update_updated_by = '' and update_sku = :skuid ");
+                    $stmt->bindparam(":skuid", $type);
+                    $stmt->execute();
+
+                    ?>
+                    <table class="table">
+                        <thead>
+                            <td>List Name</td>
+                            <td>Description</td>
+                            <td>Requested By</td>
+                            <td>Date</td>
+                        </thead>
+                        <tbody>
+                    <?php
+                    while($row = $stmt->fetch())
+                    {
+                        $date = $row['update_request_date'];
+                        $date = date('m/d/Y');
+                        ?>
+                            <tr>
+                                <td><a href="/admin/update-sku.php?sku=<?php echo $type; ?>"><?php echo $type; ?></a></td>
+                                <td><?php echo $row['sku_desc']; ?></td>
+                                <td><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
+                                <td><?php echo $date; ?></td>
+                            </tr>  
+                        <?php
+                    }
+                ?>
+                    </tbody>
+                </table>
+                <?php
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            }
+        } // end myListContent
         
     } // end class
 ?>

@@ -36,53 +36,55 @@ if(isset($_GET['register']))
     <title>Visual Parts Database: Invite User</title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
+    
 <body>
     <div class="wrapper">
         <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <!-- USER SECTION -->
         <aside class="admin-nav-bar hidden">
-        <?php
-        if($user->accessCheck() == "ADMIN")
-        {
-        ?>
             <?php include($path."inc/inc.adminnavbar.php"); ?>
-        <?php
-        }
-        ?>
         </aside>
-            <main id="aboutvpd" class="admin-main">
-                <section class="user-management-nav">
-                    <?php include($path."/inc/inc.useradmin.php"); ?>
-                </section>
-                <section class="admin-head">
-                    <h1>Invite User</h1>
-                </section>
-                <section class="add-user">
-                    <h2>Add User</h2>
-                    <form id="addUser" method="post" action="/processors/register_request.php">
-                        <table class="reg-table">
+        <main class="main">
+            <section class="title">
+                <h2>Invite User</h2>
+            </section>
+            <section class="nav">
+                <?php include($path."/inc/inc.useradmin.php"); ?>
+            </section>
+            <section class="form">
+                <form id="addUser" method="post" action="/processors/register_request.php">
+                        <table class="table">
+                            <thead>
+                                <th colspan="3">Invite User</th>
+                            </thead>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <label>Company</label>
+                                        <label for="regcompany">Company</label>
                                     </td>
                                     <td>
                                         <select name="regcompany" id="regcompany" required>
                                             <?php $user->dropDownCompany(); ?>
                                         </select>
                                     </td>
+                                    <td>
+                                        <a href="/admin/add-company.php"><i class="fas fa-plus-square"></i></a>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><label for="regfname">First Name</label></td>
-                                    <td><input type="text" name="regfname" required></td>
+                                    <td>
+                                        <label for="regfname">First Name</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="text" name="regfname" required>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <label for="reglname">Last Name</label>
                                     </td>
-                                    <td> 
+                                    <td colspan="2"> 
                                         <input type="text" name="reglname" required>
                                     </td>
                                 </tr>
@@ -90,47 +92,23 @@ if(isset($_GET['register']))
                                     <td>
                                         <label for="regemail">Email Address</label>
                                     </td>
-                                    <td>
+                                    <td colspan="2">
                                         <input type="email" name="regemail" required>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-right" colspan="3"><button class=" info" type="submit" name="regsubmit" value="Submit">Submit</button></td>
+                                </tr>
                              </tbody>
                         </table>
-                        <input type="submit" name="regsubmit" value="Submit">
                     </form>
-                                        <?php
-                    if(isset($result))
-                    {
-                        echo '<span>'.$result.'</span>';
-                    }
-                    ?>
-                </section>
-                <section>
-                    <h1>User List</h1>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td>Member ID</td>
-                                <td>First Name</td>
-                                <td>Last Name</td>
-                                <td>Email</td>
-                                <td>Company</td>
-                                <td>Active</td>
-                                <td>Role</td>
-                                <td>Member Since</td>
-                                <td>Role</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $user->userList(); ?>
-                        </tbody>
-                    </table>
-                </section>    
+            </section>
+            <section class="content">
+
+            </section>
         </main>
         <footer>
-            <?php include($path."inc/inc.footer.php"); ?>
+            <?php include($path."/inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

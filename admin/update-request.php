@@ -7,18 +7,29 @@ require_once($path."class/class.func.php");
 
 $vpd = new VISUALDB;
 $vail = new VALIDATE;
-$user = new USER;
 
-if(!isset($_SESSION['user_id']))
-{
+if(!isset($_SESSION['user_id'])){
     header('location: /');
+} else {
+    $user = new USER;
+    if($user->accessCheck() != 'ADMIN'){
+        header('location: /');
+    }
+}
+
+if(isset($_GET['sku']))
+{
+    $sku = $_GET['sku'];
+} else
+{
+    header('location: /admin/update-request.php?sku=active');
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: My Product List</title>
+    <title>Visual Parts Database: Update Request</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -27,31 +38,17 @@ if(!isset($_SESSION['user_id']))
             <?php include($path."inc/inc.header.php"); ?>
         </header>
         <aside class="admin-nav-bar hidden">
-        <?php
-        if($user->accessCheck() == "ADMIN")
-        {
-        ?>
             <?php include($path."inc/inc.adminnavbar.php"); ?>
-        <?php
-        }
-        ?>
         </aside>
         <main class="main">
             <section class="title">
-                <h1>My List</h1>
+                <h2>Update Request: <?php echo ucfirst($sku); ?></h2>
             </section>
-            <section class="form">
-                <h2>Create List</h2>
-                <form action="/processors/userManagement.php" method="post">
-                    <label for="listname">List Name:</label>
-                    <input type="text" id="listname" name="listname" maxlength="10" required>
-                    <label for="listname">List Description:</label>
-                    <input type="text" id="listdescription" name="listdescription" maxlength="30" required>
-                    <button type="submit">Submit</button>
-                </form>
+            <section class="nav">
+                <?php include($path."inc/inc.update-nav.php"); ?>
             </section>
             <section class="content">
-                <?php $user->myList(); ?>
+                <?php $vpd->skuUpdateRequest($sku); ?>
             </section>
         </main>
         <footer>

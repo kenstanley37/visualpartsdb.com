@@ -52,85 +52,19 @@ if(isset($_GET['register']))
         }
         ?>
         </aside>
-            <main id="aboutvpd" class="admin-main">
-                <section class="user-management-nav">
-                    <?php include($path."/inc/inc.useradmin.php"); ?>
-                </section>
-                <section class="admin-head">
-                    <h1>User Management</h1>
-                </section>
-                <section class="add-user">
-                    <h2>Add User</h2>
-                    <form id="addUser" method="post" action="/processors/register_request.php">
-                        <table class="reg-table">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label>Company</label>
-                                    </td>
-                                    <td>
-                                        <select name="regcompany" id="regcompany" required>
-                                            <?php $user->dropDownCompany(); ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><label for="regfname">First Name</label></td>
-                                    <td><input type="text" name="regfname" required></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="reglname">Last Name</label>
-                                    </td>
-                                    <td> 
-                                        <input type="text" name="reglname" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="regemail">Email Address</label>
-                                    </td>
-                                    <td>
-                                        <input type="email" name="regemail" required>
-                                    </td>
-                                </tr>
-                             </tbody>
-                        </table>
-                        <input type="submit" name="regsubmit" value="Submit">
-                    </form>
-                                        <?php
-                    if(isset($result))
-                    {
-                        echo '<span>'.$result.'</span>';
-                    }
-                    ?>
-                </section>
-                <section>
-                    <h1>User List</h1>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td>Member ID</td>
-                                <td>First Name</td>
-                                <td>Last Name</td>
-                                <td>Email</td>
-                                <td>Company</td>
-                                <td>Active</td>
-                                <td>Role</td>
-                                <td>Member Since</td>
-                                <td>Role</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $user->userList(); ?>
-                        </tbody>
-                    </table>
-                </section>    
+        <main class="main">
+            <section class="nav">
+                <?php include($path."/inc/inc.useradmin.php"); ?>
+            </section>
+            <section class="title">
+                <h1>User Management</h1>
+            </section>
+            <section class="content">
+                <?php $user->userList(); ?>
+            </section>    
         </main>
         <footer>
-            <?php include($path."inc/inc.footer.php"); ?>
+        <?php include($path."inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

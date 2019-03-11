@@ -64,11 +64,18 @@ h4 {
 
 a {
 	text-decoration: none;
-	color: #000;
 }
 
 a:hover {
     border-bottom: 1px solid #fff;
+}
+
+.admin-nav-bar a:hover {
+    border-bottom: 1px solid #000;
+}
+
+.admin-nav-bar a {
+    color: #000;
 }
 
 .t300 {
@@ -153,6 +160,10 @@ button {
 
 button:hover {
     box-shadow: 2px 2px 8px 1px #888888;
+}
+
+.align-right {
+    text-align: right !important;
 }
 
 /***************************** 
@@ -381,7 +392,7 @@ header .name a {
     grid-template-columns: 100px auto 35px;
     grid-template-areas: 
         "adminnavtitle adminnavlinks adminnavbars";
-    background-color: #fff;
+    background-color: burlywood;
     color: #000;
     z-index: 2;
     min-width: 100%;
@@ -996,44 +1007,90 @@ footer {
 /***************************************
 *
 *
-* START mylist.php
+* START admin sections grid setup
 *
 *
 ****************************************/
 
-.my-list-main {
+.main {
+    grid-area: main;
     display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 50px 100px auto;
+    grid-template-columns: 1000px;
+    grid-template-rows: 15px 80px auto auto;
     grid-template-areas: 
-        "listtitle"
-        "listmylist" 
-        "listshowlist";
-    justify-items: center;
+        "title"
+        "nav" 
+        "form"
+        "mcontent";
+    grid-gap: 30px;
+    justify-content: center;
+    align-content: start;
 }
 
-.my-list-main .listtitle {
-    grid-area: listtitle;
+.main .title {
+    grid-area: title;
     position: absolute;
     left: 15px;
 }
 
-.my-list-main .listtitle h1{
+.main .title h1 {
     text-align: left;
 }
 
-.my-list-main .listmylist {
-    grid-area: listmylist;
+.main .nav {
+    grid-area: nav;
 }
 
-.my-list-main .listshowlist {
-    grid-area: listshowlist;
+.main .nav {
+    border: 1px solid #ccc;
+    border-width: 1px 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
+
+.main .nav li {
+    display: inline;
+}
+
+.main .nav a {
+    display: inline-block;
+    padding: 10px;
+}
+
+.main .nav a:hover {
+    border-bottom: 1px solid #000;
+}
+
+.main .form {
+    grid-area: form;
+    display: grid;
+    justify-items: center;
+}
+
+.main .form h2, .main .content h2 {
+    justify-self: flex-start;
+}
+
+.main .content {
+    grid-area: mcontent;
+    display: grid;
+    justify-items: center;
+}
+
+
+/***************************************
+*
+*
+* START default table setup
+*
+*
+****************************************/
 
 .table {
     border: 1px solid #ccc;
     border-collapse: collapse;
-    
     margin: 0;
     padding: 0;
     max-width: 100%;
@@ -1121,14 +1178,14 @@ footer {
 }
 
 
-.admin-main .user-management-nav nav li {
+.my-list-main nav li {
     display: inline-block !important;
     list-style-type: none;
     padding-left:30px;
     padding-right:30px;
 }
 
-.admin-main .user-management-nav nav ul {
+.my-list-main nav ul {
     list-style-type: none;
 }
 
@@ -1462,7 +1519,6 @@ only screen and (max-width: 900px),
         grid-template-columns: 100px auto;
         grid-template-areas: 
             "adminnavtitle adminnavlinks adminnavbars";
-        background-color: #fff;
         color: #000;
         z-index: 2;
         width: 100%;
@@ -1481,10 +1537,11 @@ only screen and (max-width: 900px),
 
     .admin-nav-bar .admin-nav-links {
         position: absolute;
-        background-color: #fff;
+        background-color: burlywood;
         opacity: 1;
         width: 243px;
-        margin-top: 50px;
+
+        top: -50px;
         right: 0;
         visibility: hidden;
         z-index: 10;
