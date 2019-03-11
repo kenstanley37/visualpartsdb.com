@@ -50,7 +50,7 @@ if(isset($_GET['register']))
                 <h2>Invite User</h2>
             </section>
             <section class="nav">
-                <?php include($path."/inc/inc.useradmin.php"); ?>
+               
             </section>
             <section class="form">
                 <form id="addUser" method="post" action="/processors/register_request.php">

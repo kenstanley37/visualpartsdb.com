@@ -54,10 +54,10 @@ if(isset($_GET['register']))
         </aside>
         <main class="main">
             <section class="nav">
-                <?php include($path."/inc/inc.useradmin.php"); ?>
+
             </section>
             <section class="title">
-                <h1>User Management</h1>
+                <h1>Member List</h1>
             </section>
             <section class="content">
                 <?php $user->userList(); ?>

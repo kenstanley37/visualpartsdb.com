@@ -70,14 +70,6 @@ a:hover {
     border-bottom: 1px solid #fff;
 }
 
-.admin-nav-bar a:hover {
-    border-bottom: 1px solid #000;
-}
-
-.admin-nav-bar a {
-    color: #000;
-}
-
 .t300 {
     width: 300px;
 }
@@ -389,44 +381,16 @@ header .name a {
 .admin-nav-bar {
     grid-area: adminnavbar;
     display: grid;
-    grid-template-columns: 100px auto 35px;
+    grid-template-columns: 100%;
     grid-template-areas: 
-        "adminnavtitle adminnavlinks adminnavbars";
+        "adminnavlinks";
     background-color: burlywood;
     color: #000;
     z-index: 2;
-    min-width: 100%;
-}
-    
-.admin-nav-bar .admin-nav-ham {
-    grid-area: adminnavbars;
-    align-self:  center;
-    text-align: right;
-    margin-right: 25px;
-    display: none;
-}
-
-.admin-nav-bar .admin-title {
-    grid-area: adminnavtitle;
-    text-align: left;
-    margin-left: 15px;
 }
 
 .admin-nav-bar .admin-nav-links {
     grid-area: adminnavlinks;
-    display: block;
-    align-self:  center;
-    text-align: center;
-    margin-left: -115px;
-}
-
-.admin-nav-bar .admin-nav-links section {
-    display: inline-block;
-    padding-right: 10px;
-}
-
-.admin-nav-bar .admin-nav-links section a {
-    font-weight: 100;
 }
 
 main {
@@ -1077,7 +1041,6 @@ footer {
     grid-area: form;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
     grid-gap: 10px;
     justify-items: center;
 }
@@ -1213,6 +1176,23 @@ footer {
 .admin-main .disabled {
 	border: 3px solid red;
 }
+
+.adminnavbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.adminnavbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+
+
 
 /***************************************
 *
@@ -1529,58 +1509,10 @@ only screen and (max-width: 900px),
         grid-area: adminnavbar;
         display: grid;
         overflow: hidden;
-        grid-template-columns: 100px auto;
+        grid-template-columns: 100%;
         grid-template-areas: 
-            "adminnavtitle adminnavlinks adminnavbars";
-        color: #000;
+            "adminnavlinks";
         z-index: 2;
-        width: 100%;
-    }
-    
-    .admin-nav-bar .admin-nav-ham {
-        grid-area: adminnavbars;
-        display: block;
-    }
-
-    .admin-nav-bar .admin-title {
-        grid-area: adminnavtitle;
-        text-align: left;
-        margin-left: 15px;
-    }
-
-    .admin-nav-bar .admin-nav-links {
-        position: absolute;
-        background-color: burlywood;
-        opacity: 1;
-        width: 243px;
-
-        top: -50px;
-        right: 0;
-        visibility: hidden;
-        z-index: 10;
-    }
-    /* Firefox hack for the margin */
-    @-moz-document url-prefix() {
-      .admin-nav-bar .admin-nav-links {
-        margin-top: 150px; /* firefox seems to be different than other browsers */
-      }
-    }
-    
-    @supports (-ms-ime-align: auto) {
-      .admin-nav-bar .admin-nav-links {
-        margin-top: 150px;
-      }
-    }
-
-    .admin-nav-bar .admin-nav-links section {
-        display: block;
-        text-align: left;
-        margin-left: 15px;
-        line-height: 25px;
-    }
-
-    .admin-nav-bar .admin-nav-links section a {
-        font-weight: 100;
     }
     
     .index-search .search-bar {

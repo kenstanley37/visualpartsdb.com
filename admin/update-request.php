@@ -45,7 +45,7 @@ if(isset($_GET['sku']))
                 <h2>Update Request: <?php echo ucfirst($sku); ?></h2>
             </section>
             <section class="nav">
-                <?php include($path."inc/inc.update-nav.php"); ?>
+
             </section>
             <section class="content">
                 <?php $vpd->skuUpdateRequest($sku); ?>

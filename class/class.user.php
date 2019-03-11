@@ -372,7 +372,6 @@
                         LEFT JOIN role on role_id = user_role_id");
                 $stmt->execute();
                 ?>
-                <h2>User List</h2>
                 <table class="table">
                     <thead>
                         <tr>
