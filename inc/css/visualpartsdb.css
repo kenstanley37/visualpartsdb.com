@@ -1015,8 +1015,8 @@ footer {
 .main {
     grid-area: main;
     display: grid;
-    grid-template-columns: 1000px;
-    grid-template-rows: 15px 80px auto auto;
+    grid-template-columns: 75vw;
+    grid-template-rows: 15px auto auto auto;
     grid-template-areas: 
         "title"
         "nav" 
@@ -1066,6 +1066,19 @@ footer {
 .main .form {
     grid-area: form;
     display: grid;
+    justify-items: center;
+}
+
+.main .update-form {
+    margin-top: 150px;
+}
+
+.main .update-form form {
+    grid-area: form;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    grid-gap: 10px;
     justify-items: center;
 }
 

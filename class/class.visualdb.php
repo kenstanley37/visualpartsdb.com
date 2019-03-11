@@ -1064,7 +1064,247 @@
                     echo $e->getMessage();
                 }
             }
-        } // end myListContent
+        } // end skuUpdateRequest
+        
+        // *************************************************************
+        // Usage: getSkuData($sku); 
+        // Returns table of SKU Unit, Case, Pallet data to be edited
+        // *************************************************************
+        
+        public function getSkuData($sku) 
+        {
+            
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * from sku
+                    WHERE sku_id = :skuID");
+                $stmt->bindparam(":skuID", $sku);
+                $stmt->execute();
+                $row = $stmt->fetch();
+            ?>
+                <form id="UpdateForm" method="post" action="/processors/sku_handler.php">
+                    <input type="text" name="sku" value="<?php echo $sku; ?>" hidden>
+                    <section class="update-unit">
+                         <table class="table">
+                            <thead>
+                                <th colspan="3">Unit Data</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="unit-length">Length</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="unit-length" min="0" step="0.01" value="<?php echo $row['sku_unit_length'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="unit-width">Width</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="number" name="unit-width" min="0" step="0.01" value="<?php echo $row['sku_unit_width'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="unit-height">Height</label>
+                                    </td>
+                                    <td colspan="2"> 
+                                        <input type="number" name="unit-height" min="0" step="0.01" value="<?php echo $row['sku_unit_height'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="unit-weight">Weight</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $row['sku_unit_weight'] ?>">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section> <!-- end Unit Data -->
+                    <section class="update-case">
+                         <table class="table">
+                            <thead>
+                                <th colspan="3">Case Data</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="case-length">Length</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="case-length" min="0" step="0.01" value="<?php echo $row['sku_case_length'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="case-width">Width</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="number" name="case-width" min="0" step="0.01" value="<?php echo $row['sku_case_width'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="case-height">Height</label>
+                                    </td>
+                                    <td colspan="2"> 
+                                        <input type="number" name="case-height" min="0" step="0.01" value="<?php echo $row['sku_case_height'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="case-weight">Weight</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="number" name="case-weight" min="0" step="0.01" value="<?php echo $row['sku_case_weight'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="case-qty">Quantity</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $row['sku_case_qty'] ?>">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section> <!-- end Case Data -->
+                    <section class="update-pallet">
+                         <table class="table">
+                            <thead>
+                                <th colspan="3">Pallet Data</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="pallet-length">Length</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="pallet-length" min="0" step="0.01" value="<?php echo $row['sku_pallet_length'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pallet-width">Width</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="number" name="pallet-width" min="0" step="0.01" value="<?php echo $row['sku_pallet_width'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pallet-height">Height</label>
+                                    </td>
+                                    <td colspan="2"> 
+                                        <input type="number" name="pallet-height" min="0" step="0.01" value="<?php echo $row['sku_pallet_height'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pallet-weight">Weight</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="number" name="pallet-weight" min="0" step="0.01" value="<?php echo $row['sku_pallet_weight'] ?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pallet-qty">Quantity</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="number" name="pallet-qty" min="0" step="0.01" value="<?php echo $row['sku_pallet_qty'] ?>">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section> <!-- end Case Data -->
+                </form>
+
+            <?php
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end getSkuData
+        
+        // *************************************************************
+        // Usage: setSkuData($sku, $unit_length, $unit_width, $unit_height, $unit_weight, 
+        // $case_length, $case_width, $case_height, $case_weight, $case_qty, $pallet_length, 
+        // $pallet_width, $pallet_height, $pallet_weight, $pallet_qty); 
+        // Updates the sku data fields
+        // *************************************************************
+        
+        public function setSkuData($sku, 
+               $unit_length, $unit_width, $unit_height, $unit_weight,
+               $case_length, $case_width, $case_height, $case_weight, $case_qty, 
+               $pallet_length, $pallet_width, $pallet_height, $pallet_weight, $pallet_qty) 
+        {
+            $user = $_SESSION['fname'].' '.$_SESSION['lname'];
+            date_default_timezone_set('US/Eastern');
+            $date = date('m/d/Y h:i:s a', time());
+            try
+            {
+                $stmt = $this->conn->prepare("UPDATE sku 
+                    SET 
+                    sku_unit_length = :unit_length,
+                    sku_unit_width = :unit_width,
+                    sku_unit_height = :unit_height,
+                    sku_unit_weight = :unit_weight,
+
+                    sku_case_length = :case_length,
+                    sku_case_width = :case_width,
+                    sku_case_height = :case_height,
+                    sku_case_weight = :case_weight,
+                    sku_case_qty = :case_qty,
+
+                    sku_pallet_length = :pallet_length,
+                    sku_pallet_width = :pallet_width,
+                    sku_pallet_height = :pallet_height,
+                    sku_pallet_weight = :pallet_weight,
+                    sku_pallet_qty = :pallet_qty,
+                    
+                    sku_rec_update = :update_date,
+                    sku_rec_update_by = :user_name
+        
+                    WHERE sku_id = :skuID");
+                    $stmt->bindparam(":skuID", $sku);
+
+                    $stmt->bindparam(":unit_length", $unit_length);
+                    $stmt->bindparam(":unit_width", $unit_width);
+                    $stmt->bindparam(":unit_height", $unit_height);
+                    $stmt->bindparam(":unit_weight", $unit_weight);
+
+                    $stmt->bindparam(":case_length", $case_length);
+                    $stmt->bindparam(":case_width", $case_width);
+                    $stmt->bindparam(":case_height", $case_height);
+                    $stmt->bindparam(":case_weight", $case_weight);
+                    $stmt->bindparam(":case_qty", $case_qty);
+
+                    $stmt->bindparam(":pallet_length", $pallet_length);
+                    $stmt->bindparam(":pallet_width", $pallet_width);
+                    $stmt->bindparam(":pallet_height", $pallet_height);
+                    $stmt->bindparam(":pallet_weight", $pallet_weight);
+                    $stmt->bindparam(":pallet_qty", $pallet_qty);
+                    
+                    $stmt->bindparam(":update_date", $date);
+                    $stmt->bindparam(":user_name", $user);
+                    
+                    $stmt->execute();
+                
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end getSkuData
+        
         
     } // end class
 ?>
