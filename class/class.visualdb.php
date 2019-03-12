@@ -951,9 +951,11 @@
                     ?>
                     <table class="table">
                         <thead>
-                            <td>SKU</td>
-                            <td>Description</td>
-                            <td>Count</td>
+                            <tr align="middle">
+                                <td scope="col">SKU</td>
+                                <td scope="col">Description</td>
+                                <td scope="col">Count</td>
+                            </tr>
                         </thead>
                         <tbody>
                     <?php
@@ -962,9 +964,9 @@
                         $skuID = $row['update_sku'];
                         ?>
                             <tr>
-                                <td><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
-                                <td><?php echo $row['sku_desc']; ?></td>
-                                <td class="align-right"><a href="/admin/update-request.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
+                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
+                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                <td data-label="Count" class="align-right"><a href="/admin/update-request.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
                             </tr>  
                         <?php
                     }
@@ -992,9 +994,11 @@
                     ?>
                     <table class="table">
                         <thead>
-                            <td>SKU</td>
-                            <td>Description</td>
-                            <td>Count</td>
+                            <tr align="middle">
+                                <td scope="col">SKU</td>
+                                <td scope="col">Description</td>
+                                <td scope="col">Count</td>
+                            </tr>
                         </thead>
                         <tbody>
                     <?php
@@ -1003,9 +1007,9 @@
                         $skuID = $row['update_sku'];
                         ?>
                             <tr>
-                                <td><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
-                                <td><?php echo $row['sku_desc']; ?></td>
-                                <td class="align-right"><a href="/admin/update-request.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
+                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
+                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                <td data-label="Count" class="align-right"><a href="/admin/update-request.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
                             </tr>  
                         <?php
                     }
@@ -1032,10 +1036,12 @@
                     ?>
                     <table class="table">
                         <thead>
-                            <td>List Name</td>
-                            <td>Description</td>
-                            <td>Requested By</td>
-                            <td>Date</td>
+                            <tr align="middle">
+                                <td scope="col">List Name</td>
+                                <td scope="col">Description</td>
+                                <td scope="col">Requested By</td>
+                                <td scope="col">Date</td>
+                            </tr>
                         </thead>
                         <tbody>
                     <?php
@@ -1044,11 +1050,11 @@
                         $date = $row['update_request_date'];
                         $date = date('m/d/Y');
                         ?>
-                            <tr>
-                                <td><a href="/admin/update-sku.php?sku=<?php echo $type; ?>"><?php echo $type; ?></a></td>
-                                <td><?php echo $row['sku_desc']; ?></td>
-                                <td><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
-                                <td><?php echo $date; ?></td>
+                            <tr valign="middle">
+                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $type; ?>"><?php echo $type; ?></a></td>
+                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                <td data-label="User"><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
+                                <td data-label="Date"><?php echo $date; ?></td>
                             </tr>  
                         <?php
                     }
@@ -1085,11 +1091,13 @@
                     <section class="update-unit">
                          <table class="table">
                             <thead>
-                                <th colspan="3">Unit Data</th>
+                                <tr align="middle">
+                                    <th scope="col" colspan="3">Unit Data</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td data-label="Unit">
                                         <label for="unit-length">Length</label>
                                     </td>
                                     <td>
@@ -1097,7 +1105,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Unit">
                                         <label for="unit-width">Width</label>
                                     </td>
                                     <td colspan="2">
@@ -1105,7 +1113,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Unit">
                                         <label for="unit-height">Height</label>
                                     </td>
                                     <td colspan="2"> 
@@ -1113,7 +1121,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Unit">
                                         <label for="unit-weight">Weight</label>
                                     </td>
                                     <td colspan="2">
@@ -1126,11 +1134,13 @@
                     <section class="update-case">
                          <table class="table">
                             <thead>
-                                <th colspan="3">Case Data</th>
+                                <tr align="middle">
+                                    <th scope="col" colspan="3">Case Data</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td data-label="Case">
                                         <label for="case-length">Length</label>
                                     </td>
                                     <td>
@@ -1138,7 +1148,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Case">
                                         <label for="case-width">Width</label>
                                     </td>
                                     <td colspan="2">
@@ -1146,7 +1156,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Case">
                                         <label for="case-height">Height</label>
                                     </td>
                                     <td colspan="2"> 
@@ -1154,7 +1164,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Case">
                                         <label for="case-weight">Weight</label>
                                     </td>
                                     <td colspan="2">
@@ -1162,7 +1172,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Case">
                                         <label for="case-qty">Quantity</label>
                                     </td>
                                     <td colspan="2">
@@ -1175,11 +1185,13 @@
                     <section class="update-pallet">
                          <table class="table">
                             <thead>
-                                <th colspan="3">Pallet Data</th>
+                                <tr align="middle">
+                                    <th scope="col" colspan="3">Pallet Data</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td data-label="Pallet">
                                         <label for="pallet-length">Length</label>
                                     </td>
                                     <td>
@@ -1187,7 +1199,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Pallet">
                                         <label for="pallet-width">Width</label>
                                     </td>
                                     <td colspan="2">
@@ -1195,7 +1207,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Pallet">
                                         <label for="pallet-height">Height</label>
                                     </td>
                                     <td colspan="2"> 
@@ -1203,7 +1215,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Pallet">
                                         <label for="pallet-weight">Weight</label>
                                     </td>
                                     <td colspan="2">
@@ -1211,7 +1223,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td data-label="Pallet">
                                         <label for="pallet-qty">Quantity</label>
                                     </td>
                                     <td colspan="2">

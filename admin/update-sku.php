@@ -50,7 +50,7 @@ else
                 <h2>Update SKU</h2>
             </section>
             <section class="nav">
-                <?php include($path."/inc/inc.useradmin.php"); ?>
+
             </section>
             <section class="update-form">
                 <h2><?php echo $sku; ?></h2>
