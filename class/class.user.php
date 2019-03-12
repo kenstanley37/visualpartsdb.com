@@ -547,19 +547,23 @@
                 $stmt->execute();
                 ?> <table class="table">
                         <thead>
-                            <td>Status</td>
-                            <td>List</td>
-                            <td>Description</td>
-                            <td>Parts</td>
-                            <td>Date Added</td>
-                            <td>Export</td>
-                            <td></td>
+                            <tr align="middle">
+                                <td scope="col">Status</td>
+                                <td scope="col">List</td>
+                                <td scope="col">Description</td>
+                                <td scope="col">Parts</td>
+                                <td scope="col">Date Added</td>
+                                <td scope="col">Export</td>
+                                <td scope="col"></td>
+                            </tr>
                         </thead>
                         <tbody>
                 
                 <?php
                 while($row = $stmt->fetch())
                 {      
+                    $dateadded = $row['pl_list_added'];
+                    $dateadded = date('m/d/Y');
                     $listid = $row['pl_id'];
                     if($row['pl_active'] == 1) 
                     {
@@ -570,7 +574,7 @@
                     
                     $count = $this->myListCount($listid);
                     ?>
-                    <tr>
+                    <tr valign="middle">
                         <td>
                             <form action="/processors/userManagement.php" method="post">
                                 <?php 
@@ -589,11 +593,11 @@
                                 ?> 
                             </form>
                         </td>
-                        <td><a href="/user/mylistcontents.php?list=<?php echo $row['pl_id'];?>"><?php echo strtoupper($row['pl_list_name']); ?></a></td>
-                        <td><?php echo $row['pl_list_desc']; ?></td>
-                        <td><?php echo $count; ?></td>
-                        <td><?php echo $row['pl_list_added']; ?></td>
-                        <td><a href="/export/generate-xlsx.php?unit=excel&list=<?php echo $row['pl_id']; ?>"><i class="far fa-file-excel"></i></a></td>
+                        <td data-label="Name"><a href="/user/mylistcontents.php?list=<?php echo $row['pl_id'];?>"><?php echo strtoupper($row['pl_list_name']); ?></a></td>
+                        <td data-label="Desc"><?php echo $row['pl_list_desc']; ?></td>
+                        <td data-label="Count"><?php echo $count; ?></td>
+                        <td data-label="Date"><?php echo $dateadded; ?></td>
+                        <td data-label="Export"><a href="/export/generate-xlsx.php?unit=excel&list=<?php echo $row['pl_id']; ?>"><i class="far fa-file-excel"></i></a></td>
                         <td>
                             <form action="/user/deletelist.php" method="post">
                                 <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
@@ -884,17 +888,19 @@
                 ?>
                 <table class="table">
                     <thead>
-                        <td>List Name</td>
-                        <td colspan="2">Description</td>
+                        <tr align="middle">
+                            <td scope="col">SKU</td>
+                            <td scope="col" colspan="2">Description</td>
+                        </tr>
                     </thead>
                     <tbody>
                 <?php
                 while($row = $stmt->fetch())
                 {
                     ?>
-                        <tr>
-                            <td><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
-                            <td><?php echo $row['sku_desc']; ?></td>
+                        <tr valign="middle">
+                            <td scope="row" data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
+                            <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
                             <td>
                                 <form action="/processors/userManagement.php" method="post">
                                     <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>

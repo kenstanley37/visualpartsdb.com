@@ -725,9 +725,7 @@
                     if($stmt->rowCount() >= 1)
                     {
                         ?>
-                            <section class="my-search-results">
-
-
+                        <section class="my-search-results">
                             <table class="table">
                                 <caption>Search History</caption>
                                 <thead>

@@ -7,7 +7,7 @@ $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 <section class="admin-nav-links">
     <section id='cssmenu'>
         <ul>
-            <li><a href='#'>Administration</a></li>
+            <li><a>Administration</a></li>
             <li><a href='/admin/'>Dashboard</a>
             <li><a href='#'>User Management</a>
                 <ul>
