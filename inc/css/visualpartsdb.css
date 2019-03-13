@@ -158,6 +158,14 @@ button:hover {
     text-align: right !important;
 }
 
+.tb1-color {
+    background-color: lightskyblue;
+}
+
+.valign-top {
+    vertical-align:top;
+}
+
 /***************************** 
 ** index.php grid 
 ******************************/

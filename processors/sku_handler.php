@@ -14,6 +14,7 @@
     if(isset($_POST['skuUpdate']))
     {
         $sku = $_POST['sku'];
+        $sku_desc = $vail->sanitizeString($_POST['desc']);
             
         $unit_length = $_POST['unit-length'];
         $unit_width = $_POST['unit-width'];
@@ -26,14 +27,25 @@
         $case_weight = $_POST['case-weight'];
         $case_qty = $_POST['case-qty'];
         
-        $pallet_length = number_format($_POST['pallet-length'],2);
-        $pallet_width = number_format($_POST['pallet-width'],2);
-        $pallet_height = number_format($_POST['pallet-height'],2);
-        $pallet_weight= number_format($_POST['pallet-weight'],2);
-        $pallet_qty = number_format($_POST['pallet-qty']);
+        $pallet_length = $_POST['pallet-length'];
+        $pallet_width = $_POST['pallet-width'];
+        $pallet_height = $_POST['pallet-height'];
+        $pallet_weight= $_POST['pallet-weight'];
+        $pallet_qty = $_POST['pallet-qty'];
         
-        $vpd->setSkuData($sku, $unit_length, $unit_width, $unit_height, $unit_weight, $case_length, $case_width, $case_height, $case_weight, $case_qty, $pallet_length, $pallet_width, $pallet_height, $pallet_weight, $pallet_qty);
-        header("location: /admin/update-sku.php?sku=".$sku);
+        $result = $vpd->setSkuData($sku, $sku_desc, $unit_length, $unit_width, $unit_height, $unit_weight, $case_length, $case_width, $case_height, $case_weight, $case_qty, $pallet_length, $pallet_width, $pallet_height, $pallet_weight, $pallet_qty);
+        
+        echo $sku_desc;
+
+        
+        if($result == 'true')
+        {
+            header("location: /admin/update-sku.php?sku=".$sku."&submit=successful");
+        } else
+        {
+            header("location: /admin/update-sku.php?sku=".$sku."&submit=failed");
+        }
+        
     }
 
     

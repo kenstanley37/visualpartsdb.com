@@ -847,7 +847,7 @@
         
         // *************************************************************
         // Usage: myListRemSku($sku);
-        // Removes Sku from Active List
+        // Removes Sku from users Active List
         // *************************************************************
         
         public function myListRemSku($sku, $list)

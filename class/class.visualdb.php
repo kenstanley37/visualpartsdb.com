@@ -729,7 +729,7 @@
                             <table class="table">
                                 <caption>Search History</caption>
                                 <thead>
-                                    <tr align="middle">
+                                    <tr>
                                         <th scope="col">Part Number</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Date</th>
@@ -752,7 +752,7 @@
                                     $dateOnly = $newDate->format('Y-m-d'); // pull the date out
                                     $timeOnly = $newDate->format('h:i:s A'); // pull the time out
                                 ?>
-                                    <tr valign="middle">
+                                    <tr>
                                         <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></td>
                                         <td data-label="Description"><?php echo $desc; ?></td>
                                         <td data-label="Date"><?php echo $dateOnly; ?></td>
@@ -770,7 +770,7 @@
                                  <table class="table table-count">
                                     <caption>Search Count</caption>
                                     <thead>
-                                        <tr align="middle">
+                                        <tr>
                                             <th scope="col">Part Number</th>
                                             <th scope="col">Count</th>
                                         </tr>
@@ -782,7 +782,7 @@
                         while($countrow = $count->fetch())
                         {
                             ?>
-                             <tr valign="middle">
+                             <tr>
                                 <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $countrow['sku_search_sku']; ?>"><?php echo $countrow['sku_search_sku']; ?></a></td>
                                 <td data-label="Count"><?php echo $countrow['count']; ?></td>
                             </tr>
@@ -929,9 +929,9 @@
         // *************************************************************
         // Usage: skuUpdateRequest($type); 
         // $type can be:
-        // 'active' = returns a list of skus that have been requested and how many times requested
-        // 'complete' = returns a list of skus that have been requested and updated by an admin
-        // 'sku#' IE: 9911: = returns a list of users who have requested the sku update and when it was requested
+        //   'active' = returns a list of skus that have been requested and how many times requested
+        //   'complete' = returns a list of skus that have been requested and updated by an admin
+        //   'sku#' IE: 9911: = returns a list of users who have requested the sku update and when it was requested
         // *************************************************************
         
         public function skuUpdateRequest($type)
@@ -951,7 +951,7 @@
                     ?>
                     <table class="table">
                         <thead>
-                            <tr align="middle">
+                            <tr>
                                 <td scope="col">SKU</td>
                                 <td scope="col">Description</td>
                                 <td scope="col">Count</td>
@@ -994,7 +994,7 @@
                     ?>
                     <table class="table">
                         <thead>
-                            <tr align="middle">
+                            <tr>
                                 <td scope="col">SKU</td>
                                 <td scope="col">Description</td>
                                 <td scope="col">Count</td>
@@ -1036,7 +1036,7 @@
                     ?>
                     <table class="table">
                         <thead>
-                            <tr align="middle">
+                            <tr>
                                 <td scope="col">List Name</td>
                                 <td scope="col">Description</td>
                                 <td scope="col">Requested By</td>
@@ -1050,7 +1050,7 @@
                         $date = $row['update_request_date'];
                         $date = date('m/d/Y');
                         ?>
-                            <tr valign="middle">
+                            <tr>
                                 <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $type; ?>"><?php echo $type; ?></a></td>
                                 <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
                                 <td data-label="User"><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
@@ -1091,11 +1091,19 @@
                     <section class="update-unit">
                          <table class="table">
                             <thead>
-                                <tr align="middle">
-                                    <th scope="col" colspan="3">Unit Data</th>
+                                <tr>
+                                    <th data-label="<?php echo $row['sku_id']; ?>" scope="col" colspan="1"><?php echo $row['sku_id']; ?></th>
+                                    <th class="align-right"><button class="info" type="submit" name="skuUpdate" form="UpdateForm">Submit</button></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td class="valign-top"><label for="desc">Description</label></td>
+                                    <td><textarea rows="4" cols="25" name="desc"><?php echo $row['sku_desc']; ?></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="tb1-color">UNIT</th>
+                                </tr>
                                 <tr>
                                     <td data-label="Unit">
                                         <label for="unit-length">Length</label>
@@ -1128,17 +1136,9 @@
                                         <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $row['sku_unit_weight'] ?>">
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </section> <!-- end Unit Data -->
-                    <section class="update-case">
-                         <table class="table">
-                            <thead>
-                                <tr align="middle">
-                                    <th scope="col" colspan="3">Case Data</th>
+                                <tr>
+                                    <th colspan="2" class="tb1-color">CASE</th>
                                 </tr>
-                            </thead>
-                            <tbody>
                                 <tr>
                                     <td data-label="Case">
                                         <label for="case-length">Length</label>
@@ -1179,17 +1179,9 @@
                                         <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $row['sku_case_qty'] ?>">
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </section> <!-- end Case Data -->
-                    <section class="update-pallet">
-                         <table class="table">
-                            <thead>
-                                <tr align="middle">
-                                    <th scope="col" colspan="3">Pallet Data</th>
+                                <tr>
+                                    <th colspan="2" class="tb1-color">PALLET</th>
                                 </tr>
-                            </thead>
-                            <tbody>
                                 <tr>
                                     <td data-label="Pallet">
                                         <label for="pallet-length">Length</label>
@@ -1231,6 +1223,12 @@
                                     </td>
                                 </tr>
                             </tbody>
+                             <tfoot>
+                                <tr>
+                                    <th scope="col" colspan="1"><?php echo $row['sku_id']; ?></th>
+                                    <th class="align-right"><button class="info" type="submit" name="skuUpdate" form="UpdateForm">Submit</button></th>
+                                </tr>
+                             </tfoot>
                         </table>
                     </section> <!-- end Case Data -->
                 </form>
@@ -1251,7 +1249,7 @@
         // *************************************************************
         
         public function setSkuData($sku, 
-               $unit_length, $unit_width, $unit_height, $unit_weight,
+               $sku_desc, $unit_length, $unit_width, $unit_height, $unit_weight,
                $case_length, $case_width, $case_height, $case_weight, $case_qty, 
                $pallet_length, $pallet_width, $pallet_height, $pallet_weight, $pallet_qty) 
         {
@@ -1262,6 +1260,7 @@
             {
                 $stmt = $this->conn->prepare("UPDATE sku 
                     SET 
+                    sku_desc = :sku_desc,
                     sku_unit_length = :unit_length,
                     sku_unit_width = :unit_width,
                     sku_unit_height = :unit_height,
@@ -1284,6 +1283,7 @@
         
                     WHERE sku_id = :skuID");
                     $stmt->bindparam(":skuID", $sku);
+                    $stmt->bindparam(":sku_desc", $sku_desc);
 
                     $stmt->bindparam(":unit_length", $unit_length);
                     $stmt->bindparam(":unit_width", $unit_width);

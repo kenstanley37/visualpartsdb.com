@@ -33,7 +33,7 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: Update SKU</title>
+    <title>Visual Parts Database: Update SKU: <?php echo $sku; ?></title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
     
@@ -47,14 +47,13 @@ else
         </aside>
         <main class="main">
             <section class="title">
-                <h2>Update SKU</h2>
+                <h2>Update SKU: <?php echo $sku; ?></h2>
             </section>
             <section class="nav">
 
             </section>
             <section class="update-form">
-                <h2><?php echo $sku; ?></h2>
-                <button class="info" type="submit" name="skuUpdate" form="UpdateForm">Submit</button>
+                <h2 hidden><?php echo $sku; ?></h2>
                 <?php $vpd->getSkuData($sku); ?>
             </section>
 
