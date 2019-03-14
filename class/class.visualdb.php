@@ -1313,8 +1313,61 @@
             {
                 echo $e->getMessage();
             }
-        } // end getSkuData
+        } // end setSkuData
         
+        
+        // *************************************************************
+        // Usage: checkSku($sku);
+        // checks if SKU exists.. Returns true or false
+        // *************************************************************
+        public function checkSku($sku)
+        {
+            // lets update the search ticker for this sku
+            try {
+                    $stmt = $this->conn->prepare("SELECT * FROM sku
+                        WHERE sku_id = :sku");
+                    $stmt->bindparam(":sku", $sku);
+                    $stmt->execute();
+                    $count = $stmt->rowCount();
+                    
+                     if($count < 1)
+                     {
+                         return false;
+                     } else
+                     {
+                         return true;
+                     }
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end checkSku;
+        
+        
+        // *************************************************************
+        // Usage: addSku($sku, $desc);
+        // adds sku and description to the database. 
+        // *************************************************************
+        public function addSku($sku, $desc)
+        {
+            $user = $_SESSION['user_id'];
+            // lets update the search ticker for this sku
+            try {
+                    $stmt = $this->conn->prepare("INSERT INTO sku
+                        (sku_id, sku_desc, sku_rec_added)
+                        VALUES(:sku_id, :sku_desc, :sku_rec_added)");
+                    $stmt->bindparam(":sku_id", $sku);
+                    $stmt->bindparam(":sku_desc", $desc);
+                    $stmt->bindparam(":sku_rec_added", $user);
+                    $stmt->execute();
+                    return true;
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end addSku;
         
     } // end class
 ?>

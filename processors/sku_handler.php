@@ -47,6 +47,36 @@
         }
         
     }
-
     
+    // Check if SKU exists then send to skuUpdate
+    if(isset($_POST['modifysearch']))
+    {
+        $sku = $vail->sanitizeString($_POST['sku']);
+        $result = $vpd->checkSku($sku);
+        
+        if($result)
+        {
+            header('location: /admin/update-sku.php?sku='.$sku);
+        } else 
+        {
+            header('location: /admin/modify-part.php?error=notfound');
+        }
+    }
+
+    // Add Part to the database
+    if(isset($_POST['addpart']))
+    {
+        $sku = $vail->sanitizeString($_POST['sku']);
+        $desc = $vail->sanitizeString($_POST['desc']);
+        
+        $result = $vpd->addSku($sku, $desc);
+        
+        if($result)
+        {
+            header('location: /admin/update-sku.php?sku='.$sku);
+        } else 
+        {
+            header('location: /admin/add-part.php?error=notfound');
+        }
+    }
 ?>
