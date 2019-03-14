@@ -191,7 +191,7 @@ if(isset($_GET['noaccess'])){
                             </div>
                             <div class="reg-form reg-textarea">
                                 <label for="messagearea">Message: </label>
-                                <textarea type="text" name="messagearea" id="messagearea" id="messagearea" rows="4" cols="20"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
+                                <textarea name="messagearea" id="messagearea" id="messagearea" rows="4" cols="20"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
                             </div>
                             <div class="reg-form">
                                 <input type="submit" value="SUBMIT"><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>

@@ -1014,8 +1014,6 @@ footer {
 }
 
 .main .nav {
-    border: 1px solid #ccc;
-    border-width: 1px 0;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -1063,6 +1061,56 @@ footer {
     justify-items: center;
 }
 
+.dash-top {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 
+        "topbox1 topbox2 topbox3";
+    grid-gap: 30px;
+    justify-content: center;
+    align-content: start;
+    border: 5px solid skyblue;
+}
+
+.dash-top .dash1 {
+    grid-area: topbox1;
+    height: 150px;
+    min-width: 300px;
+    border: 5px solid skyblue;
+}
+
+.dash-top .dash2 {
+    grid-area: topbox2;
+    height: 150px;
+    min-width: 300px;
+    border: 5px solid skyblue;
+}
+
+.dash-top .dash3 {
+    grid-area: topbox3;
+    height: 150px;
+    min-width: 300px;
+    border: 5px solid skyblue;
+}
+
+.dash-middle {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "middlebox";
+    grid-gap: 0;
+    justify-content: center;
+    align-content: start;
+    border: 5px solid skyblue;
+}
+
+.dash-middle .dash4 {
+    grid-area: middlebox;
+    width: 100%;
+    border: 1px solid #000;
+}
 
 /***************************************
 *
