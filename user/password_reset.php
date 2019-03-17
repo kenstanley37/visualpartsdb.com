@@ -10,12 +10,17 @@ $vail = new VALIDATE;
 $user = new USER;
 $error='';
 
+if(isset($_SESSION['user_id']))
+{
+    $userID = $_SESSION['user_id'];
+}
 
 if(isset($_GET['code']))
 {
-    $recordID = $vail->sanitizeString($_GET['id']);
-    $recordCode = $vail->sanitizeString($_GET['code']);
-    $result = $user->checkVerify($recordID, $recordCode);
+    $userID = $vail->sanitizeString($_GET['id']);
+    $_SESSION['user_id'] = $userID;
+    $userCode = $vail->sanitizeString($_GET['code']);
+    $result = $user->checkVerify($userID, $userCode);
     //echo $result;
     if($result == 'true')
     {
@@ -42,7 +47,9 @@ if(!isset($_GET['code'])){
             $updateResult = $user->updatePassword($userID, $password1);
             if($updateResult == 'true')
             {
-                header('location: /login.php');
+                
+                
+                //header('location: /login.php');
             }
         }
     } else {
