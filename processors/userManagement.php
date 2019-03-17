@@ -8,7 +8,16 @@
     $vpd= new VISUALDB;
     $vail = new VALIDATE;
     $user = new USER;
+
+    if(!isset($_SESSION['user_id']))
+    {
+        header("location: /noaccess.php");
+    }
+
+    $userID = $_SESSION['user_id'];
+    $rank = $user->getUserRole($userID);
     
+
     if(isset($_POST['activeSwitch']))
     {
         $userID = $_POST['activeSwitch'];
@@ -23,6 +32,8 @@
     Manage "My List" functions
     
     ***********************************************/
+
+    
 
     // Add a list
     if(isset($_POST['listname']))
@@ -78,8 +89,55 @@
     if(isset($_POST['requestUpdate']))
     {
         $skuID = $_POST['skuID'];
-        $user->requestUpdate($skuID);
+        $result = $user->requestUpdate($skuID);
         header("location: /search.php?search=".$skuID);
+    }
+
+
+    
+    // Change user to USER role
+    if(isset($_POST['setToUser']))
+    {
+        if($rank != 'ADMIN')
+        {
+            header("location: /noaccess.php");
+        } else 
+        {
+            $userID = $_POST['userID'];
+            $role = 1;
+            $result = $user->setUserRole($userID, $role);
+            header("location: /admin/user.php");
+        }
+        
+    } 
+
+    // Change user to ADMIN role
+    if(isset($_POST['setToAdmin']))
+    {
+        if($rank != 'ADMIN')
+        {
+            header("location: /noaccess.php");
+        } else 
+        {
+        $userID = $_POST['userID'];
+        $role = 2;
+        $result = $user->setUserRole($userID, $role);
+        header("location: /admin/user.php");
+        }
+    }
+
+    // Delete User
+    if(isset($_POST['remUser']))
+    {
+        if($rank != 'ADMIN')
+        {
+            header("location: /noaccess.php");
+        } else 
+        {
+        $userID = $_POST['userID'];
+        $result = $user->remUser($userID);
+        header("location: /admin/user.php");
+        }
     }
     
 ?>

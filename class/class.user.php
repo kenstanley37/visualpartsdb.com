@@ -212,7 +212,7 @@
                     $mail->send();
                     return true;
                 } catch (Exception $e) {
-                    return false;
+                    echo $e->getMessage();
                 }
             }
         
@@ -288,6 +288,23 @@
         
         
         // *************************************************************
+        // Usage: remUser($userid);
+        // Removes user from all tables (history, list, etc)
+        // *************************************************************
+        public function remUser($userid){
+            try 
+            {
+                $stmt = $this->conn->prepare("DELETE FROM user WHERE user_id=:userid ");
+                $stmt->bindparam(":userid", $userid);
+                $stmt->execute();
+                return true;
+            } catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }	
+        }
+        
+        // *************************************************************
         // Usage: setSession($id, $fname, $lname);
         // Sets session after registeration and/or user login
         // *************************************************************
@@ -330,6 +347,31 @@
                 echo $e->getMessage();
             }
         } // end dropDownUser
+        
+        
+        // *************************************************************
+        // Usage: userFullName($userID);
+        // Returns the users first and last name 
+        // *************************************************************
+        
+        public function userFullName($userID)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM user
+                    WHERE user_id = :userid");
+                $stmt->bindparam(":userid", $userID);
+                $stmt->execute();
+                $row = $stmt->fetch();
+                $fullName = $row['user_fName'].' '.$row['user_lName'];
+                return $fullName;
+                
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end userFullName
         
         // *************************************************************
         // Usage: dropdownCompany();
@@ -380,9 +422,10 @@
                             <td>Last Name</td>
                             <td>Email</td>
                             <td>Company</td>
-                            <td>Active</td>
+                            <td>Status</td>
                             <td>Role</td>
                             <td>Member Since</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -395,23 +438,60 @@
                 {
                     $regdate = $row['user_reg_date'];
                     $regdate = date('m/d/Y');
+                    $userID = $row['user_id'];
                     ?>
                     <tr>
-                        <td><?php echo $row['user_id']; ?></td>
-                        <td><?php echo $row['user_fName']; ?></td>
-                        <td><?php echo $row['user_lName']; ?></td>
-                        <td><?php echo $row['user_email']; ?></td>
-                        <td><?php echo $row['company_name']; ?></td>
-                        <td>
-                            <form method="post" action="/processors/userManagement.php">
-
-                                <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
-                                <button type="submit" class="<?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>"><?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?></button>
-                            </form>
-                            
+                        <td data-label="ID">
+                            <?php echo $row['user_id']; ?>
                         </td>
-                        <td><?php echo $row['role_name']; ?></td>
-                        <td><?php echo $regdate; ?></td> 
+                        <td data-label="First">
+                            <?php echo $row['user_fName']; ?>
+                        </td>
+                        <td data-label="Last">
+                            <?php echo $row['user_lName']; ?>
+                        </td>
+                        <td data-label="Email">
+                            <?php echo $row['user_email']; ?>
+                        </td>
+                        <td data-label="Company">
+                            <?php echo $row['company_name']; ?>
+                        </td>
+                        <td data-label="Status">
+                            <form method="post" action="/processors/userManagement.php">
+                                <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
+                                <button type="submit" class="btn <?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>">
+                                    <?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?>
+                                </button>
+                            </form>
+                        </td>
+                        <td data-label="Role">
+                            <form action="/processors/userManagement.php" method="post">
+                                <input type="number" name="userID" value="<?php echo $userID; ?>" hidden>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <button class="btn <?php if($row['role_name'] == 'USER'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToUser">
+                                                USER 
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn <?php if($row['role_name'] == 'ADMIN'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToAdmin">
+                                                ADMIN 
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </td>
+                        <td data-label="Member Since">
+                            <?php echo $regdate; ?>
+                        </td> 
+                        <td>
+                            <form action="/admin/deleteuser.php" method="post">
+                                <input hidden type="text" name="userID" value="<?php echo $userID; ?>">
+                                <button type="submit" name="remUser" class="btn danger">DELETE</button>
+                            </form>
+                        </td>
                     </tr>
                     <?php
                 }
@@ -548,13 +628,13 @@
                 ?> <table class="table">
                         <thead>
                             <tr align="middle">
-                                <td scope="col">Status</td>
-                                <td scope="col">List</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Parts</td>
-                                <td scope="col">Date Added</td>
-                                <td scope="col">Export</td>
-                                <td scope="col"></td>
+                                <td>Status</td>
+                                <td>List</td>
+                                <td>Description</td>
+                                <td>Parts</td>
+                                <td>Date Added</td>
+                                <td>Export</td>
+                                <td></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -586,7 +666,7 @@
                                     } else 
                                     {
                                         ?>
-                                        <button class="inactive" type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive" id="makeActive">Set Active</button>
+                                        <button class="btn inactive" type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive" id="makeActive">Set Active</button>
                                         <?php
                                     }
                                 
@@ -603,7 +683,7 @@
                                 <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
                                 <input type="text" hidden value="<?php echo $row['pl_list_name']; ?>" name="listname" id="listname">
                                 <input type="text" hidden value="<?php echo $count; ?>" name="listcount" id="listcount">
-                                <button class="danger" type="submit" name="deletelist" id="deletelist" value="<?php echo $row['pl_id'];?>">Delete</button>
+                                <button class="btn danger" type="submit" name="deletelist" id="deletelist" value="<?php echo $row['pl_id'];?>">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -906,7 +986,7 @@
                                     <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
                                     <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
                                     <input name="myListContent" value="myListContent" hidden>
-                                    <button class="danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
+                                    <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
                                 </form>
                             </td>
                         </tr>  
@@ -979,6 +1059,56 @@
                 echo $e->getMessage();
             }
         } // end myListAddSku
+        
+        
+        // *************************************************************
+        // Usage: setUserRole($user, $role);
+        // Sets the users role
+        // $role can either be 1 for 'USER or 2 for 'ADMIN'
+        //*************************************************************
+        
+        public function setUserRole($user, $role)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("UPDATE user SET user_role_id = :role_id 
+                    WHERE user_id = :user_id");
+                $stmt->bindparam(":user_id", $user);
+                $stmt->bindparam(":role_id", $role);
+                $stmt->execute();
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end setUserRole
+        
+        // *************************************************************
+        // Usage: getUserRole($user);
+        // Returns the users current role name ('USER' or 'ADMIN')
+        //*************************************************************
+        
+        public function getUserRole($user)
+        {
+            $userID = $_SESSION['user_id'];
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * from user 
+                    LEFT JOIN role on user_role_id = role_id
+                    WHERE user_id = :user_id");
+                $stmt->bindparam(":user_id", $user);
+                $stmt->execute();
+                $row = $stmt->fetch();
+                $role = $row['role_name'];
+                return $role;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end setUserRole
+        
         
         
         // *************************************************************

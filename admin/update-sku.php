@@ -50,7 +50,7 @@ else
                 <h2>Update SKU: <?php echo $sku; ?></h2>
             </section>
             <section class="nav">
-
+                
             </section>
             <section class="update-form">
                 <h2 hidden><?php echo $sku; ?></h2>

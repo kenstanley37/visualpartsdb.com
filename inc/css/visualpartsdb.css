@@ -13,7 +13,7 @@
 html {
     font-family: 'Open Sans', sans-serif;
 }
-
+ 
 .navHam {
     display: none;
 }
@@ -108,50 +108,61 @@ span {
     margin-top: 55px;
 }
 
+.btn {
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+}
+
+.btn:link, btn:visited {
+    color: #000;
+}
+
+.btn:hover {
+    box-shadow: 2px 2px 8px 1px #888888;
+    border: none !important;
+}
+
 .inactive{
     padding: 5px 10px 5px 10px;
-    border-radius: 10px;
-    background-color: #87CEFA; 
-    color: black;
+    border-radius: 5px;
+    /* background-color: #87CEFA;  */
+    background-color: #cccccc;
+    color: #666666;
 	font-size: 10px;
 	font-weight: 600;
+    border: none;
 }
 
 .active {
     padding: 5px 10px 5px 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #90EE90; 
-    color: black;
+    color: #000;
 	font-size: 10px;
 	font-weight: 600;
+    border: none;
 }
 
 .danger {
     padding: 5px 10px 5px 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #f44b42; 
     color: #fff;
 	font-size: 10px;
 	font-weight: 600;
-    /*box-shadow: 2px 2px 8px 1px #888888;*/
+    border: none;
 }
 
 .info {
     padding: 5px 10px 5px 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #FFA500; 
     color: #000;
 	font-size: 10px;
 	font-weight: 600;
+    border: none;
     /*box-shadow: 2px 2px 8px 1px #888888;*/
-}
-
-button {
-    cursor: pointer;
-}
-
-button:hover {
-    box-shadow: 2px 2px 8px 1px #888888;
 }
 
 .align-right {
@@ -181,91 +192,6 @@ button:hover {
         "main"
         "footer";
 }
-
-/***************************************
-*
-*
-* START LOGIN STYLE
-*
-*
-****************************************/
-
-.login-main {
-    grid-area: main;
-	display: grid;
-    grid-template-columns: 100%;
-    grid-gap: 10px;
-    grid-template-areas: 
-        "loghead"
-        "logname"
-        "logpass"
-		"logcaptcha"
-        "logsubmit"
-        "logerror";
-    justify-items: center;
-	text-align: center;
-}
-
-.login-main .log-head {
-	grid-area: loghead;
-    margin-bottom: 50px;
-}
-
-.login-main form {
-	width: 300px;
-	margin-left: 50px;
-}
-
-.login-main form input {
-    width: 200px;
-	margin-bottom: 20px;
-}
-
-.login-main .log-name {
-	grid-area: logname;
-}
-
-.login-main .log-pass {
-	grid-area: logpass;
-}
-
-.login-main .log-captcha {
-	grid-area: logcaptcha;
-    margin-bottom: 25px;
-}
-
-.login-main  .g-recaptcha {
-    margin-left: 35px;
-    transform: scale(0.77);
-    -webkit-transform: scale(0.77);
-    transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-}
-
-.login-main .log-submit {
-	grid-area: logsubmit;
-    text-align: center;
-}
-
-.login-main .log-submit input {
-        width: 100px;
-}
-
-.login-main .log-error {
-	grid-area: logerror;
-}
-
-.login-main .emailError, .login-wrap .passwordError {
-	position: absolute;
-	margin-left: 10px;
-	color: red;
-}
-
-.login-main .captchaError {
-	margin-left: 10px;
-	color: red;
-}
-
 
 /***************************************
 *
@@ -987,7 +913,7 @@ footer {
 .main {
     grid-area: main;
     display: grid;
-    grid-template-columns: 75vw;
+    grid-template-columns: 95vw;
     grid-template-rows: 15px auto auto auto;
     grid-template-areas: 
         "title"
@@ -1059,6 +985,14 @@ footer {
     grid-area: mcontent;
     display: grid;
     justify-items: center;
+}
+
+.main .update-sku {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 10px;
 }
 
 .dash-top {

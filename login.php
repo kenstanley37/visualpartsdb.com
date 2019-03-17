@@ -4,6 +4,7 @@ include("inc/inc.path.php");
 require_once($path."class/class.user.php");
 require_once($path."class/class.func.php");
 
+$vail = new VALIDATE;
 
 // Register API keys at https://www.google.com/recaptcha/admin
 $siteKey = '6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k';
@@ -23,7 +24,10 @@ if(isset($_SESSION['emailcheck'])){
 }
 
 // check if form has been submitted then start validation checks and login
-if(isset($_POST['submit'])){
+if(isset($_POST['Login'])){
+    $email = $vail->sanitizeString($_POST['email']);
+    $pass = $vail->sanitizeString($_POST['password']);
+    
     $captcha=$_POST['g-recaptcha-response'];
     $ip = $_SERVER['REMOTE_ADDR'];					
     // Request the Google server to validate our captcha
@@ -32,10 +36,6 @@ if(isset($_POST['submit'])){
      $response = json_decode($request);	     
 
     if($response->success) {
-        $vail = new VALIDATE;
-        $email = $vail->sanitizeString($_POST['email']);
-        $pass = $vail->sanitizeString($_POST['password']);
-
         $vail->validEmail($email);
         if(empty($pass)){
             $passwordError = 'Please enter your password';
@@ -85,35 +85,76 @@ if(isset($_GET['error'])){
         }
        ?>
         </aside>
-        <main class="login-main">
-            <form action="login.php" method="post">
-                <section class="log-head">
-                    <h1>Member Login</h1>
-                    <hr>
-                </section>
-                <section class="log-name">
-                    <label id="icon" for="email"><i class="fa fa-user"></i></label>
-                    <input type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
-                    <?php if(isset($emailError)){echo '<span class="emailError">' .$emailError.'</span>';} ?>
-                </section>
-                <section class="log-pass">
-                    <label id="icon" for="password"><i class="fa fa-key"></i></label>
-                    <input type="password" placeholder="Password" id="password" name="password">
-                    <?php if(isset($emailError)){echo '<span class="passwordError">' .$passwordError.'</span>';} ?>
-                </section>
-                <section class="log-captcha">
-                    <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
-                </section>
-                <section class="log-submit">
-                    <input type="submit" name="submit" value="Sign In">
-                </section>
-                <section class="log-error">
-                    <?php echo $captchaError; ?>
-                </section>
-            </form>
+        <main class="main">
+            <section class="title">
+                <h1>Member Login</h1>
+            </section>
+            <section class="nav">
+
+            </section>
+            <section class="content">
+                <form action="login.php" method="post">
+                    <!--
+                    <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
+                    -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="3">LOGIN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label id="icon" for="email"><i class="fa fa-user"></i> Email:</label>
+                                </td>
+                                <td data-label="Email">
+                                    <input required type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <?php if(isset($emailError)){echo '<span class="emailError">' .$emailError.'</span>';} ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="icon" for="password"><i class="fa fa-key"></i> Password:</label>
+                                </td>
+                                <td data-label="Password">
+                                    <input required type="password" placeholder="Password" id="password" name="password">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <?php if(isset($emailError)){echo '<span class="passwordError">' .$passwordError.'</span>';} ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <?php echo $captchaError; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="btn info" href="/user/password-reset.php">Forgot?</a>
+                                </td>
+                                <td colspan="2" class="align-right">
+                                    <button class="btn active" type="submit" name="Login">Login</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>            
+                </form>
+            </section>
         </main>
-        <footer class="login-footer">
-            <?php include("inc/inc.footer.php"); ?>
+        <footer>
+            <?php include($path."/inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

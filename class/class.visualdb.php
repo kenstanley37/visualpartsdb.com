@@ -128,7 +128,7 @@
                                                 {
                                                     ?>
                                                     <td>
-                                                        <button class="active" type="submit" disabled>Requested</button>
+                                                        <button class="btn active" type="submit" disabled>Requested</button>
                                                     </td>
                                                     <?php
                                                 } else
@@ -137,7 +137,7 @@
                                                     <td>
                                                         <form method="post" action="/processors/userManagement.php">
                                                             <input type="text" name="skuID" value="<?php echo $skuRow['sku_id']; ?>" hidden>
-                                                            <button class="info" type="submit" name="requestUpdate">Request</button>
+                                                            <button class="btn info" type="submit" name="requestUpdate">Request</button>
                                                         </form>
                                                     </td>
                                                     <?php
@@ -186,12 +186,12 @@
                                                                     if($skucheck)
                                                                     {
                                                                         ?>
-                                                                        <button class="danger" type="submit" name="remSkuFromList">Remove From List</button>
+                                                                        <button class="btn danger" type="submit" name="remSkuFromList">Remove From List</button>
                                                                         <?php
                                                                     } else 
                                                                     {
                                                                         ?>
-                                                                        <button class="active" type="submit" name="addSkuToList">Add To List</button>
+                                                                        <button class="btn active" type="submit" name="addSkuToList">Add To List</button>
                                                                         <?php
                                                                     }
                                                                 ?>
@@ -1085,25 +1085,42 @@
                 $stmt->bindparam(":skuID", $sku);
                 $stmt->execute();
                 $row = $stmt->fetch();
+                
             ?>
-                <form id="UpdateForm" method="post" action="/processors/sku_handler.php">
+                <form id="UpdateSkuForm" method="post" action="/processors/sku_handler.php">
                     <input type="text" name="sku" value="<?php echo $sku; ?>" hidden>
-                    <section class="update-unit">
-                         <table class="table">
+                    <section class="update-sku">
+                        <table class="table sku-set1">
                             <thead>
                                 <tr>
-                                    <th data-label="<?php echo $row['sku_id']; ?>" scope="col" colspan="1"><?php echo $row['sku_id']; ?></th>
-                                    <th class="align-right"><button class="info" type="submit" name="skuUpdate" form="UpdateForm">Submit</button></th>
+                                    <th data-label="<?php echo $row['sku_id']; ?>" scope="col" colspan="1">
+                                        <?php echo $row['sku_id']; ?>
+                                    </th>
+                                    <th class="align-right">
+                                        <button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="valign-top"><label for="desc">Description</label></td>
-                                    <td><textarea rows="4" cols="25" name="desc"><?php echo $row['sku_desc']; ?></textarea></td>
+                                    <td class="valign-top">
+                                        <label for="desc">Description</label>
+                                    </td>
+                                    <td>
+                                        <textarea rows="4" cols="25" name="desc">
+                                            <?php echo $row['sku_desc']; ?>
+                                        </textarea>
+                                    </td>
                                 </tr>
+                        </table>
+
+                        <table class="table sku-set2">
+                            <thead>
                                 <tr>
                                     <th colspan="2" class="tb1-color">UNIT</th>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 <tr>
                                     <td data-label="Unit">
                                         <label for="unit-length">Length</label>
@@ -1136,9 +1153,16 @@
                                         <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $row['sku_unit_weight'] ?>">
                                     </td>
                                 </tr>
-                                <tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table sku-set3">
+                            <thead>
+                                 <tr>
                                     <th colspan="2" class="tb1-color">CASE</th>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 <tr>
                                     <td data-label="Case">
                                         <label for="case-length">Length</label>
@@ -1179,9 +1203,16 @@
                                         <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $row['sku_case_qty'] ?>">
                                     </td>
                                 </tr>
+                            </tbody>
+                        </table>    
+
+                        <table class="table sku-set4">
+                            <thead>
                                 <tr>
                                     <th colspan="2" class="tb1-color">PALLET</th>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 <tr>
                                     <td data-label="Pallet">
                                         <label for="pallet-length">Length</label>
@@ -1223,17 +1254,25 @@
                                     </td>
                                 </tr>
                             </tbody>
-                             <tfoot>
+                        </table>  
+
+                        <table class="table sku-update-btn">
+                            <thead>
                                 <tr>
-                                    <th scope="col" colspan="1"><?php echo $row['sku_id']; ?></th>
-                                    <th class="align-right"><button class="info" type="submit" name="skuUpdate" form="UpdateForm">Submit</button></th>
+                                    <th colspan="2">
+                                        <?php echo $row['sku_id']; ?>
+                                    </th>
+                                    <th class="align-right">
+                                        <button class="btn info" type="submit" name="skuUpdate" form="UpdateForm">Submit</button>
+                                    </th>
                                 </tr>
-                             </tfoot>
-                        </table>
+                             </thead>
+                        </table>                         
                     </section> <!-- end Case Data -->
                 </form>
 
             <?php
+
             }
             catch(PDOException $e)
             {
@@ -1253,6 +1292,8 @@
                $case_length, $case_width, $case_height, $case_weight, $case_qty, 
                $pallet_length, $pallet_width, $pallet_height, $pallet_weight, $pallet_qty) 
         {
+            
+            $sku_desc = trim($sku_desc);
             $user = $_SESSION['fname'].' '.$_SESSION['lname'];
             date_default_timezone_set('US/Eastern');
             $date = date('m/d/Y h:i:s a', time());
@@ -1321,8 +1362,7 @@
         // checks if SKU exists.. Returns true or false
         // *************************************************************
         public function checkSku($sku)
-        {
-            // lets update the search ticker for this sku
+        {   
             try {
                     $stmt = $this->conn->prepare("SELECT * FROM sku
                         WHERE sku_id = :sku");
@@ -1352,7 +1392,6 @@
         public function addSku($sku, $desc)
         {
             $user = $_SESSION['user_id'];
-            // lets update the search ticker for this sku
             try {
                     $stmt = $this->conn->prepare("INSERT INTO sku
                         (sku_id, sku_desc, sku_rec_added)
