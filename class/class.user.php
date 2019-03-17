@@ -186,16 +186,16 @@
                     $mail->isSMTP();                                // Set mailer to use SMTP
                     $mail->Host = 'visualpartsdb.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;                         // Enable SMTP authentication
-                    $mail->Username = 'info@visualpartsdb.com';     // SMTP username
+                    $mail->Username = 'register@visualpartsdb.com';     // SMTP username
                     $mail->Password = '#r.MTs%{@OEy';                           // SMTP password
                     $mail->SMTPSecure = 'ssl';                      // Enable TLS encryption, `ssl` also accepted
                     $mail->Port = 465;                              // TCP port to connect to
 
                     //Recipients
-                    $mail->setFrom('info@visualpartsdb.com', 'Visual Parts Database');
+                    $mail->setFrom('register@visualpartsdb.com', 'Visual Parts Database');
                     $mail->addAddress($email, $fname.' '.$lname);     // Add a recipient
                     //$mail->addAddress($email);               // Name is optional
-                    $mail->addReplyTo('info@visualpartsdb.com', 'NoReply');
+                    $mail->addReplyTo('register@visualpartsdb.com', 'NoReply');
                     //$mail->addCC('cc@example.com');
                     //$mail->addBCC('bcc@example.com');
 

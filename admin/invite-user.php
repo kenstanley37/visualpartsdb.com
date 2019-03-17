@@ -104,7 +104,7 @@ if(isset($_GET['register']))
                         </form>
             </section>
             <section class="content">
-                <span> <?php echo $result; ?></span>
+                <span> <?php if(isset($result)){echo $result;} ?></span>
             </section>
         </main>
         <footer>
