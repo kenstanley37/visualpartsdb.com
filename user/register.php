@@ -69,59 +69,48 @@ if(!isset($_GET['code'])){
         }
        ?>
         </aside>
-        <main class="register-main">
-            <h1>Registration</h1>
-            <?php 
-                if($result){
-                    ?>
-                        <section class="register-success">
-                            <form>
+        <main class="main">
+            <section class="nav">
+
+            </section>
+            <section class="title">
+                <h1>Register</h1>
+            </section>
+            <section class="form">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>REGISTER</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
                                 <label for="password1">Password</label>
+                            </td>
+                            <td>
                                 <input type="password" name="password1" id="password1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label for="password1">Password Again</label>
+                            </td>
+                            <td>
                                 <input type="password" name="password2" id="password2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input type="submit" value="Set Password">
-                            </form>
-                        </section>
-                    <?php
-                }
-            ?>
-            <?php 
-                if(!$result){
-                    ?>
-                        <section class="register-fail">
-                            <h2><?php if(!empty($fname)){echo 'Welcome '.$fname;} ?></h2>
-                            <form action="/user/register.php" method="post">
-                                <table class="reg-table">
-                                    <caption>Please set your password</caption>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <label for="password1">Password</label>
-                                            </td>
-                                            <td>
-                                                <input type="password" name="password1" id="password1">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label for="password1">Password Again</label>
-                                            </td>
-                                            <td>
-                                                <input type="password" name="password2" id="password2">
-                                                <span><?php if(isset($error)){echo $error;} ?></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="submit" value="Set Password" name="passwordupdate"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                        </section>
-                    <?php
-                }
-            ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="content">
+                
+            </section>    
         </main>
         <footer>
             <?php include($path."inc/inc.footer.php"); ?>
