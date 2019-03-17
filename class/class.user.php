@@ -175,7 +175,7 @@
                 $mail = new PHPMailer(true);                              // Passing `true` enables xceptions
                 
                 try {
-                    $stmt = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_company, user_active, user_role, user_added_by, user_code) VALUES(:fname, :lname, :email, :company, :status, :role, :admin, :code)");
+                    $stmt = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_company, user_active, user_role_id, user_added_by, user_code) VALUES(:fname, :lname, :email, :company, :status, :role, :admin, :code)");
 
                     $stmt->bindparam(":fname", $fname);
                     $stmt->bindparam(":lname", $lname);
