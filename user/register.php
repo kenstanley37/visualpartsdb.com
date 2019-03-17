@@ -20,7 +20,7 @@ if(isset($_GET['code']))
     $recordID = $vail->sanitizeString($_GET['id']);
     $recordCode = $vail->sanitizeString($_GET['code']);
     $result = $user->checkVerify($recordID, $recordCode);
-    echo $result;
+    //echo $result;
     if($result == 'true')
     {
         echo 'im working';
@@ -108,6 +108,18 @@ if(!isset($_GET['code'])){
                                 <input type="submit" value="Set Password">
                             </td>
                         </tr>
+                        <?php 
+                            if(!empty($error))
+                            {
+                                ?>
+                                <tr>
+                                    <td colspan="2">
+                                        <span><?php echo $error; ?></span>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        ?>
                     </tbody>
                 </table>
             </section>
