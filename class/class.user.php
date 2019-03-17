@@ -320,7 +320,7 @@
             $password = password_hash($password, PASSWORD_DEFAULT);
             try 
             {
-                $stmt = $this->conn->prepare("UPDATE user SET user_password=:password 
+                $stmt = $this->conn->prepare("UPDATE user SET user_password=:password, user_code = null
                     WHERE user_id=:userid ");
                 $stmt->bindparam(":userid", $userID);
                 $stmt->bindparam(":password", $password);
