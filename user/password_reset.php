@@ -10,15 +10,15 @@ $vail = new VALIDATE;
 $user = new USER;
 $error='';
 
-if(isset($_SESSION['user_id']))
+if(isset($_SESSION['temp_id']))
 {
-    $userID = $_SESSION['user_id'];
+    $userID = $_SESSION['temp_id'];
 }
 
 if(isset($_GET['code']))
 {
     $userID = $vail->sanitizeString($_GET['id']);
-    $_SESSION['user_id'] = $userID;
+    $_SESSION['temp_id'] = $userID;
     $userCode = $vail->sanitizeString($_GET['code']);
     $result = $user->checkVerify($userID, $userCode);
     //echo $result;
@@ -47,6 +47,8 @@ if(!isset($_GET['code'])){
             $updateResult = $user->updatePassword($userID, $password1);
             if($updateResult)
             {
+                unset($_SESSION['temp_id']);
+                unset($_SESSION['user_id']);
                 header('location: /login.php');
             } else
             {
