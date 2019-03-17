@@ -253,6 +253,7 @@
                         $row = $stmt->fetch();
                         $userFName = $row['user_fName'];
                         $userLName = $row['user_lName'];
+                        $userEmail = $row['user_email'];
                         $existsCheck = $this->checkID($userEmail);
                         
                         if($existsCheck)
