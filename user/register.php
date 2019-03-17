@@ -80,7 +80,7 @@ if(!isset($_GET['code'])){
                 <table class="table">
                     <thead>
                         <tr>
-                            <th colspan="2">REGISTER</th>
+                            <th colspan="2">SET PASSWORD</th>
                         </tr>
                     </thead>
                     <tbody>

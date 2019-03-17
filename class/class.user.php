@@ -237,23 +237,34 @@
                         $userActive = 1;
                         $userPassword = 'temp1';
                         $userRole = 1;
-                        try
+
+                        $existsCheck = $this->checkID($userEmail);
+                        
+                        if($existsCheck)
                         {
-                            $adduser = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_active, user_password, user_role_id, user_company) VALUES(:fname, :lname, :email, :active, :password, :role, :comp)");
-                            $adduser->bindparam(":fname", $userFName);
-                            $adduser->bindparam(":lname", $userLName);
-                            $adduser->bindparam(":email", $userEmail);
-                            $adduser->bindparam(":active", $userActive);
-                            $adduser->bindparam(":password", $userPassword);
-                            $adduser->bindparam(":role", $userRole);
-                            $adduser->bindparam(":comp", $userComp);
-                            $adduser->execute();
-                            $db_id = $this->conn->lastInsertId();
-                            //$this->setSession($db_id, $userFName, $userLName);
-                        } catch(PDOException $e)
+                            return "You already have an account";
+                        } else
                         {
-                            echo $e->getMessage();
+                            try
+                            {
+                                $adduser = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_active, user_password, user_role_id, user_company) VALUES(:fname, :lname, :email, :active, :password, :role, :comp)");
+                                $adduser->bindparam(":fname", $userFName);
+                                $adduser->bindparam(":lname", $userLName);
+                                $adduser->bindparam(":email", $userEmail);
+                                $adduser->bindparam(":active", $userActive);
+                                $adduser->bindparam(":password", $userPassword);
+                                $adduser->bindparam(":role", $userRole);
+                                $adduser->bindparam(":comp", $userComp);
+                                $adduser->execute();
+                                $db_id = $this->conn->lastInsertId();
+                                //$this->setSession($db_id, $userFName, $userLName);
+                            } catch(PDOException $e)
+                            {
+                                echo $e->getMessage();
+                            } 
                         }
+                        
+
                     } else {
                       echo 'No record found';
                     }
@@ -264,6 +275,31 @@
                     echo $e->getMessage();
                 }	
             }
+        
+        // *************************************************************
+        // Usage: checkID($email);
+        // Checks if email is already in the database
+        // *************************************************************
+        public function checkID($email)
+        {
+            try 
+            {
+                $stmt = $this->conn->prepare("SELECT * from user WHERE user_email = :email");
+                $stmt->bindparam(":email", $email);
+                $stmt->execute();
+                $rowCount = $stmt->rowCount();
+                if($rowCount >= 1)
+                {
+                    return false
+                } else
+                {
+                    return true;
+                }
+            } catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }	
+        }
         
         
         // *************************************************************
