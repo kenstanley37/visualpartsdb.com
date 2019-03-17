@@ -26,7 +26,7 @@ if(isset($_GET['code']))
         echo 'im working';
     } elseif($result == "accountexists") 
     {
-        $error = 'You already have an account. Please log in.';
+        $error = 'You already have an account. Please <a href="/login.php">Login</a>.';
     }
 }
 
