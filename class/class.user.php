@@ -257,14 +257,12 @@
                                 $adduser->bindparam(":comp", $userComp);
                                 $adduser->execute();
                                 $db_id = $this->conn->lastInsertId();
-                                //$this->setSession($db_id, $userFName, $userLName);
+                                $this->setSession($db_id, $userFName, $userLName);
                             } catch(PDOException $e)
                             {
                                 echo $e->getMessage();
                             } 
-                        }
-                        
-
+                        } 
                     } else {
                       echo 'No record found';
                     }

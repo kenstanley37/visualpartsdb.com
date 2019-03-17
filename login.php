@@ -112,11 +112,18 @@ if(isset($_GET['error'])){
                                     <input required type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <?php if(isset($emailError)){echo '<span class="emailError">' .$emailError.'</span>';} ?>
-                                </td>
-                            </tr>
+                            <?php
+                            if(!empty($emailError))
+                            {
+                                ?>
+                                    <tr>
+                                        <td colspan="3">
+                                            <?php if(isset($emailError)){echo '<span class="emailError">' .$emailError.'</span>';} ?>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                            ?>
                             <tr>
                                 <td>
                                     <label id="icon" for="password"><i class="fa fa-key"></i> Password:</label>
@@ -125,21 +132,37 @@ if(isset($_GET['error'])){
                                     <input required type="password" placeholder="Password" id="password" name="password">
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <?php if(isset($emailError)){echo '<span class="passwordError">' .$passwordError.'</span>';} ?>
-                                </td>
-                            </tr>
+                            <?php 
+                                if(!empty($emailError))
+                                {
+                                    ?>
+                                        <tr>
+                                            <td colspan="3">
+                                                <?php echo '<span class="passwordError">' .$passwordError.'</span>'; ?>
+                                            </td>
+                                        </tr>
+                            
+                                    <?php
+                                }
+                            ?>
                             <tr>
                                 <td colspan="3">
                                     <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <?php echo $captchaError; ?>
-                                </td>
-                            </tr>
+                            <?php
+                                if(!empty($captchaError))
+                                {
+                                    ?>
+                                        <tr>
+                                            <td colspan="3">
+                                                <?php echo $captchaError; ?>
+                                            </td>
+                                        </tr> 
+                                    <?php
+                                }
+                            ?>
+                            
                             <tr>
                                 <td>
                                     <a class="btn info" href="/user/password-reset.php">Forgot?</a>
