@@ -325,7 +325,6 @@
                 $stmt->bindparam(":userid", $userID);
                 $stmt->bindparam(":password", $password);
                 $stmt->execute();
-                die;
                 return true;
             } catch(PDOException $e)
             {
