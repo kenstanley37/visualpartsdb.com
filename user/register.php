@@ -89,7 +89,7 @@ if(!isset($_GET['code'])){
                                 <label for="password1">Password</label>
                             </td>
                             <td>
-                                <input type="password" name="password1" id="password1">
+                                <input required type="password" name="password1" id="password1">
                             </td>
                         </tr>
                         <tr>
@@ -97,7 +97,7 @@ if(!isset($_GET['code'])){
                                 <label for="password1">Password Again</label>
                             </td>
                             <td>
-                                <input type="password" name="password2" id="password2">
+                                <input required type="password" name="password2" id="password2">
                             </td>
                         </tr>
                         <tr>
