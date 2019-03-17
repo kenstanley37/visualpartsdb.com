@@ -150,8 +150,11 @@
         // Send new user verification email
         // *************************************************************
         
-            public function addUserVerify($fname, $lname, $email, $memFName, $memLName, $memuserID, $memCompany)
+            public function addUserVerify($fname, $lname, $email, $company)
             {
+                
+                $admin = $_SESSION['user_id'];
+                
                 $fname = strtolower($fname);
                 $fname = ucfirst($fname);
                 
@@ -160,23 +163,29 @@
                 
                 $email = strtolower($email);
                 
+                $role = 1; // default to normal user
+                
+                $status = 1; // 1 = active user
 
                 //Load Composer's autoloader
                 require '../vendor/autoload.php';
                 // for user registeration
-                $code = substr(md5(mt_rand()),0,15);
+                $code = $this->code();
                 
                 $mail = new PHPMailer(true);                              // Passing `true` enables xceptions
                 
                 try {
-                    $stmt = $this->conn->prepare("INSERT INTO verify (verify_fname, verify_lname, verify_email, verify_code, verify_added_by, verify_comp) VALUES(:fname, :lname, :email, :code, :memuserID, :memcompany)");
+                    $stmt = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_company, user_active, user_role, user_added_by, user_code) VALUES(:fname, :lname, :email, :company, :status, :role, :admin, :code)");
 
                     $stmt->bindparam(":fname", $fname);
                     $stmt->bindparam(":lname", $lname);
                     $stmt->bindparam(":email", $email);
+                    $stmt->bindparam(":company", $company);
+                    $stmt->bindparam(":status", $status);
+                    $stmt->bindparam(":role", $role);
+                    $stmt->bindparam(":admin", $admin);
                     $stmt->bindparam(":code", $code);
-                    $stmt->bindparam(":memuserID", $memuserID);
-                    $stmt->bindparam(":memcompany", $memCompany);
+                    
                     $stmt->execute();	
                     $db_id = $this->conn->lastInsertId();
                     
@@ -206,8 +215,8 @@
                     //Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Welcome to Visual Parts Database';
-                    $mail->Body    = 'Hello '.$fname.', <br><br> You have been invited by <b>'.$memFName.' '. $memLName.'</b> to be a user of Visual Parts Database. <br><br>Your Activation Code is: <b>'.$code.'</b><br><br> Please click on this link https://visualpartsdb.com/user/register.php?id='.$db_id.'&code='.$code.' to activate your account.';
-                    $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/register.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                    $mail->Body    = 'Hello '.$fname.', <br><br> You have been invited by <b>'.$memFName.' '. $memLName.'</b> to be a user of Visual Parts Database. <br><br>Your Activation Code is: <b>'.$code.'</b><br><br> Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                    $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
 
                     $mail->send();
                     return true;
@@ -217,51 +226,53 @@
             }
         
             // *************************************************************
-            // Usage: checkVerify($id, $code);
-            // Used for email verification. Adds record into user table
+            // Usage: code();
+            // Returns a code for use in password reset and member verification
             // *************************************************************
-            public function checkVerify($id, $code)
+        
+            public function code()
+            {
+                $code = substr(md5(mt_rand()),0,15);
+                return $code;
+            }
+        
+        
+            // *************************************************************
+            // Usage: checkVerify($id, $code);
+            // Used for password reset and new users
+            // *************************************************************
+            public function checkVerify($userID, $code)
             {
                 try
                 {
-                    $stmt = $this->conn->prepare("SELECT * from verify where verify_id=:id and verify_code=:code");							  
-                    $stmt->bindparam(":id", $id);
+                    $stmt = $this->conn->prepare("SELECT * from user where user_id=:id and user_code=:code");							  
+                    $stmt->bindparam(":id", $userID);
                     $stmt->bindparam(":code", $code);
                     $stmt->execute();	
                     if($stmt->rowCount() == 1){
                         $row = $stmt->fetch();
-                        $userFName = $row['verify_fname'];
-                        $userLName = $row['verify_lname'];
-                        $userEmail = $row['verify_email'];
-                        $userComp = $row['verify_comp'];
-                        $userActive = 1;
-                        $userPassword = 'temp1';
-                        $userRole = 1;
-
+                        $userFName = $row['user_fName'];
+                        $userLName = $row['user_lName'];
                         $existsCheck = $this->checkID($userEmail);
                         
                         if($existsCheck)
                         {
-                            return "accountexists";
-                        } else
-                        {
+                            $verify = 1;
                             try
                             {
-                                $adduser = $this->conn->prepare("INSERT INTO user (user_fName, user_lName, user_email, user_active, user_password, user_role_id, user_company) VALUES(:fname, :lname, :email, :active, :password, :role, :comp)");
-                                $adduser->bindparam(":fname", $userFName);
-                                $adduser->bindparam(":lname", $userLName);
-                                $adduser->bindparam(":email", $userEmail);
-                                $adduser->bindparam(":active", $userActive);
-                                $adduser->bindparam(":password", $userPassword);
-                                $adduser->bindparam(":role", $userRole);
-                                $adduser->bindparam(":comp", $userComp);
+                                $adduser = $this->conn->prepare("UPDATE user SET user_verify = :verify
+                                    WHERE user_id = :userID");
+                                $adduser->bindparam(":verify", $verify);
+                                $adduser->bindparam(":userID", $userID);
                                 $adduser->execute();
-                                $db_id = $this->conn->lastInsertId();
-                                $this->setSession($db_id, $userFName, $userLName);
+                                return true;
                             } catch(PDOException $e)
                             {
                                 echo $e->getMessage();
                             } 
+                        } else
+                        {
+                            return 'noaccount';
                         } 
                     } else {
                       echo 'No record found';
@@ -273,7 +284,7 @@
                     echo $e->getMessage();
                 }	
             }
-        
+            
         // *************************************************************
         // Usage: checkID($email);
         // Checks if email is already in the database
@@ -304,13 +315,13 @@
         // Usage: updatePassword($userid, $password);
         // Updates the password for the user
         // *************************************************************
-        public function updatePassword($userid, $password){
-            $userid = $_SESSION['user_id'];
+        public function updatePassword($userID, $password){
             $password = password_hash($password, PASSWORD_DEFAULT);
             try 
             {
-                $stmt = $this->conn->prepare("UPDATE user SET user_password=:password where user_id=:userid ");
-                $stmt->bindparam(":userid", $userid);
+                $stmt = $this->conn->prepare("UPDATE user SET user_password=:password 
+                    WHERE user_id=:userid ");
+                $stmt->bindparam(":userid", $userID);
                 $stmt->bindparam(":password", $password);
                 $stmt->execute();
                 return true;
