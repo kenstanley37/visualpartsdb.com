@@ -80,7 +80,7 @@ if(!isset($_GET['code'])){
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>REGISTER</th>
+                            <th colspan="2">REGISTER</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,7 +101,7 @@ if(!isset($_GET['code'])){
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td class="align-right">
                                 <input type="submit" value="Set Password">
                             </td>
                         </tr>
