@@ -290,10 +290,10 @@
                 $rowCount = $stmt->rowCount();
                 if($rowCount >= 1)
                 {
-                    return false;
+                    return true;
                 } else
                 {
-                    return true;
+                    return false;
                 }
             } catch(PDOException $e)
             {
