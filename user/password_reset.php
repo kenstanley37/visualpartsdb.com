@@ -40,7 +40,7 @@ if(!isset($_GET['code'])){
             $error = 'Passwords do no match';
         } else {
             $updateResult = $user->updatePassword($userID, $password1);
-            if($updateResult)
+            if($updateResult == 'true')
             {
                 header('location: /login.php');
             }
