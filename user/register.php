@@ -101,7 +101,7 @@ if(!isset($_GET['code'])){
                             </td>
                         </tr>
                         <tr>
-                            <td class="align-right">
+                            <td colspan="2" class="align-right">
                                 <input type="submit" value="Set Password">
                             </td>
                         </tr>
