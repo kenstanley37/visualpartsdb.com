@@ -290,7 +290,7 @@
                 $rowCount = $stmt->rowCount();
                 if($rowCount >= 1)
                 {
-                    return false
+                    return false;
                 } else
                 {
                     return true;
