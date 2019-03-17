@@ -242,7 +242,7 @@
                         
                         if($existsCheck)
                         {
-                            return "You already have an account";
+                            return "accountexists";
                         } else
                         {
                             try

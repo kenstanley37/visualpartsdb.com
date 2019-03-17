@@ -8,6 +8,7 @@ require_once($path."class/class.func.php");
 $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
+$error='';
 
 if(isset($_SESSION['fname'])){
     $fname = $_SESSION['fname'];
@@ -20,10 +21,12 @@ if(isset($_GET['code']))
     $recordCode = $vail->sanitizeString($_GET['code']);
     $result = $user->checkVerify($recordID, $recordCode);
     echo $result;
-    if($result == 'true'){
+    if($result == 'true')
+    {
         echo 'im working';
-    } else {
-        echo 'Im not working';
+    } elseif($result == "accountexists") 
+    {
+        $error = 'You already have an account. Please log in.';
     }
 }
 
