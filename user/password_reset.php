@@ -19,10 +19,13 @@ if(isset($_GET['code']))
     //echo $result;
     if($result == 'true')
     {
-        echo 'im working';
+        //echo 'im working';
     } elseif($result == "noaccount") 
     {
         $error = 'Sorry you do not have an account on this system';
+    } else
+    {
+        header("location: /login.php");
     }
 }
 
@@ -37,7 +40,8 @@ if(!isset($_GET['code'])){
             $error = 'Passwords do no match';
         } else {
             $updateResult = $user->updatePassword($userID, $password1);
-            if($updateResult){
+            if($updateResult)
+            {
                 header('location: /login.php');
             }
         }
