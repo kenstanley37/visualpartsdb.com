@@ -245,7 +245,7 @@
                     $stmt = $this->conn->prepare("SELECT * from user where user_email =:email");
                     $stmt->bindparam(":email", $email);
                     $stmt->execute();
-                    $row = $update->fetch();
+                    $row = $stmt->fetch();
                     $db_id = $row['user_id'];
                     $rowCount = $stmt->rowCount();
                     if($rowCount >= 1)
@@ -257,8 +257,6 @@
                             $update->bindparam(":email", $email);
                             $update->bindparam(":code", $code);
                             $update->execute();	
-
-
 
                             //Server settings
                             $mail->SMTPDebug = 2;                           // Enable verbose debug output
