@@ -165,7 +165,7 @@ if(isset($_GET['error'])){
                             
                             <tr>
                                 <td>
-                                    <a class="btn info" href="/user/password-reset.php">Forgot?</a>
+                                    <a class="btn info" href="/user/reset.php">Forgot?</a>
                                 </td>
                                 <td colspan="2" class="align-right">
                                     <button class="btn active" type="submit" name="Login">Login</button>
