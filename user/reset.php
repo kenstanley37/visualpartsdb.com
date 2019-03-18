@@ -62,7 +62,7 @@ if(isset($_POST['reset']))
                                     <td colspan="2"><p>This will send a reset link</p></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" class="align-right"><button class="btn active" name="reset">Reset</button></td>
+                                    <td colspan="2" class="align-right"><button type="submit" class="btn active" name="reset">Reset</button></td>
                                 </tr>
                             </form>
                         </tbody>
