@@ -254,6 +254,7 @@
                                 WHERE user_email = :email");
 
                             $stmt->bindparam(":email", $email);
+                            $stmt->bindparam(":code", $code);
                             $stmt->execute();	
                             $row = $stmt-fetch();
                             $db_id = $row['user_id'];
