@@ -232,12 +232,6 @@
         
             public function sendPassLink($email)
             {
-                  
-                require_once('class.func.php');
-                
-                $vail = new VALIDATE;
-                $email = strtolower($email);
-                $email = $vail->sanitizeString($email);
 
                 //Load Composer's autoloader
                 require '../vendor/autoload.php';

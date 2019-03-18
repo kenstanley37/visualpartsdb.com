@@ -13,7 +13,17 @@ $error='';
 if(isset($_POST['reset']))
 {
     $email = $_POST['email'];
+    $email = strtolower($email);
+    $email = $vail->sanitizeString($email);
     $result = $user->sendPassLink($email);
+    
+    if($result == "true")
+    {
+        $error = '';
+    } else
+    {
+        $error = $result;
+    }
 }
 
 
@@ -63,6 +73,9 @@ if(isset($_POST['reset']))
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="align-right"><button type="submit" class="btn active" name="reset">Reset</button></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $error; ?></td>
                                 </tr>
                             </form>
                         </tbody>
