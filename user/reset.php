@@ -15,7 +15,7 @@ if(isset($_POST['reset']))
     $email = $_POST['email'];
     $email = strtolower($email);
     $email = $vail->sanitizeString($email);
-    $user->sendPassLink($email);
+    $result = $user->sendPassLink($email);
     
     if($result == "true")
     {
