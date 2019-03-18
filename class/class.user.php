@@ -225,6 +225,99 @@
                 }
             }
         
+        // *************************************************************
+        // Usage: sendPassLink($email);
+        // Sends the user a password reset link
+        // *************************************************************
+        
+            public function sendPassLink($email)
+            {
+                  
+                require_once('class.func.php');
+                
+                $vail = new VALIDATE;
+                $email = strtolower($email);
+                $email = $vail->sanitizeString($email);
+
+                //Load Composer's autoloader
+                require '../vendor/autoload.php';
+                // for user registeration
+                $code = $this->code();
+                
+                $mail = new PHPMailer(true);                              // Passing `true` enables xceptions
+                
+                try 
+                {
+                    $stmt = $this->conn->prepare("SELECT * from user where user_email =:email");
+                    $stmt->bindparam(":email", $email);
+                    $rowCount = $stmt->rowCount();
+                    if($rowCount >= 1)
+                    {
+                        try 
+                        {
+                            $stmt = $this->conn->prepare("UPDATE user SET user_code = :code 
+                                WHERE user_email = :email");
+
+                            $stmt->bindparam(":email", $email);
+                            $stmt->execute();	
+                            $row = $stmt-fetch();
+                            $db_id = $row['user_id'];
+
+
+                            //Server settings
+                            $mail->SMTPDebug = 2;                           // Enable verbose debug output
+                            $mail->isSMTP();                                // Set mailer to use SMTP
+                            $mail->Host = 'visualpartsdb.com';  // Specify main and backup SMTP servers
+                            $mail->SMTPAuth = true;                         // Enable SMTP authentication
+                            $mail->Username = 'register@visualpartsdb.com';     // SMTP username
+                            $mail->Password = '#r.MTs%{@OEy';                           // SMTP password
+                            $mail->SMTPSecure = 'ssl';                      // Enable TLS encryption, `ssl` also accepted
+                            $mail->Port = 465;                              // TCP port to connect to
+
+                            //Recipients
+                            $mail->setFrom('register@visualpartsdb.com', 'Visual Parts Database');
+                            $mail->addAddress($email, $fname.' '.$lname);     // Add a recipient
+                            //$mail->addAddress($email);               // Name is optional
+                            $mail->addReplyTo('register@visualpartsdb.com', 'NoReply');
+                            //$mail->addCC('cc@example.com');
+                            //$mail->addBCC('bcc@example.com');
+
+                            //Attachments
+                            //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+                            //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+                            //Content
+                            $mail->isHTML(true);                                  // Set email format to HTML
+                            $mail->Subject = 'Visual Parts Database Password Reset';
+                            $mail->Body    = 'Hello '.$fname.', <br><br> Someone has requested a password reset for your acount. If you did not do this, please ignore.  <br><br>Your Activation Code is: <b>'.$code.'</b><br><br> Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                            $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
+
+                            $mail->send();
+                            return true;
+                        } catch (Exception $e) 
+                        {
+                            echo $e->getMessage();
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    
+                } catch (Exception $e) 
+                {
+                    echo $e->getMessage();
+                }
+                
+                
+                
+                
+            }
+        
+        
+        
+        
+        
             // *************************************************************
             // Usage: code();
             // Returns a code for use in password reset and member verification
