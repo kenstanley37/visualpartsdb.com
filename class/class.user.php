@@ -250,6 +250,7 @@
                 {
                     $stmt = $this->conn->prepare("SELECT * from user where user_email =:email");
                     $stmt->bindparam(":email", $email);
+                    $stmt->execute();
                     $rowCount = $stmt->rowCount();
                     if($rowCount >= 1)
                     {
