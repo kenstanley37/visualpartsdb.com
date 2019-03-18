@@ -19,15 +19,6 @@ if(!isset($_SESSION['user_id']))
     }
 }
 
-if(isset($_GET['register']))
-{
-    $temp = $_GET['register'];
-    if($temp == 'successful')
-    {
-        $result = 'Registeration request has been sent';
-    }
-}
-
 
 ?>
 <!DOCTYPE html>
@@ -57,10 +48,10 @@ if(isset($_GET['register']))
 
             </section>
             <section class="title">
-                <h1>Member List</h1>
+                <h1>Pending Users</h1>
             </section>
             <section class="content">
-                <?php $user->userList('active'); ?>
+                <?php $user->userList('pending'); ?>
             </section>    
         </main>
         <footer>

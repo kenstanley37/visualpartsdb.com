@@ -9,7 +9,7 @@
     $vail = new VALIDATE;
     $user = new USER;
     
-    if(isset($_GET['fname']))
+    if(isset($_GET['RegisterRequest']))
     {
         $fname = $_GET['fname'];
         $lname = $_GET['lname'];

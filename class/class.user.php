@@ -154,6 +154,7 @@
             {
                 
                 $admin = $_SESSION['user_id'];
+                $adminName = $this->userFullName($admin);
                 
                 $fname = strtolower($fname);
                 $fname = ucfirst($fname);
@@ -215,7 +216,7 @@
                     //Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Welcome to Visual Parts Database';
-                    $mail->Body    = 'Hello '.$fname.', <br><br> You have been invited by <b>'.$memFName.' '. $memLName.'</b> to be a user of Visual Parts Database. <br><br>Your Activation Code is: <b>'.$code.'</b><br><br> Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                    $mail->Body    = 'Hello '.$fname.', <br><br> You have been invited by <b>'.$adminName.'</b> to be a user of Visual Parts Database. <br><br>Your Activation Code is: <b>'.$code.'</b><br><br> Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
                     $mail->AltBody = 'Your Activation Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
 
                     $mail->send();
@@ -303,15 +304,9 @@
                 {
                     echo $e->getMessage();
                 }
-                
-                
-                
-                
+
             }
-        
-        
-        
-        
+
         
             // *************************************************************
             // Usage: code();
@@ -440,13 +435,13 @@
         }
         
         // *************************************************************
-        // Usage: setSession($id, $fname, $lname);
+        // Usage: setSession($userID, $fname, $lname);
         // Sets session after registeration and/or user login
         // *************************************************************
         
-        public function setSession($id, $fname, $lname)
+        public function setSession($userID, $fname, $lname)
         {
-            $_SESSION['user_id'] = $id;
+            $_SESSION['user_id'] = $userID;
             $_SESSION['fname'] = $fname;
             $_SESSION['lname'] = $lname;
             return true;
@@ -536,104 +531,133 @@
         } // end dropDownCompany
         
         // *************************************************************
-        // Usage: userList();
-        // Return a list of all users in database  
+        // Usage: userList($type);
+        // Return a list of all users in database based off $type
+        // $type can equal ('active','pending','disabled')
         // *************************************************************
         
-        public function userList()
+        public function userList($type)
         {
             try
             {
-                $stmt = $this->conn->prepare("SELECT * FROM user
-                        LEFT JOIN company on company_id = user_company
-                        LEFT JOIN role on role_id = user_role_id");
-                $stmt->execute();
-                ?>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Member ID</td>
-                            <td>First Name</td>
-                            <td>Last Name</td>
-                            <td>Email</td>
-                            <td>Company</td>
-                            <td>Status</td>
-                            <td>Role</td>
-                            <td>Member Since</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                
-
-                <?php
-                
-                
-                while($row = $stmt->fetch())
+                if($type == 'active')
                 {
-                    $regdate = $row['user_reg_date'];
-                    $regdate = date('m/d/Y');
-                    $userID = $row['user_id'];
+                    $stmt = $this->conn->prepare("SELECT * FROM user
+                        LEFT JOIN company on company_id = user_company
+                        LEFT JOIN role on role_id = user_role_id
+                        WHERE user_verify = 1");
+                    $stmt->execute();
+                } elseif ($type == 'pending')
+                {
+                    $stmt = $this->conn->prepare("SELECT * FROM user
+                        LEFT JOIN company on company_id = user_company
+                        LEFT JOIN role on role_id = user_role_id
+                        WHERE user_verify is null ");
+                    $stmt->execute();
+                } elseif ($type == 'disabled')
+                {
+                    $stmt = $this->conn->prepare("SELECT * FROM user
+                        LEFT JOIN company on company_id = user_company
+                        LEFT JOIN role on role_id = user_role_id
+                        WHERE user_active = 0");
+                    $stmt->execute();
+                }
+                
+                $rowCount = $stmt->rowCount();
+                
+                if($rowCount < 1)
+                {
                     ?>
-                    <tr>
-                        <td data-label="ID">
-                            <?php echo $row['user_id']; ?>
-                        </td>
-                        <td data-label="First">
-                            <?php echo $row['user_fName']; ?>
-                        </td>
-                        <td data-label="Last">
-                            <?php echo $row['user_lName']; ?>
-                        </td>
-                        <td data-label="Email">
-                            <?php echo $row['user_email']; ?>
-                        </td>
-                        <td data-label="Company">
-                            <?php echo $row['company_name']; ?>
-                        </td>
-                        <td data-label="Status">
-                            <form method="post" action="/processors/userManagement.php">
-                                <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
-                                <button type="submit" class="btn <?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>">
-                                    <?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?>
-                                </button>
-                            </form>
-                        </td>
-                        <td data-label="Role">
-                            <form action="/processors/userManagement.php" method="post">
-                                <input type="number" name="userID" value="<?php echo $userID; ?>" hidden>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <button class="btn <?php if($row['role_name'] == 'USER'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToUser">
-                                                USER 
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="btn <?php if($row['role_name'] == 'ADMIN'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToAdmin">
-                                                ADMIN 
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </td>
-                        <td data-label="Member Since">
-                            <?php echo $regdate; ?>
-                        </td> 
-                        <td>
-                            <form action="/admin/deleteuser.php" method="post">
-                                <input hidden type="text" name="userID" value="<?php echo $userID; ?>">
-                                <button type="submit" name="remUser" class="btn danger">DELETE</button>
-                            </form>
-                        </td>
-                    </tr>
+                        <p>No records found</p>
+                    <?php
+                } else
+                {
+                     ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Member ID</td>
+                                <td>First Name</td>
+                                <td>Last Name</td>
+                                <td>Email</td>
+                                <td>Company</td>
+                                <td>Status</td>
+                                <td>Role</td>
+                                <td>Member Since</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    <?php
+
+                    while($row = $stmt->fetch())
+                    {
+                        $regdate = $row['user_reg_date'];
+                        $regdate = date('m/d/Y');
+                        $userID = $row['user_id'];
+                        ?>
+                        <tr>
+                            <td data-label="ID">
+                                <?php echo $row['user_id']; ?>
+                            </td>
+                            <td data-label="First">
+                                <?php echo $row['user_fName']; ?>
+                            </td>
+                            <td data-label="Last">
+                                <?php echo $row['user_lName']; ?>
+                            </td>
+                            <td data-label="Email">
+                                <?php echo $row['user_email']; ?>
+                            </td>
+                            <td data-label="Company">
+                                <?php echo $row['company_name']; ?>
+                            </td>
+                            <td data-label="Status">
+                                <form method="post" action="/processors/userManagement.php">
+                                    <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
+                                    <button type="submit" class="btn <?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>">
+                                        <?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?>
+                                    </button>
+                                </form>
+                            </td>
+                            <td data-label="Role">
+                                <form action="/processors/userManagement.php" method="post">
+                                    <input type="number" name="userID" value="<?php echo $userID; ?>" hidden>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <button class="btn <?php if($row['role_name'] == 'USER'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToUser">
+                                                    USER 
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="btn <?php if($row['role_name'] == 'ADMIN'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToAdmin">
+                                                    ADMIN 
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </td>
+                            <td data-label="Member Since">
+                                <?php echo $regdate; ?>
+                            </td> 
+                            <td>
+                                <form action="/admin/deleteuser.php" method="post">
+                                    <input hidden type="text" name="userID" value="<?php echo $userID; ?>">
+                                    <button type="submit" name="remUser" class="btn danger">DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                        </tbody>
+                    </table> 
                     <?php
                 }
-                ?>
-                    </tbody>
-                </table> 
-                <?php
+                
+               
             }
             catch(PDOException $e)
             {
@@ -688,18 +712,14 @@
         
         public function registerRequest($fname, $lname, $email, $phone, $company, $message)
         {
-            if(isset($_SESSION['user_id']))
-            {
-                $uid = $_SESSION['user_id'];
-                return 'alreadyloggedin';
-            } else {
                 try
                 {
                     // Lets check if the user is already registered
                     $stmt = $this->conn->prepare("SELECT * FROM user WHERE user_email=:user_email");
                     $stmt->bindparam(":user_email", $email);
                     $stmt->execute();
-                    if($stmt->rowCount() == 1)
+                    $rowCount = $stmt->rowCount();
+                    if($rowCount >= 1)
                     {
                         return 'alreadyregistered';
                     } else {
@@ -742,8 +762,89 @@
                 {
                     echo $e->getMessage();
                 }
-            }
         } // end registerRequest
+        
+        
+        // *************************************************************
+        // Usage: regRequestList();
+        // Returns a list of membership applicants
+        // *************************************************************
+        
+        public function regRequestList()
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM register_request");
+                $stmt->execute();
+                $rowCount = $stmt->rowCount();
+                
+                if($rowCount < 1)
+                {
+                    ?>
+                        <p>No records found</p>
+                    <?php
+                } else
+                {
+                     ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>First Name</td>
+                                <td>Last Name</td>
+                                <td>Email</td>
+                                <td>Phone</td>
+                                <td>Company</td>
+                                <td>Message</td>
+                                <td>Date</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    <?php
+
+                    while($row = $stmt->fetch())
+                    {
+                        $requestdate = $row['rr_date'];
+                        $requestdate = date('m/d/Y');
+                        ?>
+                        <tr>
+                            <td data-label="First">
+                                <?php echo $row['rr_fname']; ?>
+                            </td>
+                            <td data-label="Last">
+                                <?php echo $row['rr_lname']; ?>
+                            </td>
+                            <td data-label="Email">
+                                <?php echo $row['rr_email']; ?>
+                            </td>
+                            <td data-label="Tel">
+                                <?php echo $row['rr_phone']; ?>
+                            </td>
+                            <td data-label="Company">
+                                <?php echo $row['rr_company']; ?>
+                            </td>
+                            <td data-label="Message">
+                                <?php echo $row['rr_message']; ?>
+                            </td>
+                            <td data-label="Date">
+                                <?php echo $requestdate; ?>
+                            </td> 
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                        </tbody>
+                    </table> 
+                    <?php
+                }
+                
+               
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end regRequestList
+        
         
         // *************************************************************
         // Usage: myList();

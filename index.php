@@ -31,7 +31,7 @@ if(isset($_GET['result']))
     if($requestResult == 'alreadyloggedin') 
     {
         $requestResult = '';
-        $requestResult = 'You are already logged in';
+        $requestResult = 'You already have an account';
     }
     
     
@@ -194,7 +194,7 @@ if(isset($_GET['noaccess'])){
                                 <textarea name="messagearea" id="messagearea" id="messagearea" rows="4" cols="20"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
                             </div>
                             <div class="reg-form">
-                                <input type="submit" value="SUBMIT"><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
+                                <input type="submit" value="SUBMIT" name="RegisterRequest"><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
                             </div>
                         </fieldset>
                     </form>
