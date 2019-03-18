@@ -19,14 +19,16 @@
             exit;
         }
 
+        //echo $filesize.' '.$skuId.' '.$desc;
+        
         $result = $vpd->addImage($skuId, $desc, $_FILES['file']);
         
         if($result)
         {
-            header('location: /search.php?search='.$skuId.'&imageupload=successful');    
+            header('location: /admin/update-sku.php?sku='.$skuId.'&message=successful#skuimages');    
         } else 
         {
-            header('location: /search.php?search='.$skuId.'&imageupload=notsupported');
+            header('location: /admin/update-sku.php?sku='.$skuId.'&message=notsupported#skuimages');
         }
     }
 
@@ -39,10 +41,10 @@
         $result = $vpd->remImage($image_id, $image_url, $image_thumb);
         if($result)
         {
-            header('location: /search.php?search='.$image_sku.'&imagedelete=successful');    
+            header('location: /admin/update-sku.php?sku='.$image_sku.'&message=successful#skuimages');    
         } else 
         {
-            header('location: /search.php?search='.$image_sku.'&imagedelete=error');
+            header('location: /admin/update-sku.php?sku='.$image_sku.'&message=error#skuimages');
         }
     }
 

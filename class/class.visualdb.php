@@ -419,6 +419,70 @@
                 $skuimages = $this->conn->prepare("SELECT * FROM sku_image 
                 WHERE sku_image_sku_id=:sku");
                 $skuimages->execute(array(':sku'=>$sku));
+                $skuRow=$skuimages->fetch(PDO::FETCH_ASSOC);
+                
+                ?>
+                    <section class="sku-image-data">
+                        <h2>SKU Images</h2>
+                        <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
+                            Select image to upload:
+                            <input type="file" name="file" id="file">
+                            <input type="text" name="desc" id="desc" placeholder="Caption">
+                            <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_image_sku_id']; ?>">
+                            <input type="submit" value="Upload Image" name="imageSubmit">
+                        </form>
+                        <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
+                    </section>
+                    <section class="sku-images" id="skuimages">
+                        <?php 
+                        while($skuimagerow = $skuimages->fetch()){
+                            ?>
+                        <figure class="card bg-white shadow">
+                            <div class="card-img">
+                                <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
+                                    <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                                </a>
+                            </div>
+                            <figcaption>
+                                <section class="card-sku-num">
+                                    <table class="table-nores">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label for="caption">Desc:</label>
+                                                </td>
+                                                <td>
+                                                    <form id="imageUpdate" action="/processors/image_handler.php" method="post">
+                                                        <input type="text" name="imageSku" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" hidden>
+                                                        <input type="text" name="imageNum" value="<?php echo $skuimagerow['sku_image_id']; ?>" hidden>
+                                                        <input type="text" name="caption" value="<?php echo $skuimagerow['sku_image_description'];?>">
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <form method="post" action="/processors/image_handler.php">
+                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
+                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
+                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
+                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
+                                                        <button class="btn danger" type="submit" name="deleteimg">Delete</button>
+                                                    </form> 
+                                                </td>
+                                                <td class="align-right">
+                                                    <button type="submit" form="imageUpdate" class="btn active" name="imageUpdate">Update</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                            </figcaption>
+                        </figure>
+                            <?php
+                        }
+                        ?>
+                    </section>
+                <?php
             }
             
             catch(PDOException $e)
@@ -426,68 +490,7 @@
                 echo $e->getMessage();
             }
             
-            ?>
-                <section class="sku-image-data">
-                    <h2>SKU Images</h2>
-                    <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
-                        Select image to upload:
-                        <input type="file" name="file" id="file">
-                        <input type="text" name="desc" id="desc" placeholder="Description">
-                        <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
-                        <input type="submit" value="Upload Image" name="imageSubmit">
-                    </form>
-                    <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
-                </section>
-                <section class="sku-images" id="skuimages">
-                    <?php 
-                    while($skuimagerow = $skuimages->fetch()){
-                        ?>
-                    <figure class="card bg-white shadow">
-                        <div class="card-img">
-                            <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
-                                <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
-                            </a>
-                        </div>
-                        <figcaption>
-                            <section class="card-sku-num">
-                                <table class="table-nores">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <label for="caption">Desc:</label>
-                                            </td>
-                                            <td>
-                                                <form id="imageUpdate" action="/processors/image_handler.php" method="post">
-                                                    <input type="text" name="imageSku" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" hidden>
-                                                    <input type="text" name="imageNum" value="<?php echo $skuimagerow['sku_image_id']; ?>" hidden>
-                                                    <input type="text" name="caption" value="<?php echo $skuimagerow['sku_image_description'];?>">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <form method="post" action="/processors/image_handler.php">
-                                                    <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
-                                                    <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
-                                                    <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
-                                                    <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
-                                                    <button class="btn danger" type="submit" name="deleteimg">Delete</button>
-                                                </form> 
-                                            </td>
-                                            <td class="align-right">
-                                                <button type="submit" form="imageUpdate" class="btn active" name="imageUpdate">Update</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </section>
-                        </figcaption>
-                    </figure>
-                        <?php
-                    }
-                    ?>
-                </section>
-            <?php
+            
         }
         
         // *************************************************************
