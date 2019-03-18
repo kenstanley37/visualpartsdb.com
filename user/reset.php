@@ -19,7 +19,7 @@ if(isset($_POST['reset']))
     
     if($result == "true")
     {
-        $error = 'Please check your email for a reset link';
+        $error = '<span>Please check your email for a reset link</span>';
     } else
     {
         $error = 'Opps! something went wrong';
