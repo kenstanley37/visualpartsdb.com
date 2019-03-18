@@ -97,12 +97,14 @@
                         <article class="slogo-search">
                             <h2><?php echo $skuRow['sku_id']; ?></h2>
                             <section class="sku-part-desc">
-                                <table>
-                                    <tbody>
+                                <table class="table-nores">
+                                    <thead>
                                         <tr>
                                             <th>Part #</th>
-                                            <td><?php echo $skuRow['sku_id']; ?></td>
+                                            <th><?php echo $skuRow['sku_id']; ?></th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr>
                                             <th>Description</th>
                                             <td><?php echo $skuRow['sku_desc']; ?></td>
@@ -156,7 +158,7 @@
                             <article class="search-part-info">
                                 <section class="export-data">
                                     <section class="export">
-                                        <table>
+                                        <table class="table-nores">
                                             <td>Export Data:</td>
                                             <td><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></td>
                                             <td><a href="search.php?export=pdf&sku=<?php echo $skuRow['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></td>
@@ -205,7 +207,7 @@
                                 </section>
                                 <section class="sku-dim-information">
                                     <section class="sku-unit-data">
-                                        <table class="unit-data bg-white shadow">
+                                        <table class="table-nores">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">Unit Data</th> 
@@ -213,19 +215,19 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th>Length</th>
+                                                    <td>Length</td>
                                                     <td><?php echo $skuRow['sku_unit_length']; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Width</th>
+                                                    <td>Width</td>
                                                     <td><?php echo $skuRow['sku_unit_width']; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Height</th>
+                                                    <td>Height</td>
                                                     <td><?php echo $skuRow['sku_unit_height']; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Weight</th>
+                                                    <td>Weight</td>
                                                     <td><?php echo $skuRow['sku_unit_weight']; ?></td>
                                                 </tr>
                                             </tbody>
@@ -236,7 +238,7 @@
                                     {
                                 ?>
                                     <section class="sku-case-data">
-                                        <table class="case-data bg-white shadow">
+                                        <table class="table-nores">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">Case Data</th>
@@ -268,7 +270,7 @@
                                     </section>
                                 
                                     <section class="sku-pallet-data">
-                                        <table class="pallet-data bg-white shadow">
+                                        <table class="table-nores">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">Pallet Data</th>
@@ -299,7 +301,7 @@
                                         </table> 
                                     </section>
                                     <section class="sku-user-data">
-                                        <table class="user-data bg-white shadow">
+                                        <table class="table-nores">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">User Data</th>

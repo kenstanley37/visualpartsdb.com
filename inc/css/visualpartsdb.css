@@ -707,29 +707,8 @@ main {
     height: 15px;
 }
 
-.sku-dim-information table thead th {
-    font-weight: bold;
-    color: #fff;
-    background-color: grey;
-    font-weight: 800;
-    font-size: 16px;
-}
-
-.sku-dim-information thead td {
-    font-size: 10px;
-}
-
 .sku-dim-information table {
-    height: 200px;
-    width: 250px;
-}
-
-.sku-dim-information td, .sku-dim-information th {
-    font-size: 12px;
-}
-
-.sku-dim-information table tbody td {
-    text-align: left;
+    width: 300px;
 }
 
 /***************************************
