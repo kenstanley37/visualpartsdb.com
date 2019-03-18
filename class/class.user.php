@@ -284,7 +284,7 @@
                             $mail->isHTML(true);                                  // Set email format to HTML
                             $mail->Subject = 'Visual Parts Database Password Reset';
                             $mail->Body    = 'Hello '.$fname.', <br><br> Someone has requested a password reset for your acount. If you did not do this, please ignore.  <br><br>Your Activation Code is: <b>'.$code.'</b><br><br> Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
-                            $mail->AltBody = 'Your Password Reset Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to activate your account.';
+                            $mail->AltBody = 'Your Password Reset Code is: '.$code.' Please click on this link https://visualpartsdb.com/user/password_reset.php?id='.$db_id.'&code='.$code.' to change your password.';
 
                             $mail->send();
                             return true;

@@ -22,7 +22,7 @@ if(isset($_POST['reset']))
         $error = '';
     } else
     {
-        $error = $result;
+        //$error = $result;
     }
 }
 
