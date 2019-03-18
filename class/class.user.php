@@ -245,19 +245,19 @@
                     $stmt = $this->conn->prepare("SELECT * from user where user_email =:email");
                     $stmt->bindparam(":email", $email);
                     $stmt->execute();
+                    $row = $update->fetch();
+                    $db_id = $row['user_id'];
                     $rowCount = $stmt->rowCount();
                     if($rowCount >= 1)
                     {
                         try 
                         {
-                            $stmt = $this->conn->prepare("UPDATE user SET user_code = :code 
+                            $update = $this->conn->prepare("UPDATE user SET user_code = :code 
                                 WHERE user_email = :email");
+                            $update->bindparam(":email", $email);
+                            $update->bindparam(":code", $code);
+                            $update->execute();	
 
-                            $stmt->bindparam(":email", $email);
-                            $stmt->bindparam(":code", $code);
-                            $stmt->execute();	
-                            $row = $stmt->fetch();
-                            $db_id = $row['user_id'];
 
 
                             //Server settings
