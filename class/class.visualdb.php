@@ -406,6 +406,111 @@
             }
         } // end skuSearch
         
+
+        
+        // *************************************************************
+        // Usage: getSkuImage();
+        // Created an admin view of the SKU images
+        // *************************************************************
+        public function getSkuImage($sku)
+        {
+            try
+            {
+                $skuimages = $this->conn->prepare("SELECT * FROM sku_image 
+                WHERE sku_image_sku_id=:sku");
+                $skuimages->execute(array(':sku'=>$sku));
+            }
+            
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+            
+            ?>
+                <section class="sku-image-data">
+                    <h2>SKU Images</h2>
+                    <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
+                        Select image to upload:
+                        <input type="file" name="file" id="file">
+                        <input type="text" name="desc" id="desc" placeholder="Description">
+                        <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_id']; ?>">
+                        <input type="submit" value="Upload Image" name="imageSubmit">
+                    </form>
+                    <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
+                </section>
+                <section class="sku-images" id="skuimages">
+                    <?php 
+                    while($skuimagerow = $skuimages->fetch()){
+                        ?>
+                    <figure class="card bg-white shadow">
+                        <div class="card-img">
+                            <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
+                                <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
+                            </a>
+                        </div>
+                        <figcaption>
+                            <section class="card-sku-num">
+                                <table class="table-nores">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label for="caption">Desc:</label>
+                                            </td>
+                                            <td>
+                                                <form id="imageUpdate" action="/processors/image_handler.php" method="post">
+                                                    <input type="text" name="imageSku" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" hidden>
+                                                    <input type="text" name="imageNum" value="<?php echo $skuimagerow['sku_image_id']; ?>" hidden>
+                                                    <input type="text" name="caption" value="<?php echo $skuimagerow['sku_image_description'];?>">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <form method="post" action="/processors/image_handler.php">
+                                                    <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
+                                                    <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
+                                                    <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
+                                                    <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
+                                                    <button class="btn danger" type="submit" name="deleteimg">Delete</button>
+                                                </form> 
+                                            </td>
+                                            <td class="align-right">
+                                                <button type="submit" form="imageUpdate" class="btn active" name="imageUpdate">Update</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                        </figcaption>
+                    </figure>
+                        <?php
+                    }
+                    ?>
+                </section>
+            <?php
+        }
+        
+        // *************************************************************
+        // Usage: setImageCaption($imageID, $caption);
+        // Updates the image caption
+        // *************************************************************
+        public function setImageCaption($imageID, $caption)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("UPDATE sku_image SET sku_image_description = :caption
+                WHERE sku_image_id = :image_id");
+                $stmt->bindparam(":image_id", $imageID);
+                $stmt->bindparam(":caption", $caption);
+                $stmt->execute();
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+        
         // *************************************************************
         // Usage: addImage(sku);
         // Adds a new image to current sku
@@ -443,9 +548,9 @@
             {
                if (in_array($image['type'],$_supportedFormats))
                {
-                   if(!is_dir('../images/'.$sku)){
+                   if(!is_dir($uploadPath)){
                         //Directory does not exist, so lets create it.
-                        mkdir('../images/'.$sku, 0755, true);
+                        mkdir($uploadPath, 0755, true);
                     }
                     $fileName = $image['tmp_name']; 
                     // get the dims of the image
@@ -1090,14 +1195,11 @@
                 <form id="UpdateSkuForm" method="post" action="/processors/sku_handler.php">
                     <input type="text" name="sku" value="<?php echo $sku; ?>" hidden>
                     <section class="update-sku">
-                        <table class="table sku-set1">
+                        <table class="table-nores sku-set1">
                             <thead>
                                 <tr>
-                                    <th data-label="<?php echo $row['sku_id']; ?>" scope="col" colspan="1">
+                                    <th data-label="<?php echo $row['sku_id']; ?>" scope="col" colspan="2">
                                         <?php echo $row['sku_id']; ?>
-                                    </th>
-                                    <th class="align-right">
-                                        <button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button>
                                     </th>
                                 </tr>
                             </thead>
@@ -1112,9 +1214,14 @@
                                         </textarea>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-right" colspan="2">
+                                        <button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button>
+                                    </td>
+                                </tr>
                         </table>
 
-                        <table class="table sku-set2">
+                        <table class="table-nores sku-set2">
                             <thead>
                                 <tr>
                                     <th colspan="2" class="tb1-color">UNIT</th>
@@ -1153,10 +1260,13 @@
                                         <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $row['sku_unit_weight'] ?>">
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-right" colspan="2"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
+                                </tr>
                             </tbody>
                         </table>
 
-                        <table class="table sku-set3">
+                        <table class="table-nores sku-set3">
                             <thead>
                                  <tr>
                                     <th colspan="2" class="tb1-color">CASE</th>
@@ -1203,10 +1313,13 @@
                                         <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $row['sku_case_qty'] ?>">
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-right" colspan="2"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
+                                </tr>
                             </tbody>
                         </table>    
 
-                        <table class="table sku-set4">
+                        <table class="table-nores sku-set4">
                             <thead>
                                 <tr>
                                     <th colspan="2" class="tb1-color">PALLET</th>
@@ -1253,24 +1366,13 @@
                                         <input type="number" name="pallet-qty" min="0" step="0.01" value="<?php echo $row['sku_pallet_qty'] ?>">
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>  
-
-                        <table class="table sku-update-btn">
-                            <thead>
                                 <tr>
-                                    <th colspan="2">
-                                        <?php echo $row['sku_id']; ?>
-                                    </th>
-                                    <th class="align-right">
-                                        <button class="btn info" type="submit" name="skuUpdate" form="UpdateForm">Submit</button>
-                                    </th>
+                                    <td class="align-right" colspan="2"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
                                 </tr>
-                             </thead>
-                        </table>                         
+                            </tbody>
+                        </table>                       
                     </section> <!-- end Case Data -->
                 </form>
-
             <?php
 
             }

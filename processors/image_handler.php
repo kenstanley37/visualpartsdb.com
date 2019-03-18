@@ -46,4 +46,21 @@
         }
     }
 
+    if(isset($_POST['imageUpdate'])){ 
+        $image_id = $_POST['imageNum'];
+        $image_sku = $_POST['imageSku'];
+        $image_caption = $vail->sanitizeString($_POST['caption']);
+
+        $result = $vpd->setImageCaption($image_id, $image_caption);
+        if($result)
+        {
+            header("location: /admin/update-sku.php?sku=".$image_sku."&message=imageUpdated#skuimages");
+        }
+        else
+        {
+            header("location: /admin/update-sku.php?sku=".$image_sku."&message=imageFailed#skuimages");
+        }
+        
+    }
+
 ?>

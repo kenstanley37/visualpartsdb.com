@@ -171,6 +171,7 @@ span {
 
 .tb1-color {
     background-color: lightskyblue;
+    color: #000;
 }
 
 .valign-top {
@@ -966,6 +967,7 @@ footer {
 }
 
 .main .update-form {
+    grid-area: form;
     margin-top: 150px;
 }
 
@@ -1054,7 +1056,7 @@ footer {
 *
 ****************************************/
 
-.table {
+.table, .table-nores {
     border: 1px solid #ccc;
     border-collapse: collapse;
     margin: 0;
@@ -1063,42 +1065,41 @@ footer {
     table-layout: fixed;
 }
 
-.table caption {
+.table caption, .table-nores caption {
     font-size: 1.5em;
     margin: .5em 0 .75em;
 }
 
-.table tr {
+.table tr, .table-nores tr {
     border: 1px solid #ddd;
     padding: .35em;
 }
 
-.table th,
-.table td {
+.table th, .table td, .table-nores th, .table-nores td {
     padding: .625em;
     text-align: left;
 }
 
-.table th {
+.table th, .table-nores th {
     font-size: .85em;
     letter-spacing: .1em;
     text-transform: uppercase;
 }
 
-.table tr:nth-child(even) {
+.table tr:nth-child(even), .table-nores tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-.table thead tr {
+.table thead tr, .table-nores thead tr {
     background: #4682B4;  /* fallback for old browsers */
     color: #fff;
 }
 
-.table a {
+.table a, .table-nores a {
     color: #0000EE;
 }
 
-.table a:hover {
+.table a:hover, .table-nores a:hover {
     border-bottom: 1px solid #000;
 }
 
@@ -1180,9 +1181,6 @@ footer {
   padding: 14px 16px;
   text-decoration: none;
 }
-
-
-
 
 /***************************************
 *

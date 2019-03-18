@@ -22,12 +22,12 @@ if(!isset($_SESSION['user_id']))
 if(isset($_GET['sku']))
 {
     $sku = $_GET['sku'];
+    $sku = strtoupper($sku);
 }
 else 
 {
     header('location: /admin/part-management.php');
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -50,14 +50,14 @@ else
                 <h2>Update SKU: <?php echo $sku; ?></h2>
             </section>
             <section class="nav">
-                
+
             </section>
             <section class="update-form">
-                <h2 hidden><?php echo $sku; ?></h2>
                 <?php $vpd->getSkuData($sku); ?>
             </section>
 
             <section class="content">
+                <?php $vpd->getSkuImage($sku); ?>
             </section>
         </main>
         <footer>

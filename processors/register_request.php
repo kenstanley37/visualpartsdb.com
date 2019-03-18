@@ -42,7 +42,6 @@
         if($result == 'alreadyloggedin'){
             header('location: /?result=alreadyloggedin#member');
         }
-                
     } 
 
     // this comes from invite-user.php
