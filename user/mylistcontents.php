@@ -12,6 +12,10 @@ $user = new USER;
 if(!isset($_SESSION['user_id']))
 {
     header('location: /');
+} else 
+{
+    $userID = $_SESSION['user_id'];
+    $user->activeCheck($userID);
 }
 
 if(isset($_GET['list']))

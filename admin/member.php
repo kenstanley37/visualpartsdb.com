@@ -7,15 +7,17 @@ require_once($path."class/class.func.php");
 
 $vpd = new VISUALDB;
 $vail = new VALIDATE;
+$user = new USER;
 
 if(!isset($_SESSION['user_id']))
 {
     header('location: /');
 } else 
 {
-    $user = new USER;
+    $userID = $_SESSION['user_id'];
+    $user->activeCheck($userID);
     if($user->accessCheck() != 'ADMIN'){
-        header('location: /');
+        header('location: /noaccess.php');
     }
 }
 

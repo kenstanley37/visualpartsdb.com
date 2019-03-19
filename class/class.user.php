@@ -130,12 +130,48 @@
                     $stmt = $this->conn->prepare("SELECT * FROM user 
                     left join role on user_role_id = role_id
                     WHERE user_id=:uid");
-                    $stmt->execute(array(':uid'=>$uid));
+                    $stmt->bindparam(":uid", $uid);
+                    $stmt->execute();
                     $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
                     // if email if found check password
                     if($stmt->rowCount() == 1)
                     {
                         return $userRow['role_name'];
+                    }
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            }
+        } // end accessCheck
+        
+        // *************************************************************
+        // Usage: activeCheck($userID);
+        // Checks if the user is disabled and sends user to fil,e
+        // *************************************************************
+        
+        public function activeCheck($userID)
+        {
+            if(isset($_SESSION['user_id']))
+            {
+                $uid = $_SESSION['user_id'];
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT * FROM user 
+                    WHERE user_id=:uid");
+                    $stmt->bindparam(":uid", $uid);
+                    $stmt->execute();
+                    $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $status = $userRow['user_active'];
+                    // if email if found check password
+                    if($status == 0)
+                    {
+                        header("location: /user/disabled.php");
+                    }
+                    else
+                    {
+                        return;
                     }
                 }
                 catch(PDOException $e)
@@ -419,7 +455,7 @@
         
         // *************************************************************
         // Usage: remUser($userid);
-        // Removes user from all tables (history, list, etc)
+        // Removes user from all tables that have a FK (history, list, etc)
         // *************************************************************
         public function remUser($userid){
             try
@@ -1003,7 +1039,7 @@
             {
                 echo $e->getMessage();
             }
-        } // end accessCheck
+        } // end myList
         
         // *************************************************************
         // Usage: myListCount($listID);

@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['user_id'])){
-    header('location: /index.php?error=noaccess');
-} else {
-    $userID = $_SESSION['user_id'];
-}
-
-
 include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
 require_once($path."class/class.visualdb.php");
@@ -16,6 +9,18 @@ require_once($path."class/class.func.php");
 $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
+
+if(!isset($_SESSION['user_id']))
+{
+    header('location: /');
+} else 
+{
+    $userID = $_SESSION['user_id'];
+    $user->activeCheck($userID);
+    if($user->accessCheck() != 'ADMIN'){
+        header('location: /noaccess.php');
+    }
+}
 
 $date = date("Y-m-d");
 $dateStart = strtotime('-1 day', strtotime($date));

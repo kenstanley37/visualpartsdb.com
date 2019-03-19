@@ -12,6 +12,11 @@ $user = new USER;
 if(!isset($_SESSION['user_id']))
 {
     header('location: /');
+} else 
+{
+    $userID = $_SESSION['user_id'];
+    $user->activeCheck($userID);
+    $listcount = $user->getMyListCount($userID, 'list');
 }
 
 ?>
@@ -51,7 +56,17 @@ if(!isset($_SESSION['user_id']))
                 </form>
             </section>
             <section class="content">
-                <?php $user->myList(); ?>
+                <?php
+                    if($listcount >= 1)
+                    {
+                        $user->myList();
+                    } else
+                    {
+                        ?>
+                            <p>You do not have any list yet. Please create one.</p>
+                        <?php
+                    }
+                ?>
             </section>
         </main>
         <footer>

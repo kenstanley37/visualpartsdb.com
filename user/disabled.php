@@ -15,9 +15,9 @@ if(!isset($_SESSION['user_id']))
 } else 
 {
     $userID = $_SESSION['user_id'];
-    $user->activeCheck($userID);
-    if($user->accessCheck() != 'ADMIN'){
-        header('location: /noaccess.php');
+    if($user->accessCheck() != 'ADMIN')
+    {
+        header('location: /');
     }
 }
 
@@ -25,7 +25,7 @@ if(!isset($_SESSION['user_id']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: User Management</title>
+    <title>Visual Parts Database: Account Disabled</title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -35,24 +35,17 @@ if(!isset($_SESSION['user_id']))
         </header>
         <!-- USER SECTION -->
         <aside class="admin-nav-bar hidden">
-        <?php
-        if($user->accessCheck() == "ADMIN")
-        {
-        ?>
-            <?php include($path."inc/inc.adminnavbar.php"); ?>
-        <?php
-        }
-        ?>
+
         </aside>
         <main class="main">
             <section class="nav">
 
             </section>
             <section class="title">
-                <h1>Pending Users</h1>
+                <h1>Account Disabled</h1>
             </section>
             <section class="content">
-                <?php $user->userList('pending'); ?>
+                Sorry, <?php echo $_SESSION['fname']; ?> your account has been disabled.
             </section>    
         </main>
         <footer>

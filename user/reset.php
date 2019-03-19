@@ -10,6 +10,16 @@ $vail = new VALIDATE;
 $user = new USER;
 $error='';
 
+if(!isset($_SESSION['user_id']))
+{
+    header('location: /');
+} else 
+{
+    $userID = $_SESSION['user_id'];
+    $user->activeCheck($userID);
+}
+
+
 if(isset($_POST['reset']))
 {
     $email = $_POST['email'];

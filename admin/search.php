@@ -8,6 +8,18 @@ $vail = new VALIDATE;
 $vpd = new VISUALDB;
 $user = new USER;
 
+if(!isset($_SESSION['user_id']))
+{
+    header('location: /');
+} else 
+{
+    $userID = $_SESSION['user_id'];
+    $user->activeCheck($userID);
+    if($user->accessCheck() != 'ADMIN'){
+        header('location: /noaccess.php');
+    }
+}
+
 if(isset($_GET['search']))
 {
     $sku = $_GET['search'];

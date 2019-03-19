@@ -15,143 +15,140 @@
     }
 
     $userID = $_SESSION['user_id'];
+    $user->activeCheck($userID);
     $rank = $user->getUserRole($userID);
     
-
-    if(isset($_POST['activeSwitch']))
+    if($rank == 'ADMIN')
     {
-        $userID = $_POST['activeSwitch'];
-        $result = $user->activeSwitch($userID);
-        echo $result;
-        header("location: /admin/user.php");
-        
-    }
-
-    /**********************************************
-    
-    Manage "My List" functions
-    
-    ***********************************************/
-
-    
-
-    // Add a list
-    if(isset($_POST['listname']))
-    {
-        $listname = $_POST['listname'];
-        $listdescription = $_POST['listdescription'];
-        $listname = $vail->sanitizeString($listname);
-        $listdescription = $vail->sanitizeString($listdescription);
-        $user->MyListAdd($listname, $listdescription);
-        header("location: /user/myexportlist.php");
-    }
-
-    // delete list (dangerous!!)
-    if(isset($_POST['deletelist']))
-    {
-        $listID = $_POST['deletelist'];
-        $user->myListDelete($listID);
-        header("location: /user/myexportlist.php");
-    }
-
-    // Set a list to active
-    if(isset($_POST['makeActive']))
-    {
-        $listID = $_POST['makeActive'];
-        $user->myListActive($listID);
-        header("location: /user/myexportlist.php");
-    }
-
-    // Add SKU to active list
-    if(isset($_POST['addSkuToList']))
-    {
-        $skuID = $_POST['skuID'];
-        $user->myListaddSku($skuID);
-        header("location: /search.php?search=".$skuID);
-    }
-
-    // Remove SKU from list
-    if(isset($_POST['remSkuFromList']))
-    {
-        $listID = $_POST['listID'];
-        $skuID = $_POST['skuID'];
-        $user->myListRemSku($skuID, $listID);
-        if(isset($_POST['myListContent']))
+        if(isset($_POST['activeSwitch']))
         {
-            header("location: /user/mylistcontents.php?list=".$listID);
-        } else
-        {
-            header("location: /search.php?search=".$skuID);
-        }
-    }
-
-    // Request SKU data update
-    if(isset($_POST['requestUpdate']))
-    {
-        $skuID = $_POST['skuID'];
-        $result = $user->requestUpdate($skuID);
-        header("location: /search.php?search=".$skuID);
-    }
-
-
-    
-    // Change user to USER role
-    if(isset($_POST['setToUser']))
-    {
-        if($rank != 'ADMIN')
-        {
-            header("location: /noaccess.php");
-        } else 
-        {
-            $userID = $_POST['userID'];
-            $role = 1;
-            $result = $user->setUserRole($userID, $role);
+            $userID = $_POST['activeSwitch'];
+            $result = $user->activeSwitch($userID);
+            echo $result;
             header("location: /admin/user.php");
         }
         
-    } 
+        // Change user to USER role
+        if(isset($_POST['setToUser']))
+        {
+            if($rank != 'ADMIN')
+            {
+                header("location: /noaccess.php");
+            } else 
+            {
+                $userID = $_POST['userID'];
+                $role = 1;
+                $result = $user->setUserRole($userID, $role);
+                header("location: /admin/user.php");
+            }
+        } 
 
-    // Change user to ADMIN role
-    if(isset($_POST['setToAdmin']))
-    {
-        if($rank != 'ADMIN')
+        // Change user to ADMIN role
+        if(isset($_POST['setToAdmin']))
         {
-            header("location: /noaccess.php");
-        } else 
+            if($rank != 'ADMIN')
+            {
+                header("location: /noaccess.php");
+            } else 
+            {
+            $userID = $_POST['userID'];
+            $role = 2;
+            $result = $user->setUserRole($userID, $role);
+            header("location: /admin/user.php");
+            }
+        }
+
+        // Delete User
+        if(isset($_POST['remUser']))
         {
-        $userID = $_POST['userID'];
-        $role = 2;
-        $result = $user->setUserRole($userID, $role);
-        header("location: /admin/user.php");
+            if($rank != 'ADMIN')
+            {
+                header("location: /noaccess.php");
+            } else 
+            {
+            $userID = $_POST['userID'];
+            $result = $user->remUser($userID);
+            header("location: /admin/user.php");
+            }
+        }
+
+        // Delete register request
+        if(isset($_POST['remRegister']))
+        {
+            $regID = $_POST['recordID'];
+            $result = $user->regDelete($regID);
+            if($result)
+            {
+                header("location: /admin/requested-membership.php?delete=success");
+            } else
+            {
+                header("location: /admin/requested-membership.php?delete=fail");
+            }
         }
     }
 
-    // Delete User
-    if(isset($_POST['remUser']))
+    if($rank == 'USER' || $rank == 'ADMIN')
     {
-        if($rank != 'ADMIN')
+        /**********************************************
+        // Manage "My List" functions
+        ***********************************************/
+        // Add a list
+        if(isset($_POST['listname']))
         {
-            header("location: /noaccess.php");
-        } else 
-        {
-        $userID = $_POST['userID'];
-        $result = $user->remUser($userID);
-        header("location: /admin/user.php");
+            $listname = $_POST['listname'];
+            $listdescription = $_POST['listdescription'];
+            $listname = $vail->sanitizeString($listname);
+            $listdescription = $vail->sanitizeString($listdescription);
+            $user->MyListAdd($listname, $listdescription);
+            header("location: /user/myexportlist.php");
         }
-    }
 
-    // Delete register request
-    if(isset($_POST['remRegister']))
-    {
-        $regID = $_POST['recordID'];
-        $result = $user->regDelete($regID);
-        if($result)
+        // delete list (dangerous!!)
+        if(isset($_POST['deletelist']))
         {
-            header("location: /admin/requested-membership.php?delete=success");
-        } else
-        {
-            header("location: /admin/requested-membership.php?delete=fail");
+            $listID = $_POST['deletelist'];
+            $user->myListDelete($listID);
+            header("location: /user/myexportlist.php");
         }
-    }
+
+        // Set a list to active
+        if(isset($_POST['makeActive']))
+        {
+            $listID = $_POST['makeActive'];
+            $user->myListActive($listID);
+            header("location: /user/myexportlist.php");
+        }
+
+        // Add SKU to active list
+        if(isset($_POST['addSkuToList']))
+        {
+            $skuID = $_POST['skuID'];
+            $user->myListaddSku($skuID);
+            header("location: /search.php?search=".$skuID);
+        }
+
+        // Remove SKU from list
+        if(isset($_POST['remSkuFromList']))
+        {
+            $listID = $_POST['listID'];
+            $skuID = $_POST['skuID'];
+            $user->myListRemSku($skuID, $listID);
+            if(isset($_POST['myListContent']))
+            {
+                header("location: /user/mylistcontents.php?list=".$listID);
+            } else
+            {
+                header("location: /search.php?search=".$skuID);
+            }
+        }
+
+        // Request SKU data update
+        if(isset($_POST['requestUpdate']))
+        {
+            $skuID = $_POST['skuID'];
+            $result = $user->requestUpdate($skuID);
+            header("location: /search.php?search=".$skuID);
+        }
+    } // END user or admin check
     
 ?>
