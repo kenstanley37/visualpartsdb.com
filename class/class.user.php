@@ -422,16 +422,57 @@
         // Removes user from all tables (history, list, etc)
         // *************************************************************
         public function remUser($userid){
-            try 
+            try
             {
-                $stmt = $this->conn->prepare("DELETE FROM user WHERE user_id=:userid ");
+                $stmt = $this->conn->prepare("DELETE user_part_list_skus FROM user_part_list_skus
+                    LEFT join user_part_list on pl_id = pls_list_id 
+                    WHERE pl_user_id=:userid ");
                 $stmt->bindparam(":userid", $userid);
                 $stmt->execute();
-                return true;
+                try
+                {
+                    $stmt = $this->conn->prepare("DELETE FROM user_part_list
+                        WHERE pl_user_id=:userid ");
+                    $stmt->bindparam(":userid", $userid);
+                    $stmt->execute();
+                        try
+                        {
+                            $stmt = $this->conn->prepare("DELETE FROM sku_update_request
+                                WHERE update_request_by=:userid ");
+                            $stmt->bindparam(":userid", $userid);
+                            $stmt->execute();
+                                    try 
+                                    {
+                                        $stmt = $this->conn->prepare("DELETE FROM sku_search WHERE sku_search_by=:userid ");
+                                        $stmt->bindparam(":userid", $userid);
+                                        $stmt->execute();
+                                            try 
+                                            {
+                                                $stmt = $this->conn->prepare("DELETE FROM user WHERE user_id=:userid ");
+                                                $stmt->bindparam(":userid", $userid);
+                                                $stmt->execute();
+                                                return true;
+                                            } catch(PDOException $e)
+                                            {
+                                                echo $e->getMessage();
+                                            }
+                                    } catch(PDOException $e)
+                                    {
+                                        echo $e->getMessage();
+                                    }
+                        } catch(PDOException $e)
+                        {
+                            echo $e->getMessage();
+                        }	  
+                } catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+
             } catch(PDOException $e)
             {
                 echo $e->getMessage();
-            }	
+            }		
         }
         
         // *************************************************************
@@ -1137,6 +1178,53 @@
             }
         } // end myListReturnActive
         
+        
+        // *************************************************************
+        // Usage: getMyListCount($userID, $type); 
+        // Returns the number of list the user currently has or
+        // Returns the number of sum of skus in all list
+        // $type can be either 'list' or 'skus'
+        // *************************************************************
+        
+        public function getMyListCount($userID, $type)
+        {    
+            if($type == 'list')
+            {
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT count(*) as List_Count FROM user_part_list
+                        WHERE pl_user_id = :userID");
+                    $stmt->bindparam(":userID", $userID);
+                    $stmt->execute();
+                    $row = $stmt->fetch();
+                    $list_count = $row['List_Count'];
+                    return number_format($list_count);
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            } elseif($type == 'skus')
+            {
+                try
+                {
+                    $stmt = $this->conn->prepare("SELECT count(*) as List_Count FROM user_part_list_skus
+                        LEFT JOIN user_part_list on pl_id = pls_list_id
+                        WHERE pl_user_id = :userID");
+                    $stmt->bindparam(":userID", $userID);
+                    $stmt->execute();
+                    $row = $stmt->fetch();
+                    $list_count = $row['List_Count'];
+                    return number_format($list_count);
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            }
+            
+        } // end myListReturnActive
+        
         // *************************************************************
         // Usage: myListAddSku($sku);
         // Add a SKU to the active list
@@ -1151,7 +1239,7 @@
                 $stmt->bindparam(":pl_list_id", $listid);
                 $stmt->bindparam(":pl_list_sku", $sku);
                 $stmt->execute();
-                return;
+                return true;
             }
             catch(PDOException $e)
             {

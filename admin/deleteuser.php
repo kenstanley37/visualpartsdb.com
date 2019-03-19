@@ -23,6 +23,8 @@ if(isset($_POST['remUser']))
 {
     $userID = $_POST['userID'];
     $userName = $user->userFullName($userID);
+    $userListCount = $user->getMyListCount($userID, 'list');
+    $userListSkuCount = $user->getMyListCount($userID, 'skus');
 }
 else 
 {
@@ -58,11 +60,16 @@ else
                     <thead>
                         <tr>
                             <td colspan="2">
-                                <p>Are you sure you want to delete <?php echo $userName; ?>?</p>
+                                <?php echo $userName; ?> currently has <?php echo $userListCount; ?> list and <?php echo $userListSkuCount; ?> SKUs.
                             </td>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td colspan="2">
+                                Are you sure you want to delete <?php echo $userName; ?>?
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <form action="/processors/userManagement.php" method="post">
