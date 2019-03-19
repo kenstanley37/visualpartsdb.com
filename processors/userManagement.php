@@ -139,5 +139,19 @@
         header("location: /admin/user.php");
         }
     }
+
+    // Delete register request
+    if(isset($_POST['remRegister']))
+    {
+        $regID = $_POST['recordID'];
+        $result = $user->regDelete($regID);
+        if($result)
+        {
+            header("location: /admin/requested-membership.php?delete=success");
+        } else
+        {
+            header("location: /admin/requested-membership.php?delete=fail");
+        }
+    }
     
 ?>

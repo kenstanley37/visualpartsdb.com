@@ -796,6 +796,7 @@
                                 <td>Company</td>
                                 <td>Message</td>
                                 <td>Date</td>
+                                <td></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -828,6 +829,12 @@
                             <td data-label="Date">
                                 <?php echo $requestdate; ?>
                             </td> 
+                            <td>
+                                <form action="/processors/userManagement.php" method="post">
+                                    <input hidden type="text"  name="recordID" value="<?php echo $row['rr_id']; ?>">
+                                    <button class="btn danger" type="submit" name="remRegister">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                         <?php
                     }
@@ -844,6 +851,27 @@
                 echo $e->getMessage();
             }
         } // end regRequestList
+        
+        // *************************************************************
+        // Usage: regDelete($regID);
+        // Deleted the register request where $regID = the record ID
+        // *************************************************************
+        
+        public function regDelete($regID)
+        {
+            try
+            {
+               $stmt = $this->conn->prepare("DELETE from register_request
+                WHERE rr_id = :regID"); 
+                $stmt->bindparam(":regID", $regID);
+                $stmt->execute();
+                return true; 
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
         
         
         // *************************************************************
