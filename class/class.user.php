@@ -881,8 +881,9 @@
 
                     while($row = $stmt->fetch())
                     {
-                        $requestdate = $row['rr_date'];
-                        $requestdate = date('m/d/Y');
+                        $date = $row['rr_date'];
+                        $dateadded = date_create($date);
+                        $addDate = date_format($dateadded, 'm/d/Y');
                         ?>
                         <tr>
                             <td data-label="First">
@@ -904,7 +905,7 @@
                                 <?php echo $row['rr_message']; ?>
                             </td>
                             <td data-label="Date">
-                                <?php echo $requestdate; ?>
+                                <?php echo $addDate; ?>
                             </td> 
                             <td>
                                 <form action="/processors/userManagement.php" method="post">
@@ -983,8 +984,9 @@
                 <?php
                 while($row = $stmt->fetch())
                 {      
-                    $dateadded = $row['pl_list_added'];
-                    $dateadded = date('m/d/Y');
+                    $date = $row['pl_list_added'];
+                    $dateadded = date_create($date);
+                    $addDate = date_format($dateadded, 'm/d/Y');
                     $listid = $row['pl_id'];
                     if($row['pl_active'] == 1) 
                     {
@@ -1017,7 +1019,7 @@
                         <td data-label="Name"><a href="/user/mylistcontents.php?list=<?php echo $row['pl_id'];?>"><?php echo strtoupper($row['pl_list_name']); ?></a></td>
                         <td data-label="Desc"><?php echo $row['pl_list_desc']; ?></td>
                         <td data-label="Count"><?php echo $count; ?></td>
-                        <td data-label="Date"><?php echo $dateadded; ?></td>
+                        <td data-label="Date"><?php echo $addDate; ?></td>
                         <td data-label="Export"><a href="/export/generate-xlsx.php?unit=excel&list=<?php echo $row['pl_id']; ?>"><i class="far fa-file-excel"></i></a></td>
                         <td>
                             <form action="/user/deletelist.php" method="post">

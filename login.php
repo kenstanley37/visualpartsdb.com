@@ -133,7 +133,7 @@ if(isset($_GET['error'])){
                                 </td>
                             </tr>
                             <?php 
-                                if(!empty($emailError))
+                                if(!empty($passwordError))
                                 {
                                     ?>
                                         <tr>
@@ -162,7 +162,6 @@ if(isset($_GET['error'])){
                                     <?php
                                 }
                             ?>
-                            
                             <tr>
                                 <td>
                                     <a class="btn info" href="/user/reset.php">Forgot?</a>
