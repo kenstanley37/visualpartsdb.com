@@ -118,7 +118,7 @@ if(isset($_GET['noaccess'])){
                     </table>
                     <h2>Information</h2>
                     <p>We record part information such as weight, length, height, and depth. We record this data at the different stages of the product</p>
-                    <table class="table">
+                    <table class="table-nores">
                         <tbody>
                             <tr>
                                 <td>UNIT</td>
@@ -191,7 +191,7 @@ if(isset($_GET['noaccess'])){
                             </div>
                             <div class="reg-form reg-textarea">
                                 <label for="messagearea">Message: </label>
-                                <textarea name="messagearea" id="messagearea" id="messagearea" rows="4" cols="20"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
+                                <textarea name="messagearea" id="messagearea" id="messagearea"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
                             </div>
                             <div class="reg-form">
                                 <input type="submit" value="SUBMIT" name="RegisterRequest"><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>

@@ -45,7 +45,7 @@ if(!isset($_SESSION['user_id']))
             <section class="title">
                 <h1>My List</h1>
             </section>
-            <section class="form">
+            <section class="form createList">
                 <form action="/processors/userManagement.php" method="post">
                     <h2>Create List</h2>
                     <label for="listname">List Name:</label>

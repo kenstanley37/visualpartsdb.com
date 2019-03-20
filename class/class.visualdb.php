@@ -174,31 +174,35 @@
                                                 else 
                                                 {
                                                     ?>
-                                                    <table>
-                                                        <td>
-                                                            Active List: <a href="/user/mylistcontents.php?list=<?php echo $activelistID; ?>"><?php echo strtoupper($activelist); ?></a>
-                                                        </td>
-                                                        <td>
-                                                            <form action="/processors/userManagement.php" method="post">
-                                                                <input type="text" value="<?php echo $skuRow['sku_id']; ?>" name="skuID" id="skuID" hidden>
-                                                                
-                                                                <input type="text" value="<?php echo $activelistID; ?>" name="listID" id="listID" hidden>
-                                                                <?php 
-                                                                    $skucheck = $user->myListSkuCheck($sku);
-                                                                    if($skucheck)
-                                                                    {
+                                                    <table class="table-nores">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    Active List: <a href="/user/mylistcontents.php?list=<?php echo $activelistID; ?>"><?php echo strtoupper($activelist); ?></a>
+                                                                </td>
+                                                                <td>
+                                                                    <form action="/processors/userManagement.php" method="post">
+                                                                        <input type="text" value="<?php echo $skuRow['sku_id']; ?>" name="skuID" id="skuID" hidden>
+
+                                                                        <input type="text" value="<?php echo $activelistID; ?>" name="listID" id="listID" hidden>
+                                                                        <?php 
+                                                                            $skucheck = $user->myListSkuCheck($sku);
+                                                                            if($skucheck)
+                                                                            {
+                                                                                ?>
+                                                                                <button class="btn danger" type="submit" name="remSkuFromList">Remove From List</button>
+                                                                                <?php
+                                                                            } else 
+                                                                            {
+                                                                                ?>
+                                                                                <button class="btn active" type="submit" name="addSkuToList">Add To List</button>
+                                                                                <?php
+                                                                            }
                                                                         ?>
-                                                                        <button class="btn danger" type="submit" name="remSkuFromList">Remove From List</button>
-                                                                        <?php
-                                                                    } else 
-                                                                    {
-                                                                        ?>
-                                                                        <button class="btn active" type="submit" name="addSkuToList">Add To List</button>
-                                                                        <?php
-                                                                    }
-                                                                ?>
-                                                            </form>
-                                                        </td>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                     <?php
                                                 }
