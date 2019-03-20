@@ -463,8 +463,7 @@ main {
 
 .index-main .main-intro {
     grid-area: indexintro;
-
-    min-width: 100%;
+    min-width: 90%;
     display: grid;
     grid-template-columns: 45% 45%;
     grid-gap: 5px;
@@ -478,11 +477,11 @@ main {
 .index-main .main-intro .intro {
     grid-area: introparts;
     line-height: 2em;
-    min-width: 100%;
+    min-width: 90%;
 }
 
 .index-main .main-intro table {
-    width: 100%;
+    width: 90%;
 }
 
 .index-main textarea {
@@ -1531,7 +1530,6 @@ only screen and (max-width: 900px),
         grid-template-columns: 100%;
         font-size: 12px !important;
     }
-    
 }
 
 
@@ -1677,6 +1675,19 @@ only screen and (max-width: 360px),
     
     .card .card-sku-desc p {
         font-size: 12px;
+    }
+    
+    .table-nores {
+        width: 250px;
+        font-size: 10px;
+    }
+    
+    .g-recaptcha {
+        transform: scale(0.77);
+        -webkit-transform: scale(0.77);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        
     }
 }
 

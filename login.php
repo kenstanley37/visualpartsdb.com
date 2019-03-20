@@ -97,7 +97,7 @@ if(isset($_GET['error'])){
                     <!--
                     <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
                     -->
-                    <table class="table">
+                    <table class="table-nores">
                         <thead>
                             <tr>
                                 <th colspan="3">LOGIN</th>
