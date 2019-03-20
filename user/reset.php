@@ -85,7 +85,7 @@ if(isset($_POST['reset']))
                                     <td colspan="2" class="align-right"><button type="submit" class="btn active" name="reset">Reset</button></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><?php echo $error; ?></td>
+                                    <td colspan="2" class="error"><?php echo $error; ?></td>
                                 </tr>
                             </form>
                         </tbody>

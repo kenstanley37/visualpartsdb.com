@@ -118,7 +118,7 @@ if(isset($_GET['error'])){
                                 ?>
                                     <tr>
                                         <td colspan="3">
-                                            <?php if(isset($emailError)){echo '<span class="emailError">' .$emailError.'</span>';} ?>
+                                            <?php if(isset($emailError)){echo '<span class="error">' .$emailError.'</span>';} ?>
                                         </td>
                                     </tr>
                                 <?php
@@ -138,7 +138,7 @@ if(isset($_GET['error'])){
                                     ?>
                                         <tr>
                                             <td colspan="3">
-                                                <?php echo '<span class="passwordError">' .$passwordError.'</span>'; ?>
+                                                <?php echo '<span class="error">' .$passwordError.'</span>'; ?>
                                             </td>
                                         </tr>
                             
@@ -156,7 +156,7 @@ if(isset($_GET['error'])){
                                     ?>
                                         <tr>
                                             <td colspan="3">
-                                                <?php echo $captchaError; ?>
+                                                <span class="error"><?php echo $captchaError; ?></span>
                                             </td>
                                         </tr> 
                                     <?php

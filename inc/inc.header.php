@@ -8,7 +8,7 @@
     </section>
     <section class="main-nav-bar">
         <nav class="navlinks">
-            <section><a href="/">Home</a></section>
+            <section><a href="/" class="<?php if($basename == ''){ echo 'button1';}?>">Home</a></section>
             <section>
                 <?php if(isset($_SESSION['user_id']))
             { 

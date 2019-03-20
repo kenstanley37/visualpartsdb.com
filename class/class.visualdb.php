@@ -1162,13 +1162,14 @@
                     while($row = $stmt->fetch())
                     {
                         $date = $row['update_request_date'];
-                        $date = date('m/d/Y');
+                        $dateadded = date_create($date);
+                        $addDate = date_format($dateadded, 'm/d/Y');
                         ?>
                             <tr>
                                 <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $type; ?>"><?php echo $type; ?></a></td>
                                 <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
                                 <td data-label="User"><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
-                                <td data-label="Date"><?php echo $date; ?></td>
+                                <td data-label="Date"><?php echo $addDate; ?></td>
                             </tr>  
                         <?php
                     }

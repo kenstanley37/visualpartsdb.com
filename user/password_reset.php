@@ -135,7 +135,7 @@ if(!isset($_GET['code'])){
                                     ?>
                                     <tr>
                                         <td colspan="2">
-                                            <span><?php echo $error; ?></span>
+                                            <span class="error"><?php echo $error; ?></span>
                                         </td>
                                     </tr>
                                     <?php

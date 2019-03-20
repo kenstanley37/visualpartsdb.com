@@ -7,7 +7,7 @@ $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
     <i class="fas fa-images none"> <a href="/">VPD</a> </i>
 </section>
 <section class="mainNavlinks">
-    <a href="/" class="navLinks <?php if($basename == ''){ echo 'button1';}?>">VPD Home</a>
+    <a href="/" class="navLinks <?php if($basename == ''){ echo 'button1';}?>"><?php echo $basename; ?>VPD Home</a>
     <?php if(isset($_SESSION['user_id']))
     { 
         ?> 

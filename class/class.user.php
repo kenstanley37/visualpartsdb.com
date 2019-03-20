@@ -669,8 +669,9 @@
 
                     while($row = $stmt->fetch())
                     {
-                        $regdate = $row['user_reg_date'];
-                        $regdate = date('m/d/Y');
+                        $date = $row['user_reg_date'];
+                        $dateadded = date_create($date);
+                        $addDate = date_format($dateadded, 'm/d/Y');
                         $userID = $row['user_id'];
                         ?>
                         <tr>
@@ -717,7 +718,7 @@
                                 </form>
                             </td>
                             <td data-label="Member Since">
-                                <?php echo $regdate; ?>
+                                <?php echo $addDate; ?>
                             </td> 
                             <td>
                                 <form action="/admin/deleteuser.php" method="post">
