@@ -1,5 +1,6 @@
 $(document).ready(function(){
     url = '/processors/ajax.php';
+    $('#dataTable').DataTable();
     startup();
 });
 

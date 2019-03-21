@@ -74,7 +74,6 @@ a:hover {
     width: 500px;
 }
 
-
 .shadow {
     box-shadow: 5px 5px 10px grey;
 }
@@ -311,6 +310,7 @@ header .name a {
 
 .admin-nav-bar {
     grid-area: adminnavbar;
+    z-index: 2;
 }
 
 main {
@@ -605,17 +605,15 @@ main {
 
 .search-main {
     grid-area: main;
-    margin: auto;
     min-height: 100vh;
     min-width: 100%;
-    grid-column-gap: 15px;
     grid-template-areas: 
         "searcherror"
-        "searchname"
         "searchexportlist"
+        "searchname"
         "searchpartdetails"
         "searchimage";
-    padding: 10px;
+    padding: 15px;
     justify-items: center;
 }
 
@@ -1038,6 +1036,15 @@ footer {
 }
 
 .table th, .table td, .table-nores th, .table-nores td {
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+        font-style: normal; 
+    font-variant: normal;
+    /*
+    font-size: 12px; 
+ 
+    font-weight: 700; 
+    line-height: 20px;
+    */
     padding: .625em;
     text-align: left;
 }

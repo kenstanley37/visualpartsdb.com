@@ -29,7 +29,7 @@
          <section class="searchbox">
             <form class="search" action="/search.php" method="get">
                 <label for="search" hidden>Search</label>
-                <input class="toupper" type="search" name="search" id="search" placeholder="search">
+                <input class="toupper" type="search" name="search" id="nav-search" placeholder="search">
                 <input type="submit" class="submit_3" value="Search" />
             </form>
         </section>

@@ -97,7 +97,7 @@
                         <article class="slogo-search">
                             <h2><?php echo $skuRow['sku_id']; ?></h2>
                             <section class="sku-part-desc">
-                                <table class="table-nores">
+                                <table class="table-nores shadow">
                                     <thead>
                                         <tr>
                                             <th>Part #</th>
@@ -145,7 +145,6 @@
                                                     <?php
                                                 }
                                             ?>
-
                                         </tr>
                                          <?php
                                             }
@@ -158,10 +157,12 @@
                             <article class="search-part-info">
                                 <section class="export-data">
                                     <section class="export">
-                                        <table class="table-nores">
+                                        <table class="table-nores shadow">
                                             <td>Export Data:</td>
                                             <td><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $skuRow['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></td>
+                                            <!--
                                             <td><a href="search.php?export=pdf&sku=<?php echo $skuRow['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></td>
+                                            -->
                                         </table>
                                     </section>
                                     <section class="addtolist">
@@ -174,7 +175,7 @@
                                                 else 
                                                 {
                                                     ?>
-                                                    <table class="table-nores">
+                                                    <table class="table-nores shadow">
                                                         <tbody>
                                                             <tr>
                                                                 <td>
@@ -211,7 +212,7 @@
                                 </section>
                                 <section class="sku-dim-information">
                                     <section class="sku-unit-data">
-                                        <table class="table-nores">
+                                        <table class="table-nores shadow">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">Unit Data</th> 
@@ -219,19 +220,19 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Length</td>
+                                                    <th>Length</th>
                                                     <td><?php echo $skuRow['sku_unit_length']; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Width</td>
+                                                    <th>Width</th>
                                                     <td><?php echo $skuRow['sku_unit_width']; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Height</td>
+                                                    <th>Height</th>
                                                     <td><?php echo $skuRow['sku_unit_height']; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Weight</td>
+                                                    <th>Weight</th>
                                                     <td><?php echo $skuRow['sku_unit_weight']; ?></td>
                                                 </tr>
                                             </tbody>
@@ -242,7 +243,7 @@
                                     {
                                 ?>
                                     <section class="sku-case-data">
-                                        <table class="table-nores">
+                                        <table class="table-nores shadow">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">Case Data</th>
@@ -274,7 +275,7 @@
                                     </section>
                                 
                                     <section class="sku-pallet-data">
-                                        <table class="table-nores">
+                                        <table class="table-nores shadow">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">Pallet Data</th>
@@ -305,7 +306,7 @@
                                         </table> 
                                     </section>
                                     <section class="sku-user-data">
-                                        <table class="table-nores">
+                                        <table class="table-nores shadow">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">User Data</th>
@@ -336,7 +337,6 @@
 
                                 ?>
                                 </section> <!-- end sku-dim-information -->       
-
                             </article>
                             <section class="sku-image-data">
                                 <h2>SKU Images</h2>
@@ -831,7 +831,6 @@
                               ");
                             $count->bindparam(":dateFrom", $dateFrom);
                             $count->bindparam(":dateTo", $dateTo);
-
                     }    
                     $stmt->execute();
                     $count->execute();
@@ -1063,7 +1062,7 @@
                     $stmt->execute();
                     
                     ?>
-                    <table class="table">
+                    <table class="table shadow">
                         <thead>
                             <tr>
                                 <td scope="col">SKU</td>

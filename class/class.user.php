@@ -650,10 +650,10 @@
                 } else
                 {
                      ?>
-                    <table class="table">
+                    <table class="table shadow">
                         <thead>
                             <tr>
-                                <td>Member ID</td>
+                                <td>ID</td>
                                 <td>First Name</td>
                                 <td>Last Name</td>
                                 <td>Email</td>
@@ -864,7 +864,7 @@
                 } else
                 {
                      ?>
-                    <table class="table">
+                    <table class="table shadow">
                         <thead>
                             <tr>
                                 <td>First Name</td>

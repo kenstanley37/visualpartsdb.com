@@ -56,54 +56,54 @@ if(isset($_GET['register']))
             </section>
             <section class="form">
                 <form id="addUser" method="post" action="/processors/register_request.php">
-                            <table class="table">
-                                <thead>
-                                    <th colspan="3">Invite User</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <label for="regcompany">Company</label>
-                                        </td>
-                                        <td>
-                                            <select name="regcompany" id="regcompany" required>
-                                                <?php $user->dropDownCompany(); ?>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <a href="/admin/add-company.php"><i class="fas fa-plus-square"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="regfname">First Name</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="text" name="regfname" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="reglname">Last Name</label>
-                                        </td>
-                                        <td colspan="2"> 
-                                            <input type="text" name="reglname" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="regemail">Email Address</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="email" name="regemail" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-right" colspan="3"><button class=" info" type="submit" name="regsubmit" value="Submit">Submit</button></td>
-                                    </tr>
-                                 </tbody>
-                            </table>
-                        </form>
+                    <table class="table shadow">
+                        <thead>
+                            <th colspan="3">Invite User</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label for="regcompany">Company</label>
+                                </td>
+                                <td>
+                                    <select name="regcompany" id="regcompany" required>
+                                        <?php $user->dropDownCompany(); ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <a href="/admin/add-company.php"><i class="fas fa-plus-square"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="regfname">First Name</label>
+                                </td>
+                                <td colspan="2">
+                                    <input type="text" name="regfname" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="reglname">Last Name</label>
+                                </td>
+                                <td colspan="2"> 
+                                    <input type="text" name="reglname" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="regemail">Email Address</label>
+                                </td>
+                                <td colspan="2">
+                                    <input type="email" name="regemail" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-right" colspan="3"><button class=" info" type="submit" name="regsubmit" value="Submit">Submit</button></td>
+                            </tr>
+                         </tbody>
+                    </table>
+                </form>
             </section>
             <section class="content">
                 <span> <?php if(isset($result)){echo $result;} ?></span>

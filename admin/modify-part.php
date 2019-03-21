@@ -55,7 +55,7 @@ if(isset($_GET['error']))
             </section>
             <section class="content">
                 <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
-                <table class="table">
+                <table class="table shadow">
                     <thead>
                         <tr>
                             <th colspan="3"><h6>Modify SKU</h6></th>
