@@ -71,7 +71,7 @@ if(isset($_GET['export'])){
         }
         ?>
         </aside>
-        <main class="search-main">
+        <main class="search-main bg-clr-grey">
             <?php $vpd->skuSearch($sku, 'search'); ?>
         </main>
         <footer>

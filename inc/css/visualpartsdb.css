@@ -173,6 +173,10 @@ a:hover {
     vertical-align:top;
 }
 
+.bg-clr-grey {
+    background-color: #efefef;
+}
+
 /***************************** 
 ** index.php grid 
 ******************************/
@@ -536,7 +540,6 @@ main {
     color: #303030;
 }
 
-
 .index-main #member {
     background-color: antiquewhite;
     grid-area: indexmembership;
@@ -605,21 +608,29 @@ main {
 
 .search-main {
     grid-area: main;
-    min-height: 100vh;
-    min-width: 100%;
+    display: grid;
     grid-template-areas: 
-        "searcherror"
-        "searchexportlist"
-        "searchname"
-        "searchpartdetails"
-        "searchimage";
+        "searchskunum searchexportlist"
+        "searcherror searcherror"
+        "searchdesc  searchdesc"
+        "searchpartdetails searchpartdetails"
+        "searchimageheader searchimageheader"
+        "searchimage searchimage";
+    grid-gap: 15px;
     padding: 15px;
-    justify-items: center;
+}
+
+.search-sku-num {
+    grid-area: searchskunum;
 }
 
 .search-error {
     grid-area: searcherror;
     min-height: 100vh;
+}
+
+.sku-part-desc {
+    grid-area: searchdesc;
 }
 
 .search-error #staticImg {
@@ -634,7 +645,7 @@ main {
     display: grid;
     grid-template-areas: 
         "export list";
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 45% 45%;
     font-size: 12px !important;
 }
 
@@ -647,12 +658,17 @@ main {
     justify-items: center;
 }
 
+.search-main .sku-image-data {
+    grid-area: searchimageheader;
+}
+
 .search-main .sku-images {
     grid-area: searchimage;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: auto;
     grid-gap: 10px;
+    padding: 15px;
     justify-items: center;
 }
 
@@ -664,14 +680,10 @@ main {
     grid-area: list;
 }
 
-.slogo-search {
-    grid-area: searchname;
-}
-
 .search-main table, .search-main table th, .search-main table td,  .search-main table tr {
     /* order: 5px solid black; */
     text-align: left;
-    padding: 5px;
+    padding: 10px;
 }
 
 .search-main table th {
@@ -684,13 +696,6 @@ main {
     margin-bottom: 25px;
 }
 
-.sku-dim-information tr {
-    height: 15px;
-}
-
-.sku-dim-information table {
-    width: 300px;
-}
 
 /***************************************
 *
@@ -1411,16 +1416,7 @@ only screen and (max-width: 900px),
         font-size: 1.3em;
     }
 
-    .table thead {
-        border: none;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-    }
+
 
     .table tr {
         border-bottom: 3px solid #ddd;

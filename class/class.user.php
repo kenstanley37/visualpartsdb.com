@@ -452,7 +452,6 @@
             }	
         }
         
-        
         // *************************************************************
         // Usage: remUser($userid);
         // Removes user from all tables that have a FK (history, list, etc)
