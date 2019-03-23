@@ -11,51 +11,45 @@ $user = new USER;
 
 $randomImage =  $vpd->randImage('6');
 
-if(isset($_GET['result']))
+$fname = '';
+$lname = '';
+$email = '';
+$phone = '';
+$company = '';
+$message = '';
+
+if(isset($_POST['RegisterRequest']))
 {
-    $requestResult = $_GET['result'];
-    if($requestResult == 'alreadyregistered') 
-    {
+    $fname = $vail->sanitizeString($_POST['fname']);
+    $lname = $vail->sanitizeString($_POST['lname']);
+    $email = $vail->sanitizeString($_POST['email']);
+    $phone = $vail->sanitizeString($_POST['phone']);
+    $company = $vail->sanitizeString($_POST['company']);
+    $message = $vail->sanitizeString($_POST['messagearea']);
+
+    echo $message;
+    
+    $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
+
+    if($result == 'alreadyregistered'){
         $requestResult = 'Email address is already registered';
-    } 
-    
-    if($requestResult == 'alreadyrequested') 
-    {
+    }
+
+    if($result == 'alreadyrequested'){
         $requestResult = 'Email already awaiting approval';
-    } 
-    
-    if($requestResult == 'success') 
-    {
+    }
+
+    if($result == 'success'){
         $requestResult = '';
+        $fname = '';
+        $lname = '';
+        $email = '';
+        $phone = '';
+        $company = '';
+        $message = '';
         $rrSuccess = 'Thank you';
     }
-    
-    if($requestResult == 'alreadyloggedin') 
-    {
-        $requestResult = '';
-        $requestResult = 'You already have an account';
-    }
-    
-    
-    if(isset($_GET['fname'])){
-        $fname = ucfirst($_GET['fname']);
-    }
-    if(isset($_GET['lname'])){
-        $lname = ucfirst($_GET['lname']);
-    }
-    if(isset($_GET['email'])){
-        $email = strtolower($_GET['email']);
-    }
-    if(isset($_GET['phone'])){
-        $phone = ucfirst($_GET['phone']);
-    }
-    if(isset($_GET['company'])){
-        $company = ucfirst($_GET['company']);
-    }
-    if(isset($_GET['message'])){
-        $message = ucfirst($_GET['message']);
-    }
-}
+} 
 
 if(isset($_GET['noaccess'])){
     $error = 'You must be a registered user';
@@ -193,21 +187,21 @@ if(isset($_GET['noaccess'])){
                 <section class="member-request shadow">
                     <div class="form-contact">
                         <h3>Request Membership</h3>
-                        <form action="/processors/register_request.php" method="get" class="form-example" id="requestForm">
+                        <form action="/index.php#requestForm" method="post" class="form-example" id="requestForm">
                             <fieldset>
 
-                                <input type="text" name="fname" id="fname" placeholder="First Name" <?php if(isset($fname)){ echo 'value='.$fname;} ?> required>
+                                <input type="text" name="fname" id="fname" placeholder="First Name" value = "<?php if(!empty($fname)){ echo $fname;} ?>" required>
 
-                                <input type="text" name="lname" id="lname" placeholder="Last Name" <?php if(isset($lname)){ echo 'value='.$lname;} ?> required>
+                                <input type="text" name="lname" id="lname" placeholder="Last Name" value="<?php if(!empty($lname)){ echo $lname;} ?>" required>
  
-                                <input type="email" name="email" id="email" placeholder="Email" <?php if(isset($email)){ echo 'value='.$email;} ?> required>
-                                    <?php if(isset($requestResult)){echo '<span>'.$requestResult.'</span>';}?>
+                                <input type="email" name="email" id="email" placeholder="Email" value="<?php if(isset($email)){ echo $email;} ?>" required>
+                                    <?php if(!empty($requestResult)){echo '<span>'.$requestResult.'</span>';}?>
 
-                                <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="Phone xxx-xxx-xxxx" <?php if(isset($phone)){ echo 'value='.$phone;} ?> required>
+                                <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="Phone xxx-xxx-xxxx" value="<?php if(!empty($phone)){ echo $phone;} ?>" required>
 
-                                <input type="text" name="company" id="company" placeholder="Company" <?php if(isset($company)){ echo 'value='.$company;} ?> required>
+                                <input type="text" name="company" id="company" placeholder="Company" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
                                     
-                                <textarea name="messagearea" id="messagearea" placeholder="Message" id="messagearea"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
+                                <textarea name="messagearea" id="messagearea" placeholder="Message" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
                                 
                                 <button type="submit" value="SUBMIT" name="RegisterRequest">SEND</button><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
                             </fieldset>

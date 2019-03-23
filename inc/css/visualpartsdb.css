@@ -502,8 +502,17 @@ main {
 }
 
 .index-main textarea {
-    width: 500px;
-    height: 150px;
+    margin-bottom: 30px;
+    max-width: 100%;
+    min-width: 100%;
+    height: 100px;
+    max-height: 300px;
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    transition: all .3s;
+    overflow: auto;
 }
 
 .index-main .main-intro #staticImg {
@@ -586,6 +595,7 @@ main {
         "memberrequest memberinfo";
     justify-content: center;
     justify-items: center;
+    padding-bottom: 25px;
 }
 
 .index-main #member > h3 {
@@ -626,9 +636,9 @@ main {
     display: block;
     width: 100%;
     border: none;
-        border-bottom-color: currentcolor;
-        border-bottom-style: none;
-        border-bottom-width: medium;
+    border-bottom-color: currentcolor;
+    border-bottom-style: none;
+    border-bottom-width: medium;
     background-color: transparent;
     transition: all .3s;
 }
@@ -1249,7 +1259,7 @@ footer {
         align-items: center;
     }
     
-    header .main-logo h1{
+    header .main-logo h1 {
         font-size: 15px;
     }
 
@@ -1284,15 +1294,20 @@ footer {
         grid-column: 1 / span 6;
     }
     
-
     .index-main .main-intro {
         grid-area: indexintro;
-        min-width: 100%;
-        grid-template-columns: auto;
+        display: grid;
+        grid-template-columns: 90%;
+        grid-template-rows: auto;
+        grid-gap: 55px;
         grid-template-areas: 
-            "introparts" 
+            "introbrands"
+            "introinfo"
             "introimages";
+        justify-items: center;
         justify-content: center;
+        padding-bottom: 50px;
+        position: relative;
     }
 
     .index-main .main-intro .intro {
@@ -1303,33 +1318,19 @@ footer {
         margin-left: 25px;
     }
     
-    .index-main .main-intro #staticImg {
-        grid-area: introimages;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        grid-template-rows: auto;
-        width: 90%;
-        grid-gap: 2.5em;
-        justify-items: center;
-    }
-
     .index-main #member {
+        grid-area: indexmembership;
+        margin-top: 50px;
+        padding-top: 15px;
+        grid-gap: 45px;
         display: grid;
-        min-width: 90%;
-        grid-template-columns: 100%;
-        grid-gap: 5px;
+        grid-template-columns: 90%;
         grid-template-areas: 
             "memberheader"
-            "memberrequest" 
+            "memberrequest"
             "memberinfo";
         justify-content: center;
-        padding-left: 25px;
-    }
-    
-    .index-search input {
-        width: 250px;
-        height: 35px;
-        padding-left: 10px;
+        justify-items: center;
     }
     
     .search-grid {
@@ -1397,7 +1398,7 @@ footer {
         padding: 5px;
     }
     
-    .main .createList input{
+    .main .createList input {
         display: block;
     }
 }
@@ -1410,11 +1411,6 @@ and also iPads specifically.
 @media 
 only screen and (max-width: 900px),
 (min-device-width: 900px) and (max-device-width: 1024px)  {
-    
-    .index-main textarea {
-        width: 300px;
-        height: 150px;
-    }
     
     header .main-logo {
         grid-area: mainlogo;
@@ -1496,8 +1492,6 @@ only screen and (max-width: 900px),
         font-size: 1.3em;
     }
 
-
-
     .table tr {
         border-bottom: 3px solid #ddd;
         display: block;
@@ -1539,6 +1533,10 @@ only screen and (max-width: 900px),
         grid-template-areas: 
             "adminnavlinks";
         z-index: 2;
+    }
+    
+    .index-main #member .member-request {
+        min-width: 300px;
     }
     
     .index-search .search-bar {
@@ -1648,6 +1646,10 @@ only screen and (max-width: 360px),
             "indexintro"
             "indexmembership";
     }
+    
+    .index-main #member .member-request {
+        min-width: 200px;
+    }
 
     .index-main-tog {
         margin-left: 150px;
@@ -1703,31 +1705,6 @@ only screen and (max-width: 360px),
         padding-left: 10px;
         position: relative;
         top: 20px;
-    }
-    
-    .card {
-        /* Add shadows to create the "card" effect 
-        box-shadow: 0 4px 8px 40px rgba(0,0,0,0.2);
-        */
-        width: 200px;
-        height: 300px;
-    }
-    
-    .card .card-img {
-        height: auto;
-    }
-    
-    .card figcaption {
-        border: none;
-    }
-    
-    .card .card-sku-num h4 {
-        font-size: 20px;
-        font-weight: 100;
-    }
-    
-    .card .card-sku-desc p {
-        font-size: 12px;
     }
     
     .table-nores {
