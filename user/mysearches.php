@@ -35,12 +35,10 @@ if(isset($_GET['dfrom']))
         $userID = '';
     }
 } 
-
-if($user->accessCheck() != 'ADMIN'){
-    $userID = $_SESSION['user_id']; // check if admin and set $userID
-}
-
+$userID = $_SESSION['user_id']; // check if admin and set $userID
 $result = '';
+$dropdown = $user->getUserList();
+$searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,13 +92,24 @@ $result = '';
                                 </td>
                                 <td>
                                     <select id="users" name="usersID" hidden>
-                                        <?php $user->dropDownUser($userID); ?> <!-- list of user names -->
+                                        <option value=""></option>
+                                        <?php
+                                        foreach($dropdown as $row)
+                                        {
+                                        ?>
+                                        <option value="<?php echo $row['user_id']; ?>"
+                                            <?php if($row['user_id'] == $userID ){ echo 'selected';}?>>
+                                            <?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?>
+                                        </option>
+                                        <?php
+                                        }
+                                        ?>
                                     </select> 
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input class="search-button" type="submit" value="Search">
+                                    <input class="search-button" type="submit" value="View">
                                 </td>
                             </tr>
                         </tbody>
@@ -108,10 +117,38 @@ $result = '';
                 </form>
             </article>
             <article class="my-search-body">            
-                <?php 
-                    // return the top 50 results. Need to change this to a drop down.
-                    $vpd->mySearches($dateStart, $dateEnd, $userID, 50);
-                 ?>
+               <section class="my-search-results">
+                    <h2 class="block-title shadow">My Searches</h2>
+                    <table class="table-nores shadow">
+                        <thead>
+                            <tr>
+                                <th>Part Number</th>
+                                <th>Description</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <?php
+                                foreach($searchHist as $row)
+                                {
+                                    ?>
+                                        <tr>
+                                            <td scope="row" data-label="SKU">
+                                                <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
+                                            </td>
+                                            <td data-label="Description">
+                                                <?php echo $row['sku_desc']; ?>
+                                            </td>
+                                            <td data-label="Count">
+                                                <?php echo $row['count']; ?>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </section>
             </article>
             <article class="my-search-foot"></article>
         </main>

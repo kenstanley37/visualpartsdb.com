@@ -38,12 +38,9 @@ if(isset($_GET['dfrom']))
         $userID = '';
     }
 } 
-
-if($user->accessCheck() != 'ADMIN'){
-    $userID = $_SESSION['user_id'];
-}
-
 $result = '';
+$dropdown = $user->getUserList();
+$searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +52,6 @@ $result = '';
     <div class="wrapper">
         <header>
             <?php include($path."inc/inc.header.php");?>
-            
         </header>
         <aside class="admin-nav-bar hidden">
         <?php
@@ -92,39 +88,27 @@ $result = '';
                                 </td>
                             </tr>
 
-                                    <?php 
-                                        if($user->accessCheck() == "ADMIN")
-                                        {
-                                            ?>
-                                            <tr>
-                                                <td>
-                                                    <label for="users">Select User:</label>
-                                                </td>
-                                                <td>
-                                                    <select id="users" name="usersID">
-                                                        <?php $user->dropDownUser($userID); ?>
-                                                    </select> 
-                                                </td>
-                                            </tr>
-                                            
-                                            
-                                            <?php
-                                        } else
+                            <tr>
+                                <td>
+                                    <label for="users" hidden>Select User:</label>
+                                </td>
+                                <td>
+                                    <select id="users" name="usersID">
+                                        <option value=""></option>
+                                        <?php
+                                        foreach($dropdown as $row)
                                         {
                                         ?>
-                                            <tr>
-                                                <td>
-                                                    <label for="users" hidden>Select User:</label>
-                                                </td>
-                                                <td>
-                                                    <select id="users" name="usersID" hidden>
-                                                        <?php $user->dropDownUser($userID); ?>
-                                                    </select> 
-                                                </td>
-                                            </tr>
-                                    <?php
-                                    }; ?>
-
+                                        <option value="<?php echo $row['user_id']; ?>"
+                                            <?php if($row['user_id'] == $userID ){ echo 'selected';}?>>
+                                            <?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?>
+                                        </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select> 
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <input class="search-button" type="submit" value="Search">
@@ -134,10 +118,39 @@ $result = '';
                     </table>
                 </form>
             </article>
-            <article class="my-search-body">            
-                <?php 
-                    $vpd->mySearches($dateStart, $dateEnd, $userID, 50);
-                 ?>
+            <article class="my-search-body shadow">            
+                <section class="my-search-results">
+                    <h2 class="shadow">Search History</h2>
+                    <table class="table-nores shadow">
+                        <thead>
+                            <tr>
+                                <th>Part Number</th>
+                                <th>Description</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <?php
+                                foreach($searchHist as $row)
+                                {
+                                    ?>
+                                        <tr>
+                                            <td scope="row" data-label="SKU">
+                                                <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
+                                            </td>
+                                            <td data-label="Description">
+                                                <?php echo $row['sku_desc']; ?>
+                                            </td>
+                                            <td data-label="Count">
+                                                <?php echo $row['count']; ?>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </section>
             </article>
             <article class="my-search-foot"></article>
         </main>

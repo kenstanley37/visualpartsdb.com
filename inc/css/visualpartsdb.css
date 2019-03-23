@@ -36,10 +36,18 @@ ul {
     margin-top: 15px;
 }
 
+ul {
+    font-weight: bold;
+}
+
+li {
+    font-weight: normal;
+}
+
 h1, h2, h3, h4 {
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
-    line-height: 50px;
+
 }
 
 h1 {
@@ -178,6 +186,19 @@ a:hover {
     background-color: #efefef;
 }
 
+.block-title {
+    position: absolute;
+    padding: 5px;
+    width: 250px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: -20px;
+    text-align: center;
+    background-color: #0487CC;
+    color: #fff;
+}
+
 /***************************** 
 ** index.php grid 
 ******************************/
@@ -186,7 +207,7 @@ a:hover {
     min-height: 100vh;
     min-width: 100%;
     grid-template-columns: 100%;
-    grid-template-rows: auto auto 2fr auto;
+    grid-template-rows: 50px auto 2fr auto;
     grid-template-areas: 
         "header"
         "adminnavbar"
@@ -305,6 +326,10 @@ header .name a {
     font-size: 15px;
 }
 
+main {
+    overflow: auto;
+}
+
 /***************************************
 *
 *
@@ -316,10 +341,6 @@ header .name a {
 .admin-nav-bar {
     grid-area: adminnavbar;
     z-index: 2;
-}
-
-main {
-    overflow: auto;
 }
 
 /***************************************
@@ -342,6 +363,7 @@ main {
         "indexsearch"
         "indexintro"
         "indexmembership";
+    justify-content: center;
 }
 
 .index-main-tog {
@@ -468,10 +490,12 @@ main {
 
 .index-main .main-intro .brands {
     grid-area: introbrands;
+    width: 100%;
 }
 
 .index-main .main-intro .information {
     grid-area: introinfo;
+    width: 100%;
 }
 
 .index-main .main-intro .brands, .index-main .main-intro .information {
@@ -482,19 +506,6 @@ main {
     padding-top: 55px;
     margin-bottom: 55px;
     min-height: 300px;
-}
-
-.index-main .main-intro .brands h2, .index-main .main-intro .information h2 {
-    position: absolute;
-    padding: 5px;
-    width: 250px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: -35px;
-    text-align: center;
-    background-color: #0487CC;
-    color: #fff;
 }
 
 .index-main .main-intro table {
@@ -545,6 +556,7 @@ main {
 /* Add some padding inside the card container */
 .card figcaption { 
     padding: 2px 16px;
+    padding-bottom: 15px;
 }
 
 .card img {
@@ -583,19 +595,18 @@ main {
 }
 
 .index-main #member {
-    background-color: antiquewhite;
     grid-area: indexmembership;
-    margin-top: 50px;
-    padding-top: 15px;
-    grid-gap: 45px;
     display: grid;
     grid-template-columns: 45% 45%;
+    grid-template-rows: auto;
+    grid-gap: 55px;
     grid-template-areas: 
         "memberheader memberheader"
         "memberrequest memberinfo";
-    justify-content: center;
     justify-items: center;
-    padding-bottom: 25px;
+    justify-content: center;
+    padding-bottom: 50px;
+    position: relative;
 }
 
 .index-main #member > h3 {
@@ -609,16 +620,20 @@ main {
 
 .index-main #member .member-info {
     grid-area: memberinfo;
+    width: 100%;
 }
 
 .index-main #member .member-request {
     grid-area: memberrequest;
-    background-color: #fff;
-    padding: 25px;
-    min-width: 600px;
+    width: 100%;
 }
 
-.member-request h3 {
+.index-main #member .member-request, .index-main #member .member-info {
+    background-color: #fff;
+    padding: 25px;
+}
+
+.member-request h3, .member-info h3 {
     color: #0487cc;
 }
 
@@ -636,9 +651,6 @@ main {
     display: block;
     width: 100%;
     border: none;
-    border-bottom-color: currentcolor;
-    border-bottom-style: none;
-    border-bottom-width: medium;
     background-color: transparent;
     transition: all .3s;
 }
@@ -939,15 +951,23 @@ footer {
     display: grid;
     grid-template-columns: auto;
     grid-template-areas: 
-        "searchresults searchcount";
+        "searchresults";
+    justify-content: center;
+    background-color: #fff;
+    margin-top: 75px;
+    position: relative;
+}
+
+.my-search-body table {
+    margin-top: 50px;
+}
+
+.my-search-body .my-search-results {
+    position: relative;
 }
 
 .my-search-results {
     grid-area: searchresults;
-}
-
-.my-search-count {
-    grid-area: searchcount;
 }
 
 .my-search-body a:hover {
@@ -969,7 +989,7 @@ footer {
 .main {
     grid-area: main;
     display: grid;
-    grid-template-columns: 95vw;
+    grid-template-columns: 90%;
     grid-template-rows: 15px auto auto auto;
     grid-template-areas: 
         "title"
@@ -978,7 +998,7 @@ footer {
         "mcontent";
     grid-gap: 30px;
     justify-content: center;
-    align-content: start;
+    position: relative;
 }
 
 .main .title {
@@ -1018,20 +1038,42 @@ footer {
 .main .form {
     grid-area: form;
     display: grid;
-    justify-items: center;
 }
 
 .main .update-form {
     grid-area: form;
-    margin-top: 150px;
+    display: grid;
+    grid-template-areas: 
+        "skuedit";
+    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: relative;
 }
 
-.main .update-form form {
-    grid-area: form;
+
+.main .update-form textarea {
+    width: 100%;
+    height: 100px;
+}
+
+.main .update-form input {
+    width: 75px;
+}
+
+.main .update-form .update-sku {
+    grid-area: skuedit;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 25px;
+    justify-content: center;
     justify-items: center;
+}
+
+.main .update-form .update-sku table {
+    min-width: 350px;
 }
 
 .main .form h2, .main .content h2 {
@@ -1042,14 +1084,6 @@ footer {
     grid-area: mcontent;
     display: grid;
     justify-items: center;
-}
-
-.main .update-sku {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-template-rows: auto;
-    grid-gap: 10px;
 }
 
 .dash-top {
@@ -1309,28 +1343,20 @@ footer {
         padding-bottom: 50px;
         position: relative;
     }
-
-    .index-main .main-intro .intro {
-        grid-area: introparts;
-        line-height: 2em;
-        max-width: 10%;
-        justify-self: center;
-        margin-left: 25px;
-    }
     
     .index-main #member {
-        grid-area: indexmembership;
-        margin-top: 50px;
-        padding-top: 15px;
-        grid-gap: 45px;
         display: grid;
         grid-template-columns: 90%;
+        grid-template-rows: auto;
+        grid-gap: 55px;
         grid-template-areas: 
             "memberheader"
             "memberrequest"
             "memberinfo";
         justify-content: center;
         justify-items: center;
+        padding-bottom: 50px;
+        position: relative;
     }
     
     .search-grid {
@@ -1535,10 +1561,6 @@ only screen and (max-width: 900px),
         z-index: 2;
     }
     
-    .index-main #member .member-request {
-        min-width: 300px;
-    }
-    
     .index-search .search-bar {
         width: 300px;
         height: 35px;
@@ -1590,51 +1612,13 @@ This query will take effect for any screen smaller than 760px
 and also iPads specifically.
 */
 @media 
-only screen and (max-width: 360px),
-(min-device-width: 1px) and (max-device-width: 360px)  {
+only screen and (max-width: 890px),
+(min-device-width: 1px) and (max-device-width: 890px)  {
     header {
         grid-template-columns: 240px auto 25px;
     }
 
-    .login-main {
-        grid-area: main;
-        display: grid;
-        height: 80vh;
-        min-width: 100%;
-        max-width: 100%;
-        margin: 0;
-        grid-template-columns: 100%;
-        grid-template-areas: 
-            "loghead"
-            "logname"
-            "logpass"
-            "logcaptcha"
-            "logsubmit"
-            "logerror";
-        justify-items: center;
-        text-align: center;
-    }
-    
-    .login-main form {
-        max-width: 200px;
-        margin: 0;
-    }
-    
-    .login-main form input {
-        width: 150px;
-        margin-bottom: 20px;
-    }
-
-    .login-main .g-recaptcha {
-        margin-left: 0;
-        transform: scale(0.67);
-        -webkit-transform: scale(0.67);
-        transform-origin: 0 0;
-        -webkit-transform-origin: 0 0;
-    }
-    
     .index-main {
-        overflow: hidden;
         grid-area: main;
         display: grid;
         grid-template-columns: 100%;
@@ -1646,11 +1630,7 @@ only screen and (max-width: 360px),
             "indexintro"
             "indexmembership";
     }
-    
-    .index-main #member .member-request {
-        min-width: 200px;
-    }
-
+     
     .index-main-tog {
         margin-left: 150px;
     }
@@ -1717,7 +1697,28 @@ only screen and (max-width: 360px),
         -webkit-transform: scale(0.77);
         transform-origin: 0 0;
         -webkit-transform-origin: 0 0;
-        
+    }
+    
+    .title {
+        width: 100%;
+        font-size: 16px;
+    }
+    
+    .main .update-form .update-sku {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .main .update-form .update-sku table {
+        min-width: 150px;
+    }
+    
+    .member-info ul {
+        font-size: 12px;
+    }
+    
+    .block-title {
+        width: 150px;
+        font-size: 16px;
     }
 }
 

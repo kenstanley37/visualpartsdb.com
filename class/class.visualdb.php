@@ -127,80 +127,20 @@
         } // end skuSearchData
         
         // *************************************************************
-        // Usage: getSkuImage();
-        // Created an admin view of the SKU images
+        // Usage: getSkuImage($sku);
+        // Returns image links for $sku
         // *************************************************************
         public function getSkuImage($sku)
         {
             try
             {
-                $skuimages = $this->conn->prepare("SELECT * FROM sku_image 
+                $stmt = $this->conn->prepare("SELECT * FROM sku_image 
                 WHERE sku_image_sku_id=:sku");
-                $skuimages->execute(array(':sku'=>$sku));
-                $skuRow=$skuimages->fetch(PDO::FETCH_ASSOC);
-                
-                ?>
-                    <section class="sku-image-data">
-                        <h2>SKU Images</h2>
-                        <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
-                            Select image to upload:
-                            <input type="file" name="file" id="file">
-                            <input type="text" name="desc" id="desc" placeholder="Caption">
-                            <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_image_sku_id']; ?>">
-                            <input type="submit" value="Upload Image" name="imageSubmit">
-                        </form>
-                        <span class="imagemessage"><?php echo $this->imageMessage; ?></span>
-                    </section>
-                    <section class="sku-images" id="skuimages">
-                        <?php 
-                        while($skuimagerow = $skuimages->fetch()){
-                            ?>
-                        <figure class="card bg-white shadow">
-                            <div class="card-img">
-                                <a href="<?php echo $skuimagerow['sku_image_url']; ?>">
-                                    <img class="article-img" src="<?php echo $skuimagerow['sku_image_thumb']; ?>" alt="<?php echo $skuimagerow['sku_image_sku_id'].'-'.$skuimagerow['sku_image_description']; ?>" />
-                                </a>
-                            </div>
-                            <figcaption>
-                                <section class="card-sku-num">
-                                    <table class="table-nores">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <label for="caption">Desc:</label>
-                                                </td>
-                                                <td>
-                                                    <form id="imageUpdate" action="/processors/image_handler.php" method="post">
-                                                        <input type="text" name="imageSku" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" hidden>
-                                                        <input type="text" name="imageNum" value="<?php echo $skuimagerow['sku_image_id']; ?>" hidden>
-                                                        <input type="text" name="caption" value="<?php echo $skuimagerow['sku_image_description'];?>">
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <form method="post" action="/processors/image_handler.php">
-                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_sku_id']; ?>" name="image_sku" hidden>
-                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_id']; ?>" name="image_id" hidden>
-                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_url']; ?>" name="image_url" hidden>
-                                                        <input type="text" value="<?php echo $skuimagerow['sku_image_thumb']; ?>" name="image_thumb" hidden>
-                                                        <button class="btn danger" type="submit" name="deleteimg">Delete</button>
-                                                    </form> 
-                                                </td>
-                                                <td class="align-right">
-                                                    <button type="submit" form="imageUpdate" class="btn active" name="imageUpdate">Update</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </section>
-                            </figcaption>
-                        </figure>
-                            <?php
-                        }
-                        ?>
-                    </section>
-                <?php
+                $stmt->bindparam(":sku", $sku);
+                $stmt->execute();
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
             }
             
             catch(PDOException $e)
@@ -468,11 +408,11 @@
         
         
         // *************************************************************
-        // Usage: mySearches($dateFrom, $dateTo, $userID, $recordCount)
+        // Usage: mySearches($dateFrom, $dateTo, $userID)
         // returns a table of searches from users search history
         // my date range (or all if blank)
         // *************************************************************
-        public function mySearches($dateFrom, $dateTo, $userID, $recordCount)
+        public function mySearches($dateFrom, $dateTo, $userID)
         {
            require_once('class.user.php');
             $user = new USER;
@@ -486,126 +426,35 @@
                     if(!empty($userID))
                     {  
 
-                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
-                            left join user on user_id = sku_search_by
-                            left join sku on sku_id = sku_search_sku
-                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
-                             ORDER BY sku_search_id desc");
-                            $stmt->bindparam(":userID", $userID);
-                            $stmt->bindparam(":dateFrom", $dateFrom);
-                            $stmt->bindparam(":dateTo", $dateTo);
-                            
-                            
-                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
-                            left join user on user_id = sku_search_by
-                            left join sku on sku_id = sku_search_sku
-                             WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
-                             GROUP by sku_search_sku
-                             ORDER BY count desc");
-                            $count->bindparam(":userID", $userID);
-                            $count->bindparam(":dateFrom", $dateFrom);
-                            $count->bindparam(":dateTo", $dateTo);
+                        $stmt = $this->conn->prepare("SELECT sku_search_sku, sku_desc, count(sku_search_sku) as count 
+                            FROM sku_search 
+                            LEFT JOIN user on user_id = sku_search_by
+                            LEFT JOIN sku on sku_id = sku_search_sku
+                         WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                         GROUP by sku_search_sku, sku_desc
+                         ORDER BY count desc");
+                        $stmt->bindparam(":userID", $userID);
+                        $stmt->bindparam(":dateFrom", $dateFrom);
+                        $stmt->bindparam(":dateTo", $dateTo);
 
                     } else 
                     {
-                            $stmt = $this->conn->prepare("SELECT * FROM sku_search 
-                            left join user on user_id = sku_search_by
-                            left join sku on sku_id = sku_search_sku
-                                WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
-                              ORDER BY sku_search_id desc");
-                            $stmt->bindparam(":dateFrom", $dateFrom);
-                            $stmt->bindparam(":dateTo", $dateTo);
-                            
-                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
-                            left join user on user_id = sku_search_by
-                            left join sku on sku_id = sku_search_sku
-                                WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
-                              GROUP by sku_search_sku
-                              ORDER BY count desc
-                              ");
-                            $count->bindparam(":dateFrom", $dateFrom);
-                            $count->bindparam(":dateTo", $dateTo);
+                        $stmt = $this->conn->prepare("SELECT sku_search_sku, sku_desc, count(sku_search_sku) as count 
+                            FROM sku_search 
+                            LEFT JOIN user on user_id = sku_search_by
+                            LEFT JOIN sku on sku_id = sku_search_sku
+                            WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
+                          GROUP by sku_search_sku, sku_desc
+                          ORDER BY count desc
+                          ");
+                        $stmt->bindparam(":dateFrom", $dateFrom);
+                        $stmt->bindparam(":dateTo", $dateTo);
                     }    
                     $stmt->execute();
-                    $count->execute();
-                    
-                    if($stmt->rowCount() >= 1)
-                    {
-                        ?>
-                        <section class="my-search-results">
-                            <table class="table">
-                                <caption>Search History</caption>
-                                <thead>
-                                    <tr>
-                                        <th>Part Number</th>
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                    </tr>
-                                </thead> 
-                                 <tbody>
-                        <?php
-                        while($row = $stmt->fetch())
-                        {
-                        ?>
-                                <?php 
-                                    $fname = $row['user_fName'];
-                                    $lname = $row['user_lName'];
-                                    $desc = $row['sku_desc'];
-                                    $date = $row['sku_search_date']; 
-                                    $newDate = new DateTime($date);
-                                    $dateOnly = $newDate->format('Y-m-d'); // pull the date out
-                                    $timeOnly = $newDate->format('h:i:s A'); // pull the time out
-                                ?>
-                                    <tr>
-                                        <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a></td>
-                                        <td data-label="Description"><?php echo $desc; ?></td>
-                                        <td data-label="Date"><?php echo $dateOnly; ?></td>
-                                        <td data-label="Time"><?php echo $timeOnly; ?></td>
-                                        <td data-label="First Name"><?php echo $fname; ?></td>
-                                        <td data-label="Last Name"><?php echo $lname; ?></td>
-                                    </tr>
+                    $result = array(array());
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $result;
 
-                        <?php
-                        }
-                            ?></tbody>
-                            </table>
-                            </section>    
-                            <section class="my-search-count">
-                                 <table class="table table-count">
-                                    <caption>Search Count</caption>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Part Number</th>
-                                            <th scope="col">Count</th>
-                                        </tr>
-                                    </thead> 
-                                     <tbody>
-
-                                <?php
-
-                        while($countrow = $count->fetch())
-                        {
-                            ?>
-                             <tr>
-                                <td scope="row" data-label="SKU"><a class="sku-name" href="/search.php?search=<?php echo $countrow['sku_search_sku']; ?>"><?php echo $countrow['sku_search_sku']; ?></a></td>
-                                <td data-label="Count"><?php echo $countrow['count']; ?></td>
-                            </tr>
-                            <?php
-                        }
-                        ?>
-                                     </tbody>
-                                </table>
-                        </section>
-                        <?php
-                    } else 
-                    {
-                        ?>
-                            <section>Sorry, nothing was found for this date range.</section>
-                        <?php
-                    }
                 }   
                 catch(PDOException $e)
                 {
@@ -614,10 +463,10 @@
         } // end mySearches
         
         // *************************************************************
-        // Usage: recordCount();
+        // Usage: skuCount();
         // display counts for records, images, and searches
         // *************************************************************
-        public function recordCount()
+        public function getSkuCount()
         {
             // lets update the search ticker for this sku
             try {
@@ -625,22 +474,47 @@
                     $stmt->execute();
                     $row_sku = $stmt->fetch();
                     $sku_count = $row_sku['SKU_Count'];
-                
+                    return $sku_count;
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end recordCount;
+        
+                // *************************************************************
+        // Usage: recordCount();
+        // display counts for records, images, and searches
+        // *************************************************************
+        public function getSearchCount()
+        {
+            // lets update the search ticker for this sku
+            try {
                     $stmt = $this->conn->prepare("SELECT count(*) as Search_Count FROM sku_search");
                     $stmt->execute();
                     $row_search = $stmt->fetch();
                     $search_count = $row_search['Search_Count'];
-                
+                    return $search_count;
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end recordCount;
+        
+                // *************************************************************
+        // Usage: recordCount();
+        // display counts for records, images, and searches
+        // *************************************************************
+        public function getImageCount()
+        {
+            // lets update the search ticker for this sku
+            try {
                     $stmt = $this->conn->prepare("SELECT count(*) as Search_Count FROM sku_image");
                     $stmt->execute();
                     $row_image = $stmt->fetch();
                     $image_count = $row_image['Search_Count'];
-                
-                    ?>
-                    <p><?php echo number_format($sku_count);?> Parts </p>
-                    <p><?php echo number_format($image_count);?> Pictures </p>
-                    <p><?php echo number_format($search_count);?> Searches</p>
-                    <?php
+                    return $image_count;
                     
                 }   
                 catch(PDOException $e)
@@ -885,199 +759,14 @@
         
         public function getSkuData($sku) 
         {
-            
             try
             {
                 $stmt = $this->conn->prepare("SELECT * from sku
                     WHERE sku_id = :skuID");
                 $stmt->bindparam(":skuID", $sku);
                 $stmt->execute();
-                $row = $stmt->fetch();
-                
-            ?>
-                <form id="UpdateSkuForm" method="post" action="/processors/sku_handler.php">
-                    <input type="text" name="sku" value="<?php echo $sku; ?>" hidden>
-                    <section class="update-sku">
-                        <table class="table-nores sku-set1">
-                            <thead>
-                                <tr>
-                                    <th data-label="<?php echo $row['sku_id']; ?>" scope="col" colspan="2">
-                                        <?php echo $row['sku_id']; ?>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="valign-top">
-                                        <label for="desc">Description</label>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="25" name="desc">
-                                            <?php echo $row['sku_desc']; ?>
-                                        </textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-right" colspan="2">
-                                        <button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button>
-                                    </td>
-                                </tr>
-                        </table>
-
-                        <table class="table-nores sku-set2">
-                            <thead>
-                                <tr>
-                                    <th colspan="2" class="tb1-color">UNIT</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="Unit">
-                                        <label for="unit-length">Length</label>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="unit-length" min="0" step="0.01" value="<?php echo $row['sku_unit_length'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Unit">
-                                        <label for="unit-width">Width</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="number" name="unit-width" min="0" step="0.01" value="<?php echo $row['sku_unit_width'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Unit">
-                                        <label for="unit-height">Height</label>
-                                    </td>
-                                    <td colspan="2"> 
-                                        <input type="number" name="unit-height" min="0" step="0.01" value="<?php echo $row['sku_unit_height'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Unit">
-                                        <label for="unit-weight">Weight</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $row['sku_unit_weight'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-right" colspan="2"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <table class="table-nores sku-set3">
-                            <thead>
-                                 <tr>
-                                    <th colspan="2" class="tb1-color">CASE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="Case">
-                                        <label for="case-length">Length</label>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="case-length" min="0" step="0.01" value="<?php echo $row['sku_case_length'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Case">
-                                        <label for="case-width">Width</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="number" name="case-width" min="0" step="0.01" value="<?php echo $row['sku_case_width'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Case">
-                                        <label for="case-height">Height</label>
-                                    </td>
-                                    <td colspan="2"> 
-                                        <input type="number" name="case-height" min="0" step="0.01" value="<?php echo $row['sku_case_height'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Case">
-                                        <label for="case-weight">Weight</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="number" name="case-weight" min="0" step="0.01" value="<?php echo $row['sku_case_weight'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Case">
-                                        <label for="case-qty">Quantity</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $row['sku_case_qty'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-right" colspan="2"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
-                                </tr>
-                            </tbody>
-                        </table>    
-
-                        <table class="table-nores sku-set4">
-                            <thead>
-                                <tr>
-                                    <th colspan="2" class="tb1-color">PALLET</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="Pallet">
-                                        <label for="pallet-length">Length</label>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="pallet-length" min="0" step="0.01" value="<?php echo $row['sku_pallet_length'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Pallet">
-                                        <label for="pallet-width">Width</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="number" name="pallet-width" min="0" step="0.01" value="<?php echo $row['sku_pallet_width'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Pallet">
-                                        <label for="pallet-height">Height</label>
-                                    </td>
-                                    <td colspan="2"> 
-                                        <input type="number" name="pallet-height" min="0" step="0.01" value="<?php echo $row['sku_pallet_height'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Pallet">
-                                        <label for="pallet-weight">Weight</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="number" name="pallet-weight" min="0" step="0.01" value="<?php echo $row['sku_pallet_weight'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Pallet">
-                                        <label for="pallet-qty">Quantity</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="number" name="pallet-qty" min="0" step="0.01" value="<?php echo $row['sku_pallet_qty'] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-right" colspan="2"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
-                                </tr>
-                            </tbody>
-                        </table>                       
-                    </section> <!-- end Case Data -->
-                </form>
-            <?php
-
+                $result = $stmt->fetch();
+                return $result;
             }
             catch(PDOException $e)
             {

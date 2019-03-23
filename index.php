@@ -55,6 +55,10 @@ if(isset($_GET['noaccess'])){
     $error = 'You must be a registered user';
 }
 
+$sku_count = $vpd->getSkuCount();
+$search_count = $vpd->getSearchCount();
+$image_count = $vpd->getImageCount();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,33 +92,41 @@ if(isset($_GET['noaccess'])){
                     </form>
                 </section>
                 <section class="records">
-                    <?php $vpd->recordCount(); ?>
+                    <p><?php echo number_format($sku_count);?> Parts </p>
+                    <p><?php echo number_format($image_count);?> Pictures </p>
+                    <p><?php echo number_format($search_count);?> Searches</p>
                 </section>
             </article>
             <article class="main-intro">
-                <section class="brands shadow">
-                    <h2 class="shadow">Brands</h2>
+                <section class="brands indexCard shadow">
+                    <h2 class="block-title shadow">Brands</h2>
                     <p>Our database of parts contains information on over 50,000 components from popular brands such as:</p>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td><a href="https://www.electroluxappliances.com/">Electrolux</a></td>
-                                <td><a href="https://www.frigidaire.com/">Frigidaire</a></td>
-                                <td><a href="https://www.kelvinatorcommercial.com/">Kelvinator</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="https://www.aeg.com/">AEG</a></td>
-                                <td><a href="http://gibson-intl.com/">Gibson</a></td>
-                                <td><a href="https://www.zanussi.com/">Zanussi</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="https://professional.electrolux.com/">Professional</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <ul>
+                        <li>
+                            <a href="https://www.electroluxappliances.com/">Electrolux</a>
+                        </li>
+                        <li>
+                            <a href="https://www.frigidaire.com/">Frigidaire</a>
+                        </li>
+                        <li>
+                            <a href="https://www.kelvinatorcommercial.com/">Kelvinator</a>
+                        </li>
+                        <li>
+                            <a href="https://www.aeg.com/">AEG</a>
+                        </li>
+                        <li>
+                            <a href="http://gibson-intl.com/">Gibson</a>
+                        </li>
+                        <li>
+                            <a href="https://www.zanussi.com/">Zanussi</a>
+                        </li>
+                        <li>
+                            <a href="https://professional.electrolux.com/">Professional</a>
+                        </li>
+                    </ul>
                 </section>
                 <section class="information shadow">
-                    <h2 class="shadow">Information</h2>
+                    <h2 class="block-title shadow">Information</h2>
                     <p>We record part information such as weight, length, height, and depth. We record this data at the different stages of the product</p>
                     <table class="table-nores">
                         <tbody>
@@ -168,25 +180,38 @@ if(isset($_GET['noaccess'])){
                 <section class="member-header">
                     <h2>Membership Information</h2>
                 </section>
-                <section class="member-info">
-                    <h3>Membership Benefits</h3>
-                    <ul>
-                        <li>Custom Item List: create custom list of items for exporting data</li>
-                        <li>Export Data: individual items or item list
-                            <ul>
-                                <li>Excel</li>
-                                <li>PDF</li>
-                                <li>CSV</li>
-                            </ul>
+                <section class="member-info shadow">
+                    <h3 class="title">Benefits & Requirements</h3>
+                    <ul>Benefits:
+                        <li>
+                            View case and pallet information
                         </li>
-                        <li>Search History: create date range reports of your search history</li>
-                        <li>Visual Data: graphs and charts on skus or sku list</li>
-                        <li>Request Updates: request updates on sku data with a click of a button</li>
+                        <li>
+                            Export data to Excel (PDF and CVS coming soon)
+                        </li>
+                        <li>
+                            View search history
+                        </li>
+                        <li>
+                            Create unlimited export list
+                        </li>
+                        <li>
+                            Request updates on SKUs
+                        </li>
                     </ul>
+                    <ul>Requirements
+                        <li>
+                            Must be a customer or supplier
+                        </li>
+                        <li>
+                            Suppliers keep their own product up to date (images and data)
+                        </li>
+                    </ul>
+                    
                 </section>
                 <section class="member-request shadow">
                     <div class="form-contact">
-                        <h3>Request Membership</h3>
+                        <h3 class="title">Request Membership</h3>
                         <form action="/index.php#requestForm" method="post" class="form-example" id="requestForm">
                             <fieldset>
 
