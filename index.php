@@ -9,6 +9,8 @@ $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
 
+$randomImage =  $vpd->randImage('6');
+
 if(isset($_GET['result']))
 {
     $requestResult = $_GET['result'];
@@ -96,8 +98,8 @@ if(isset($_GET['noaccess'])){
                 </section>
             </article>
             <article class="main-intro">
-                <section class="intro">
-                    <h2>Brands</h2>
+                <section class="brands shadow">
+                    <h2 class="shadow">Brands</h2>
                     <p>Our database of parts contains information on over 50,000 components from popular brands such as:</p>
                     <table>
                         <tbody>
@@ -116,7 +118,9 @@ if(isset($_GET['noaccess'])){
                             </tr>
                         </tbody>
                     </table>
-                    <h2>Information</h2>
+                </section>
+                <section class="information shadow">
+                    <h2 class="shadow">Information</h2>
                     <p>We record part information such as weight, length, height, and depth. We record this data at the different stages of the product</p>
                     <table class="table-nores">
                         <tbody>
@@ -136,7 +140,34 @@ if(isset($_GET['noaccess'])){
                     </table>
                 </section>
                 <section id="staticImg">
-                    <?php echo $vpd->randImage('2'); ?>
+                    <?php
+                        foreach($randomImage as $key)
+                        {
+                            ?>
+                             <figure class="card shadow">
+                                <div class="card-img">
+                                    <a href="<?php echo $key['sku_image_url']; ?>">
+                                        <img class="article-img" src="<?php echo $key['sku_image_thumb']; ?>" alt="<?php echo $key['sku_image_sku_id'].'-'.$key['sku_image_description']; ?>" />
+                                    </a>
+                                </div>
+                                 <a href="/search.php?search=<?php echo $key['sku_image_sku_id']; ?>">
+                                    <figcaption>
+                                            <div class="card-sku-num">
+                                                <h4>
+                                                    <?php echo $key['sku_image_sku_id']; ?></h4>
+                                            </div>
+                                            <div class="card-image-desc">
+                                                <p><?php echo $key['sku_image_description'];?></p>
+                                            </div>
+                                            <div class="card-sku-desc">
+                                                <p><?php echo $key['sku_desc'];?></p>
+                                            </div>
+                                    </figcaption>
+                                 </a>
+                            </figure>
+                            <?php
+                        }
+                    ?>
                 </section>
             </article> <!-- end main-intro -->
             <article id="member">
@@ -159,45 +190,29 @@ if(isset($_GET['noaccess'])){
                         <li>Request Updates: request updates on sku data with a click of a button</li>
                     </ul>
                 </section>
-                <section class="member-request">
-                    <h3>Request Membership</h3>
-                    <form action="/processors/register_request.php" method="get" class="form-example" id="requestForm">
-                        <fieldset>
-                            <div class="reg-form">
-                                <label for="fname">First Name: </label>
-                                <input type="text" name="fname" id="fname" <?php if(isset($fname)){ echo 'value='.$fname;} ?> required>
-                                <i class="fas fa-asterisk"></i>
-                            </div>
-                            <div class="reg-form">
-                                <label for="lname">Last Name: </label>
-                                <input type="text" name="lname" id="lname" <?php if(isset($lname)){ echo 'value='.$lname;} ?> required>
-                                <i class="fas fa-asterisk"></i>
-                            </div>
-                            <div class="reg-form">
-                                <label for="email">Email: </label>
-                                <input type="email" name="email" id="email" <?php if(isset($email)){ echo 'value='.$email;} ?> required>
-                                <i class="fas fa-asterisk"></i>
-                                <span><?php if(isset($requestResult)){echo $requestResult;}?></span>
-                            </div>
-                            <div class="reg-form">
-                                <label for="phone">Phone: </label>
-                                <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="xxx-xxx-xxxx" <?php if(isset($phone)){ echo 'value='.$phone;} ?> required>
-                                <i class="fas fa-asterisk"></i>
-                            </div>
-                            <div class="reg-form">
-                                <label for="email">Company: </label>
-                                <input type="text" name="company" id="company" <?php if(isset($company)){ echo 'value='.$company;} ?> required>
-                                <i class="fas fa-asterisk"></i>
-                            </div>
-                            <div class="reg-form reg-textarea">
-                                <label for="messagearea">Message: </label>
-                                <textarea name="messagearea" id="messagearea" id="messagearea"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
-                            </div>
-                            <div class="reg-form">
-                                <input type="submit" value="SUBMIT" name="RegisterRequest"><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
-                            </div>
-                        </fieldset>
-                    </form>
+                <section class="member-request shadow">
+                    <div class="form-contact">
+                        <h3>Request Membership</h3>
+                        <form action="/processors/register_request.php" method="get" class="form-example" id="requestForm">
+                            <fieldset>
+
+                                <input type="text" name="fname" id="fname" placeholder="First Name" <?php if(isset($fname)){ echo 'value='.$fname;} ?> required>
+
+                                <input type="text" name="lname" id="lname" placeholder="Last Name" <?php if(isset($lname)){ echo 'value='.$lname;} ?> required>
+ 
+                                <input type="email" name="email" id="email" placeholder="Email" <?php if(isset($email)){ echo 'value='.$email;} ?> required>
+                                    <?php if(isset($requestResult)){echo '<span>'.$requestResult.'</span>';}?>
+
+                                <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="Phone xxx-xxx-xxxx" <?php if(isset($phone)){ echo 'value='.$phone;} ?> required>
+
+                                <input type="text" name="company" id="company" placeholder="Company" <?php if(isset($company)){ echo 'value='.$company;} ?> required>
+                                    
+                                <textarea name="messagearea" id="messagearea" placeholder="Message" id="messagearea"><?php if(isset($message)){ echo 'value='.$message;} ?></textarea>
+                                
+                                <button type="submit" value="SUBMIT" name="RegisterRequest">SEND</button><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
+                            </fieldset>
+                        </form>
+                    </div>
                 </section>
         </article> <!-- end member -->
         </main>

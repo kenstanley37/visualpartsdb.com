@@ -12,6 +12,7 @@
 
 html {
     font-family: 'Open Sans', sans-serif;
+    background-color: #efefef;
 }
 
 .center {
@@ -210,7 +211,7 @@ header {
     max-width: 100%;
     color: #fff;
     grid-gap: 0;
-    background: #368cbf;  /* fallback for old browsers */
+    background: #0487CC;  /* fallback for old browsers */
     grid-template-areas: 
         "mainlogo mainnavbar mainnavham";
     position: sticky;
@@ -452,21 +453,48 @@ main {
 
 .index-main .main-intro {
     grid-area: indexintro;
-    min-width: 90%;
     display: grid;
     grid-template-columns: 45% 45%;
-    grid-gap: 5px;
+    grid-template-rows: auto;
+    grid-gap: 55px;
     grid-template-areas: 
-        "introparts introimages";
-    justify-content: center;
+        "introbrands introimages"
+        "introinfo introimages";
     justify-items: center;
+    justify-content: center;
     padding-bottom: 50px;
+    position: relative;
 }
 
-.index-main .main-intro .intro {
-    grid-area: introparts;
+.index-main .main-intro .brands {
+    grid-area: introbrands;
+}
+
+.index-main .main-intro .information {
+    grid-area: introinfo;
+}
+
+.index-main .main-intro .brands, .index-main .main-intro .information {
     line-height: 2em;
-    min-width: 90%;
+    background-color: #fff;
+    position: relative;
+    padding: 35px;
+    padding-top: 55px;
+    margin-bottom: 55px;
+    min-height: 300px;
+}
+
+.index-main .main-intro .brands h2, .index-main .main-intro .information h2 {
+    position: absolute;
+    padding: 5px;
+    width: 250px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: -35px;
+    text-align: center;
+    background-color: #0487CC;
+    color: #fff;
 }
 
 .index-main .main-intro table {
@@ -481,25 +509,24 @@ main {
 .index-main .main-intro #staticImg {
     grid-area: introimages;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-template-rows: auto;
     width: 90%;
     grid-gap: 2.5em;
     justify-items: center;
+    justify-content: center;
 }
 
 .card {
     position: relative;
     /* Add shadows to create the "card" effect */
     transition: 0.3s;
-    width: 300px;
-    height: 400px;
+    min-width: 200px;
+    min-height: 100px;
     margin: 15px;
+    background-color: #fff;
 }
 
-.card-img {
-    height: 300px;
-}
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
@@ -540,18 +567,25 @@ main {
     color: #303030;
 }
 
+.card .card-image-desc p {
+    font-size: 16px;
+    color: #303030;
+    padding-bottom: 10px;
+}
+
 .index-main #member {
     background-color: antiquewhite;
     grid-area: indexmembership;
-    min-width: 100%;
     margin-top: 50px;
     padding-top: 15px;
+    grid-gap: 45px;
     display: grid;
     grid-template-columns: 45% 45%;
     grid-template-areas: 
         "memberheader memberheader"
         "memberrequest memberinfo";
     justify-content: center;
+    justify-items: center;
 }
 
 .index-main #member > h3 {
@@ -569,12 +603,57 @@ main {
 
 .index-main #member .member-request {
     grid-area: memberrequest;
+    background-color: #fff;
+    padding: 25px;
+    min-width: 600px;
 }
 
-.reg-textarea * {
-  vertical-align: top;
+.member-request h3 {
+    color: #0487cc;
 }
 
+.form-contact input, .form-contact textarea {
+    border-bottom: 1px solid #cacaca !important;
+    color: #202020;
+}
+
+.form-contact input {
+    margin-bottom: 22px;
+    height: 40px;
+}
+
+.form-contact input, .form-contact textarea {
+    display: block;
+    width: 100%;
+    border: none;
+        border-bottom-color: currentcolor;
+        border-bottom-style: none;
+        border-bottom-width: medium;
+    background-color: transparent;
+    transition: all .3s;
+}
+
+.form-contact textarea {
+    margin-bottom: 30px;
+    max-width: 100%;
+    min-width: 100%;
+    height: 100px;
+    max-height: 300px;
+}
+
+.form-contact button {
+    background-color: #0487cc !important;
+    color: #fff;
+    margin-bottom: 5px;
+    width: 123px;
+    height: 45px;
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all .3s;
+}
+
+/*
 .index-main #member .member-request form.regform {
     display: table;
 }
@@ -588,6 +667,7 @@ main {
     margin-bottom: 10px;
 }
 
+*/
 .index-main #member .member-request i, #member span {
     padding-left: 10px;
     color: red;
