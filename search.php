@@ -77,80 +77,29 @@ if(isset($_GET['export'])){
         }
         ?>
         </aside>
-        <main class="search-main bg-clr-grey">
+        <main class="main bg-clr-grey">
             <?php
             if(!empty($dataResult))
             {
-                ?>
-                    <section class="search-sku-num">
+                ?>  
+                    <section class="title">
                         <h2><?php echo $dataResult['sku_id']; ?></h2>
                     </section>
-                    <section class="sku-part-desc">
-                            <table class="table shadow">
-                                <thead>
-                                    <tr>
-                                        <th>Part #</th>
-                                        <th><?php echo $dataResult['sku_id']; ?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Description</th>
-                                        <td><?php echo $dataResult['sku_desc']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Dimension UOM</th>
-                                        <td>Inches</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Weight UOM</th>
-                                        <td>Pounds</td>
-                                    </tr>
-                                     <?php
-                                        if(isset($_SESSION['user_id']))
-                                        {
-                                            ?>
-                                    <tr>
-                                        <th>
-                                            Request Data Update 
-                                        </th>
-                                        <?php 
-                                            if($user->requestUpdateCheck($sku))
-                                            {
-                                                ?>
-                                                <td>
-                                                    <button class="btn active" type="submit" disabled>Requested</button>
-                                                </td>
-                                                <?php
-                                            } else
-                                            {
-                                                ?>
-                                                <td>
-                                                    <form method="post" action="/processors/userManagement.php">
-                                                        <input type="text" name="skuID" value="<?php echo $dataResult['sku_id']; ?>" hidden>
-                                                        <button class="btn info" type="submit" name="requestUpdate">Request</button>
-                                                    </form>
-                                                </td>
-                                                <?php
-                                            }
-                                        ?>
-                                    </tr>
-                                     <?php
-                                        }
-                                    ?>
-                                </tbody>                                    
-                            </table> 
-                        </section>
-
-
-                        <section class="export-data">
+            
+                    <section class="nav">
+                        <section class="search-control shadow">
+                            <h2 class="block-title shadow">Export</h2>
                             <section class="export">
                                 <table class="table-nores shadow">
-                                    <td>Export Data:</td>
-                                    <td><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></td>
-                                    <!--
-                                    <td><a href="search.php?export=pdf&sku=<?php echo $dataResult['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></td>
-                                    -->
+                                    <tbody>
+                                        <tr>
+                                            <td>Export Data:</td>
+                                            <td><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></td>
+                                            <!--
+                                            <td><a href="search.php?export=pdf&sku=<?php echo $dataResult['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></td>
+                                            -->
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </section>
                             <section class="addtolist">
@@ -198,9 +147,68 @@ if(isset($_GET['export'])){
                                 } ?> 
                             </section>
                         </section>
+                    </section>
+                    <section class="form search-desc shadow">
+                        <h2 class="block-title shadow">Description</h2>
+                        <table class="table shadow">
+                            <thead>
+                                <tr>
+                                    <th>Part #</th>
+                                    <th><?php echo $dataResult['sku_id']; ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Description</th>
+                                    <td><?php echo $dataResult['sku_desc']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Dimension UOM</th>
+                                    <td>Inches</td>
+                                </tr>
+                                <tr>
+                                    <th>Weight UOM</th>
+                                    <td>Pounds</td>
+                                </tr>
+                                 <?php
+                                    if(isset($_SESSION['user_id']))
+                                    {
+                                        ?>
+                                <tr>
+                                    <th>
+                                        Request Data Update 
+                                    </th>
+                                    <?php 
+                                        if($user->requestUpdateCheck($sku))
+                                        {
+                                            ?>
+                                            <td>
+                                                <button class="btn active" type="submit" disabled>Requested</button>
+                                            </td>
+                                            <?php
+                                        } else
+                                        {
+                                            ?>
+                                            <td>
+                                                <form method="post" action="/processors/userManagement.php">
+                                                    <input type="text" name="skuID" value="<?php echo $dataResult['sku_id']; ?>" hidden>
+                                                    <button class="btn info" type="submit" name="requestUpdate">Request</button>
+                                                </form>
+                                            </td>
+                                            <?php
+                                        }
+                                    ?>
+                                </tr>
+                                 <?php
+                                    }
+                                ?>
+                                </tbody>                                    
+                            </table> 
+                        </section>
 
-                        <section class="sku-dim-information">
-                            <section class="sku-unit-data">
+                        <section class="content sku-data">
+                            <section class="sku-unit-data shadow">
+                                <h2 class="block-title shadow">Unit Data</h2>
                                 <table class="table shadow">
                                     <thead>
                                         <tr>
@@ -235,7 +243,8 @@ if(isset($_GET['export'])){
                             if(!empty($user->accessCheck()))
                             {
                         ?>
-                            <section class="sku-case-data">
+                            <section class="sku-case-data shadow">
+                                <h2 class="block-title shadow">Case Data</h2>
                                 <table class="table shadow">
                                     <thead>
                                         <tr>
@@ -267,7 +276,8 @@ if(isset($_GET['export'])){
                                 </table> 
                             </section>
 
-                            <section class="sku-pallet-data">
+                            <section class="sku-pallet-data shadow">
+                                <h2 class="block-title shadow">Pallet Data</h2>
                                 <table class="table shadow">
                                     <thead>
                                         <tr>
@@ -298,7 +308,9 @@ if(isset($_GET['export'])){
                                     </tbody>
                                 </table> 
                             </section>
-                            <section class="sku-user-data">
+                            
+                            <section class="sku-user-data shadow">
+                                <h2 class="block-title shadow">User Data</h2>
                                 <table class="table shadow">
                                     <thead>
                                         <tr>
@@ -331,9 +343,9 @@ if(isset($_GET['export'])){
                         ?>
                         </section> <!-- end sku-dim-information --> 
                         <section class="sku-image-data">
-                            <h2>Images</h2>
+                            <h2 class="block-title shadow">Images</h2>
                         </section>
-                        <section class="sku-images shadow bg-white">
+                        <section class="sku-images">
                             <?php 
                             if(!empty($imageResult))
                             {

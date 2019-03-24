@@ -173,6 +173,9 @@ a:hover {
     background-color: lightskyblue;
     color: #000;
 }
+.text-white {
+    color: #fff;
+}
 
 .valign-top {
     vertical-align:top;
@@ -195,6 +198,9 @@ a:hover {
     color: #fff;
 }
 
+section {
+    position: relative;
+}
 /***************************** 
 ** index.php grid 
 ******************************/
@@ -209,6 +215,121 @@ a:hover {
         "adminnavbar"
         "main"
         "footer";
+}
+
+/***************************************
+*
+*
+* START admin sections grid setup
+*
+*
+****************************************/
+
+.main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 95vw;
+    grid-template-rows: 30px auto auto auto;
+    grid-template-areas: 
+        "title"
+        "nav" 
+        "form"
+        "mcontent";
+    grid-gap: 30px;
+    grid-row-gap: 55px;
+    justify-content: center;
+    align-content: start;
+}
+
+.main .title {
+    grid-area: title;
+    padding: 25px;
+}
+
+.main .title h1 {
+    text-align: left;
+}
+
+.main .nav {
+    grid-area: nav;
+}
+
+.main .nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.main .nav li {
+    display: inline;
+}
+
+.main .nav a {
+    display: inline-block;
+    padding: 10px;
+}
+
+.main .nav a:hover {
+    border-bottom: 1px solid #000;
+}
+
+.main .form {
+    grid-area: form;
+    display: grid;
+    justify-content: center;
+}
+
+.main .update-form {
+    grid-area: form;
+    display: grid;
+    grid-template-areas: 
+        "skuedit";
+    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: relative;
+}
+
+
+.main .update-form textarea {
+    width: 100%;
+    height: 100px;
+}
+
+.main .update-form input {
+    width: 75px;
+}
+
+.main .update-form .update-sku {
+    grid-area: skuedit;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 25px;
+    justify-content: center;
+    justify-items: center;
+}
+
+.main .update-form .update-sku table {
+    min-width: 350px;
+}
+
+.main .form h2, .main .content h2 {
+    justify-self: flex-start;
+}
+
+.main .content {
+    grid-area: mcontent;
+    display: grid;
+    justify-content: center;
+}
+
+.main .createList {
+    position: relative;
+    min-height: 200px;
+    padding-top: 75px;
 }
 
 /***************************************
@@ -573,6 +694,10 @@ main {
     border: none;
 }
 
+.card .card-sku-num .table-nores {
+    width: 100%;
+}
+
 .card .card-sku-num h4 {
     font-size: 20px;
     color: #000;
@@ -704,23 +829,6 @@ main {
 *
 ****************************************/
 
-.search-main {
-    grid-area: main;
-    display: grid;
-    grid-template-areas: 
-        "searchskunum searchexportlist"
-        "searcherror searcherror"
-        "searchdesc  searchdesc"
-        "searchpartdetails searchpartdetails"
-        "searchimageheader searchimageheader"
-        "searchimage searchimage";
-    grid-gap: 15px;
-    padding: 15px;
-}
-
-.search-sku-num {
-    grid-area: searchskunum;
-}
 
 .search-error {
     grid-area: searcherror;
@@ -731,69 +839,85 @@ main {
     grid-area: searchdesc;
 }
 
-.search-error #staticImg {
+#staticImg {
     margin-top: 50px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: auto;
 }
 
-.search-main .export-data {
-    grid-area: searchexportlist;
-    display: grid;
-    grid-template-areas: 
-        "export list";
-    grid-template-columns: 45% 45%;
-    font-size: 12px !important;
-}
-
-.search-main .sku-dim-information {
+.sku-dim-information {
     grid-area: searchpartdetails;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: auto;
     grid-gap: 10px;
+    grid-row-gap: 20px;
     justify-items: center;
 }
 
-.search-main .sku-image-data {
-    grid-area: searchimageheader;
+.sku-dim-information .block-title {
+    font-size: 16px;
+    width: 100px;
 }
 
-.search-main .sku-images {
-    grid-area: searchimage;
+.image-layout {
+    position: relative;
+    background-color: #fff;
+    width: 95vw;
+    padding-top: 50px;
+}
+
+.sku-images {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-template-rows: auto;
-    grid-gap: 10px;
-    padding: 15px;
+    grid-gap: 25px;
+    justify-content: center;
     justify-items: center;
 }
 
-.search-main .export {
-    grid-area: export;
+.search-control {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 45% 45%;
+    justify-content: center;
+    background-color: #fff;
+    height: 120px;
+    justify-content: center;
+    align-content: center;
 }
 
-.search-main .addtolist {
-    grid-area: list;
+.search-control .addtolist {
+    display:flex;
+    justify-content: flex-end;
 }
 
-.search-main table, .search-main table th, .search-main table td,  .search-main table tr {
-    /* order: 5px solid black; */
-    text-align: left;
-    padding: 10px;
+.search-desc, .sku-unit-data {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-self: center;
+    align-content: center;
+    min-height: 400px;
+    background-color: #fff;
 }
 
-.search-main table th {
-    width: 200px;
-    padding-right: 5px;
-    font-weight: 600;
+.sku-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 25px;
+
+    align-self: center;
+    align-content: center;
+    min-height: 400px;
 }
 
-.search-main table {
-    margin-bottom: 25px;
+.sku-unit-data, .sku-case-data, .sku-pallet-data, .sku-user-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
 }
-
 
 /***************************************
 *
@@ -975,120 +1099,6 @@ footer {
     grid-area: mysearchfoot;
 }
 
-/***************************************
-*
-*
-* START admin sections grid setup
-*
-*
-****************************************/
-
-.main {
-    grid-area: main;
-    display: grid;
-    grid-template-columns: 95vw;
-    grid-template-rows: 30px auto auto auto;
-    grid-template-areas: 
-        "title"
-        "nav" 
-        "form"
-        "mcontent";
-    grid-gap: 30px;
-    justify-content: center;
-    align-content: start;
-}
-
-.main .title {
-    grid-area: title;
-    padding: 25px;
-}
-
-.main .title h1 {
-    text-align: left;
-}
-
-.main .nav {
-    grid-area: nav;
-}
-
-.main .nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-.main .nav li {
-    display: inline;
-}
-
-.main .nav a {
-    display: inline-block;
-    padding: 10px;
-}
-
-.main .nav a:hover {
-    border-bottom: 1px solid #000;
-}
-
-.main .form {
-    grid-area: form;
-    display: grid;
-    justify-content: center;
-}
-
-.main .update-form {
-    grid-area: form;
-    display: grid;
-    grid-template-areas: 
-        "skuedit";
-    background-color: #fff;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-left: 25px;
-    padding-right: 25px;
-    position: relative;
-}
-
-
-.main .update-form textarea {
-    width: 100%;
-    height: 100px;
-}
-
-.main .update-form input {
-    width: 75px;
-}
-
-.main .update-form .update-sku {
-    grid-area: skuedit;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    grid-gap: 25px;
-    justify-content: center;
-    justify-items: center;
-}
-
-.main .update-form .update-sku table {
-    min-width: 350px;
-}
-
-.main .form h2, .main .content h2 {
-    justify-self: flex-start;
-}
-
-.main .content {
-    grid-area: mcontent;
-    display: grid;
-    justify-content: center;
-}
-
-.main .createList {
-    position: relative;
-    min-height: 200px;
-    padding-top: 75px;
-}
-
 .dash-top {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1155,6 +1165,7 @@ footer {
     padding: 0;
     max-width: 100%;
     table-layout: fixed;
+    position: relative;
 }
 
 .table caption, .table-nores caption {
@@ -1169,7 +1180,7 @@ footer {
 
 .table th, .table td, .table-nores th, .table-nores td {
     font-family: Helvetica, Arial, sans-serif; /* Nicer font */
-        font-style: normal; 
+    font-style: normal; 
     font-variant: normal;
     /*
     font-size: 12px; 

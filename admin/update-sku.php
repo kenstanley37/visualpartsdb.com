@@ -240,8 +240,11 @@ $skuImage = $vpd->getSkuImage($sku);
             </section>
 
             <section class="content">
-                <section class="sku-image-data">
-                        <h2>SKU Images</h2>
+                <section class="image-layout shadow">
+                    <section>
+                        <h2 class="block-title">SKU Images</h2>
+                    </section>
+                    <section class="sku-image-data">
                         <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
                             Select image to upload:
                             <input type="file" name="file" id="file">
@@ -264,13 +267,15 @@ $skuImage = $vpd->getSkuImage($sku);
                             </div>
                             <figcaption>
                                 <section class="card-sku-num">
-                                    <table class="table-nores">
+                                    <table class="table-nores shadow">
                                         <tbody>
                                             <tr>
-                                                <td>
+                                                <td class="tb1-color" colspan="2">
                                                     <label for="caption">Desc:</label>
                                                 </td>
-                                                <td>
+                                            </tr>
+                                            <tr>
+                                                <td  colspan="2">
                                                     <form id="imageUpdate" action="/processors/image_handler.php" method="post">
                                                         <input type="text" name="imageSku" value="<?php echo $row['sku_image_sku_id']; ?>" hidden>
                                                         <input type="text" name="imageNum" value="<?php echo $row['sku_image_id']; ?>" hidden>
@@ -301,6 +306,7 @@ $skuImage = $vpd->getSkuImage($sku);
                         }
                         ?>
                     </section>
+                </section>
             </section>
         </main>
         <footer>
