@@ -753,76 +753,10 @@
             {
                 $stmt = $this->conn->prepare("SELECT * FROM register_request");
                 $stmt->execute();
-                $rowCount = $stmt->rowCount();
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
                 
-                if($rowCount < 1)
-                {
-                    ?>
-                        <p>No records found</p>
-                    <?php
-                } else
-                {
-                     ?>
-                    <table class="table shadow">
-                        <thead>
-                            <tr>
-                                <td>First Name</td>
-                                <td>Last Name</td>
-                                <td>Email</td>
-                                <td>Phone</td>
-                                <td>Company</td>
-                                <td>Message</td>
-                                <td>Date</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    <?php
-
-                    while($row = $stmt->fetch())
-                    {
-                        $date = $row['rr_date'];
-                        $dateadded = date_create($date);
-                        $addDate = date_format($dateadded, 'm/d/Y');
-                        ?>
-                        <tr>
-                            <td data-label="First">
-                                <?php echo $row['rr_fname']; ?>
-                            </td>
-                            <td data-label="Last">
-                                <?php echo $row['rr_lname']; ?>
-                            </td>
-                            <td data-label="Email">
-                                <?php echo $row['rr_email']; ?>
-                            </td>
-                            <td data-label="Tel">
-                                <?php echo $row['rr_phone']; ?>
-                            </td>
-                            <td data-label="Company">
-                                <?php echo $row['rr_company']; ?>
-                            </td>
-                            <td data-label="Message">
-                                <?php echo $row['rr_message']; ?>
-                            </td>
-                            <td data-label="Date">
-                                <?php echo $addDate; ?>
-                            </td> 
-                            <td>
-                                <form action="/processors/userManagement.php" method="post">
-                                    <input hidden type="text"  name="recordID" value="<?php echo $row['rr_id']; ?>">
-                                    <button class="btn danger" type="submit" name="remRegister">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
-                        </tbody>
-                    </table> 
-                    <?php
-                }
-                
-               
             }
             catch(PDOException $e)
             {
@@ -867,75 +801,9 @@
                         where pl_user_id = :userid ");
                 $stmt->bindparam(":userid", $userid);
                 $stmt->execute();
-                ?> <table class="table">
-                        <thead>
-                            <tr align="middle">
-                                <td>Status</td>
-                                <td>List</td>
-                                <td>Description</td>
-                                <td>Parts</td>
-                                <td>Date Added</td>
-                                <td>Export</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                
-                <?php
-                while($row = $stmt->fetch())
-                {      
-                    $date = $row['pl_list_added'];
-                    $dateadded = date_create($date);
-                    $addDate = date_format($dateadded, 'm/d/Y');
-                    $listid = $row['pl_id'];
-                    if($row['pl_active'] == 1) 
-                    {
-                        $listactive = $row['pl_active'];
-                    } else {
-                        $listactive = 0;
-                    }
-                    
-                    $count = $this->myListCount($listid);
-                    ?>
-                    <tr valign="middle">
-                        <td>
-                            <form action="/processors/userManagement.php" method="post">
-                                <?php 
-                                    if($listactive==1)
-                                    {
-                                        ?>
-                                       <span class="active">ACTIVE</span>
-                                        <?php
-                                    } else 
-                                    {
-                                        ?>
-                                        <button class="btn inactive" type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive" id="makeActive">Set Active</button>
-                                        <?php
-                                    }
-                                
-                                ?> 
-                            </form>
-                        </td>
-                        <td data-label="Name"><a href="/user/mylistcontents.php?list=<?php echo $row['pl_id'];?>"><?php echo strtoupper($row['pl_list_name']); ?></a></td>
-                        <td data-label="Desc"><?php echo $row['pl_list_desc']; ?></td>
-                        <td data-label="Count"><?php echo $count; ?></td>
-                        <td data-label="Date"><?php echo $addDate; ?></td>
-                        <td data-label="Export"><a href="/export/generate-xlsx.php?unit=excel&list=<?php echo $row['pl_id']; ?>"><i class="far fa-file-excel"></i></a></td>
-                        <td>
-                            <form action="/user/deletelist.php" method="post">
-                                <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
-                                <input type="text" hidden value="<?php echo $row['pl_list_name']; ?>" name="listname" id="listname">
-                                <input type="text" hidden value="<?php echo $count; ?>" name="listcount" id="listcount">
-                                <button class="btn danger" type="submit" name="deletelist" id="deletelist" value="<?php echo $row['pl_id'];?>">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    <?php
-                }
-                ?>
-                        </tbody>
-                </table>
-                <?php
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
             }
             catch(PDOException $e)
             {

@@ -27,20 +27,16 @@ html, body {
     margin: 0;
 }
 
-li {
-    line-height: 35px;
-}
-
 ul {
     margin-left: 5%;
     margin-top: 15px;
-}
-
-ul {
     font-weight: bold;
+    list-style-type: circle;
 }
 
 li {
+    line-height: 35px;
+    margin-left: 35px;
     font-weight: normal;
 }
 
@@ -118,7 +114,7 @@ a:hover {
     color: #000;
 }
 
-.btn:link, btn:visited {
+.btn:link, .btn:visited {
     color: #000;
 }
 
@@ -956,6 +952,7 @@ footer {
     background-color: #fff;
     margin-top: 75px;
     position: relative;
+    margin-bottom: 50px;
 }
 
 .my-search-body table {
@@ -989,8 +986,8 @@ footer {
 .main {
     grid-area: main;
     display: grid;
-    grid-template-columns: 90%;
-    grid-template-rows: 15px auto auto auto;
+    grid-template-columns: 95vw;
+    grid-template-rows: 30px auto auto auto;
     grid-template-areas: 
         "title"
         "nav" 
@@ -998,13 +995,13 @@ footer {
         "mcontent";
     grid-gap: 30px;
     justify-content: center;
+    align-content: start;
     position: relative;
 }
 
 .main .title {
     grid-area: title;
-    position: absolute;
-    left: 15px;
+    padding: 25px;
 }
 
 .main .title h1 {
@@ -1038,6 +1035,7 @@ footer {
 .main .form {
     grid-area: form;
     display: grid;
+    justify-content: center;
 }
 
 .main .update-form {
@@ -1083,7 +1081,14 @@ footer {
 .main .content {
     grid-area: mcontent;
     display: grid;
-    justify-items: center;
+    justify-content: center;
+    padding-bottom: 225px;
+}
+
+.main .createList {
+    position: relative;
+    min-height: 200px;
+    padding-top: 75px;
 }
 
 .dash-top {
@@ -1383,7 +1388,7 @@ footer {
     .my-search-main {
         grid-area: main;
         display: grid;
-        min-height: 100vh;
+
         grid-template-columns: 100%;
         grid-template-rows: auto auto auto 1fr auto;
         grid-column-gap: 55px;

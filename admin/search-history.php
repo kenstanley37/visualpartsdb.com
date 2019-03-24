@@ -120,7 +120,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
             </article>
             <article class="my-search-body shadow">            
                 <section class="my-search-results">
-                    <h2 class="shadow">Search History</h2>
+                    <h2 class="block-title shadow">Search History</h2>
                     <table class="table-nores shadow">
                         <thead>
                             <tr>

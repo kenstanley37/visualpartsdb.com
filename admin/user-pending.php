@@ -21,6 +21,8 @@ if(!isset($_SESSION['user_id']))
     }
 }
 
+$pending = $user->userList('pending');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +54,97 @@ if(!isset($_SESSION['user_id']))
                 <h1>Pending Users</h1>
             </section>
             <section class="content">
-                <?php $user->userList('pending'); ?>
+                <section class="member-list">
+                    <table class="table shadow">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>First Name</td>
+                                <td>Last Name</td>
+                                <td>Email</td>
+                                <td>Company</td>
+                                <td>Status</td>
+                                <td>Role</td>
+                                <td>Member Since</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php 
+                        if(!empty($pending))
+                        {
+                            foreach($pending as $row)
+                            {
+                                $date = $row['user_reg_date'];
+                                $dateadded = date_create($date);
+                                $addDate = date_format($dateadded, 'm/d/Y');
+                                $userID = $row['user_id'];
+                                ?>
+                                <tr>
+                                    <td data-label="ID">
+                                        <?php echo $row['user_id']; ?>
+                                    </td>
+                                    <td data-label="First">
+                                        <?php echo $row['user_fName']; ?>
+                                    </td>
+                                    <td data-label="Last">
+                                        <?php echo $row['user_lName']; ?>
+                                    </td>
+                                    <td data-label="Email">
+                                        <?php echo $row['user_email']; ?>
+                                    </td>
+                                    <td data-label="Company">
+                                        <?php echo $row['company_name']; ?>
+                                    </td>
+                                    <td data-label="Status">
+                                        <form method="post" action="/processors/userManagement.php">
+                                            <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
+                                            <button type="submit" class="btn <?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>">
+                                                <?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td data-label="Role">
+                                        <form action="/processors/userManagement.php" method="post">
+                                            <input type="number" name="userID" value="<?php echo $userID; ?>" hidden>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <button class="btn <?php if($row['role_name'] == 'USER'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToUser">
+                                                            USER 
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn <?php if($row['role_name'] == 'ADMIN'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToAdmin">
+                                                            ADMIN 
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </form>
+                                    </td>
+                                    <td data-label="Member Since">
+                                        <?php echo $addDate; ?>
+                                    </td> 
+                                    <td>
+                                        <form action="/admin/deleteuser.php" method="post">
+                                            <input hidden type="text" name="userID" value="<?php echo $userID; ?>">
+                                            <button type="submit" name="remUser" class="btn danger">DELETE</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php
+                                }
+                            } else 
+                        {
+                            ?>
+                                <p>There are currently no pending users.</p>
+                            <?php
+                        }
+                            ?>
+                         </tbody>
+                    </table> 
+                </section>
             </section>    
         </main>
         <footer>

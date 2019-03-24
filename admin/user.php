@@ -55,14 +55,14 @@ if(isset($_GET['register']))
         ?>
         </aside>
         <main class="main">
-            <section class="nav">
-
-            </section>
             <section class="title">
                 <h1>Member List</h1>
             </section>
+            <section class="nav">
+            </section>
             <section class="content">
-                <table class="table shadow">
+                <section class="member-list">
+                    <table class="table shadow">
                     <thead>
                         <tr>
                             <td>ID</td>
@@ -151,6 +151,7 @@ if(isset($_GET['register']))
                     ?>
                  </tbody>
             </table> 
+                </section>
             </section>    
         </main>
         <footer>

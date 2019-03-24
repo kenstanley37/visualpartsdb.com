@@ -17,6 +17,7 @@ if(!isset($_SESSION['user_id']))
     $userID = $_SESSION['user_id'];
     $user->activeCheck($userID);
     $listcount = $user->getMyListCount($userID, 'list');
+    $myList = $user->myList();
 }
 
 ?>
@@ -45,9 +46,9 @@ if(!isset($_SESSION['user_id']))
             <section class="title">
                 <h1>My List</h1>
             </section>
-            <section class="form createList">
+            <section class="form createList shadow">
+                <h2 class="block-title">Create List</h2>
                 <form action="/processors/userManagement.php" method="post">
-                    <h2>Create List</h2>
                     <label for="listname">List Name:</label>
                     <input type="text" id="listname" name="listname" maxlength="10" required>
                     <label for="listname">List Description:</label>
@@ -56,10 +57,76 @@ if(!isset($_SESSION['user_id']))
                 </form>
             </section>
             <section class="content">
+                <table class="table">
+                    <thead>
+                        <tr align="middle">
+                            <td>Status</td>
+                            <td>List</td>
+                            <td>Description</td>
+                            <td>Parts</td>
+                            <td>Date Added</td>
+                            <td>Export</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
                 <?php
                     if($listcount >= 1)
                     {
-                        $user->myList();
+                        foreach($myList as $row)
+                        {
+                            $date = $row['pl_list_added'];
+                            $dateadded = date_create($date);
+                            $addDate = date_format($dateadded, 'm/d/Y');
+                             if($row['pl_active'] == 1) 
+                            {
+                                $listactive = $row['pl_active'];
+                            } else {
+                                $listactive = 0;
+                            }
+                            $listid = $row['pl_id'];
+                            $count = $user->myListCount($listid);
+                            ?>  
+                                <tr valign="middle">
+                                    <td>
+                                        <form action="/processors/userManagement.php" method="post">
+                                            <?php 
+                                                if($listactive==1)
+                                                {
+                                                    ?>
+                                                   <span class="active">ACTIVE</span>
+                                                    <?php
+                                                } else 
+                                                {
+                                                    ?>
+                                                    <button class="btn inactive" type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive" id="makeActive">Set Active</button>
+                                                    <?php
+                                                }
+
+                                            ?> 
+                                        </form>
+                                    </td>
+                                    <td data-label="Name"><a href="/user/mylistcontents.php?list=<?php echo $row['pl_id'];?>"><?php echo strtoupper($row['pl_list_name']); ?></a></td>
+                                    <td data-label="Desc"><?php echo $row['pl_list_desc']; ?></td>
+                                    <td data-label="Count"><?php echo $count; ?></td>
+                                    <td data-label="Date"><?php echo $addDate; ?></td>
+                                    <td data-label="Export"><a href="/export/generate-xlsx.php?unit=excel&list=<?php echo $row['pl_id']; ?>"><i class="far fa-file-excel"></i></a></td>
+                                    <td>
+                                        <form action="/user/deletelist.php" method="post">
+                                            <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
+                                            <input type="text" hidden value="<?php echo $row['pl_list_name']; ?>" name="listname" id="listname">
+                                            <input type="text" hidden value="<?php echo $count; ?>" name="listcount" id="listcount">
+                                            <button class="btn danger" type="submit" name="deletelist" id="deletelist" value="<?php echo $row['pl_id'];?>">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                        
+                            <?php
+                        }
+                        ?>
+                            </tbody>
+                        </table>
+                    <?php
                     } else
                     {
                         ?>

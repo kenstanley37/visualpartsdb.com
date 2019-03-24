@@ -116,7 +116,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                     </table>
                 </form>
             </article>
-            <article class="my-search-body">            
+            <article class="my-search-body shadow">            
                <section class="my-search-results">
                     <h2 class="block-title shadow">My Searches</h2>
                     <table class="table-nores shadow">
