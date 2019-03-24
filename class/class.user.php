@@ -1122,38 +1122,9 @@
                     ORDER by pls_list_sku");
                 $stmt->bindparam(":pl_id", $listid);
                 $stmt->execute();
-                
-                ?>
-                <table class="table">
-                    <thead>
-                        <tr align="middle">
-                            <td scope="col">SKU</td>
-                            <td scope="col" colspan="2">Description</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                <?php
-                while($row = $stmt->fetch())
-                {
-                    ?>
-                        <tr valign="middle">
-                            <td scope="row" data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
-                            <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                            <td>
-                                <form action="/processors/userManagement.php" method="post">
-                                    <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
-                                    <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
-                                    <input name="myListContent" value="myListContent" hidden>
-                                    <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
-                                </form>
-                            </td>
-                        </tr>  
-                    <?php
-                }
-                ?>
-                    </tbody>
-                </table>
-                <?php
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
              
             }
             catch(PDOException $e)

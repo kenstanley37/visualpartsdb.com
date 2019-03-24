@@ -628,32 +628,12 @@
                         ORDER BY count(update_sku) desc
                         ");
                     $stmt->execute();
+                    $result = array(array());
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $result;
                     
                     ?>
-                    <table class="table shadow">
-                        <thead>
-                            <tr>
-                                <td scope="col">SKU</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Count</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    <?php
-                    while($row = $stmt->fetch())
-                    {
-                        $skuID = $row['update_sku'];
-                        ?>
-                            <tr>
-                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
-                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                <td data-label="Count" class="align-right"><a href="/admin/update-request.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
-                            </tr>  
-                        <?php
-                    }
-                ?>
-                    </tbody>
-                </table>
+                    
                 <?php
                 }
                 catch(PDOException $e)
@@ -671,33 +651,10 @@
                         ORDER BY count(update_sku) desc
                         ");
                     $stmt->execute();
-                    
-                    ?>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td scope="col">SKU</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Count</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    <?php
-                    while($row = $stmt->fetch())
-                    {
-                        $skuID = $row['update_sku'];
-                        ?>
-                            <tr>
-                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
-                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                <td data-label="Count" class="align-right"><a href="/admin/update-request.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
-                            </tr>  
-                        <?php
-                    }
-                ?>
-                    </tbody>
-                </table>
-                <?php
+                    $result = array(array());
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $result;
+
                 }
                 catch(PDOException $e)
                 {
@@ -713,37 +670,9 @@
                         where update_updated_by = '' and update_sku = :skuid ");
                     $stmt->bindparam(":skuid", $type);
                     $stmt->execute();
-
-                    ?>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td scope="col">List Name</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Requested By</td>
-                                <td scope="col">Date</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    <?php
-                    while($row = $stmt->fetch())
-                    {
-                        $date = $row['update_request_date'];
-                        $dateadded = date_create($date);
-                        $addDate = date_format($dateadded, 'm/d/Y');
-                        ?>
-                            <tr>
-                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $type; ?>"><?php echo $type; ?></a></td>
-                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                <td data-label="User"><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
-                                <td data-label="Date"><?php echo $addDate; ?></td>
-                            </tr>  
-                        <?php
-                    }
-                ?>
-                    </tbody>
-                </table>
-                <?php
+                    $result = array(array());
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $result;
                 }
                 catch(PDOException $e)
                 {

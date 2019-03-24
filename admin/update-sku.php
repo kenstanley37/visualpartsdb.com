@@ -52,7 +52,7 @@ $skuImage = $vpd->getSkuImage($sku);
         </aside>
         <main class="main">
             <section class="title">
-                <h2>Update SKU: <?php echo $sku; ?></h2>
+                <h2>Modify SKU: <?php echo $sku; ?></h2>
             </section>
             <section class="nav">
 

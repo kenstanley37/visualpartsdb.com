@@ -26,6 +26,7 @@ if(isset($_GET['list']))
     header('location: /user/myexportlist.php');
 }
 
+$mylistcontent =  $user->myListContent($listid); 
 
 ?>
 <!DOCTYPE html>
@@ -57,7 +58,35 @@ if(isset($_GET['list']))
                 Insert Export Links Here
             </section>
             <section class="content">
-                <?php $user->myListContent($listid); ?>
+                <table class="table">
+                    <thead>
+                        <tr align="middle">
+                            <td scope="col">SKU</td>
+                            <td scope="col" colspan="2">Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                         foreach($mylistcontent as $row)
+                {
+                    ?>
+                        <tr valign="middle">
+                            <td scope="row" data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
+                            <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                            <td>
+                                <form action="/processors/userManagement.php" method="post">
+                                    <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
+                                    <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
+                                    <input name="myListContent" value="myListContent" hidden>
+                                    <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
+                                </form>
+                            </td>
+                        </tr>  
+                    <?php
+                }
+                ?>
+                    </tbody>
+                </table>
             </section>
         </main>
         <footer>

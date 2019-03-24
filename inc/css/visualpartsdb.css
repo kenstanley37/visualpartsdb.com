@@ -996,7 +996,6 @@ footer {
     grid-gap: 30px;
     justify-content: center;
     align-content: start;
-    position: relative;
 }
 
 .main .title {
@@ -1082,7 +1081,6 @@ footer {
     grid-area: mcontent;
     display: grid;
     justify-content: center;
-    padding-bottom: 225px;
 }
 
 .main .createList {
@@ -1518,7 +1516,18 @@ only screen and (max-width: 900px),
     .table {
         border: 0;
     }
-
+    
+    .table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    
     .table caption {
         font-size: 1.3em;
     }

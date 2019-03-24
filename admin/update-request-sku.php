@@ -29,13 +29,13 @@ if(isset($_GET['sku']))
     header('location: /admin/update-request.php?sku=active');
 }
 
-$updateRequest = $vpd->skuUpdateRequest('active');
+$updateRequest = $vpd->skuUpdateRequest($sku);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: Update Request</title>
+    <title>Visual Parts Database: Update Request SKU</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -54,26 +54,31 @@ $updateRequest = $vpd->skuUpdateRequest('active');
 
             </section>
             <section class="content">
-                <table class="table shadow">
-                    <caption>SKU Update Request</caption>
-                    <thead>
-                        <tr>
-                            <td scope="col">SKU</td>
-                            <td scope="col">Description</td>
-                            <td scope="col">Count</td>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    <table class="table shadow">
+                        <caption>Requested By User</caption>
+                        <thead>
+                            <tr>
+                                <td scope="col">List Name</td>
+                                <td scope="col">Description</td>
+                                <td scope="col">Requested By</td>
+                                <td scope="col">Date</td>
+                            </tr>
+                        </thead>
+                        <tbody>
                     <?php
                     foreach($updateRequest as $row)
                     {
+                        $date = $row['update_request_date'];
+                        $dateadded = date_create($date);
+                        $addDate = date_format($dateadded, 'm/d/Y');
                         $skuID = $row['update_sku'];
                         ?>
                             <tr>
-                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
+                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $sku; ?>"><?php echo $sku; ?></a></td>
                                 <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                <td data-label="Count" class="align-right"><a href="/admin/update-request-sku.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
-                            </tr>  
+                                <td data-label="User"><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
+                                <td data-label="Date"><?php echo $addDate; ?></td>
+                            </tr>    
                         <?php
                     }
                 ?>
