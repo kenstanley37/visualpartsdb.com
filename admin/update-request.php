@@ -51,31 +51,33 @@ $updateRequest = $vpd->skuUpdateRequest('active');
                 <h2>Update Request: <?php echo ucfirst($sku); ?></h2>
             </section>
             <section class="nav">
-                <table class="table shadow">
-                    <caption>SKU Update Request</caption>
-                    <thead>
-                        <tr>
-                            <td scope="col">SKU</td>
-                            <td scope="col">Description</td>
-                            <td scope="col">Count</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    foreach($updateRequest as $row)
-                    {
-                        $skuID = $row['update_sku'];
-                        ?>
+                <section class="display bg-white shadow">
+                    <h2 class="block-title shadow">SKU Update Request</h2>
+                    <table class="table shadow">
+                        <thead>
                             <tr>
-                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
-                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                <td data-label="Count" class="align-right"><a href="/admin/update-request-sku.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
-                            </tr>  
+                                <td scope="col">SKU</td>
+                                <td scope="col">Description</td>
+                                <td scope="col">Count</td>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <?php
-                    }
-                ?>
-                    </tbody>
-                </table>
+                        foreach($updateRequest as $row)
+                        {
+                            $skuID = $row['update_sku'];
+                            ?>
+                                <tr>
+                                    <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
+                                    <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                    <td data-label="Count" class="align-right"><a href="/admin/update-request-sku.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
+                                </tr>  
+                            <?php
+                        }
+                    ?>
+                        </tbody>
+                    </table>
+                </section>
             </section>
         </main>
         <footer>

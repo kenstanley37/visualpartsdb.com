@@ -338,12 +338,14 @@ section {
     justify-content: center;
 }
 
-.createList {
+.display {
+    display: flex;
     position: relative;
-    display: grid;
-    width 1900px;
-    align-content: center;
-    min-height: 100px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 200px;
+    padding: 35px;
 }
 
 /***************************************
@@ -1618,7 +1620,7 @@ only screen and (max-width: 900px),
     }
     
     .index-search .search-bar form {
-        display: block;
+        display: block !important;
     }
     
     .index-search .search-bar button {
@@ -1652,6 +1654,12 @@ only screen and (max-width: 900px),
             "list";
         grid-template-columns: 100%;
         font-size: 12px !important;
+    }
+    
+    .display form * {
+        display: block;
+        text-align: left;
+        line-height: 25px;
     }
 }
 
