@@ -51,9 +51,6 @@ if(isset($_GET['error']))
                 <h2>Modify Part</h2>
             </section>
             <section class="nav">
-
-            </section>
-            <section class="content">
                 <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
                 <table class="table shadow">
                     <thead>

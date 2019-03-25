@@ -51,9 +51,6 @@ if(isset($_GET['error']))
                 <h2>Add Part</h2>
             </section>
             <section class="nav">
-
-            </section>
-            <section class="content">
                 <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
                 <form action="/processors/sku_handler.php" method="post">
                     <table class="table shadow rounded">

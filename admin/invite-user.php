@@ -52,9 +52,6 @@ if(isset($_GET['register']))
                 <h2>Invite User</h2>
             </section>
             <section class="nav">
-               
-            </section>
-            <section class="form">
                 <form id="addUser" method="post" action="/processors/register_request.php">
                     <table class="table shadow">
                         <thead>
@@ -105,7 +102,7 @@ if(isset($_GET['register']))
                     </table>
                 </form>
             </section>
-            <section class="content">
+            <section class="form">
                 <span> <?php if(isset($result)){echo $result;} ?></span>
             </section>
         </main>

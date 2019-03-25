@@ -51,9 +51,6 @@ $updateRequest = $vpd->skuUpdateRequest($sku);
                 <h2>Update Request: <?php echo ucfirst($sku); ?></h2>
             </section>
             <section class="nav">
-
-            </section>
-            <section class="content">
                     <table class="table shadow">
                         <caption>Requested By User</caption>
                         <thead>

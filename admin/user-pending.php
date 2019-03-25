@@ -47,13 +47,10 @@ $pending = $user->userList('pending');
         ?>
         </aside>
         <main class="main">
-            <section class="nav">
-
-            </section>
             <section class="title">
                 <h1>Pending Users</h1>
             </section>
-            <section class="content">
+            <section class="nav">
                 <section class="member-list">
                     <table class="table shadow">
                         <thead>

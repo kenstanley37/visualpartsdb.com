@@ -228,17 +228,17 @@ section {
 .main {
     grid-area: main;
     display: grid;
-    grid-template-columns: 95vw;
-    grid-template-rows: 30px auto auto auto;
+    grid-template-columns: 100%;
+    grid-auto-rows: min-content;
     grid-template-areas: 
         "title"
         "nav" 
         "form"
         "mcontent";
-    grid-gap: 30px;
+    grid-column-gap: 15px;
     grid-row-gap: 55px;
-    justify-content: center;
-    align-content: start;
+    justify-content: center; 
+    overflow: hidden;
 }
 
 .main .title {
@@ -252,6 +252,12 @@ section {
 
 .main .nav {
     grid-area: nav;
+    display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: auto;
+    justify-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .main .nav {
@@ -277,12 +283,17 @@ section {
 .main .form {
     grid-area: form;
     display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: auto;
+    justify-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .main .update-form {
     grid-area: form;
     display: grid;
+    grid-template-columns: 90%;
     grid-template-areas: 
         "skuedit";
     background-color: #fff;
@@ -291,6 +302,7 @@ section {
     padding-left: 25px;
     padding-right: 25px;
     position: relative;
+    justify-content: center;
 }
 
 
@@ -306,7 +318,7 @@ section {
 .main .update-form .update-sku {
     grid-area: skuedit;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 25px;
     justify-content: center;
     justify-items: center;
@@ -326,10 +338,12 @@ section {
     justify-content: center;
 }
 
-.main .createList {
+.createList {
     position: relative;
-    min-height: 200px;
-    padding-top: 75px;
+    display: grid;
+    width 1900px;
+    align-content: center;
+    min-height: 100px;
 }
 
 /***************************************
@@ -400,7 +414,7 @@ header .name {
 }
 
 header i {
-    color: red;
+    color: orange;
 }
 
 header a {
@@ -870,20 +884,21 @@ main {
 
 .sku-images {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 25px;
     justify-content: center;
     justify-items: center;
 }
 
-.search-control {
+.search-user-functions {
     display: grid;
-    width: 100%;
-    grid-template-columns: 45% 45%;
+    width: 85vw;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     justify-content: center;
     background-color: #fff;
-    height: 120px;
+    min-height: 120px;
     justify-content: center;
+    justify-items: center;
     align-content: center;
 }
 
@@ -892,24 +907,33 @@ main {
     justify-content: flex-end;
 }
 
-.search-desc, .sku-unit-data {
-    display: flex;
+.export, .addtolist {
+    padding: 25px;
+}
+
+.search-desc {
+    display: grid;
+    width: 85vw;
     justify-content: center;
-    justify-items: center;
-    align-self: center;
     align-content: center;
+    align-items: center;
+    align-self: center;
     min-height: 400px;
-    background-color: #fff;
 }
 
 .sku-data {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    width: 85vw;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-gap: 25px;
-
+    justify-content: center;
     align-self: center;
     align-content: center;
     min-height: 400px;
+}
+
+.search-desc  table {
+    max-width 50px !important;
 }
 
 .sku-unit-data, .sku-case-data, .sku-pallet-data, .sku-user-data {
@@ -917,6 +941,7 @@ main {
     align-items: center;
     justify-content: center;
     padding: 25px;
+    
 }
 
 /***************************************
@@ -1745,6 +1770,13 @@ only screen and (max-width: 890px),
         width: 150px;
         font-size: 16px;
     }
+    
+    .search-control .addtolist {
+        display:flex;
+        justify-content: center;
+    }
+    
+
 }
 
 .nav-show {

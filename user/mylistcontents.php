@@ -54,10 +54,10 @@ $mylistcontent =  $user->myListContent($listid);
             <section class="title">
                 <h1>List: <?php echo strtoupper($user->myListReturn($listid, 'name')); ?></h1>
             </section>
-            <section class="form">
+            <section class="nav">
                 Insert Export Links Here
             </section>
-            <section class="content">
+            <section class="form">
                 <table class="table">
                     <thead>
                         <tr align="middle">

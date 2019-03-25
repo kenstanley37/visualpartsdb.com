@@ -46,17 +46,19 @@ if(!isset($_SESSION['user_id']))
             <section class="title">
                 <h1>My List</h1>
             </section>
-            <section class="form createList shadow">
-                <h2 class="block-title">Create List</h2>
-                <form action="/processors/userManagement.php" method="post">
-                    <label for="listname">List Name:</label>
-                    <input type="text" id="listname" name="listname" maxlength="10" required>
-                    <label for="listname">List Description:</label>
-                    <input type="text" id="listdescription" name="listdescription" maxlength="30" required>
-                    <button type="submit">Submit</button>
-                </form>
+            <section class="nav">
+                <section class="createList shadow bg-white">
+                    <h2 class="block-title">Create List</h2>
+                    <form action="/processors/userManagement.php" method="post">
+                        <label for="listname">List Name:</label>
+                        <input type="text" id="listname" name="listname" maxlength="10" required>
+                        <label for="listname">List Description:</label>
+                        <input type="text" id="listdescription" name="listdescription" maxlength="30" required>
+                        <button type="submit">Submit</button>
+                    </form>
+                </section>
             </section>
-            <section class="content">
+            <section class="form">
                 <table class="table">
                     <thead>
                         <tr align="middle">

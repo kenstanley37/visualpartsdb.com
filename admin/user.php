@@ -59,8 +59,6 @@ if(isset($_GET['register']))
                 <h1>Member List</h1>
             </section>
             <section class="nav">
-            </section>
-            <section class="content">
                 <section class="member-list">
                     <table class="table shadow">
                     <thead>
