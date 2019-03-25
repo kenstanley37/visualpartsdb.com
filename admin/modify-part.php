@@ -51,24 +51,26 @@ if(isset($_GET['error']))
                 <h2>Modify Part</h2>
             </section>
             <section class="nav">
-                <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
-                <table class="table shadow">
-                    <thead>
-                        <tr>
-                            <th colspan="3"><h6>Modify SKU</h6></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Part Number:</td>
-                            <form action="/processors/sku_handler.php" method="post">
-                                <td><input type="text" name="sku" required></td>
-                                <td><button type="submit" name="modifysearch" class="info" >Search</button></td>
-                            </form>
-                        </tr>
-                    </tbody>
-                
-                </table>
+                <section class="display shadow bg-white">
+                    <h2 class="block-title shadow">Modify SKU</h2>
+                    <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
+                    <table class="table shadow">
+                        <thead>
+                            <tr>
+                                <th colspan="3"><h6>Modify SKU</h6></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Part Number:</td>
+                                <form action="/processors/sku_handler.php" method="post">
+                                    <td><input type="text" name="sku" required></td>
+                                    <td><button type="submit" name="modifysearch" class="info" >Search</button></td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
             </section>
         </main>
         <footer>

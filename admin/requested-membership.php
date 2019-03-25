@@ -51,8 +51,8 @@ $regRequest =  $user->regRequestList();
                 <h1>Requested Membership</h1>
             </section>
             <section class="nav">
-                <section class="requested-list">
-                    <h2 class="block-title shadow">test</h2>
+                <section class="display bg-white shadow">
+                    <h2 class="block-title shadow">Member Request</h2>
                    <table class="table shadow">
                         <thead>
                             <tr>

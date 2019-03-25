@@ -51,7 +51,8 @@ $pending = $user->userList('pending');
                 <h1>Pending Users</h1>
             </section>
             <section class="nav">
-                <section class="member-list">
+                <section class="display bg-white shadow">
+                    <h2 class="block-title shadow">Verification Pending</h2>
                     <table class="table shadow">
                         <thead>
                             <tr>
