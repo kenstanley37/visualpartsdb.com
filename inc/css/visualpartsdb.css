@@ -718,8 +718,7 @@ main {
     min-height: 100px;
     margin: 15px;
     background-color: #fff;
-    display: grid;
-    grid-template-rows: 55% 35%;
+
 }
 
 
