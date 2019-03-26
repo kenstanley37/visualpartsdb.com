@@ -213,7 +213,7 @@ section {
     min-height: 100vh;
     min-width: 100%;
     grid-template-columns: 100%;
-    grid-template-rows: 50px auto 2fr auto;
+    grid-template-rows: auto auto 2fr auto;
     grid-template-areas: 
         "header"
         "adminnavbar"
@@ -400,8 +400,7 @@ header {
     grid-area: header;
     display: grid;
     grid-template-columns: 350px auto 25px;
-    min-width: 100%;
-    max-width: 100%;
+    width: 100%;
     color: #fff;
     grid-gap: 0;
     background: #0487CC;  /* fallback for old browsers */
@@ -715,10 +714,9 @@ main {
     /* Add shadows to create the "card" effect */
     transition: 0.3s;
     min-width: 200px;
-    min-height: 100px;
+    max-height: 300px;
     margin: 15px;
     background-color: #fff;
-
 }
 
 
@@ -729,8 +727,12 @@ main {
 
 /* Add some padding inside the card container */
 .card figcaption { 
-    padding: 2px 16px;
-    padding-bottom: 15px;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 15px 5px 15px;
 }
 
 .card img {
@@ -739,8 +741,8 @@ main {
     margin-right: auto;
     object-fit: cover;
     max-width: 100%;
-    max-height: 100%;
-    padding: 15px;
+    padding-bottom: 55px;
+    position: relative;
 }
 
 .card .card-img {
@@ -755,8 +757,6 @@ main {
     display: flex;
     justify-content: center;
 }
-
-
 
 .card .card-sku-num h4 {
     font-size: 20px;
