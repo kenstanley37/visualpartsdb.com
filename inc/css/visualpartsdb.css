@@ -99,7 +99,7 @@ a:hover {
     background-color: #fff;
 }
 
-.bg-light-blue {
+.bg-blue {
     background-color: #0487CC;
 }
 
@@ -254,7 +254,7 @@ section {
     justify-items: center;
     justify-content: center;
     position: relative;
-    padding: 25px;
+    padding-top: 25px;
 }
 
 
@@ -373,6 +373,14 @@ section {
     padding: 35px;
 }
 
+.display p {
+    display:contents;
+}
+
+.display .not-found p {
+    display: block;
+    line-height: 35px;
+}
 /***************************************
 *
 *

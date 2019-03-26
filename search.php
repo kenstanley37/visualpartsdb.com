@@ -91,7 +91,7 @@ if(isset($_GET['export'])){
             {
                 ?>  
                     <section class="title">
-                        <section class="display shadow bg-light-blue">
+                        <section class="display shadow bg-blue">
                             <h2 class="text-white"><?php echo $dataResult['sku_id']; ?></h2>
                         </section>
                     </section>
@@ -395,15 +395,17 @@ if(isset($_GET['export'])){
             } else
             {
                  ?>
-            <section class="content">
-                <section class="search-error center">
-                    <h1>Sorry, nothing was found for SKU "<?php echo $sku; ?>"</h1>
-                    
-                    <section id="staticImg">
-                       <p>Please try again!</p>
+            
+            <section class="nav">
+                <section class="display shadow bg-white">
+                    <h2 class="block-title shadow">Not Found</h2>
+                    <section class="not-found">
+                        <p>Sorry, nothing was found for SKU "<i class="error"><?php echo $sku; ?></i>"</p>
+                        <p>Please try again!</p>
                     </section>
                 </section>
             </section>
+
                 <?php
             }
            ?>
