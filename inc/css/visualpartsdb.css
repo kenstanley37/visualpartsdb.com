@@ -992,7 +992,6 @@ main {
 
 footer {
     grid-area: footer;
-    min-height: 100%;
     color: #fff;
     display: grid;
     grid-template-columns: auto;
@@ -1002,6 +1001,7 @@ footer {
     text-align: center;
     background-color: #333;
     z-index: 1;
+    padding: 25px;
 }
 
 /* ADMIN STYLE */
