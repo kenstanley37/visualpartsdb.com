@@ -44,7 +44,9 @@ if(!isset($_SESSION['user_id']))
         </aside>
         <main class="main">
             <section class="title">
-                <h1>My List</h1>
+                <section class="display bg-blue shadow">
+                    <h2 class="text-white">My List</h2>
+                </section>
             </section>
             <section class="nav">
                 <section class="display shadow bg-white">
@@ -60,7 +62,7 @@ if(!isset($_SESSION['user_id']))
             </section>
             <section class="form">
                 <section class="display shadow bg-white">
-                    <h2 class="block-title shadow">My List</h2>
+                    <h2 class="block-title shadow">Lists</h2>
                     <table class="table shadow">
                         <thead>
                             <tr align="middle">

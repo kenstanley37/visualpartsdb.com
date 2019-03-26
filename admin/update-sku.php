@@ -60,11 +60,11 @@ $count = 0;
                     <h2 class="block-title shadow">Modify SKU</h2>
                     <form id="UpdateSkuForm" method="post" action="/processors/sku_handler.php">
                         <input type="text" name="sku" value="<?php echo $sku; ?>" hidden>
-                        <section class="update-sku">
+                        <section class="grid-wrap250">
                             <table class="table-nores shadow">
                                 <thead>
                                     <tr>
-                                        <th data-label="Description" scope="col" colspan="2" class="tb1-color">
+                                        <th data-label="Description" colspan="2" class="tb1-color">
                                             Description
                                         </th>
                                     </tr>
@@ -252,10 +252,11 @@ $count = 0;
                         <span class="imagemessage"><?php echo $vpd->imageMessage; ?></span>
                 </section>
             </section>
+            
             <section class="content">
                 <section class="display shadow bg-white">
                     <h2 class="block-title shadow">Images</h2>
-                    <section class="sku-images" id="skuimages">
+                    <section class="grid-wrap250" id="skuimages">
                         <?php 
                        foreach($skuImage as $row)
                        {
@@ -269,15 +270,15 @@ $count = 0;
                             </div>
                             <figcaption>
                                 <section class="card-sku-num">
-                                    <table class="table-nores shadow">
+                                    <table class="table-nores">
                                         <tbody>
                                             <tr>
                                                 <td class="tb1-color" colspan="2">
-                                                    <label for="caption">Desc:</label>
+                                                    <label for="caption">Caption:</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td  colspan="2">
+                                                <td colspan="2">
                                                     <form id="imageUpdate<?php echo $count; ?>" action="/processors/image_handler.php" method="post">
                                                         <input type="text" name="imageSku" value="<?php echo $row['sku_image_sku_id']; ?>" hidden>
                                                         <input type="text" name="imageNum" value="<?php echo $row['sku_image_id']; ?>" hidden>

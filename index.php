@@ -159,8 +159,7 @@ $image_count = $vpd->getImageCount();
                                  <a href="/search.php?search=<?php echo $key['sku_image_sku_id']; ?>">
                                     <figcaption>
                                             <div class="card-sku-num">
-                                                <h4>
-                                                    <?php echo $key['sku_image_sku_id']; ?></h4>
+                                                <h4><?php echo $key['sku_image_sku_id']; ?></h4>
                                             </div>
                                             <div class="card-image-desc">
                                                 <p><?php echo $key['sku_image_description'];?></p>

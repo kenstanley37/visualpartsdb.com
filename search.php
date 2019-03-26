@@ -85,7 +85,7 @@ if(isset($_GET['export'])){
         }
         ?>
         </aside>
-        <main class="main bg-clr-grey">
+        <main class="main">
             <?php
             if(!empty($dataResult))
             {
@@ -97,7 +97,7 @@ if(isset($_GET['export'])){
                     </section>
             
                     <section class="nav">
-                        <section class="search-user-functions shadow">
+                        <section class="display bg-white shadow">
                             <h2 class="block-title shadow">Export</h2>
                             <section class="export">
                                 <table class="table-nores shadow">
@@ -160,7 +160,7 @@ if(isset($_GET['export'])){
                     </section>
             
                     <section class="form">
-                        <section class="search-desc shadow bg-white">
+                        <section class="display shadow bg-white">
                             <h2 class="block-title shadow">Description</h2>
                             <table class="table shadow">
                                 <thead>

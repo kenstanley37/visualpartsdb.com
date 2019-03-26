@@ -249,7 +249,7 @@ section {
 .main .title {
     grid-area: title;
     display: grid;
-    grid-template-columns: 86%;
+    grid-template-columns: 90%;
     grid-template-rows: auto;
     justify-items: center;
     justify-content: center;
@@ -312,7 +312,6 @@ section {
     justify-content: center;
 }
 
-
 .main .update-form textarea {
     width: 100%;
     height: 100px;
@@ -331,13 +330,20 @@ section {
     justify-items: center;
 }
 
-.grid-wrap250 {
+.grid-wrap250, .grid-wrap300 {
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 25px;
     justify-content: center;
     justify-items: center;
+}
+
+.grid-wrap250 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-wrap300 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .main .update-form .update-sku table {
@@ -648,8 +654,8 @@ main {
     grid-template-areas: 
         "introbrands introimages"
         "introinfo introimages";
-    justify-items: center;
     justify-content: center;
+    justify-items: center;
     padding-bottom: 50px;
     position: relative;
 }
@@ -701,6 +707,7 @@ main {
     grid-gap: 2.5em;
     justify-items: center;
     justify-content: center;
+    margin-top: -18px;
 }
 
 .card {
@@ -711,6 +718,8 @@ main {
     min-height: 100px;
     margin: 15px;
     background-color: #fff;
+    display: grid;
+    grid-template-rows: 55% 35%;
 }
 
 
@@ -743,9 +752,12 @@ main {
     border: none;
 }
 
-.card .card-sku-num .table-nores {
-    width: 100%;
+.card .card-sku-num {
+    display: flex;
+    justify-content: center;
 }
+
+
 
 .card .card-sku-num h4 {
     font-size: 20px;
@@ -986,7 +998,7 @@ footer {
     display: grid;
     grid-template-columns: auto;
     grid-gap: 30px;
-    margin-25px;
+    margin-top: 25px;
     align-items: center;
     text-align: center;
     background-color: #333;
@@ -1071,85 +1083,13 @@ footer {
     text-transform: uppercase;
 }
 
-
-/***************************************
-*
-*
-* START mysearches.php
-*
-*
-****************************************/
-
-.my-search-main {
-    grid-area: main;
+.charts {
     display: grid;
-    min-height: 100vh;
-    grid-template-columns: 45% 45%;
-    grid-template-rows: auto auto 1fr auto;
-    grid-column-gap: 55px;
-    grid-template-areas: 
-        "mysearchgraph mysearchpie"
-        "mysearchhead mysearchhead"
-        "mysearchbody mysearchbody"
-        "mysearchfoot mysearchfoot";
-    margin-top: 50px;
-    justify-content: center; 
-}
-
-.my-search-pie {
-    grid-area: mysearchpie;
-    max-height: 150px;
-}
-
-.my-search-graph {
-    grid-area: mysearchgraph;
-    max-height: 150px;
-}
-
-.my-search-head {
-    grid-area: mysearchhead;
-    display: grid;
-    margin-top: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    min-height: 150px;
+    padding: 25px;
     justify-content: center;
-}
-
-.my-search-head table, .my-search-head table tr, .my-search-head table td {
-    display: inline-block;
-}
-
-.my-search-body {
-    grid-area: mysearchbody;
-	margin-right: 25px;
-	margin-left: 25px;
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-areas: 
-        "searchresults";
-    justify-content: center;
-    background-color: #fff;
-    margin-top: 75px;
-    position: relative;
-    margin-bottom: 50px;
-}
-
-.my-search-body table {
-    margin-top: 50px;
-}
-
-.my-search-body .my-search-results {
-    position: relative;
-}
-
-.my-search-results {
-    grid-area: searchresults;
-}
-
-.my-search-body a:hover {
-	border-bottom: 1px solid #000;
-}
-
-.my-search-foot {
-    grid-area: mysearchfoot;
+    align-content: center;
 }
 
 .dash-top {
@@ -1237,7 +1177,6 @@ footer {
     font-variant: normal;
     /*
     font-size: 12px; 
- 
     font-weight: 700; 
     line-height: 20px;
     */
@@ -1442,55 +1381,6 @@ footer {
         grid-gap: 2.5em;
     }
     
-    .my-search-body {
-        margin: auto;
-        margin-left: 50px;
-    }
-    
-    .my-search-main {
-        grid-area: main;
-        display: grid;
-
-        grid-template-columns: 100%;
-        grid-template-rows: auto auto auto 1fr auto;
-        grid-column-gap: 55px;
-        grid-template-areas: 
-            "mysearchgraph"
-            "mysearchpie"
-            "mysearchhead"
-            "mysearchbody"
-            "mysearchfoot";
-        margin-top: 50px;
-    }
-    
-    .my-search-body {
-        grid-area: mysearchbody;
-        margin-right: 25px;
-        margin-left: 25px;
-        display: grid;
-        grid-template-columns: auto;
-        grid-template-areas: 
-            "searchcount"
-            "searchresults";
-        justify-items: center;
-    }
-    
-    .my-search-head table, .my-search-head table tr, .my-search-head table td {
-        display: block;
-    }
-    
-    .my-search-head table select, .my-search-head input {
-        min-width: 150px;
-    }
-    
-    .my-search-head table .search-button {
-        min-width: 50px;
-    }
-    
-    .my-search-head table tr {
-        padding: 5px;
-    }
-    
     .main .createList input {
         display: block;
     }
@@ -1682,11 +1572,6 @@ only screen and (max-width: 900px),
         font-size: 12px !important;
     }
     
-    .display form * {
-        display: block;
-        text-align: left;
-        line-height: 25px;
-    }
 }
 
 
@@ -1770,25 +1655,12 @@ only screen and (max-width: 890px),
         position: relative;
         top: 20px;
     }
-    
-    .table-nores {
-        width: 250px;
-        font-size: 10px;
-    }
-    
+
     .g-recaptcha {
         transform: scale(0.77);
         -webkit-transform: scale(0.77);
         transform-origin: 0 0;
         -webkit-transform-origin: 0 0;
-    }
-    
-    .main .update-form .update-sku {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-
-    .main .update-form .update-sku table {
-        min-width: 150px;
     }
     
     .member-info ul {
@@ -1803,6 +1675,10 @@ only screen and (max-width: 890px),
     .search-control .addtolist {
         display:flex;
         justify-content: center;
+    }
+    
+    figure {
+        max-width: 150px;
     }
     
 
