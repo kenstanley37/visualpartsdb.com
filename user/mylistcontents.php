@@ -58,35 +58,38 @@ $mylistcontent =  $user->myListContent($listid);
                 Insert Export Links Here
             </section>
             <section class="form">
-                <table class="table">
-                    <thead>
-                        <tr align="middle">
-                            <td scope="col">SKU</td>
-                            <td scope="col" colspan="2">Description</td>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <section class="display bg-white shadow">
+                    <h2 class="block-title shadow">My List</h2>
+                    <table class="table shadow">
+                        <thead>
+                            <tr>
+                                <td>SKU</td>
+                                <td colspan="2">Description</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                             foreach($mylistcontent as $row)
+                    {
+                        ?>
+                            <tr valign="middle">
+                                <td data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
+                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                <td>
+                                    <form action="/processors/userManagement.php" method="post">
+                                        <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
+                                        <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
+                                        <input name="myListContent" value="myListContent" hidden>
+                                        <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>  
                         <?php
-                         foreach($mylistcontent as $row)
-                {
+                    }
                     ?>
-                        <tr valign="middle">
-                            <td scope="row" data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
-                            <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                            <td>
-                                <form action="/processors/userManagement.php" method="post">
-                                    <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
-                                    <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
-                                    <input name="myListContent" value="myListContent" hidden>
-                                    <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
-                                </form>
-                            </td>
-                        </tr>  
-                    <?php
-                }
-                ?>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </section>
             </section>
         </main>
         <footer>

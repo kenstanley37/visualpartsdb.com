@@ -19,6 +19,14 @@ if(isset($_GET['search']))
     $sku = strtoupper($sku);
     $dataResult = $vpd->skuSearchData($sku);
     $imageResult = $vpd->skuSearchImage($sku);
+    
+    $createDate = $dataResult['sku_rec_date'];
+    $createDate = date_create($createDate);
+    $createDate = date_format($createDate, 'm/d/Y');
+    
+    $updateDate = $dataResult['sku_rec_update'];
+    $updateDate = date_create($updateDate);
+    $updateDate = date_format($updateDate, 'm/d/Y');
 }
 
 if(isset($_POST['imageSubmit']))
@@ -46,8 +54,8 @@ if(isset($_GET['export'])){
     
     $sku = $vail->sanitizeString($sku);
     $type = $vail->sanitizeString($type);
-    
     $result = $vpd->exportData($sku, $type);
+    
 }
 
 ?>
@@ -83,7 +91,9 @@ if(isset($_GET['export'])){
             {
                 ?>  
                     <section class="title">
-                        <h2><?php echo $dataResult['sku_id']; ?></h2>
+                        <section class="display shadow bg-light-blue">
+                            <h2 class="text-white"><?php echo $dataResult['sku_id']; ?></h2>
+                        </section>
                     </section>
             
                     <section class="nav">
@@ -211,7 +221,7 @@ if(isset($_GET['export'])){
 
                         <section class="content">
                             <section class="sku-data">
-                                <section class="sku-unit-data shadow">
+                                <section class="display shadow bg-white">
                                     <h2 class="block-title shadow">Unit Data</h2>
                                     <table class="table shadow">
                                         <thead>
@@ -247,7 +257,7 @@ if(isset($_GET['export'])){
                                 if(!empty($user->accessCheck()))
                                 {
                             ?>
-                                <section class="sku-case-data shadow">
+                                <section class="display shadow bg-white">
                                     <h2 class="block-title shadow">Case Data</h2>
                                     <table class="table shadow">
                                         <thead>
@@ -280,7 +290,7 @@ if(isset($_GET['export'])){
                                     </table> 
                                 </section>
 
-                                <section class="sku-pallet-data shadow">
+                                <section class="display shadow bg-white">
                                     <h2 class="block-title shadow">Pallet Data</h2>
                                     <table class="table shadow">
                                         <thead>
@@ -313,7 +323,7 @@ if(isset($_GET['export'])){
                                     </table> 
                                 </section>
 
-                                <section class="sku-user-data shadow">
+                                <section class="display shadow bg-white">
                                     <h2 class="block-title shadow">User Data</h2>
                                     <table class="table shadow">
                                         <thead>
@@ -328,7 +338,7 @@ if(isset($_GET['export'])){
                                             </tr>
                                             <tr>
                                                 <th>SKU created Date</th>
-                                                <td><?php echo $dataResult['sku_rec_date']; ?></td>
+                                                <td><?php echo $createDate; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>SKU Last Updated</th>
@@ -336,7 +346,7 @@ if(isset($_GET['export'])){
                                             </tr>
                                             <tr>
                                                 <th>SKU Updated Date</th>
-                                                <td><?php echo $dataResult['sku_rec_update']; ?></td>
+                                                <td><?php echo $updateDate; ?></td>
                                             </tr>
                                         </tbody>
                                     </table> 
@@ -346,37 +356,41 @@ if(isset($_GET['export'])){
                             ?>
                                 </section>
                         </section> <!-- end content --> 
-                        <section class="sku-image-data">
-                            <h2 class="block-title shadow">Images</h2>
-                        </section>
-                        <section class="sku-images">
-                            <?php 
-                            if(!empty($imageResult))
-                            {
-                                foreach($imageResult as $image){
+                        
+                        <section class="content2">
+                            <section class="display shadow bg-white">
+                                <h2 class="block-title shadow">Images</h2>
+                                <section class="grid-wrap250">
+                                    <?php 
+                                    if(!empty($imageResult))
+                                    {
+                                        foreach($imageResult as $image){
+                                            ?>
+                                        <figure class="card bg-white shadow">
+                                            <div class="card-img">
+                                                <a href="<?php echo $image['sku_image_url']; ?>">
+                                                    <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />
+                                                </a>
+                                            </div>
+                                            <figcaption>
+                                                <div class="card-sku-num">
+                                                    <p><?php echo $image['sku_image_description'];?></p>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                            <?php
+                                        } 
+                                    } else
+                                    {
+                                        ?>
+                                            <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
+                                        <?php
+                                    }
                                     ?>
-                                <figure class="card bg-white shadow">
-                                    <div class="card-img">
-                                        <a href="<?php echo $image['sku_image_url']; ?>">
-                                            <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />
-                                        </a>
-                                    </div>
-                                    <figcaption>
-                                        <div class="card-sku-num">
-                                            <p><?php echo $image['sku_image_description'];?></p>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                                    <?php
-                                } 
-                            } else
-                            {
-                                ?>
-                                    <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
-                                <?php
-                            }
-                            ?>
+                                </section>
+                            </section>
                         </section>
+                        
                 <?php
             } else
             {
