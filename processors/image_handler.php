@@ -52,7 +52,8 @@
         $image_id = $_POST['imageNum'];
         $image_sku = $_POST['imageSku'];
         $image_caption = $vail->sanitizeString($_POST['caption']);
-
+        $image_caption = strtoupper($image_caption);
+        
         $result = $vpd->setImageCaption($image_id, $image_caption);
         if($result)
         {

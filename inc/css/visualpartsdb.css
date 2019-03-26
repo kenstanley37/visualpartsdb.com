@@ -291,7 +291,6 @@ section {
 }
 
 .main .update-form {
-    grid-area: form;
     display: grid;
     grid-template-columns: 90%;
     grid-template-areas: 
@@ -335,7 +334,9 @@ section {
 .main .content {
     grid-area: mcontent;
     display: grid;
+    grid-template-columns: 90%;
     justify-content: center;
+    padding: 25px;
 }
 
 .display {
@@ -344,7 +345,6 @@ section {
     justify-content: center;
     align-items: center;
     width: 100%;
-
     padding: 35px;
 }
 
@@ -961,6 +961,7 @@ footer {
     display: grid;
     grid-template-columns: auto;
     grid-gap: 30px;
+    margin-25px;
     align-items: center;
     text-align: center;
     background-color: #333;
