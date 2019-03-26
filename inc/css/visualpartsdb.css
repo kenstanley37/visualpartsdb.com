@@ -80,7 +80,9 @@ a:hover {
 }
 
 .shadow {
-    box-shadow: 5px 5px 10px grey;
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0, .65);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0, .65);
+    box-shadow: 0 0 10px rgba(0,0,0, .65);
 }
 
 .rounded {
@@ -213,7 +215,7 @@ section {
     min-height: 100vh;
     min-width: 100%;
     grid-template-columns: 100%;
-    grid-template-rows: auto auto 2fr auto;
+    grid-template-rows: 65px auto 2fr auto;
     grid-template-areas: 
         "header"
         "adminnavbar"
@@ -1401,7 +1403,7 @@ only screen and (max-width: 900px),
     header .main-nav-bar {
         position: absolute;
         right: -25px;
-        top: 50px;
+        top: 65px;
         width: 300px;
         z-index: 20;
         background: #368cbf;
@@ -1417,6 +1419,7 @@ only screen and (max-width: 900px),
     
     header .main-nav-ham {
         display: block;
+        cursor: pointer;
     }
     
     header .main-nav-bar {
