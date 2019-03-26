@@ -468,7 +468,6 @@
         // *************************************************************
         public function getSkuCount()
         {
-            // lets update the search ticker for this sku
             try {
                     $stmt = $this->conn->prepare("SELECT count(*) as SKU_Count FROM sku");
                     $stmt->execute();
@@ -488,7 +487,6 @@
         // *************************************************************
         public function getSearchCount()
         {
-            // lets update the search ticker for this sku
             try {
                     $stmt = $this->conn->prepare("SELECT count(*) as Search_Count FROM sku_search");
                     $stmt->execute();
@@ -508,7 +506,6 @@
         // *************************************************************
         public function getImageCount()
         {
-            // lets update the search ticker for this sku
             try {
                     $stmt = $this->conn->prepare("SELECT count(*) as Search_Count FROM sku_image");
                     $stmt->execute();
@@ -537,8 +534,7 @@
             if($user->accessCheck() != 'ADMIN'){
                 $userID = $_SESSION['user_id'];
             }
-                
-            // lets update the search ticker for this sku
+
             try {
                     if(!empty($userID))
                     {  
