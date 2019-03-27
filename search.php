@@ -99,8 +99,8 @@ if(isset($_GET['export'])){
                     <section class="nav">
                         <section class="display bg-white shadow search-user-functions">
                             <h2 class="block-title shadow">User Controls</h2>
-                            <section class="export">
-                                <section class="display shadow bg-white">
+                            <section class="contain1">
+                                <section class="display shadow bg-white test">
                                     <h2 class="block-title-small shadow">Export</h2>
                                     <table class="table-nores">
                                         <tbody>
@@ -120,11 +120,10 @@ if(isset($_GET['export'])){
                                     </table>
                                 </section>
                             </section>
-                            <section class="addtolist">
+                            <section class="contain2">
                                 help
-                                <section class="display shadow bg-white">
+                                <section class="display shadow bg-white test">
                                     <h2 class="block-title-small shadow">Active List</h2>
-                                    
                                 <?php if(isset($_SESSION['user_id'])){ 
                                         if(empty($activelist)){
                                             ?>
