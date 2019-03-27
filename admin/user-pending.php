@@ -53,6 +53,10 @@ $pending = $user->userList('pending');
             <section class="nav">
                 <section class="display bg-white shadow">
                     <h2 class="block-title shadow">Verification Pending</h2>
+                    <?php 
+                    if(!empty($pending))
+                    {
+                    ?>
                     <table class="table shadow">
                         <thead>
                             <tr>
@@ -68,9 +72,8 @@ $pending = $user->userList('pending');
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
-                        if(!empty($pending))
-                        {
+                    <?php
+
                             foreach($pending as $row)
                             {
                                 $date = $row['user_reg_date'];
