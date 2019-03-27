@@ -121,8 +121,10 @@ if(isset($_GET['export'])){
                                 </section>
                             </section>
                             <section class="addtolist">
+                                help
                                 <section class="display shadow bg-white">
                                     <h2 class="block-title-small shadow">Active List</h2>
+                                    
                                 <?php if(isset($_SESSION['user_id'])){ 
                                         if(empty($activelist)){
                                             ?>

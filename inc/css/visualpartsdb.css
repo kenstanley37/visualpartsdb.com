@@ -365,6 +365,7 @@ section {
     grid-gap: 25px;
     justify-content: center;
     justify-items: center;
+
 }
 
 .grid-wrap250 {
@@ -390,11 +391,10 @@ section {
     align-items: center;
     width: 100%;
     padding: 35px;
-    max-height: 100%;
 }
 
 .display p {
-    display: contents;
+    display:contents;
 }
 
 .display .not-found p {
@@ -730,6 +730,7 @@ main {
     flex-direction: row;
 }
 
+
 /* On mouse-over, add a deeper shadow */
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -933,16 +934,31 @@ main {
     padding: 55px;
 }
 
+.search-control .addtolist {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .export, .addtolist {
     padding: 25px;
-    height: 170px !important;
-    width: 50%;
+    height: 200px !important;
+    width: 100%;
 }
 
 .export table, .addtolist table {
     border-spacing: 10px !important;
     border-collapse: separate !important;
     border: 0;
+}
+
+.search-desc {
+    display: grid;
+    width: 85vw;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    min-height: 400px;
 }
 
 .sku-data {
@@ -1547,6 +1563,16 @@ only screen and (max-width: 900px),
         padding: 1px;
     }
     
+    .search-main .export-data {
+        grid-area: searchexportlist;
+        display: grid;
+        grid-template-areas: 
+            "export"
+            "list";
+        grid-template-columns: 100%;
+        font-size: 12px !important;
+    }
+    
 }
 
 
@@ -1645,6 +1671,11 @@ only screen and (max-width: 890px),
     .block-title {
         width: 150px;
         font-size: 16px;
+    }
+    
+    .search-control .addtolist {
+        display:flex;
+        justify-content: center;
     }
     
     figure {
