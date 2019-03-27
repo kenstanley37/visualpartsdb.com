@@ -66,7 +66,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
         <main class="main">  
             <section class="title">
                 <section class="display shadow bg-blue">
-                    <h2 class="bg-blue shadow text-white">Search History</h2>
+                    <h2 class="bg-blue text-white">Search History</h2>
                 </section>
             </section>
             
