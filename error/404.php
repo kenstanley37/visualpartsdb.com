@@ -31,7 +31,7 @@ $vail = new VALIDATE;
         }
        ?>
         <main class="main">
-            <section class="nav">
+            <section class="content">
                 <h1>OPPS! The file you are looking for was not found</h1>
             </section>
         </main>
