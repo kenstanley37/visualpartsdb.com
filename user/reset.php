@@ -10,6 +10,7 @@ $vail = new VALIDATE;
 $user = new USER;
 $error='';
 
+/*
 if(!isset($_SESSION['user_id']))
 {
     header('location: /');
@@ -18,7 +19,7 @@ if(!isset($_SESSION['user_id']))
     $userID = $_SESSION['user_id'];
     $user->activeCheck($userID);
 }
-
+*/
 
 if(isset($_POST['reset']))
 {
@@ -34,6 +35,8 @@ if(isset($_POST['reset']))
     {
         $error = 'Opps! something went wrong';
     }
+} else {
+    header('location: /');
 }
 
 
