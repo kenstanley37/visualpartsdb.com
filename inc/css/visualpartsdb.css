@@ -205,7 +205,8 @@ a:hover {
 }
 
 .block-title-small {
-    width: 100px;
+    width: 150px;
+    font-size: 16px;
 }
 
 section {
@@ -364,7 +365,6 @@ section {
     grid-gap: 25px;
     justify-content: center;
     justify-items: center;
-    grid-template-rows: 150px;
 }
 
 .grid-wrap250 {
@@ -390,10 +390,11 @@ section {
     align-items: center;
     width: 100%;
     padding: 35px;
+    max-height: 100%;
 }
 
 .display p {
-    display:contents;
+    display: contents;
 }
 
 .display .not-found p {
@@ -729,7 +730,6 @@ main {
     flex-direction: row;
 }
 
-
 /* On mouse-over, add a deeper shadow */
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -922,40 +922,27 @@ main {
 
 .search-user-functions {
     display: grid;
-    width: 85vw;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-rows: 150px;
+    grid-row-gap: 35px;
     justify-content: center;
     background-color: #fff;
-    min-height: 120px;
     justify-content: center;
     justify-items: center;
     align-content: center;
-}
-
-.search-control .addtolist {
-    display:flex;
-    justify-content: flex-end;
+    padding: 55px;
 }
 
 .export, .addtolist {
     padding: 25px;
-    min-height: 375px;
+    height: 170px !important;
+    width: 50%;
 }
 
-.export table {
-    border-spacing: 20px !important;
+.export table, .addtolist table {
+    border-spacing: 10px !important;
     border-collapse: separate !important;
     border: 0;
-}
-
-.search-desc {
-    display: grid;
-    width: 85vw;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    align-self: center;
-    min-height: 400px;
 }
 
 .sku-data {
@@ -1560,16 +1547,6 @@ only screen and (max-width: 900px),
         padding: 1px;
     }
     
-    .search-main .export-data {
-        grid-area: searchexportlist;
-        display: grid;
-        grid-template-areas: 
-            "export"
-            "list";
-        grid-template-columns: 100%;
-        font-size: 12px !important;
-    }
-    
 }
 
 
@@ -1668,11 +1645,6 @@ only screen and (max-width: 890px),
     .block-title {
         width: 150px;
         font-size: 16px;
-    }
-    
-    .search-control .addtolist {
-        display:flex;
-        justify-content: center;
     }
     
     figure {

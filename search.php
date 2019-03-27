@@ -97,7 +97,7 @@ if(isset($_GET['export'])){
                     </section>
             
                     <section class="nav">
-                        <section class="display bg-white shadow ">
+                        <section class="display bg-white shadow search-user-functions">
                             <h2 class="block-title shadow">User Controls</h2>
                             <section class="export">
                                 <section class="display shadow bg-white">
@@ -107,12 +107,12 @@ if(isset($_GET['export'])){
                                             <tr>
                                                 <td class="shadow">
                                                     <a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
-                                                        <img src="/assets/msoffice/icons8-microsoft-excel-40.png">
+                                                        <img src="/assets/msoffice/icons8-microsoft-excel-30.png">
                                                     </a>
                                                 </td>
                                                 <td class="shadow">
                                                     <a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
-                                                        <img src="/assets/msoffice/icons8-pdf-40.png">
+                                                        <img src="/assets/msoffice/icons8-pdf-30.png">
                                                     </a>
                                                 </td>
                                             </tr>
@@ -132,7 +132,7 @@ if(isset($_GET['export'])){
                                         else 
                                         {
                                             ?>
-                                            <table class="table shadow">
+                                            <table class="table-nores shadow">
                                                 <tbody>
                                                     <tr>
                                                         <td>

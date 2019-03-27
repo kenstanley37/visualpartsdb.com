@@ -30,8 +30,10 @@ $vail = new VALIDATE;
             <?php
         }
        ?>
-        <main id="aboutvpd" class="index-main">
-            <h1>OPPS! The file you were looking for was not found</h1>
+        <main class="main">
+            <section class="nav">
+                <h1>OPPS! The file you were looking for was not found</h1>
+            </section>
         </main>
         <footer>
             <?php include("inc/inc.footer.php"); ?>
