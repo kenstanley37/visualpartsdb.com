@@ -191,7 +191,7 @@ a:hover {
     background-color: #efefef;
 }
 
-.block-title {
+.block-title, .block-title-small {
     position: absolute;
     padding: 5px;
     width: 250px;
@@ -202,6 +202,10 @@ a:hover {
     text-align: center;
     background-color: #0487CC;
     color: #fff;
+}
+
+.block-title-small {
+    width: 100px;
 }
 
 section {
@@ -215,7 +219,7 @@ section {
     min-height: 100vh;
     min-width: 100%;
     grid-template-columns: 100%;
-    grid-template-rows: 65px auto 2fr auto;
+    grid-template-rows: 65px auto 2fr 50px;
     grid-template-areas: 
         "header"
         "adminnavbar"
@@ -300,6 +304,28 @@ section {
     position: relative;
 }
 
+.main .content {
+    grid-area: mcontent;
+    display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: auto;
+    justify-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.main .content2 {
+    grid-area: mcontent2;
+    display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: auto;
+    justify-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 25px;
+}
+
 .main .update-form {
     display: grid;
     grid-template-columns: 90%;
@@ -338,6 +364,7 @@ section {
     grid-gap: 25px;
     justify-content: center;
     justify-items: center;
+    grid-template-rows: 150px;
 }
 
 .grid-wrap250 {
@@ -354,22 +381,6 @@ section {
 
 .main .form h2, .main .content h2 {
     justify-self: flex-start;
-}
-
-.main .content {
-    grid-area: mcontent;
-    display: grid;
-    grid-template-columns: 90%;
-    justify-content: center;
-    padding: 25px;
-}
-
-.main .content2 {
-    grid-area: mcontent2;
-    display: grid;
-    grid-template-columns: 90%;
-    justify-content: center;
-    padding: 25px;
 }
 
 .display {
@@ -704,7 +715,7 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-template-rows: auto;
-    width: 90%;
+    width: 100%;
     grid-gap: 2.5em;
     justify-items: center;
     justify-content: center;
@@ -712,13 +723,10 @@ main {
 }
 
 .card {
-    position: relative;
     /* Add shadows to create the "card" effect */
-    transition: 0.3s;
-    min-width: 200px;
-    max-height: 300px;
-    margin: 15px;
-    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 
@@ -728,12 +736,9 @@ main {
 }
 
 /* Add some padding inside the card container */
-.card figcaption { 
-    padding: 0;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.card figcaption {  
+    display: grid;
+    grid-row-gap: 15px;
     padding: 0 15px 5px 15px;
 }
 
@@ -743,8 +748,9 @@ main {
     margin-right: auto;
     object-fit: cover;
     max-width: 100%;
-    padding-bottom: 55px;
+    object-fit: cover;
     position: relative;
+    padding: 15px;
 }
 
 .card .card-img {
@@ -755,24 +761,8 @@ main {
     border: none;
 }
 
-.card .card-sku-num {
-    display: flex;
-    justify-content: center;
-}
-
-.card .card-sku-num h4 {
-    font-size: 20px;
-    color: #000;
-    font-weight: 900;
-}
-
 .card .card-sku-desc p {
-    font-size: 12px;
-    color: #303030;
-}
-
-.card .card-image-desc p {
-    font-size: 16px;
+    font-size: 10px;
     color: #303030;
     padding-bottom: 10px;
 }
@@ -949,6 +939,13 @@ main {
 
 .export, .addtolist {
     padding: 25px;
+    min-height: 375px;
+}
+
+.export table {
+    border-spacing: 20px !important;
+    border-collapse: separate !important;
+    border: 0;
 }
 
 .search-desc {
@@ -998,12 +995,10 @@ footer {
     display: grid;
     grid-template-columns: auto;
     grid-gap: 30px;
-    margin-top: 25px;
     align-items: center;
     text-align: center;
     background-color: #333;
     z-index: 1;
-    padding: 25px;
 }
 
 /* ADMIN STYLE */
@@ -1385,6 +1380,7 @@ footer {
     .main .createList input {
         display: block;
     }
+    
 }
 
 /* 

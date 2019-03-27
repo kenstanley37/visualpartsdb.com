@@ -150,7 +150,7 @@ $image_count = $vpd->getImageCount();
                         foreach($randomImage as $key)
                         {
                             ?>
-                             <figure class="card shadow">
+                             <figure class="card bg-white shadow">
                                 <div class="card-img">
                                     <a href="<?php echo $key['sku_image_url']; ?>">
                                         <img class="article-img" src="<?php echo $key['sku_image_thumb']; ?>" alt="<?php echo $key['sku_image_sku_id'].'-'.$key['sku_image_description']; ?>" />

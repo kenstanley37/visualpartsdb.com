@@ -96,7 +96,7 @@ $count = 0;
                                             <label for="unit-length">Length</label>
                                         </td>
                                         <td>
-                                            <input type="number" name="unit-length" min="0" step="0.01" value="<?php echo $skuData['sku_unit_length'] ?>">
+                                            <input type="number" name="unit-length" min="0" step="0.01" value="<?php echo $skuData['sku_unit_length']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -104,7 +104,7 @@ $count = 0;
                                             <label for="unit-width">Width</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="unit-width" min="0" step="0.01" value="<?php echo $skuData['sku_unit_width'] ?>">
+                                            <input type="number" name="unit-width" min="0" step="0.01" value="<?php echo $skuData['sku_unit_width']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -112,7 +112,7 @@ $count = 0;
                                             <label for="unit-height">Height</label>
                                         </td>
                                         <td colspan="2"> 
-                                            <input type="number" name="unit-height" min="0" step="0.01" value="<?php echo $skuData['sku_unit_height'] ?>">
+                                            <input type="number" name="unit-height" min="0" step="0.01" value="<?php echo $skuData['sku_unit_height']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -120,7 +120,7 @@ $count = 0;
                                             <label for="unit-weight">Weight</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $skuData['sku_unit_weight'] ?>">
+                                            <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $skuData['sku_unit_weight']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -141,7 +141,7 @@ $count = 0;
                                             <label for="case-length">Length</label>
                                         </td>
                                         <td>
-                                            <input type="number" name="case-length" min="0" step="0.01" value="<?php echo $skuData['sku_case_length'] ?>">
+                                            <input type="number" name="case-length" min="0" step="0.01" value="<?php echo $skuData['sku_case_length']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -149,7 +149,7 @@ $count = 0;
                                             <label for="case-width">Width</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="case-width" min="0" step="0.01" value="<?php echo $skuData['sku_case_width'] ?>">
+                                            <input type="number" name="case-width" min="0" step="0.01" value="<?php echo $skuData['sku_case_width']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -157,7 +157,7 @@ $count = 0;
                                             <label for="case-height">Height</label>
                                         </td>
                                         <td colspan="2"> 
-                                            <input type="number" name="case-height" min="0" step="0.01" value="<?php echo $skuData['sku_case_height'] ?>">
+                                            <input type="number" name="case-height" min="0" step="0.01" value="<?php echo $skuData['sku_case_height']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -165,7 +165,7 @@ $count = 0;
                                             <label for="case-weight">Weight</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="case-weight" min="0" step="0.01" value="<?php echo $skuData['sku_case_weight'] ?>">
+                                            <input type="number" name="case-weight" min="0" step="0.01" value="<?php echo $skuData['sku_case_weight']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -173,7 +173,7 @@ $count = 0;
                                             <label for="case-qty">Quantity</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $skuData['sku_case_qty'] ?>">
+                                            <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $skuData['sku_case_qty']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -194,7 +194,7 @@ $count = 0;
                                             <label for="pallet-length">Length</label>
                                         </td>
                                         <td>
-                                            <input type="number" name="pallet-length" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_length'] ?>">
+                                            <input type="number" name="pallet-length" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_length']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -202,7 +202,7 @@ $count = 0;
                                             <label for="pallet-width">Width</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="pallet-width" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_width'] ?>">
+                                            <input type="number" name="pallet-width" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_width']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -210,7 +210,7 @@ $count = 0;
                                             <label for="pallet-height">Height</label>
                                         </td>
                                         <td colspan="2"> 
-                                            <input type="number" name="pallet-height" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_height'] ?>">
+                                            <input type="number" name="pallet-height" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_height']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -218,7 +218,7 @@ $count = 0;
                                             <label for="pallet-weight">Weight</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="pallet-weight" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_weight'] ?>">
+                                            <input type="number" name="pallet-weight" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_weight']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -226,7 +226,7 @@ $count = 0;
                                             <label for="pallet-qty">Quantity</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="pallet-qty" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_qty'] ?>">
+                                            <input type="number" name="pallet-qty" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_qty']; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -239,21 +239,21 @@ $count = 0;
                 </section>
             </section>
 
-            <section class="form">
+            <section class="content">
                 <section class="display shadow bg-white">
                     <h2 class="block-title">Add Image</h2>
                         <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
                             Select image to upload:
                             <input type="file" name="file" id="file">
                             <input type="text" name="desc" id="desc" placeholder="Caption">
-                            <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuRow['sku_image_sku_id']; ?>">
+                            <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuData['sku_id']; ?>">
                             <input type="submit" value="Upload Image" name="imageSubmit">
                         </form>
                         <span class="imagemessage"><?php echo $vpd->imageMessage; ?></span>
                 </section>
             </section>
             
-            <section class="content">
+            <section class="content2">
                 <section class="display shadow bg-white">
                     <h2 class="block-title shadow">Images</h2>
                     <section class="grid-wrap250" id="skuimages">

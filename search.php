@@ -97,22 +97,32 @@ if(isset($_GET['export'])){
                     </section>
             
                     <section class="nav">
-                        <section class="display bg-white shadow">
-                            <h2 class="block-title shadow">Export</h2>
+                        <section class="display bg-white shadow ">
+                            <h2 class="block-title shadow">User Controls</h2>
                             <section class="export">
-                                <table class="table-nores shadow">
-                                    <tbody>
-                                        <tr>
-                                            <td>Export Data:</td>
-                                            <td><a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">Excel <i class="far fa-file-excel"></i></a></td>
-                                            <!--
-                                            <td><a href="search.php?export=pdf&sku=<?php echo $dataResult['sku_id']; ?>">PDF <i class="far fa-file-pdf"></i></a></td>
-                                            -->
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <section class="display shadow bg-white">
+                                    <h2 class="block-title-small shadow">Export</h2>
+                                    <table class="table-nores">
+                                        <tbody>
+                                            <tr>
+                                                <td class="shadow">
+                                                    <a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
+                                                        <img src="/assets/msoffice/icons8-microsoft-excel-40.png">
+                                                    </a>
+                                                </td>
+                                                <td class="shadow">
+                                                    <a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
+                                                        <img src="/assets/msoffice/icons8-pdf-40.png">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
                             </section>
                             <section class="addtolist">
+                                <section class="display shadow bg-white">
+                                    <h2 class="block-title-small shadow">Active List</h2>
                                 <?php if(isset($_SESSION['user_id'])){ 
                                         if(empty($activelist)){
                                             ?>
@@ -126,7 +136,7 @@ if(isset($_GET['export'])){
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            Active List: <a href="/user/mylistcontents.php?list=<?php echo $activelistID; ?>"><?php echo strtoupper($activelist); ?></a>
+                                                            <a href="/user/mylistcontents.php?list=<?php echo $activelistID; ?>"><?php echo strtoupper($activelist); ?></a>
                                                         </td>
                                                         <td>
                                                             <form action="/processors/userManagement.php" method="post">
@@ -155,6 +165,7 @@ if(isset($_GET['export'])){
                                             <?php
                                         }
                                 } ?> 
+                                </section>
                             </section>
                         </section>
                     </section>

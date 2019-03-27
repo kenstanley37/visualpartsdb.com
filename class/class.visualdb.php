@@ -716,6 +716,7 @@
             $user = $_SESSION['fname'].' '.$_SESSION['lname'];
             date_default_timezone_set('US/Eastern');
             $date = date('m/d/Y h:i:s a', time());
+            
             try
             {
                 $stmt = $this->conn->prepare("UPDATE sku 
@@ -738,7 +739,7 @@
                     sku_pallet_weight = :pallet_weight,
                     sku_pallet_qty = :pallet_qty,
                     
-                    sku_rec_update = :update_date,
+                    sku_rec_update = now(),
                     sku_rec_update_by = :user_name
         
                     WHERE sku_id = :skuID");
@@ -762,16 +763,56 @@
                     $stmt->bindparam(":pallet_weight", $pallet_weight);
                     $stmt->bindparam(":pallet_qty", $pallet_qty);
                     
-                    $stmt->bindparam(":update_date", $date);
                     $stmt->bindparam(":user_name", $user);
                     
                     $stmt->execute();
-                
-                return true;
+                    $ru = $this->setRequestUpdate($sku);
+                    if($ru)
+                    {
+                        return true;
+                    } else
+                    {
+                        echo 'something went wrong';
+                        die;
+                        return false;
+                    }
             }
             catch(PDOException $e)
             {
                 echo $e->getMessage();
+            }
+        } // end setSkuData
+        
+        // *************************************************************
+        // Usage: setSkuData($sku, $unit_length, $unit_width, $unit_height, $unit_weight, 
+        // $case_length, $case_width, $case_height, $case_weight, $case_qty, $pallet_length, 
+        // $pallet_width, $pallet_height, $pallet_weight, $pallet_qty); 
+        // Updates the sku data fields
+        // *************************************************************
+        
+        public function setRequestUpdate($sku) 
+        {
+            $user = $_SESSION['user_id'];
+            $updateDate = date("Y-m-d H:i:s");
+            
+            try
+            {
+                $stmt = $this->conn->prepare("UPDATE sku_update_request 
+                    SET 
+                    update_complete = 1, 
+                    update_updated_by = $user,
+                    update_complete_date = now()
+                    WHERE update_sku = :skuID");
+                
+                    $stmt->bindparam(":skuID", $sku);
+                    
+                    $stmt->execute();
+                    return true;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+                die;
             }
         } // end setSkuData
         
