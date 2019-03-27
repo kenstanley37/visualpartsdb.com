@@ -758,6 +758,10 @@ main {
     height: auto;
 }
 
+.card-sku-num table, .card-sku-num input {
+    width: 100% !important;
+}
+
 .card figcaption {
     border: none;
 }
@@ -1679,8 +1683,25 @@ only screen and (max-width: 890px),
         max-width: 150px;
     }
     
+    .card-sku-num button {
+        width: 100% !important;
+        font-size: 6px !important;
+        font-weight: 900 !important;
+    }
+    
+}
+
+@media 
+only screen and (max-width: 300px),
+(min-device-width: 1px) and (max-device-width: 300px)  {
+    .card-sku-num button {
+        width: 100% !important;
+        font-size: 6px !important;
+        font-weight: 900 !important;
+    }
 
 }
+
 
 .nav-show {
     visibility: visible !important;
