@@ -35,9 +35,7 @@ if(isset($_POST['reset']))
     {
         $error = 'Opps! something went wrong';
     }
-} else {
-    header('location: /');
-}
+} 
 
 
 ?>
