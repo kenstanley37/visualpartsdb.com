@@ -105,6 +105,10 @@ a:hover {
     background-color: #0487CC;
 }
 
+button:hover {
+    cursor: pointer !important;
+}
+
 .button1 {
 	border-bottom: 1px solid #fff;
 }
