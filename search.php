@@ -9,8 +9,8 @@ $vpd = new VISUALDB;
 $user = new USER;
 
 // get the list name of the current active list, if any
-$activelist = $user->myListReturn('none','name');
-$activelistID = $user->myListReturn('none','id');
+$activelist = $user->getMyActiveListName();
+$activelistID = $user->getMyActiveListID();
 
 if(isset($_GET['search']))
 {
@@ -378,7 +378,7 @@ if(isset($_GET['export'])){
                                     {
                                         foreach($imageResult as $image){
                                             ?>
-                                        <figure class="card bg-white shadow">
+                                        <figure class="card-responsive bg-white shadow">
                                             <div class="card-img">
                                                 <a href="<?php echo $image['sku_image_url']; ?>">
                                                     <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />

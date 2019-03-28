@@ -1026,7 +1026,7 @@
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return integer list id
         */
-        public function myListName($listid)
+        public function getMyListName($listid)
         {
             if(isset($_SESSION['user_id']))
             {
@@ -1038,6 +1038,62 @@
                     WHERE pl_user_id = :userid and pl_id = :pl_id");
                 $stmt->bindparam(":userid", $userid);
                 $stmt->bindparam(":pl_id", $listid);
+                $stmt->execute();
+                $row = $stmt->fetch();
+                return $row['pl_id'];
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListReturnActive
+        
+        /**
+        * Returns the users active list name 
+        *
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return string list name
+        */
+        public function getMyActiveListName()
+        {
+            if(isset($_SESSION['user_id']))
+            {
+                $userid = $_SESSION['user_id'];
+            }
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * from user_part_list
+                    WHERE pl_user_id = :userid and pl_active = 1");
+                $stmt->bindparam(":userid", $userid);
+                $stmt->execute();
+                $row = $stmt->fetch();
+                return $row['pl_list_name'];
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end myListReturnActive
+        
+         /**
+        * Returns the ID of the users active list
+        *
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return integer list id
+        */
+        public function getMyActiveListID()
+        {
+            if(isset($_SESSION['user_id']))
+            {
+                $userid = $_SESSION['user_id'];
+            }
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * from user_part_list
+                    WHERE pl_user_id = :userid and pl_active = 1");
+                $stmt->bindparam(":userid", $userid);
                 $stmt->execute();
                 $row = $stmt->fetch();
                 return $row['pl_id'];
@@ -1132,7 +1188,7 @@
         */
         public function myListSkuCheck($sku)
         {
-            $listid = $this->myListReturn('none','id');
+            $listid = $this->getMyActiveListID();
             try
             {
                 $stmt = $this->conn->prepare("SELECT * from user_part_list_skus WHERE pls_list_sku = :pl_list_sku and pls_list_id = :pl_list_id");
@@ -1329,10 +1385,13 @@
         
         
         /**
-        * Destories session and sends the user to the home view
+        * Destories session and sends user to the landing page
         *
+        * @param string $sku is the part number
+        * @param string $sku is the part number
         * 
         * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or false
         */
         public function doLogout()
         {   

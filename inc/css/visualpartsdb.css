@@ -369,7 +369,6 @@ section {
     grid-gap: 25px;
     justify-content: center;
     justify-items: center;
-
 }
 
 .grid-wrap250 {
@@ -734,19 +733,19 @@ main {
 
 
 /* On mouse-over, add a deeper shadow */
-.card:hover {
+.card:hover, .card-responsive {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 /* Add some padding inside the card container */
-.card figcaption {  
+.card figcaption, .card-responsive figcaption {  
     display: grid;
     grid-row-gap: 15px;
     padding: 0 15px 5px 15px;
     word-wrap:  break-word;
 }
 
-.card img {
+.card img, .card-responsive img {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -757,7 +756,7 @@ main {
     padding: 15px;
 }
 
-.card .card-img {
+.card .card-img, .card-responsive .card-img {
     height: auto;
 }
 
@@ -765,11 +764,11 @@ main {
     width: 100% !important;
 }
 
-.card figcaption {
+.card figcaption, .card-responsive figcaption {
     border: none;
 }
 
-.card .card-sku-desc p {
+.card .card-sku-desc p, .card-responsive .card-sku-desc p {
     font-size: 10px;
     color: #303030;
     padding-bottom: 10px;
