@@ -561,7 +561,7 @@ main {
 
 .index-bg {
     grid-area: indexbg;
-    background-image: url(/images/index-background-search.jpg);
+    background-image: url(/images/index-background-search.png);
           /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: 0px 120px;
@@ -571,7 +571,7 @@ main {
     -webkit-filter: blur(4px);
     */
     z-index: 0; 
-   margin-bottom: 35px;
+    margin-bottom: 35px;
 }
 
 .index-search {
@@ -1386,6 +1386,21 @@ footer {
     
     .main .createList input {
         display: block;
+    }
+    
+    .index-bg {
+        grid-area: indexbg;
+        background-image: url(/images/index-background-search.png);
+              /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: 0px 80px;
+        background-repeat: no-repeat;
+        /*
+        filter: blur(4px);
+        -webkit-filter: blur(4px);
+        */
+        z-index: 0; 
+        margin: 0;
     }
     
 }
