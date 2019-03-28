@@ -53,6 +53,10 @@ $regRequest =  $user->regRequestList();
             <section class="nav">
                 <section class="display bg-white shadow">
                     <h2 class="block-title shadow">Member Request</h2>
+                <?php 
+                 if(!empty($regRequest))
+                 {
+                     ?>
                    <table class="table shadow">
                         <thead>
                             <tr>
@@ -67,9 +71,7 @@ $regRequest =  $user->regRequestList();
                             </tr>
                         </thead>
                         <tbody>
-                <?php 
-                     if(!empty($regRequest))
-                     {
+                        <?php
                          foreach($regRequest as $row)
                         {
                             $date = $row['rr_date'];
