@@ -52,7 +52,7 @@ $mylistcontent =  $user->myListContent($listid);
         </aside>
         <main class="main">
             <section class="title">
-                <h1>List: <?php echo strtoupper($user->myListReturn($listid, 'name')); ?></h1>
+                <h1>List: <?php echo strtoupper($user->myListName($listid)); ?></h1>
             </section>
             <section class="nav">
                 Insert Export Links Here

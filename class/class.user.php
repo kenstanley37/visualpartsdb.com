@@ -57,15 +57,16 @@
             echo $loginCheck;
         } // end isLogin
         
-        // *************************************************************
-        // Usage: login(test@test.com, password)
-        // Verify that user is in the database and sets session for:
-        // 1: User ID
-        // 2: User Role (Member, Admin)
-        // 3: User First Name
-        // 4: User Last Name
-        // *************************************************************
         
+        /**
+        * This function logs the user in by setting the session
+        *
+        * @param Place   $umail  the users email address
+        * @param integer $upass the users password
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or false
+        */
         public function doLogin($umail,$upass)
         {
             try
@@ -114,12 +115,12 @@
             }
         } // end doLogin
         
-        // *************************************************************
-        // Usage: accessCheck();
-        // returns the role of the current user to secure access 
-        // to different sections of the website.
-        // *************************************************************
-        
+        /**
+        * Returns the user role name
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return role_name (USER or ADMIN)
+        */
         public function accessCheck()
         {
             if(isset($_SESSION['user_id']))
@@ -146,11 +147,14 @@
             }
         } // end accessCheck
         
-        // *************************************************************
-        // Usage: activeCheck($userID);
-        // Checks if the user is disabled and sends user to fil,e
-        // *************************************************************
-        
+        /**
+        * Checks if the user has been disabled
+        *
+        * @param interger $userID the users ID number
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return send to location /user/disabled.php or true
+        */
         public function activeCheck($userID)
         {
             if(isset($_SESSION['user_id']))
@@ -171,7 +175,7 @@
                     }
                     else
                     {
-                        return;
+                        return true;
                     }
                 }
                 catch(PDOException $e)
@@ -179,12 +183,19 @@
                     echo $e->getMessage();
                 }
             }
-        } // end accessCheck
+        } // end activeCheck
         
-        // *************************************************************
-        // Usage: addUserVerify($fname, $lname, $email);
-        // Send new user verification email
-        // *************************************************************
+            /**
+            * Adds a new user and sends email verification
+            *
+            * @param string $fname users first name
+            * @param string $lname users last name
+            * @param string $email users email address
+            * @param string $company users company
+            * 
+            * @author Ken Stanley <ken@stanleysoft.org>
+            * @return true or pdo error
+            */
         
             public function addUserVerify($fname, $lname, $email, $company)
             {
@@ -262,11 +273,14 @@
                 }
             }
         
-        // *************************************************************
-        // Usage: sendPassLink($email);
-        // Sends the user a password reset link
-        // *************************************************************
-        
+            /**
+            * Password reset function. Sends an email to the user to reset the password
+            *
+            * @param string $email  the users email address
+            * 
+            * @author Ken Stanley <ken@stanleysoft.org>
+            * @return true or false
+            */
             public function sendPassLink($email)
             {
 
@@ -344,10 +358,13 @@
             }
 
         
-            // *************************************************************
-            // Usage: code();
-            // Returns a code for use in password reset and member verification
-            // *************************************************************
+            /**
+            * Generates a code for use in password reset, new user, etc.
+            *
+            * 
+            * @author Ken Stanley <ken@stanleysoft.org>
+            * @return generate code
+            */
         
             public function code()
             {
@@ -356,10 +373,15 @@
             }
         
         
-            // *************************************************************
-            // Usage: checkVerify($id, $code);
-            // Used for password reset and new users
-            // *************************************************************
+            /**
+            * Password reset verification. Updates the database user_verify field
+            *
+            * @param integer $userID the users ID from the database
+            * @param string  $code the code from the email verification
+            * 
+            * @author Ken Stanley <ken@stanleysoft.org>
+            * @return true, noaccount, no record found
+            */
             public function checkVerify($userID, $code)
             {
                 try
@@ -405,10 +427,14 @@
                 }	
             }
             
-        // *************************************************************
-        // Usage: checkID($email);
-        // Checks if email is already in the database
-        // *************************************************************
+        /**
+        * Checks if an email is already in the database
+        *
+        * @param string $email  the users email address
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or false
+        */
         public function checkID($email)
         {
             try 
@@ -431,10 +457,15 @@
         }
         
         
-        // *************************************************************
-        // Usage: updatePassword($userid, $password);
-        // Updates the password for the user
-        // *************************************************************
+        /**
+        * Updates the password field in the user database
+        *
+        * @param integer $userID the users database ID
+        * @param integer $password the users new password
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true
+        */
         public function updatePassword($userID, $password){
             $password = password_hash($password, PASSWORD_DEFAULT);
             try 
@@ -452,10 +483,14 @@
             }	
         }
         
-        // *************************************************************
-        // Usage: remUser($userid);
-        // Removes user from all tables that have a FK (history, list, etc)
-        // *************************************************************
+        /**
+        * Removes all traces of the user from the database. 
+        *
+        * @param integer $userid the users database ID
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function remUser($userid){
             try
             {
@@ -510,10 +545,16 @@
             }		
         }
         
-        // *************************************************************
-        // Usage: setSession($userID, $fname, $lname);
-        // Sets session after registeration and/or user login
-        // *************************************************************
+        /**
+        * Sets the $_SESSION after login
+        *
+        * @param integer $email the users database ID
+        * @param string $fname the users first name
+        * @param string $lname the users last name
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true
+        */
         
         public function setSession($userID, $fname, $lname)
         {
@@ -523,10 +564,13 @@
             return true;
         }
         
-        // *************************************************************
-        // Usage: getUserList();
-        // Returns a list of all users 
-        // *************************************************************
+        /**
+        * Returns a list of all users
+        *
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return array of users
+        */
         
         public function getUserList()
         {
@@ -545,11 +589,14 @@
         } // end dropDownUser
         
         
-        // *************************************************************
-        // Usage: userFullName($userID);
-        // Returns the users first and last name 
-        // *************************************************************
-        
+        /**
+        * Returns the users First and Last name as one field
+        *
+        * @param integer $userID the users database ID
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return $fullname
+        */
         public function userFullName($userID)
         {
             try
@@ -569,26 +616,22 @@
             }
         } // end userFullName
         
-        // *************************************************************
-        // Usage: dropdownCompany();
-        // returns a list of all companies in a select  
-        // *************************************************************
-        
+        /**
+        * Returns a list of all companies as an array
+        *
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return array of companies
+        */
         public function dropDownCompany()
         {
             try
             {
                 $stmt = $this->conn->prepare("SELECT * FROM company");
                 $stmt->execute();
-                ?> <option value=""></option><?php
-                while($row = $stmt->fetch())
-                {
-                    ?>
-                    <option value="<?php echo $row['company_id']; ?>">
-                        <?php echo $row['company_name']; ?>
-                    </option>
-                    <?php
-                }
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
             }
             catch(PDOException $e)
             {
@@ -596,12 +639,15 @@
             }
         } // end dropDownCompany
         
-        // *************************************************************
-        // Usage: userList($type);
-        // Return a list of all users in database based off $type
-        // $type can equal ('active','pending','disabled')
-        // *************************************************************
-        
+        /**
+        * Returns an array of users based on status
+        *
+        * @param string $userID can be 'active' 'pending' or 'disabled'
+        * will return data based on selection
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return array of results
+        */
         public function userList($type)
         {
             try
@@ -642,11 +688,14 @@
             }
         } // end userList
         
-        // *************************************************************
-        // Usage: activeSwitch($userID);
-        // Switches user from active to disabled and vice versa
-        // *************************************************************
-        
+        /**
+        * Toggles the users active status in the database
+        *
+        * @param integer $userID the users database ID
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true
+        */
         public function activeSwitch($userID)
         {
             try
@@ -668,7 +717,7 @@
                     $update->bindparam(":userid", $userID);
                     $update->bindparam(":change", $change);
                     $update->execute();
-                    //echo $change;
+                    return true;
                 } 
                 catch(PDOException $e)
                 {
@@ -682,11 +731,19 @@
             }
         } // end activeSwitch
         
-        // *************************************************************
-        // Usage: registerRequest($fname, $lname, $email, $phone, $company, $message);
-        // Writes a record to the data base for an ADMIN to approve or deny
-        // *************************************************************
-        
+         /**
+        * Records register request into the database
+        *
+        * @param string $fname the users first name
+        * @param string $lname the users last name
+        * @param string $email the users email address
+        * @param int $phone the users phone number
+        * @param string $company the users company
+        * @param string $message the users request message
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return 'success' or 'alreadyrequested' or'alreadyregistered'
+        */
         public function registerRequest($fname, $lname, $email, $phone, $company, $message)
         {
                 try
@@ -742,11 +799,13 @@
         } // end registerRequest
         
         
-        // *************************************************************
-        // Usage: regRequestList();
-        // Returns a list of membership applicants
-        // *************************************************************
-        
+        /**
+        * Returns an array of users that have requested membership
+        *
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return $result array
+        */
         public function regRequestList()
         {
             try
@@ -764,11 +823,14 @@
             }
         } // end regRequestList
         
-        // *************************************************************
-        // Usage: regDelete($regID);
-        // Deleted the register request where $regID = the record ID
-        // *************************************************************
-        
+         /**
+        * Deletes register request from the database
+        *
+        * @param integer $regID the ID from the database of the register request
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function regDelete($regID)
         {
             try
@@ -786,11 +848,13 @@
         }
         
         
-        // *************************************************************
-        // Usage: myList();
-        // Returns each of the users created part list.
-        // *************************************************************
-        
+         /**
+        * Returns an array of the users SKU list
+        *
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return $result array
+        */
         public function myList()
         {
             $userid = $_SESSION['user_id'];
@@ -811,11 +875,14 @@
             }
         } // end myList
         
-        // *************************************************************
-        // Usage: myListCount($listID);
-        // Returns how many records are in a list
-        // *************************************************************
-        
+        /**
+        * Records how many records are in the users list
+        *
+        * @param integer $listID the users list ID from the database
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return integer row count
+        */
         public function myListCount($listID)
         {
             $li = $listID;
@@ -835,11 +902,14 @@
             }
         } // end myListCount
         
-        // *************************************************************
-        // Usage: myListDelete($listID);
-        // Deleted a list and all SKUs attached to a list -- DANGEROUS!
-        // *************************************************************
-        
+         /**
+        * Deletes a list and the assoicated SKUs from the user_part_list_skus table
+        *
+        * @param integer $listID the users list ID from the database
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function myListDelete($listID)
         {
             $li = $listID;
@@ -864,11 +934,15 @@
         } // end myListDelete
         
         
-        // *************************************************************
-        // Usage: myListAdd($listname, $listdescription);
-        // Adds a new list and description to the users part list
-        // *************************************************************
-        
+         /**
+        * Records a new user list in the database then sets it as active
+        *
+        * @param string $listname the users list name
+        * @param string $listdescription the users list description
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function myListAdd($listname, $listdescription)
         {
             $userid = $_SESSION['user_id'];
@@ -884,7 +958,7 @@
                 $stmt->bindparam(":listdescription", $ld);
                 $stmt->bindparam(":pl_active", $active);
                 $stmt->execute();
-                return;
+                return true;
             }
             catch(PDOException $e)
             {
@@ -892,11 +966,14 @@
             }
         } // end myListAdd
         
-        // *************************************************************
-        // Usage: myListActive($listid);
-        // Set or change the active list
-        // *************************************************************
-        
+         /**
+        * Removes the user active list then sets selected list as active
+        *
+        * @param string $listid the users list ID from the database
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function myListActive($listid)
         {
             $userid = $_SESSION['user_id'];
@@ -908,6 +985,7 @@
                 $stmt->bindparam(":userid", $userid);
                 $stmt->bindparam(":listid", $listid);
                 $stmt->execute();
+                return true;
             }
             catch(PDOException $e)
             {
@@ -916,11 +994,13 @@
 
         } // end myListActive
         
-        // *************************************************************
-        // Usage: myListDeActive();
-        // Unsets all active list - internal use only
-        // *************************************************************
-        
+         /**
+        * Removes all of the user list active status
+        *
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function myListDeActive()
         {
             $userid = $_SESSION['user_id'];
@@ -930,6 +1010,7 @@
                     WHERE pl_user_id = :userid");
                 $stmt->bindparam(":userid", $userid);
                 $stmt->execute();
+                return true;
             }
             catch(PDOException $e)
             {
@@ -937,46 +1018,29 @@
             }
         } // end myListDeActive
         
-        // *************************************************************
-        // Usage: myListReturnActive($listid, $type); 
-        // $type can be 'name' or 'id'
-        // $listid is the list ID
-        // Returns the name or id of the requested list
-        // *************************************************************
-        
-        public function myListReturn($listid, $type)
+         /**
+        * Returns the name of a user list 
+        *
+        * @param string $listid can be list ID from the database or 'none'
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return integer list id
+        */
+        public function myListName($listid)
         {
             if(isset($_SESSION['user_id']))
             {
                 $userid = $_SESSION['user_id'];
             }
-            
             try
             {
-                if($listid == 'none')
-                {
-                    $stmt = $this->conn->prepare("SELECT * from user_part_list
-                    WHERE pl_user_id = :userid and pl_active = 1");
-                } else 
-                {
-                    $stmt = $this->conn->prepare("SELECT * from user_part_list
+                $stmt = $this->conn->prepare("SELECT * from user_part_list
                     WHERE pl_user_id = :userid and pl_id = :pl_id");
-                }
-                
                 $stmt->bindparam(":userid", $userid);
-                if($listid != 'none')
-                {
-                    $stmt->bindparam(":pl_id", $listid);
-                }
+                $stmt->bindparam(":pl_id", $listid);
                 $stmt->execute();
                 $row = $stmt->fetch();
-                if($type == 'id')
-                {
-                    return $row['pl_id'];
-                } elseif($type == 'name')
-                {
-                    return $row['pl_list_name'];
-                }
+                return $row['pl_id'];
             }
             catch(PDOException $e)
             {
@@ -985,13 +1049,15 @@
         } // end myListReturnActive
         
         
-        // *************************************************************
-        // Usage: getMyListCount($userID, $type); 
-        // Returns the number of list the user currently has or
-        // Returns the number of sum of skus in all list
-        // $type can be either 'list' or 'skus'
-        // *************************************************************
-        
+        /**
+        * Returns a count of the user list or a count of the skus in requested list
+        *
+        * @param integer $userID the users ID
+        * @param string $type can be 'list' or 'sku' to either get a count of the list or skus
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return list count or sku count
+        */
         public function getMyListCount($userID, $type)
         {    
             if($type == 'list')
@@ -1031,11 +1097,14 @@
             
         } // end myListReturnActive
         
-        // *************************************************************
-        // Usage: myListAddSku($sku);
-        // Add a SKU to the active list
-        // *************************************************************
-        
+        /**
+        * Adds a sku to the users active list
+        *
+        * @param string $sku is the part number
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function myListAddSku($sku)
         {
             $listid = $this->myListReturn('none','id');
@@ -1053,11 +1122,14 @@
             }
         } // end myListAddSku
         
-        // *************************************************************
-        // Usage: myListSkuCheck($sku);
-        // Checks if sku is already in active list. Returns true or false
-        // *************************************************************
-        
+        /**
+        * Checks if the sku is already in the users active list
+        *
+        * @param string $sku is the part number
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or false
+        */
         public function myListSkuCheck($sku)
         {
             $listid = $this->myListReturn('none','id');
@@ -1083,13 +1155,18 @@
             }
         } // end myListSkuCheck
         
-        // *************************************************************
-        // Usage: myListRemSku($sku);
-        // Removes Sku from users Active List
-        // *************************************************************
-        
+        /**
+        * Removes a sku from a users list
+        *
+        * @param string $sku is the part number
+        * @param string $sku is the part number
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or false
+        */
         public function myListRemSku($sku, $list)
         {
+            // get the active list 
             $listid = $this->myListReturn('none','id');
             try
             {
@@ -1106,11 +1183,14 @@
             }
         } // end myListSkuCheck
         
-        // *************************************************************
-        // Usage: myListContent($listid); $listid = The list ID
-        // Returns a table with a list and the skus assoicated
-        // *************************************************************
-        
+        /**
+        * Returns an array of all the users list
+        *
+        * @param string $listid is the list ID from the database
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return array $result
+        */
         public function myListContent($listid)
         {
             try
@@ -1133,13 +1213,14 @@
             }
         } // end myListContent
         
-        
-        // *************************************************************
-        // Usage: requestUpdate($sku);
-        // User request information update on a SKU. 
-        // Adds sku to users update list
-        // *************************************************************
-        
+        /**
+        * Add record to the database of user and requested sku to be updated
+        *
+        * @param string $sku is the part number
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function requestUpdate($sku)
         {
             $user = $_SESSION['user_id'];
@@ -1149,7 +1230,7 @@
                 $stmt->bindparam(":update_sku", $sku);
                 $stmt->bindparam(":update_request_by", $user);
                 $stmt->execute();
-                return;
+                return true;
             }
             catch(PDOException $e)
             {
@@ -1157,12 +1238,14 @@
             }
         } // end myListAddSku
         
-        // *************************************************************
-        // Usage: requestUpdateCheck($sku);
-        // Internal use only. Checks if the user has already requested an update.
-        // Use this to prevent user from requesting multiple updates on the same SKU
-        // *************************************************************
-        
+       /**
+        * RChecks if the user has already requested a sku update
+        *
+        * @param string $sku is the part number
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or false
+        */
         public function requestUpdateCheck($sku)
         {
             $user = $_SESSION['user_id'];
@@ -1181,7 +1264,6 @@
                 {
                     return true;
                 }
-                return;
             }
             catch(PDOException $e)
             {
@@ -1190,12 +1272,15 @@
         } // end myListAddSku
         
         
-        // *************************************************************
-        // Usage: setUserRole($user, $role);
-        // Sets the users role
-        // $role can either be 1 for 'USER or 2 for 'ADMIN'
-        //*************************************************************
-        
+        /**
+        * Sets the user role to either USER or ADMIN
+        *
+        * @param integer $user is the user ID from the database
+        * @param integer $role is 1 for USER or 2 for ADMIN 
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return true or pdo error
+        */
         public function setUserRole($user, $role)
         {
             try
@@ -1213,11 +1298,14 @@
             }
         } // end setUserRole
         
-        // *************************************************************
-        // Usage: getUserRole($user);
-        // Returns the users current role name ('USER' or 'ADMIN')
-        //*************************************************************
-        
+        /**
+        * Returns the users current Role name
+        *
+        * @param integer $user is the users ID from the database
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return string $role = role name
+        */
         public function getUserRole($user)
         {
             $userID = $_SESSION['user_id'];
@@ -1240,11 +1328,12 @@
         
         
         
-        // *************************************************************
-        // Usage: doLogout()
-        // unsets and destory sessions. Sends user back to root url
-        // *************************************************************
-        
+        /**
+        * Destories session and sends the user to the home view
+        *
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        */
         public function doLogout()
         {   
             session_destroy();

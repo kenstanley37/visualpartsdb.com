@@ -30,6 +30,7 @@ if(isset($_GET['register']))
     }
 }
 
+$company = $user->dropDownCompany();
 
 ?>
 <!DOCTYPE html>
@@ -66,7 +67,16 @@ if(isset($_GET['register']))
                                     </td>
                                     <td>
                                         <select name="regcompany" id="regcompany" required>
-                                            <?php $user->dropDownCompany(); ?>
+                                            <option value=""></option>
+                                            <?php foreach($company as $row)
+                                            {
+                                                ?>
+                                                <option value="<?php echo $row['company_id']; ?>">
+                                                    <?php echo $row['company_name']; ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </td>
                                     <td>
