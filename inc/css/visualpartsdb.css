@@ -718,20 +718,18 @@ main {
 .index-main .main-intro #staticImg {
     grid-area: introimages;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+    grid-template-rows: 300px;
     width: 100%;
     grid-gap: 2.5em;
     justify-items: center;
     justify-content: center;
-    margin-top: -18px;
+    margin-top: -4px;
 }
 
 .card {
     /* Add shadows to create the "card" effect */
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    height: 300px;
 }
 
 
@@ -745,6 +743,7 @@ main {
     display: grid;
     grid-row-gap: 15px;
     padding: 0 15px 5px 15px;
+    word-wrap:  break-word;
 }
 
 .card img {
