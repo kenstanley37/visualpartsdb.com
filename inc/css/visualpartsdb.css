@@ -195,6 +195,17 @@ button:hover {
     background-color: #efefef;
 }
 
+.center-title {
+    position: absolute;
+    padding: 5px;
+    width: 250px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: -20px;
+    text-align: center;
+}
+
 .block-title, .block-title-small {
     position: absolute;
     padding: 5px;
@@ -211,6 +222,14 @@ button:hover {
 .block-title-small {
     width: 150px;
     font-size: 16px;
+}
+
+.bold500 {
+    font-weight: 900;
+}
+
+.up-50 {
+    top: -50px !important;
 }
 
 section {
@@ -252,7 +271,7 @@ section {
         "mcontent"
         "mcontent2";
     grid-column-gap: 15px;
-    grid-row-gap: 55px;
+    grid-row-gap: 25px;
     justify-content: center; 
     overflow: hidden;
 }
@@ -262,19 +281,16 @@ section {
     display: grid;
     grid-template-columns: 90%;
     grid-template-rows: auto;
-    justify-items: center;
     justify-content: center;
     position: relative;
     padding-top: 25px;
 }
-
 
 .main .nav {
     grid-area: nav;
     display: grid;
     grid-template-columns: 90%;
     grid-template-rows: auto;
-    justify-items: center;
     justify-content: center;
     position: relative;
 }
@@ -283,7 +299,7 @@ section {
     list-style: none;
     margin: 0;
     padding: 0;
-    text-align: center;
+
 }
 
 .main .nav li {
@@ -394,6 +410,7 @@ section {
     align-items: center;
     width: 100%;
     padding: 35px;
+    border-radius: 10px;
 }
 
 .display p {
@@ -931,10 +948,8 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-auto-rows: 1fr;
-    grid-template-rows: 150px;
     grid-row-gap: 35px;
     justify-content: space-evenly;
-    padding-top: 55px;
 }
 
 .search-control .addtolist {
@@ -942,16 +957,18 @@ main {
     justify-content: flex-end;
 }
 
-.contain1, .contain2 {
-    padding: 25px;
-    width: 100%;
-}
-
-
-.contain1 table, .contain1 table {
+.contain1 table, .contain2 table  {
     border-spacing: 10px !important;
     border-collapse: separate !important;
     border: 0;
+}
+
+.just-right {
+   justify-self: right;
+}
+
+.just-left {
+   justify-self: left;
 }
 
 .search-desc {
@@ -967,12 +984,14 @@ main {
 .sku-data {
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 25px;
     justify-content: center;
     align-self: center;
     align-content: center;
     min-height: 400px;
+    grid-row-gap: 55px;
+    border: 1px solid red;
 }
 
 .search-desc  table {
@@ -1161,6 +1180,7 @@ footer {
     max-width: 100%;
     table-layout: fixed;
     position: relative;
+    min-width: 100%;
 }
 
 .table caption, .table-nores caption {
@@ -1177,13 +1197,13 @@ footer {
     font-family: Helvetica, Arial, sans-serif; /* Nicer font */
     font-style: normal; 
     font-variant: normal;
-    /*
     font-size: 12px; 
     font-weight: 700; 
     line-height: 20px;
-    */
+
     padding: .625em;
     text-align: left;
+        overflow-wrap: break-word;
 }
 
 .table th, .table-nores th {
@@ -1390,6 +1410,11 @@ footer {
     .index-bg {
         background-position: -70px 80px;
     }    
+    
+    .block-title {
+        width: 150px;
+        font-size: 18px;
+    }
     
 }
 
