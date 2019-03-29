@@ -1163,7 +1163,7 @@
         */
         public function myListAddSku($sku)
         {
-            $listid = $this->myListReturn('none','id');
+            $listid = $this->getMyActiveListID();
             try
             {
                 $stmt = $this->conn->prepare("INSERT INTO user_part_list_skus (pls_list_id, pls_list_sku) VALUES(:pl_list_id, :pl_list_sku )");
