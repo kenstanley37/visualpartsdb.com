@@ -9,8 +9,18 @@ function startup(){
     hamburgerNav();
     datePickerSetup();
     mySearchCharts();
+    myImgModal();
 }
   
+function myImgModal(){
+    $( ".modal-hover a" ).hover(function() {
+        img = $(this).attr('href');
+        alt = $(this).children('img').attr('alt');
+        $('.larger-img img').attr('src', img);
+        $('.larger-img img').attr('alt', alt);
+    });  
+}
+    
 function datePickerSetup(){
     $( function() {
         var dateFormat = "yy-mm-dd",

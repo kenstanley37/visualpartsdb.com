@@ -85,13 +85,15 @@ if(isset($_GET['export'])){
         }
         ?>
         </aside>
-        <main class="main">
+        <main class="main-search">
             <?php
             if(!empty($dataResult))
             {
                 ?>  
                     <section class="title">
-                        <h2 class="">PART: <?php echo $dataResult['sku_id']; ?></h2>
+                        <section class="search-title">
+                            <h2 class="blue-header">PART: <?php echo $dataResult['sku_id']; ?></h2>
+                        </section>
                     </section>
             
                     <section class="nav">
@@ -100,18 +102,41 @@ if(isset($_GET['export'])){
                                 <table class="table-nores">
                                     <tbody>
                                         <tr>
-                                            <td class="shadow">
-                                                <a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
+                                            <td>
+                                                <a class="btn" href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
                                                     <img src="/assets/msoffice/icons8-microsoft-excel-30.png" alt="Excel Export">
                                                 </a>
                                             </td>
-                                            <td class="shadow">
-                                                <a href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
-                                                    <img src="/assets/msoffice/icons8-pdf-30.png" alt="Excel Export">
+                                            <!--
+                                            <td>
+                                                <a class="btn" href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
+                                                    <img src="/assets/msoffice/icons8-pdf-30.png" alt="PDF Export">
                                                 </a>
                                             </td>
+                                            -->
                                             <td>
+                                                 <?php
+                                                    if(isset($_SESSION['user_id']))
+                                                    {
 
+                                                        if($user->requestUpdateCheck($sku))
+                                                        {
+                                                            ?>
+                                                        <span class="pad-35 bg-offwhite border-red" disabled>Update Requested</span>
+                                                            <?php
+                                                        } else
+                                                        {
+                                                            ?>
+
+                                                                <form method="post" action="/processors/userManagement.php">
+                                                                    <input type="text" name="skuID" value="<?php echo $dataResult['sku_id']; ?>" hidden>
+                                                                    <button class="btn active just-right pad-35" type="submit" name="requestUpdate">Request SKU Update</button>
+                                                                </form>
+
+                                                            <?php
+                                                        }
+                                                    }
+                                                ?>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -127,7 +152,7 @@ if(isset($_GET['export'])){
                                         else 
                                         {
                                             ?>
-                                            <table class="table-nores shadow">
+                                            <table class="table-nores">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -143,12 +168,12 @@ if(isset($_GET['export'])){
                                                                     if($skucheck)
                                                                     {
                                                                         ?>
-                                                                        <button class="btn danger" type="submit" name="remSkuFromList">Remove From List</button>
+                                                                        <button class="btn danger pad-35" type="submit" name="remSkuFromList">Remove From List</button>
                                                                         <?php
                                                                     } else 
                                                                     {
                                                                         ?>
-                                                                        <button class="btn active" type="submit" name="addSkuToList">Add To List</button>
+                                                                        <button class="btn active pad-35" type="submit" name="addSkuToList">Add To List</button>
                                                                         <?php
                                                                     }
                                                                 ?>
@@ -168,208 +193,221 @@ if(isset($_GET['export'])){
                         
                     </section>
 
-                    <section class="content">
+                    <section class="content pad-bot-50">
                         <section class="display">
-                            <section class="grid-wrap250">
-                                <h2 class="center-title up-50">SKU INFORMATION</h2>
-                                <table class="table shadow">
-                                    <caption>SKU Info</caption>
-                                    <tbody>
-                                        <tr>
-                                            <th class="bold900">Description</th>
-                                            <td><?php echo $dataResult['sku_desc']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Dimension UOM</th>
-                                            <td>Inches</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Weight UOM</th>
-                                            <td>Pounds</td>
-                                        </tr>
-                                         <?php
-                                            if(isset($_SESSION['user_id']))
-                                            {
-                                                ?>
-                                        <tr>
-                                            <th>
-                                                Request Data Update 
-                                            </th>
-                                            <?php 
-                                                if($user->requestUpdateCheck($sku))
-                                                {
-                                                    ?>
-                                                    <td>
-                                                        <button class="btn active" type="submit" disabled>Requested</button>
-                                                    </td>
-                                                    <?php
-                                                } else
-                                                {
-                                                    ?>
-                                                    <td>
-                                                        <form method="post" action="/processors/userManagement.php">
-                                                            <input type="text" name="skuID" value="<?php echo $dataResult['sku_id']; ?>" hidden>
-                                                            <button class="btn info" type="submit" name="requestUpdate">Request</button>
-                                                        </form>
-                                                    </td>
-                                                    <?php
-                                                }
-                                            ?>
-                                        </tr>
-                                         <?php
-                                            }
-                                        ?>
-                                        </tbody>                                    
-                                    </table> 
-
-                                    <table class="table shadow">
-                                        <caption>Unit Data</caption>
+                            <section class="grid-wrap250 sku-data">
+                                <div class="sku-content shadow bg-white">
+                                    <h3>INFORMATION</h3>
+                                    <table>
                                         <tbody>
                                             <tr>
-                                                <th>Length</th>
+                                                <td class="grey-text">
+                                                    <i class="fas fa-ruler"></i>
+                                                </td>
+                                                <td class="grey-text">
+                                                    UOM
+                                                </td>
+                                                <td class="grey-text">
+                                                    INCHES
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="grey-text"><i class="fas fa-weight"></i></td>
+                                                <td class="grey-text">WEIGHT</td>
+                                                <td class="grey-text">LBS</td>
+                                            </tr>
+                                            <tr class="sku-description">
+                                                <td><i class="fas fa-file-alt"></i></td>
+                                                <td colspan="2">Description</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <?php echo $dataResult['sku_desc']; ?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="sku-content shadow bg-white">
+                                    <h3>UNIT DATA</h3>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td><i class="fas fa-ruler"></i></td>
+                                                <td>Length</td>
                                                 <td><?php echo $dataResult['sku_unit_length']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Width</th>
+                                                <td><i class="fas fa-ruler-horizontal"></i></td>
+                                                <td>Width</td>
                                                 <td><?php echo $dataResult['sku_unit_width']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Height</th>
+                                                <td><i class="fas fa-ruler-vertical"></i></td>
+                                                <td>Height</td>
                                                 <td><?php echo $dataResult['sku_unit_height']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Weight</th>
+                                                <td><i class="fas fa-weight"></i></td>
+                                                <td>Weight</td>
                                                 <td><?php echo $dataResult['sku_unit_weight']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Qty Per</th>
+                                                <td><i class="fas fa-cog"></i></td>
+                                                <td>Qty Per</td>
                                                 <td>1</td>
                                             </tr>
                                         </tbody>
                                     </table> 
-                                <?php
-                                    if(!empty($user->accessCheck()))
-                                    {
-                                ?>
-                                    <table class="table shadow">
-                                        <caption>Case Data</caption>
+                                </div>
+                                
+                                <div class="sku-content shadow bg-white">
+                                    <h3>CASE DATA</h3>
+                                    <table>
                                         <tbody>
                                             <tr>
-                                                <th>Length</th>
+                                                <td><i class="fas fa-ruler"></i></td>
+                                                <td>Length</td>
                                                 <td><?php echo $dataResult['sku_case_length']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Width</th>
+                                                <td><i class="fas fa-ruler-horizontal"></i></td>
+                                                <td>Width</td>
                                                 <td><?php echo $dataResult['sku_case_width']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Height</th>
+                                                <td><i class="fas fa-ruler-vertical"></i></td>
+                                                <td>Height</td>
                                                 <td><?php echo $dataResult['sku_case_height']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Weight</th>
+                                                <td><i class="fas fa-weight"></i></td>
+                                                <td>Weight</td>
                                                 <td><?php echo $dataResult['sku_case_weight']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Qty Per</th>
+                                                <td><i class="fas fa-cog"></i></td>
+                                                <td>Qty Per</td>
                                                 <td><?php echo $dataResult['sku_case_qty']; ?></td>
                                             </tr>
                                         </tbody>
                                     </table> 
-
-                                    <table class="table shadow">
-                                        <caption>Pallet Data</caption>
+                                </div>
+                                
+                                <div class="sku-content shadow bg-white">
+                                    <h3>PALLET DATA</h3>
+                                    <table>
                                         <tbody>
                                             <tr>
-                                                <th>Length</th>
+                                                <td><i class="fas fa-ruler"></i></td>
+                                                <td>Length</td>
                                                 <td><?php echo $dataResult['sku_pallet_length']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Width</th>
+                                                <td><i class="fas fa-ruler-horizontal"></i></td>
+                                                <td>Width</td>
                                                 <td><?php echo $dataResult['sku_pallet_width']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Height</th>
+                                                <td><i class="fas fa-ruler-vertical"></i></td>
+                                                <td>Height</td>
                                                 <td><?php echo $dataResult['sku_pallet_height']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Weight</th>
+                                                <td><i class="fas fa-weight"></i></td>
+                                                <td>Weight</td>
                                                 <td><?php echo $dataResult['sku_pallet_weight']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Qty Per</th>
+                                                <td><i class="fas fa-cog"></i></td>
+                                                <td>Qty Per</td>
                                                 <td><?php echo $dataResult['sku_pallet_qty']; ?></td>
                                             </tr>
                                         </tbody>
                                     </table> 
-
-                                    <table class="table shadow">
-                                        <caption>User Data</caption>
+                                </div>
+                                
+                                <?php
+                                if($user->accessCheck() == 'ADMIN')
+                                {
+                                ?>
+                                <div class="sku-content shadow bg-white">
+                                    <h3>USER DATA</h3>
+                                    <table>
                                         <tbody>
                                             <tr>
-                                                <th>SKU created by</th>
+                                                <td><i class="fas fa-ruler"></i></td>
+                                                <td>Created by</td>
                                                 <td><?php echo $dataResult['sku_rec_added']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>SKU created Date</th>
+                                                <td><i class="fas fa-ruler-horizontal"></i></td>
+                                                <td>Created Date</td>
                                                 <td><?php echo $createDate; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>SKU Last Updated</th>
+                                                <td><i class="fas fa-ruler-vertical"></i></td>
+                                                <td>Updated By</td>
                                                 <td><?php echo $dataResult['sku_rec_update_by']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>SKU Updated Date</th>
+                                                <td><i class="fas fa-weight"></i></td>
+                                                <td>Updated Date</td>
                                                 <td><?php echo $updateDate; ?></td>
                                             </tr>
                                         </tbody>
                                     </table> 
-                                        <?php
-                                    }
+                                </div>
+                                <?php
+                                }
                                 ?>
-                                </section>
-                            </section>
-                        </section> <!-- end content --> 
-                        
-                        <section class="content2">
-                            <section class="display">
-                                <h2 class="center-title">IMAGES</h2>
-                                <section class="grid-wrap250">
-                                    <?php 
-                                    if(!empty($imageResult))
-                                    {
-                                        foreach($imageResult as $image){
-                                            ?>
-                                        <figure class="card-responsive bg-white shadow">
-                                            <div class="card-img">
-                                                <a href="<?php echo $image['sku_image_url']; ?>">
-                                                    <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />
-                                                </a>
-                                            </div>
-                                            <figcaption>
-                                                <div class="card-sku-num">
-                                                    <p><?php echo $image['sku_image_description'];?></p>
-                                                </div>
-                                            </figcaption>
-                                        </figure>
-                                            <?php
-                                        } 
-                                    } else
-                                    {
-                                        ?>
-                                            <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
-                                        <?php
-                                    }
-                                    ?>
-                                </section>
                             </section>
                         </section>
+                    </section>
                         
-                <?php
+                        <section class="content2">
+                            <section class="img-viewer">
+                                <section class="display sku-images flex-start">
+                                    <!--
+                                    <h2 class="center-title up-25 pad-bot-50 blue-header">IMAGES</h2>
+    -->
+                                    <section class="grid-wrap250">
+                                        <?php 
+                                        if(!empty($imageResult))
+                                        {
+                                            foreach($imageResult as $image)
+                                            {
+                                                ?>
+                                            <figure class="card-responsive bg-white shadow">
+                                                <div  class="card-img modal-hover">
+                                                    <a href="<?php echo $image['sku_image_url']; ?>">
+                                                        <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />
+                                                    </a>
+                                                </div>
+                                            </figure>
+                                                <?php
+                                            } 
+                                        } else
+                                        {
+                                            ?>
+                                                <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
+                                            <?php
+                                        }
+                                        ?>
+                                    </section>
+                                </section>
+                                <section class="larger-img">
+                                    <img class="shadow" src="<?php echo $imageResult[0]['sku_image_url']; ?>" alt="<?php echo $imageResult[0]['sku_image_sku_id'].'-'.$imageResult[0]['sku_image_description']; ?>" >
+                                </section>
+                            </section>
+                            
+                        </section>
+                        
+            <?php
             } else
             {
-                 ?>
-            
+            ?>
             <section class="nav">
                 <section class="display shadow bg-white">
                     <h2 class="block-title shadow">Not Found</h2>
@@ -379,7 +417,6 @@ if(isset($_GET['export'])){
                     </section>
                 </section>
             </section>
-
                 <?php
             }
            ?>

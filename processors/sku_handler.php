@@ -35,7 +35,7 @@
         
         $result = $vpd->setSkuData($sku, $sku_desc, $unit_length, $unit_width, $unit_height, $unit_weight, $case_length, $case_width, $case_height, $case_weight, $case_qty, $pallet_length, $pallet_width, $pallet_height, $pallet_weight, $pallet_qty);
         
-        echo $sku_desc;
+        //echo $sku_desc;
 
         
         if($result == 'true')

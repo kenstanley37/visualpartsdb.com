@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 
 * {
     box-sizing: border-box; /* CSS 3 rec */
@@ -98,11 +99,15 @@ a:hover {
 }
 
 .bg-white {
-    background-color: #fff;
+    background-color: #fff !important;
 }
 
 .bg-blue {
     background-color: #0487CC;
+}
+
+.bg-grey {
+    background-color: #efefef !important;
 }
 
 button:hover {
@@ -179,6 +184,10 @@ button:hover {
     text-align: right !important;
 }
 
+.just-right {
+    justify-content: flex-end !important;
+}
+
 .tb1-color {
     background-color: lightskyblue;
     color: #000;
@@ -195,15 +204,23 @@ button:hover {
     background-color: #efefef;
 }
 
+.pad-bot-50 {
+    padding-bottom: 75px !important;
+}
+
 .center-title {
     position: absolute;
     padding: 5px;
-    width: 250px;
     left: 0;
     right: 0;
     margin: auto;
-    top: -20px;
     text-align: center;
+}
+
+.blue-header {
+    font-family: 'Oswald', sans-serif !important;
+    color: #0487cc !important;
+    font-size: 30px !important;
 }
 
 .block-title, .block-title-small {
@@ -229,12 +246,32 @@ button:hover {
 }
 
 .up-50 {
+    top: -75px !important;
+}
+
+.up-25 {
     top: -50px !important;
 }
 
 section {
     position: relative;
 }
+
+.bg-rounded {
+    border-radius: 5px 5px 0 0;
+}
+
+.pad-35 {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.border-red {
+    border: 1px solid red;
+    border
+    
+}
+
 /***************************** 
 ** index.php grid 
 ******************************/
@@ -271,51 +308,81 @@ section {
         "mcontent"
         "mcontent2";
     grid-column-gap: 15px;
-    grid-row-gap: 25px;
+    grid-row-gap: 15px;
     justify-content: center; 
     overflow: hidden;
 }
 
-.main .title {
+.main-search {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: min-content;
+    grid-template-areas: 
+        "nav nav" 
+        "title title"
+        "form form"
+        "mcontent2 mcontent";
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+}
+
+.img-viewer {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 150px auto; 
+}
+
+.larger-img img {
+    margin-top: 35px;
+    object-fit: cover;
+    width: 90%;
+    object-position: 50% 50%;
+}
+
+.main-search .title, .main .title {
     grid-area: title;
     display: grid;
-    grid-template-columns: 90%;
+    grid-template-columns: 45% 45%;
     grid-template-rows: auto;
     justify-content: center;
     position: relative;
     padding-top: 25px;
 }
 
-.main .nav {
+.main-search .search-title {
+    padding-bottom: 75px;
+}
+
+.main-search .nav, .main .nav {
     grid-area: nav;
     display: grid;
-    grid-template-columns: 90%;
+    grid-template-columns: 100%;
     grid-template-rows: auto;
     justify-content: center;
     position: relative;
 }
 
-.main .nav {
+.main-search .nav, .main .nav {
     list-style: none;
     margin: 0;
     padding: 0;
-
 }
 
-.main .nav li {
+.main-search .nav li, .main .nav li {
     display: inline;
 }
 
-.main .nav a {
+.main-search .nav a, .main .nav a {
     display: inline-block;
     padding: 10px;
 }
 
-.main .nav a:hover {
+.main-search .nav a:hover, .main .nav a:hover {
     border-bottom: 1px solid #000;
 }
 
-.main .form {
+.main-search .form, .main .form {
     grid-area: form;
     display: grid;
     grid-template-columns: 90%;
@@ -325,18 +392,19 @@ section {
     position: relative;
 }
 
-.main .content {
+.main-search .content, .main .content {
     grid-area: mcontent;
     display: grid;
     grid-template-columns: 90%;
+    grid-row-gap: 55px;
     grid-template-rows: auto;
-    justify-items: center;
+    align-content: flex-start;
     justify-content: center;
     position: relative;
     padding-bottom: 25px;
 }
 
-.main .content2 {
+.main-search .content2, .main .content2 {
     grid-area: mcontent2;
     display: grid;
     grid-template-columns: 90%;
@@ -347,7 +415,7 @@ section {
     padding-bottom: 25px;
 }
 
-.main .update-form {
+.main-search .update-form. .main .update-form {
     display: grid;
     grid-template-columns: 90%;
     grid-template-areas: 
@@ -387,6 +455,10 @@ section {
     justify-items: center;
 }
 
+.flex-start {
+    align-self: flex-start;
+}
+
 .grid-wrap250 {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
@@ -421,6 +493,86 @@ section {
     display: block;
     line-height: 35px;
 }
+
+/*
+*
+*   SKU DATA
+*
+*/
+
+.sku-content {
+    width: 250px;
+}
+
+.sku-content, .sku-content ul {
+    position: relative;
+    padding: 10px;
+}
+
+.sku-content table {
+    width: 100%;
+}
+
+.sku-content table tr td:first-child{
+    width: 25px;
+}
+
+.sku-content table td {
+    padding: 8px 0 8px 5px;
+}
+
+.sku-content .sku-description td {
+    padding-top: 25px;
+}
+
+.sku-content .grey-text {
+    color: #757575;
+    font-size: 14px;
+}
+
+.sku-content h3 {
+    position: absolute;
+    margin-bottom: 18px;
+    display: inline-block;
+    padding: 15px 45px;
+    min-height: 50px;
+    position: relative;
+    left: -24px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,.4);
+    background-color: #0487cc;
+    color: #fff;
+    font-size: 20px !important;
+}
+
+.sku-content h3::before {
+    border-top-color: #035c8a !important;
+    border-right-color: #035c8a !important;
+}
+
+.sku-content h3::before {
+    content: '';
+    position: absolute;
+    top: 48px;
+    left: 0px;
+    border-width: 5px 7px;
+    border-style: solid;
+    border-color: transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    transition: all .6s;
+}
+
+::before, ::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.sku-education {
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
 /***************************************
 *
 *
@@ -744,11 +896,13 @@ main {
 }
 
 .card {
-    /* Add shadows to create the "card" effect */
     height: 300px;
 }
 
-
+.card-responsive, .card-resonsive img {
+    height: 100px !important;
+    width: 100px !important;
+}
 /* On mouse-over, add a deeper shadow */
 .card:hover, .card-responsive {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -774,7 +928,7 @@ main {
 }
 
 .card .card-img, .card-responsive .card-img {
-    height: auto;
+
 }
 
 .card-sku-num table, .card-sku-num input {
@@ -945,11 +1099,12 @@ main {
 }
 
 .search-user-functions {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-auto-rows: 1fr;
-    grid-row-gap: 35px;
-    justify-content: space-evenly;
+    border-bottom: 1px solid blue;
+    padding-left: 15px;
+    padding-right: 25px;
 }
 
 .search-control .addtolist {
@@ -958,8 +1113,22 @@ main {
 }
 
 .contain1 table, .contain2 table  {
-    border-spacing: 10px !important;
+    display: grid;
     border-collapse: separate !important;
+    border: 0;
+    align-self: center;
+    vertical-align: middle;
+}
+
+.contain1 table td, .contain2 table td {
+   vertical-align: middle;
+}
+
+.contain1, .contain2 {
+    display: grid;
+}
+
+.contain1 table tr, .contain2 table tr {
     border: 0;
 }
 
@@ -981,18 +1150,6 @@ main {
     min-height: 400px;
 }
 
-.sku-data {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 25px;
-    justify-content: center;
-    align-self: center;
-    align-content: center;
-    min-height: 400px;
-    grid-row-gap: 55px;
-    border: 1px solid red;
-}
 
 .search-desc  table {
     max-width 50px !important;
@@ -1293,6 +1450,95 @@ footer {
 .admin-main .disabled {
 	border: 3px solid red;
 }
+
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+
 
 /***************************************
 *
@@ -1605,6 +1851,19 @@ only screen and (max-width: 900px),
         font-size: 12px !important;
     }
     
+    .main-search {
+        grid-template-columns: 90%;
+        grid-template-areas: 
+            "nav" 
+            "title"
+            "form"
+            "mcontent"
+            "mcontent2";
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+        justify-content: center;
+    }
+    
 }
 
 
@@ -1718,6 +1977,17 @@ only screen and (max-width: 890px),
         width: 100% !important;
         font-size: 6px !important;
         font-weight: 900 !important;
+    }
+    
+    .larger-img {
+        display: none;
+    }
+    
+    .img-viewer {
+        display: grid;
+        width: 90%;
+        grid-template-columns: auto; 
+        justify-content: center;
     }
     
 }

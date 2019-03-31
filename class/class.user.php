@@ -125,13 +125,13 @@
         {
             if(isset($_SESSION['user_id']))
             {
-                $uid = $_SESSION['user_id'];
+                $user_id = $_SESSION['user_id'];
                 try
                 {
                     $stmt = $this->conn->prepare("SELECT * FROM user 
                     left join role on user_role_id = role_id
                     WHERE user_id=:uid");
-                    $stmt->bindparam(":uid", $uid);
+                    $stmt->bindparam(":uid", $user_id);
                     $stmt->execute();
                     $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
                     // if email if found check password
