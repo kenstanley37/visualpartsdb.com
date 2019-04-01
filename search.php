@@ -85,14 +85,14 @@ if(isset($_GET['export'])){
         }
         ?>
         </aside>
-        <main class="main-search">
+        <main class="search-main">
             <?php
             if(!empty($dataResult))
             {
                 ?>  
                     <section class="title">
                         <section class="search-title">
-                            <h2 class="blue-header">PART: <?php echo $dataResult['sku_id']; ?></h2>
+                            <h2 class="blue-header">PART #: <?php echo $dataResult['sku_id']; ?></h2>
                         </section>
                     </section>
             
@@ -106,11 +106,11 @@ if(isset($_GET['export'])){
                                                 <form action="/export/generate-xlsx.php" method="get">
                                                     <input type="text" value="excel" name="unit" hidden>
                                                    <input type="text" value="<?php echo $dataResult['sku_id']; ?>" name="sku" hidden>
-                                                    <button type="submit" name="submit">EXCEL</button>
+                                                    <button class="nav-btn shadow" type="submit" name="submit">EXCEL</button>
                                                 </form>
 
                                             </td>
-                                            <!--
+                                            <!-- PDF coming soon
                                             <td>
                                                 <a class="btn" href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
                                                     <img src="/assets/msoffice/icons8-pdf-30.png" alt="PDF Export">
@@ -125,7 +125,7 @@ if(isset($_GET['export'])){
                                                         if($user->requestUpdateCheck($sku))
                                                         {
                                                             ?>
-                                                        <button class="active" disabled>Update Requested</button>
+                                                        <button class="active shadow" disabled>Update Requested</button>
                                                             <?php
                                                         } else
                                                         {
@@ -133,7 +133,7 @@ if(isset($_GET['export'])){
 
                                                                 <form method="post" action="/processors/userManagement.php">
                                                                     <input type="text" name="skuID" value="<?php echo $dataResult['sku_id']; ?>" hidden>
-                                                                    <button class="nav-btn " type="submit" name="requestUpdate">Request SKU Update</button>
+                                                                    <button class="nav-btn shadow" type="submit" name="requestUpdate">Request SKU Update</button>
                                                                 </form>
 
                                                             <?php
@@ -153,7 +153,7 @@ if(isset($_GET['export'])){
                                             <tr>
                                                 <td class="nav-btn">
                                                     <form action="/user/myexportlist.php">
-                                                        <button type="submit" name="submit">
+                                                        <button class="nav-btn shadow" type="submit" name="submit">
                                                             Create List
                                                         </button>
                                                     </form>
@@ -171,7 +171,7 @@ if(isset($_GET['export'])){
                                                         <td class="nav-btn">
                                                             <form action="/user/mylistcontents.php" method="get">
                                                                 <input type="text" name="list" value="<?php echo $activelistID; ?>" hidden>
-                                                                <button type="submit" name="submit">Active List: <?php echo strtoupper($activelist); ?> </button>
+                                                                <button class="nav-btn shadow" type="submit" name="submit">Active List: <?php echo strtoupper($activelist); ?> </button>
                                                             </form>
                                                            
                                                         </td>
@@ -185,12 +185,12 @@ if(isset($_GET['export'])){
                                                                     if($skucheck)
                                                                     {
                                                                         ?>
-                                                                        <button class="" type="submit" name="remSkuFromList">Remove From List</button>
+                                                                        <button class="nav-btn shadow active" type="submit" name="remSkuFromList">Remove From List</button>
                                                                         <?php
                                                                     } else 
                                                                     {
                                                                         ?>
-                                                                        <button class="nav-btn" type="submit" name="addSkuToList">Add To List</button>
+                                                                        <button class="nav-btn shadow" type="submit" name="addSkuToList">Add To List</button>
                                                                         <?php
                                                                     }
                                                                 ?>

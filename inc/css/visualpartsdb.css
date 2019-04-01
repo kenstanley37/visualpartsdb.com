@@ -260,6 +260,18 @@ section {
     padding-bottom: 15px !important;
 }
 
+.pad-bot-35 {
+    padding-bottom: 35px !important;
+}
+
+.pad-bot-55 {
+    padding-bottom: 55px !important;
+}
+
+.marg-bot-35 {
+    margin-bottom: 35px !important;
+}
+
 .border-red {
     border: 1px solid red;
     border
@@ -269,15 +281,15 @@ section {
     text-align: center !important;
     display: table-cell;
     vertical-align: middle;
-    color: #000 !important;  
-    border: 0 !important;
     vertical-align: middle;
 }
 
 .nav-btn button {
     width: 160px !important;
     padding: 5px;
-    background-color: #efefef ;
+    background-color: #007bff;
+    color: #fff !important;  
+    border: 0 !important;
 }
 
 .nav-btn a {
@@ -287,7 +299,14 @@ section {
 .nav-btn button:hover {
     border: 0 !important;
     background-color: #ccc !important; 
+    color: #000 !important;
 }
+
+.nav-btn .active {
+    background-color: #ffa500 !important; 
+    color: #000 !important;
+}
+
 
 /***************************** 
 ** index.php grid 
@@ -330,17 +349,33 @@ section {
     overflow: hidden;
 }
 
-.main-search {
+.search-main {
     grid-area: main;
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-auto-rows: 5px auto ;
+    grid-auto-rows: auto ;
     grid-template-areas: 
         "nav nav" 
         "title title"
         "form form"
         "mcontent2 mcontent";
     grid-row-gap: 15px;
+}
+
+.my-search-main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-auto-rows: min-content;
+    grid-template-areas: 
+        "title title"
+        "nav nav" 
+        "mcontent form"
+        "mcontent2 mcontent2";
+    grid-column-gap: 15px;
+    grid-row-gap: 55px;
+    justify-content: center; 
+    overflow: hidden;
 }
 
 .img-viewer {
@@ -366,7 +401,7 @@ section {
     max-width: 600px;
 }
 
-.main-search .title, .main .title {
+.my-search-main .title, .search-main .title, .main .title {
     grid-area: title;
     display: grid;
     grid-template-columns: 45% 45%;
@@ -376,7 +411,12 @@ section {
     padding-top: 25px;
 }
 
-.main-search .nav, .main .nav {
+.search-title {
+    margin-top: 15px;
+    width: 300px;
+}
+
+.search-main .nav, .main .nav {
     grid-area: nav;
     display: grid;
     grid-template-columns: 100%;
@@ -387,36 +427,47 @@ section {
     grid-row-gap: 0;
 }
 
-.main-search .nav, .main .nav {
+.my-search-main .nav {
+    grid-area: nav;
+    display: grid;
+    grid-template-columns: 95%;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+    margin: 0;
+    grid-row-gap: 0;
+}
+
+.my-search-main .nav, .search-main .nav, .main .nav {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.main-search .nav li, .main .nav li {
+.search-main .nav li, .main .nav li {
     display: inline;
 }
 
-.main-search .nav a, .main .nav a {
+.my-search-main .nav a, .search-main .nav a, .main .nav a {
     display: inline-block;
     padding: 10px;
 }
 
-.main-search .nav a:hover, .main .nav a:hover {
+..my-search-main .nav a:hover, .search-main .nav a:hover, .main .nav a:hover {
     border-bottom: 1px solid #000;
 }
 
-.main-search .form, .main .form {
+.my-search-main .form, .search-main .form, .main .form {
     grid-area: form;
     display: grid;
-    grid-template-columns: 90%;
+    grid-template-columns: 100%;
     grid-template-rows: auto;
     justify-items: center;
     justify-content: center;
     position: relative;
 }
 
-.main-search .content, .main .content {
+.my-search-main .content, .search-main .content, .main .content {
     grid-area: mcontent;
     display: grid;
     grid-template-columns: 90%;
@@ -428,7 +479,7 @@ section {
     padding-bottom: 25px;
 }
 
-.main-search .content2, .main .content2 {
+.my-search-main .content2, .search-main .content2, .main .content2 {
     grid-area: mcontent2;
     display: grid;
     grid-template-columns: 90%;
@@ -439,7 +490,7 @@ section {
     padding-bottom: 25px;
 }
 
-.main-search .update-form. .main .update-form {
+.my-search-main .update-form, .search-main .update-form. .main .update-form {
     display: grid;
     grid-template-columns: 90%;
     grid-template-areas: 
@@ -1062,9 +1113,27 @@ main {
     margin-top: 15px;
 }
 
-.login {
-    width: 50%;
+.btn-blue {
+    background-color: #0487cc !important;
+    color: #fff;
+    margin-bottom: 5px;
+    width: 100%;
+    height: 45px;
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all .3s;
+    align-self: flex-end;
+    margin-top: 15px;
 }
+
+.login {
+    min-width: 60%;
+}
+
+.per-90 (
+    width: 90% !important;
+)
 
 .login input, .login span {
     padding: 10px;
@@ -1083,7 +1152,7 @@ main {
     text-align: center;
     align-content: center;
     height: 43px;
-    background-color: orangered!important;
+    background-color: orangered !important;
 }
 
 .login-title {
@@ -1212,6 +1281,9 @@ main {
     background-color: #fff;
     width: 95vw;
     padding-top: 50px;
+}
+.search-nav {
+
 }
 
 .search-user-functions {
@@ -1385,11 +1457,11 @@ footer {
 
 .charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    min-height: 150px;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-rows: 300px;
     padding: 25px;
     justify-content: center;
-    align-content: center;
+    align-content: flex-start;
 }
 
 .dash-top {
@@ -1559,6 +1631,12 @@ footer {
 
 .my-list-main nav ul {
     list-style-type: none;
+}
+
+.my-search-range td {
+    padding-bottom: 5px !important;
+    padding-right: 5px;
+    text-align: right;
 }
 
 .admin-main #addUser tr {
@@ -1776,6 +1854,26 @@ footer {
         font-size: 18px;
     }
     
+    .my-search-main {
+        grid-area: main;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-areas: 
+            "title"
+            "nav" 
+            "form"
+            "mcontent"
+            "mcontent2";
+        grid-column-gap: 15px;
+        grid-row-gap: 55px;
+        justify-content: center; 
+        overflow: hidden;
+    }
+    
+    .charts {
+        width: 90%;
+    }
+    
 }
 
 /* 
@@ -1955,7 +2053,7 @@ only screen and (max-width: 900px),
         padding: 1px;
     }
 
-    .main-search {
+    .search-main {
         grid-template-columns: 100%;
         grid-template-areas: 
             "nav" 
@@ -1966,6 +2064,7 @@ only screen and (max-width: 900px),
         grid-column-gap: 15px;
         grid-row-gap: 15px;
         justify-content: center;
+        overflow-y: hidden;
     }
     
     .search-user-functions {
@@ -1985,7 +2084,6 @@ only screen and (max-width: 900px),
     .search-user-functions .just-left, .search-user-functions .just-right  {
         justify-self: center;
     }
-    
 }
 
 

@@ -32,7 +32,7 @@ $mylistcontent =  $user->myListContent($listid);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: My List Content</title>
+    <title>Visual Parts Database: My List Contents</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -52,43 +52,46 @@ $mylistcontent =  $user->myListContent($listid);
         </aside>
         <main class="main">
             <section class="title">
-                <h1>List: <?php echo strtoupper($user->getMyListName($listid)); ?></h1>
+                <h1 class="blue-header">List Contents</h1>
             </section>
             <section class="nav">
-                Insert Export Links Here
+                
             </section>
             <section class="form">
-                <section class="display bg-white shadow">
-                    <h2 class="block-title shadow">My List</h2>
-                    <table class="table shadow">
-                        <thead>
-                            <tr>
-                                <td>SKU</td>
-                                <td colspan="2">Description</td>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <section class="display">
+                    <section class="login shadow">
+                        <h2 class="login-title"><?php echo strtoupper($mylistcontent[0]['pl_list_name']); ?></h2>
+                        <table class="table shadow">
+                            <thead>
+                                <tr>
+                                    <td>SKU</td>
+                                    <td colspan="2">Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                 foreach($mylistcontent as $row)
+                        {
+                            ?>
+                                <tr valign="middle">
+                                    <td data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
+                                    <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                    <td>
+                                        <form action="/processors/userManagement.php" method="post">
+                                            <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
+                                            <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
+                                            <input name="myListContent" value="myListContent" hidden>
+                                            <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>  
                             <?php
-                             foreach($mylistcontent as $row)
-                    {
+                        }
                         ?>
-                            <tr valign="middle">
-                                <td data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
-                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                <td>
-                                    <form action="/processors/userManagement.php" method="post">
-                                        <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
-                                        <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
-                                        <input name="myListContent" value="myListContent" hidden>
-                                        <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
-                                    </form>
-                                </td>
-                            </tr>  
-                        <?php
-                    }
-                    ?>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </section>
+                    
                 </section>
             </section>
         </main>

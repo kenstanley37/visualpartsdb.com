@@ -62,10 +62,10 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
         }
         ?>
         </aside>
-        <main class="main">  
+        <main class="my-search-main">  
             <section class="title">
-                <section class="display shadow bg-blue">
-                    <h2 class="bg-blue text-white">My Searches</h2>
+                <section class="search-title">
+                    <h2 class="blue-header">My Searches</h2>
                 </section>
             </section>
             
@@ -74,7 +74,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                     <h2 class="block-title shadow">Date Range</h2>
                     <form action="/user/mysearches.php" method="get">
                         <input type="text" name="tempID" id="tempID" value="<?php echo $userID; ?>" hidden>
-                        <table>
+                        <table class="table-nores">
                             <tbody>
                                 <tr>
                                     <td>
@@ -114,8 +114,8 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <input class="search-button" type="submit" value="View">
+                                    <td colspan="2">
+                                        <input class="btn-blue" type="submit" value="View">
                                     </td>
                                 </tr>
                             </tbody>
@@ -125,10 +125,12 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
             </article>
             
             <section class="form">
-                <section class="display charts bg-white shadow">
+                <section class="display bg-white shadow">
                     <h2 class="block-title shadow">Charts</h2>
-                    <article id="my-search-graph" class="my-search-graph"></article>
-                    <article id="my-search-pie" class="my-search-pie"></article>
+                    <section class="charts">
+                        <article id="my-search-graph" class="my-search-graph"></article>
+                        <article id="my-search-pie" class="my-search-pie"></article>
+                    </section>
                 </section>
             </section>
             
