@@ -98,9 +98,9 @@ if(!isset($_GET['code'])){
 
             </section>
             <section class="title">
-                <h1>Register</h1>
+                <h1 class="blue-header">Register</h1>
             </section>
-            <section class="form">
+            <section class="form-contact">
                 <form action="password_reset.php" method="post">
                     <table class="table">
                         <thead>

@@ -48,12 +48,13 @@ $updateRequest = $vpd->skuUpdateRequest('active');
         </aside>
         <main class="main">
             <section class="title">
-                <h2>Update Request: <?php echo ucfirst($sku); ?></h2>
+                <h2 class="blue-header">SKU Update Request</h2>
             </section>
             <section class="nav">
-                <section class="display bg-white shadow">
-                    <h2 class="block-title shadow">SKU Update Request</h2>
-                    <table class="table shadow">
+                <section class="display">
+                    <section class="login shadow">
+                        <h3 class="login-title">Active Part Update Request</h3>
+                        <table class="table-nores shadow">
                         <thead>
                             <tr>
                                 <td scope="col">SKU</td>
@@ -77,6 +78,7 @@ $updateRequest = $vpd->skuUpdateRequest('active');
                     ?>
                         </tbody>
                     </table>
+                    </section>
                 </section>
             </section>
         </main>

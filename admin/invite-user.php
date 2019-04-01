@@ -50,24 +50,18 @@ $company = $user->dropDownCompany();
         </aside>
         <main class="main">
             <section class="title">
-                <h2>Invite User</h2>
+                <h2 class="blue-header">Invite User</h2>
             </section>
             <section class="nav">
-                <section class="display bg-white shadow">
-                    <h2 class="block-title shadow">User Invite</h2>
-                    <form id="addUser" method="post" action="/processors/register_request.php">
-                        <table class="table shadow">
-                            <thead>
-                                <th colspan="3">Invite User</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label for="regcompany">Company</label>
-                                    </td>
-                                    <td>
-                                        <select name="regcompany" id="regcompany" required>
-                                            <option value=""></option>
+                <section class="display">
+                    <div class="login shadow">
+                         <div class="form-contact">
+                            <h3 class="login-title">Register Invite</h3>
+                            <form id="addUser" method="post" action="/processors/register_request.php">
+                                <fieldset>
+                                    <select class="select-css" name="regcompany" id="regcompany" required>
+                                            <label for="regcompany">Company</label>
+                                            <option placeholder="Company" value=""></option>
                                             <?php foreach($company as $row)
                                             {
                                                 ?>
@@ -78,41 +72,20 @@ $company = $user->dropDownCompany();
                                             }
                                             ?>
                                         </select>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/add-company.php"><i class="fas fa-plus-square"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="regfname">First Name</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="text" name="regfname" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="reglname">Last Name</label>
-                                    </td>
-                                    <td colspan="2"> 
-                                        <input type="text" name="reglname" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="regemail">Email Address</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <input type="email" name="regemail" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-right" colspan="3"><button class=" info" type="submit" name="regsubmit" value="Submit">Submit</button></td>
-                                </tr>
-                             </tbody>
-                        </table>
-                    </form>
+                                    
+                                    <input placeholder="First Name" type="text" name="regfname" required>
+                                    
+                                    <input placeholder="Last Name" type="text" name="reglname" required>
+                                    
+                                    <input placeholder="Email" type="email" name="regemail" required>
+                                    <button class=" info" type="submit" name="regsubmit" value="Submit">Submit</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                   
+                    
+                    
                 </section>
             </section>
             <section class="form">

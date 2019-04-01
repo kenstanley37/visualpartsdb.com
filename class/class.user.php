@@ -258,7 +258,7 @@
 
                     //Attachments
                     //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-                    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+                    //$mail->addAttachmedsnt('/tmp/image.jpg', 'new.jpg');    // Optional name
 
                     //Content
                     $mail->isHTML(true);                                  // Set email format to HTML
@@ -347,7 +347,7 @@
                     }
                     else
                     {
-                        return false;
+                        return 'Email Not Found';
                     }
                     
                 } catch (Exception $e) 
@@ -1223,7 +1223,7 @@
         public function myListRemSku($sku, $list)
         {
             // get the active list 
-            $listid = $this->myListReturn('none','id');
+            $listid = $this->getMyActiveListID();
             try
             {
                 $stmt = $this->conn->prepare("DELETE from user_part_list_skus WHERE pls_list_sku = :pl_list_sku and pls_list_id = :pl_list_id");

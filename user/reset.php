@@ -33,7 +33,7 @@ if(isset($_POST['reset']))
         $error = '<span>Please check your email for a reset link</span>';
     } else
     {
-        $error = 'Opps! something went wrong';
+        $error = $result;
     }
 } 
 
@@ -63,35 +63,25 @@ if(isset($_POST['reset']))
 
             </section>
             <section class="title">
-                <h1>Password Reset</h1>
+                <h1 class="blue-header">Password Reset</h1>
             </section>
             <section class="form">
-                <form action="reset.php" method="post">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th colspan="2">Password Reset</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <form action="/user/reset.php" method="post">
-                                <tr>
-                                    <td><label for="email">Email:</label></td>
-                                    <td><input type="email" name="email" required></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><p>This will send a reset link</p></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="align-right"><button type="submit" class="btn active" name="reset">Reset</button></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="error"><?php echo $error; ?></td>
-                                </tr>
-                            </form>
-                        </tbody>
-                    </table>
-                </form>
+                <div class="login shadow">
+                    <div class="form-contact">
+                        <h3 class="login-title">Reset Password</h3>
+                        <form action="reset.php" method="post">
+                            <fieldset>
+                                <input placeholder="Email" type="email" name="email" required>
+
+                                <p>This will send a reset link</p>
+                                
+                                <p class="error"><?php echo $error; ?></p>
+
+                                <button type="submit" class="btn active" name="reset">Reset</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </section>
             <section class="content">
                 

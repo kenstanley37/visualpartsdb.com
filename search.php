@@ -96,16 +96,19 @@ if(isset($_GET['export'])){
                         </section>
                     </section>
             
-                    <section class="nav">
+                    <section class="nav search-nav">
                         <section class="search-user-functions">
                             <section class="contain1 just-left">
                                 <table class="table-nores">
                                     <tbody>
                                         <tr>
-                                            <td>
-                                                <a class="btn" href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
-                                                    <img src="/assets/msoffice/icons8-microsoft-excel-30.png" alt="Excel Export">
-                                                </a>
+                                            <td class="nav-btn">
+                                                <form action="/export/generate-xlsx.php" method="get">
+                                                    <input type="text" value="excel" name="unit" hidden>
+                                                   <input type="text" value="<?php echo $dataResult['sku_id']; ?>" name="sku" hidden>
+                                                    <button type="submit" name="submit">EXCEL</button>
+                                                </form>
+
                                             </td>
                                             <!--
                                             <td>
@@ -114,7 +117,7 @@ if(isset($_GET['export'])){
                                                 </a>
                                             </td>
                                             -->
-                                            <td>
+                                            <td class="nav-btn">
                                                  <?php
                                                     if(isset($_SESSION['user_id']))
                                                     {
@@ -122,7 +125,7 @@ if(isset($_GET['export'])){
                                                         if($user->requestUpdateCheck($sku))
                                                         {
                                                             ?>
-                                                        <span class="pad-35 bg-offwhite border-red" disabled>Update Requested</span>
+                                                        <button class="active" disabled>Update Requested</button>
                                                             <?php
                                                         } else
                                                         {
@@ -130,7 +133,7 @@ if(isset($_GET['export'])){
 
                                                                 <form method="post" action="/processors/userManagement.php">
                                                                     <input type="text" name="skuID" value="<?php echo $dataResult['sku_id']; ?>" hidden>
-                                                                    <button class="btn active just-right pad-35" type="submit" name="requestUpdate">Request SKU Update</button>
+                                                                    <button class="nav-btn " type="submit" name="requestUpdate">Request SKU Update</button>
                                                                 </form>
 
                                                             <?php
@@ -146,7 +149,17 @@ if(isset($_GET['export'])){
                                 <?php if(isset($_SESSION['user_id'])){ 
                                         if(empty($activelist)){
                                             ?>
-                                            <a href="/user/myexportlist.php">Create List <i class="fas fa-plus-circle"></i></a>
+                                        <table class="table-nores">
+                                            <tr>
+                                                <td class="nav-btn">
+                                                    <form action="/user/myexportlist.php">
+                                                        <button type="submit" name="submit">
+                                                            Create List
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </table>
                                             <?php
                                         }
                                         else 
@@ -155,10 +168,14 @@ if(isset($_GET['export'])){
                                             <table class="table-nores">
                                                 <tbody>
                                                     <tr>
-                                                        <td>
-                                                            ACTIVE LIST:<a href="/user/mylistcontents.php?list=<?php echo $activelistID; ?>"><?php echo strtoupper($activelist); ?></a>
+                                                        <td class="nav-btn">
+                                                            <form action="/user/mylistcontents.php" method="get">
+                                                                <input type="text" name="list" value="<?php echo $activelistID; ?>" hidden>
+                                                                <button type="submit" name="submit">Active List: <?php echo strtoupper($activelist); ?> </button>
+                                                            </form>
+                                                           
                                                         </td>
-                                                        <td>
+                                                        <td class="nav-btn">
                                                             <form action="/processors/userManagement.php" method="post">
                                                                 <input type="text" value="<?php echo $dataResult['sku_id']; ?>" name="skuID" id="skuID" hidden>
 
@@ -168,12 +185,12 @@ if(isset($_GET['export'])){
                                                                     if($skucheck)
                                                                     {
                                                                         ?>
-                                                                        <button class="btn danger pad-35" type="submit" name="remSkuFromList">Remove From List</button>
+                                                                        <button class="" type="submit" name="remSkuFromList">Remove From List</button>
                                                                         <?php
                                                                     } else 
                                                                     {
                                                                         ?>
-                                                                        <button class="btn active pad-35" type="submit" name="addSkuToList">Add To List</button>
+                                                                        <button class="nav-btn" type="submit" name="addSkuToList">Add To List</button>
                                                                         <?php
                                                                     }
                                                                 ?>
@@ -368,17 +385,20 @@ if(isset($_GET['export'])){
                         
                         <section class="content2">
                             <section class="img-viewer">
-                                <section class="display sku-images flex-start">
+                                
                                     <!--
-                                    <h2 class="center-title up-25 pad-bot-50 blue-header">IMAGES</h2>
-    -->
+                                    <h2 class="center-title up-25 pad-bot-50 blue-header">IMAGES</h2> --> 
+                                    
+                                <?php 
+                                if(!empty($imageResult))
+                                {
+                                    ?>
+                                <section class="display sku-images flex-start">
                                     <section class="grid-wrap250">
-                                        <?php 
-                                        if(!empty($imageResult))
-                                        {
-                                            foreach($imageResult as $image)
-                                            {
-                                                ?>
+                                        <?php
+                                    foreach($imageResult as $image)
+                                    {
+                                        ?>
                                             <figure class="card-responsive bg-white shadow">
                                                 <div  class="card-img modal-hover">
                                                     <a href="<?php echo $image['sku_image_url']; ?>">
@@ -386,20 +406,26 @@ if(isset($_GET['export'])){
                                                     </a>
                                                 </div>
                                             </figure>
-                                                <?php
-                                            } 
-                                        } else
-                                        {
-                                            ?>
-                                                <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
-                                            <?php
-                                        }
-                                        ?>
+                                        <?php
+                                    }
+                                    ?>
                                     </section>
                                 </section>
                                 <section class="larger-img">
                                     <img class="shadow" src="<?php echo $imageResult[0]['sku_image_url']; ?>" alt="<?php echo $imageResult[0]['sku_image_sku_id'].'-'.$imageResult[0]['sku_image_description']; ?>" >
                                 </section>
+                            <?php 
+                                } else
+                                {
+                                    ?>
+
+                                <section></section>
+                                <section class="larger-img">
+                                    <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
+                                </section>
+                                            <?php
+                                        }
+                                        ?>
                             </section>
                             
                         </section>

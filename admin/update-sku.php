@@ -52,196 +52,188 @@ $count = 0;
         </aside>
         <main class="main">
             <section class="title">
-                <h2>Modify SKU: <?php echo $sku; ?></h2>
+                <h2 class="blue-header">Modify SKU</h2>
             </section>
 
             <section class="nav">
-                <section class="display update-form shadow">
-                    <h2 class="block-title shadow">Modify SKU</h2>
-                    <form id="UpdateSkuForm" method="post" action="/processors/sku_handler.php">
-                        <input type="text" name="sku" value="<?php echo $sku; ?>" hidden>
-                        <section class="grid-wrap250">
-                            <table class="table-nores shadow">
-                                <thead>
-                                    <tr>
-                                        <th data-label="Description" colspan="2" class="tb1-color">
-                                            Description
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">
-                                            <textarea name="desc">
-                                                <?php echo $skuData['sku_desc']; ?>
-                                            </textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-right" colspan="2">
-                                            <button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button>
-                                        </td>
-                                    </tr>
-                            </table>
+                <section class="display">
+                    <section class="sku-edit bg-white shadow">
+                            <h3 class="login-title"><?php echo $sku; ?></h3>
+                            <form id="UpdateSkuForm" method="post" action="/processors/sku_handler.php">
+                            <input type="text" name="sku" value="<?php echo $sku; ?>" hidden>
+                            <section class="grid-wrap250">
+                                <table class="table-nores shadow edit-table">
+                                    <thead>
+                                        <tr>
+                                            <th data-label="Description" colspan="2" class="tb1-color">
+                                                Description
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                <textarea name="desc">
+                                                    <?php echo $skuData['sku_desc']; ?>
+                                                </textarea>
+                                            </td>
+                                        </tr>
+                                </table>
 
-                            <table class="table-nores shadow">
-                                <thead>
-                                    <tr>
-                                        <th data-label="UNIT" colspan="3" class="tb1-color">UNIT</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td data-label="Unit">
-                                            <label for="unit-length">Length</label>
-                                        </td>
-                                        <td>
-                                            <input type="number" name="unit-length" min="0" step="0.01" value="<?php echo $skuData['sku_unit_length']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Unit">
-                                            <label for="unit-width">Width</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="number" name="unit-width" min="0" step="0.01" value="<?php echo $skuData['sku_unit_width']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Unit">
-                                            <label for="unit-height">Height</label>
-                                        </td>
-                                        <td colspan="2"> 
-                                            <input type="number" name="unit-height" min="0" step="0.01" value="<?php echo $skuData['sku_unit_height']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Unit">
-                                            <label for="unit-weight">Weight</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $skuData['sku_unit_weight']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-right" colspan="3"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                <table class="table-nores shadow edit-table">
+                                    <thead>
+                                        <tr>
+                                            <th data-label="UNIT" colspan="3" class="tb1-color">UNIT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td data-label="Unit">
+                                                <label for="unit-length">Length</label>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="unit-length" min="0" step="0.01" value="<?php echo $skuData['sku_unit_length']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Unit">
+                                                <label for="unit-width">Width</label>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="number" name="unit-width" min="0" step="0.01" value="<?php echo $skuData['sku_unit_width']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Unit">
+                                                <label for="unit-height">Height</label>
+                                            </td>
+                                            <td colspan="2"> 
+                                                <input type="number" name="unit-height" min="0" step="0.01" value="<?php echo $skuData['sku_unit_height']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Unit">
+                                                <label for="unit-weight">Weight</label>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="number" name="unit-weight" min="0" step="0.01" value="<?php echo $skuData['sku_unit_weight']; ?>">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
-                            <table class="table-nores shadow">
-                                <thead>
-                                     <tr>
-                                        <th data-label="CASE" colspan="3" class="tb1-color">CASE</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td data-label="Case">
-                                            <label for="case-length">Length</label>
-                                        </td>
-                                        <td>
-                                            <input type="number" name="case-length" min="0" step="0.01" value="<?php echo $skuData['sku_case_length']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Case">
-                                            <label for="case-width">Width</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="number" name="case-width" min="0" step="0.01" value="<?php echo $skuData['sku_case_width']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Case">
-                                            <label for="case-height">Height</label>
-                                        </td>
-                                        <td colspan="2"> 
-                                            <input type="number" name="case-height" min="0" step="0.01" value="<?php echo $skuData['sku_case_height']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Case">
-                                            <label for="case-weight">Weight</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="number" name="case-weight" min="0" step="0.01" value="<?php echo $skuData['sku_case_weight']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Case">
-                                            <label for="case-qty">Quantity</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $skuData['sku_case_qty']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-right" colspan="3"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>    
+                                <table class="table-nores shadow edit-table">
+                                    <thead>
+                                         <tr>
+                                            <th data-label="CASE" colspan="3" class="tb1-color">CASE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td data-label="Case">
+                                                <label for="case-length">Length</label>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="case-length" min="0" step="0.01" value="<?php echo $skuData['sku_case_length']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Case">
+                                                <label for="case-width">Width</label>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="number" name="case-width" min="0" step="0.01" value="<?php echo $skuData['sku_case_width']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Case">
+                                                <label for="case-height">Height</label>
+                                            </td>
+                                            <td colspan="2"> 
+                                                <input type="number" name="case-height" min="0" step="0.01" value="<?php echo $skuData['sku_case_height']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Case">
+                                                <label for="case-weight">Weight</label>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="number" name="case-weight" min="0" step="0.01" value="<?php echo $skuData['sku_case_weight']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Case">
+                                                <label for="case-qty">Quantity</label>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="number" name="case-qty" min="0" step="0.01" value="<?php echo $skuData['sku_case_qty']; ?>">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>    
 
-                            <table class="table-nores shadow">
-                                <thead>
-                                    <tr>
-                                        <th data-label="PALLET" colspan="3" class="tb1-color">PALLET</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td data-label="Pallet">
-                                            <label for="pallet-length">Length</label>
-                                        </td>
-                                        <td>
-                                            <input type="number" name="pallet-length" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_length']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Pallet">
-                                            <label for="pallet-width">Width</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="number" name="pallet-width" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_width']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Pallet">
-                                            <label for="pallet-height">Height</label>
-                                        </td>
-                                        <td colspan="2"> 
-                                            <input type="number" name="pallet-height" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_height']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Pallet">
-                                            <label for="pallet-weight">Weight</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="number" name="pallet-weight" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_weight']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Pallet">
-                                            <label for="pallet-qty">Quantity</label>
-                                        </td>
-                                        <td colspan="2">
-                                            <input type="number" name="pallet-qty" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_qty']; ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-right" colspan="3"><button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>                       
-                        </section> <!-- end Case Data -->
-                    </form>
+                                <table class="table-nores shadow edit-table">
+                                    <thead>
+                                        <tr>
+                                            <th data-label="PALLET" colspan="3" class="tb1-color">PALLET</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td data-label="Pallet">
+                                                <label for="pallet-length">Length</label>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="pallet-length" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_length']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Pallet">
+                                                <label for="pallet-width">Width</label>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="number" name="pallet-width" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_width']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Pallet">
+                                                <label for="pallet-height">Height</label>
+                                            </td>
+                                            <td colspan="2"> 
+                                                <input type="number" name="pallet-height" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_height']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Pallet">
+                                                <label for="pallet-weight">Weight</label>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="number" name="pallet-weight" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_weight']; ?>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Pallet">
+                                                <label for="pallet-qty">Quantity</label>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="number" name="pallet-qty" min="0" step="0.01" value="<?php echo $skuData['sku_pallet_qty']; ?>">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>                       
+                            </section> <!-- end Case Data -->
+                                <button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button>
+                        </form>
+                        
+                    </section>
+                    
+                    
                 </section>
             </section>
 
             <section class="content">
-                <section class="display shadow bg-white">
-                    <h2 class="block-title">Add Image</h2>
+                <section class="display">
+                    <h2 class="block-title shadow">Images</h2>
                         <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
                             Select image to upload:
                             <input type="file" name="file" id="file">
@@ -254,9 +246,8 @@ $count = 0;
             </section>
             
             <section class="content2">
-                <section class="display shadow bg-white">
-                    <h2 class="block-title shadow">Images</h2>
-                    <section class="grid-wrap250" id="skuimages">
+                <section class="display">
+                    <section class="grid-wrap250 edit-img" id="skuimages">
                         <?php 
                        foreach($skuImage as $row)
                        {

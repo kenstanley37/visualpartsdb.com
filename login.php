@@ -87,94 +87,37 @@ if(isset($_GET['error'])){
         </aside>
         <main class="main">
             <section class="title">
-                <section class="display shadow bg-blue text-white">
-                    <h1>Member Login</h1>
+                <section class="">
+                    <h1 class="blue-header">Member Login</h1>
                 </section>
-                
             </section>
             
             <section class="nav">
-                <section class="display shadow bg-white">
-                    <form action="login.php" method="post">
-                        <!--
-                        <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
-                        -->
-                        <table class="table-nores">
-                            <thead>
-                                <tr>
-                                    <th colspan="3">LOGIN</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label id="icon" for="email"><i class="fa fa-user"></i> Email:</label>
-                                    </td>
-                                    <td data-label="Email">
-                                        <input required type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
-                                    </td>
-                                </tr>
-                                <?php
-                                if(!empty($emailError))
-                                {
-                                    ?>
-                                        <tr>
-                                            <td colspan="3">
-                                                <?php if(isset($emailError)){echo '<span class="error">' .$emailError.'</span>';} ?>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                }
-                                ?>
-                                <tr>
-                                    <td>
-                                        <label id="icon" for="password"><i class="fa fa-key"></i> Password:</label>
-                                    </td>
-                                    <td data-label="Password">
-                                        <input required type="password" placeholder="Password" id="password" name="password">
-                                    </td>
-                                </tr>
-                                <?php 
-                                    if(!empty($passwordError))
-                                    {
-                                        ?>
-                                            <tr>
-                                                <td colspan="3">
-                                                    <?php echo '<span class="error">' .$passwordError.'</span>'; ?>
-                                                </td>
-                                            </tr>
+                <section class="display">
+                     <section class="login shadow">
+                        <div class="form-contact">
+                            <h3 class="login-title">LOGIN</h3>
+                            <form action="login.php" method="post">
+                                <fieldset>
+                                    <input required type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
+                                    <?php if(isset($emailError)){echo '<span class="error">' .$emailError.'</span>';} ?>
 
-                                        <?php
-                                    }
-                                ?>
-                                <tr>
-                                    <td colspan="3">
-                                        <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
-                                    </td>
-                                </tr>
-                                <?php
-                                    if(!empty($captchaError))
-                                    {
-                                        ?>
-                                            <tr>
-                                                <td colspan="3">
-                                                    <span class="error"><?php echo $captchaError; ?></span>
-                                                </td>
-                                            </tr> 
-                                        <?php
-                                    }
-                                ?>
-                                <tr>
-                                    <td>
-                                        <a class="btn info" href="/user/reset.php">Forgot?</a>
-                                    </td>
-                                    <td colspan="2" class="align-right">
-                                        <button class="btn active" type="submit" name="Login">Login</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>            
-                    </form>
+                                    <input required type="password" placeholder="Password" id="password" name="password">
+                                    <?php echo '<span class="error">' .$passwordError.'</span>'; ?>
+
+                                    <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
+                                    <div class="login-buttons">
+                                        <div>
+                                            <a  href="/user/reset.php">Forgot?</a>
+                                        </div>
+                                        <div>
+                                            <button type="submit" name="Login">Login</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </section>
                 </section>
             </section>
         </main>

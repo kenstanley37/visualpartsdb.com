@@ -48,28 +48,24 @@ if(isset($_GET['error']))
         </aside>
         <main class="main">
             <section class="title">
-                <h2>Modify Part</h2>
+                <h2 class="blue-header">Modify Part</h2>
             </section>
             <section class="nav">
-                <section class="display shadow bg-white">
-                    <h2 class="block-title shadow">Modify SKU</h2>
-                    <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
-                    <table class="table shadow">
-                        <thead>
-                            <tr>
-                                <th colspan="3"><h6>Modify SKU</h6></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Part Number:</td>
-                                <form action="/processors/sku_handler.php" method="post">
-                                    <td><input type="text" name="sku" required></td>
-                                    <td><button type="submit" name="modifysearch" class="info" >Search</button></td>
-                                </form>
-                            </tr>
-                        </tbody>
-                    </table>
+                <section class="display">
+                    <section class="login shadow">
+                        <div class="form-contact">
+                            <h3 class="login-title">Part #</h3>
+                            <form action="/processors/sku_handler.php" method="post">
+                                <fieldset>
+                                    <input type="text" name="sku" required>
+                                    
+                                    <button type="submit" name="modifysearch" class="info" >Modify</button>
+                                    
+                                    <?php if(isset($error)){echo '<span class="error">'.$error.'</span>';} ?>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </section>
                 </section>
             </section>
         </main>
