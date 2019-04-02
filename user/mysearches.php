@@ -105,8 +105,8 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
             
             <section class="form">
                 <section class="display">
-                    <section class="login">
-                        <h2 class="block-title shadow">Charts</h2>
+                    <section class="login shadow">
+                        <h2 class="login-title">Charts</h2>
                         <section class="charts">
                             <article id="my-search-graph" class="my-search-graph"></article>
                             <article id="my-search-pie" class="my-search-pie"></article>

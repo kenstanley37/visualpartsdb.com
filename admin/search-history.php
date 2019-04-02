@@ -63,110 +63,94 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
         }
         ?>
         </aside>
-        <main class="main">  
+        <main class="my-search-main">  
             <section class="title">
-                <section class="display shadow bg-blue">
-                    <h2 class="bg-blue text-white">Search History</h2>
-                </section>
+                <h2 class="blue-header">Search History</h2>
             </section>
             
             <article class="nav">
-                <section class="display bg-white shadow">
-                    <h2 class="block-title shadow">Date Range</h2>
-                    <form action="/admin/search-history.php" method="get">
-                        <input type="text" name="tempID" id="tempID" value="<?php echo $userID; ?>" hidden>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label for="dfrom">Date From:</label>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="dto">Date To:</label>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <label for="users" hidden>Select User:</label>
-                                    </td>
-                                    <td>
-                                        <select id="users" name="usersID">
-                                            <option value=""></option>
-                                            <?php
-                                            foreach($dropdown as $row)
-                                            {
-                                            ?>
-                                            <option value="<?php echo $row['user_id']; ?>"
-                                                <?php if($row['user_id'] == $userID ){ echo 'selected';}?>>
-                                                <?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?>
-                                            </option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input class="search-button" type="submit" value="Search">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
+                <section class="display">
+                    <section class="login shadow">
+                        <section class="form-contact">
+                            <h2 class="login-title">Date Range</h2>
+                            <form action="/admin/search-history.php" method="get">
+                                <input type="text" name="tempID" id="tempID" value="<?php echo $userID; ?>" hidden>
+                                
+                                <label for="dfrom">Date From: </label>
+                                <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
+                                
+                                 <label for="dto">Date To:</label>
+                                <input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
+                                
+                                <label for="users" hidden>Select User:</label>
+                                <select class="select-css" id="users" name="usersID">
+                                    <option value=""></option>
+                                    <?php
+                                    foreach($dropdown as $row)
+                                    {
+                                    ?>
+                                    <option value="<?php echo $row['user_id']; ?>"
+                                        <?php if($row['user_id'] == $userID ){ echo 'selected';}?>>
+                                        <?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?>
+                                    </option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select> 
+                                <input class="btn-blue" type="submit" value="Search">
+                            </form>
+                        </section>
+                    </section>
                 </section>
             </article>
             
             <section class="form">
-                <section class="display charts bg-white shadow">
-                    <h2 class="block-title shadow">Charts</h2>
-                    <article id="my-search-graph" class="my-search-graph"></article>
-                    <article id="my-search-pie" class="my-search-pie"></article>
+                <section class="display">
+                    <section class="login shadow">
+                        <h2 class="login-title">Charts</h2>
+                        <section class="charts">
+                            <article id="my-search-graph" class="my-search-graph"></article>
+                            <article id="my-search-pie" class="my-search-pie"></article>
+                        </section>
+                    </section>
                 </section>
             </section>
             
             
             <article class="content">            
-                <section class="display shadow bg-white">
-                    <h2 class="block-title shadow">Search History</h2>
-                    <table class="table shadow">
-                        <thead>
-                            <tr>
-                                <th>Part Number</th>
-                                <th>Description</th>
-                                <th># Searches</th>
-                            </tr>
-                        </thead> 
-                        <tbody>
-                            <?php
-                                foreach($searchHist as $row)
-                                {
-                                    ?>
-                                        <tr>
-                                            <td scope="row" data-label="SKU">
-                                                <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
-                                            </td>
-                                            <td data-label="Description">
-                                                <?php echo $row['sku_desc']; ?>
-                                            </td>
-                                            <td data-label="Count">
-                                                <?php echo $row['count']; ?>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                }
-                            ?>
-                        </tbody>
-                    </table>
+                <section class="display">
+                    <section class="login shadow">
+                        <h2 class="login-title">Search History</h2>
+                        <table class="table shadow">
+                            <thead>
+                                <tr>
+                                    <th>Part Number</th>
+                                    <th>Description</th>
+                                    <th># Searches</th>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <?php
+                                    foreach($searchHist as $row)
+                                    {
+                                        ?>
+                                            <tr>
+                                                <td scope="row" data-label="SKU">
+                                                    <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
+                                                </td>
+                                                <td data-label="Description">
+                                                    <?php echo $row['sku_desc']; ?>
+                                                </td>
+                                                <td data-label="Count">
+                                                    <?php echo $row['count']; ?>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+                    </section>
                 </section>
             </article>
             <article class="my-search-foot"></article>

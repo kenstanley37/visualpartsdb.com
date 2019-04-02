@@ -121,6 +121,7 @@ button:hover {
 .error {
     color: red;
     margin-top: 55px;
+    padding-bottom: 75px !important;
 }
 
 .btn {
@@ -150,7 +151,10 @@ button:hover {
 }
 
 .active {
-    background-color: #ccc !important; 
+    background-color: green !important; 
+    padding: 5px;
+    color: #fff;
+    border-radius: 10px;
 }
 
 .danger {
@@ -1093,6 +1097,11 @@ main {
     transition: all .3s;
 }
 
+.form-contact a {
+    text-align: center;
+    font-size: 12px;
+}
+
 .form-contact textarea {
     margin-bottom: 30px;
     max-width: 100%;
@@ -1101,7 +1110,12 @@ main {
     max-height: 300px;
 }
 
-.sku-edit button, .form-contact button, .form-contact a {
+.g-recaptcha {
+    display: inline-block;
+    align-self: center;
+}
+
+.sku-edit button, .form-contact button {
     background-color: #0487cc !important;
     color: #fff;
     margin-bottom: 5px;
@@ -1117,7 +1131,7 @@ main {
 
 .btn-blue {
     background-color: #0487cc !important;
-    color: #fff;
+    color: #fff !important;
     margin-bottom: 5px;
     width: 100%;
     height: 45px;
@@ -1127,15 +1141,12 @@ main {
     transition: all .3s;
     align-self: flex-end;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 .login {
     min-width: 60%;
 }
-
-.per-90 (
-    width: 90% !important;
-)
 
 .login input, .login span {
     padding: 10px;
@@ -1459,11 +1470,11 @@ footer {
 
 .charts {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     grid-template-rows: 300px;
     padding: 25px;
     justify-content: center;
-    align-content: flex-start;
+
 }
 
 .dash-top {
@@ -1867,7 +1878,7 @@ footer {
             "mcontent"
             "mcontent2";
         grid-column-gap: 15px;
-        grid-row-gap: 55px;
+
         justify-content: center; 
         overflow: hidden;
     }
