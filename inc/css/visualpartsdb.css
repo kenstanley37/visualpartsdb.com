@@ -1084,7 +1084,9 @@ main {
 }
 
 .form-contact input, .form-contact textarea {
+    /*
     display: block;
+    */
     width: 100%;
     border: none;
     background-color: transparent;

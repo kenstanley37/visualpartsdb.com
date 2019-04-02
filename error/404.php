@@ -32,7 +32,7 @@ $vail = new VALIDATE;
        ?>
         <main class="main">
             <section class="content">
-                <h1>OPPS! The file you are looking for was not found</h1>
+                <h1>OOPS! The file you are looking for was not found</h1>
             </section>
         </main>
         <footer>
