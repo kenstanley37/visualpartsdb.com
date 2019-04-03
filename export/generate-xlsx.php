@@ -122,7 +122,7 @@ if(isset($_GET['unit'])){
                     $i++;
                 }
                 
-            } elseif($user->accessCheck() == 'USER')
+            } else
             {
                 // SET HEADERS
                 $sheet->setCellValue('A1', "Part Number");
@@ -160,25 +160,8 @@ if(isset($_GET['unit'])){
                     $sheet->setCellValue('P'.$i, $row['sku_pallet_weight']);
                     $i++;
                 }
-            } else 
-            {
-                // SET HEADERS
-                $sheet->setCellValue('A1', "Part Number");
-                $sheet->setCellValue('B1', "Description");
-                $sheet->setCellValue('C1', "Unit Length");
-                $sheet->setCellValue('D1', "Unit Width");
-                $sheet->setCellValue('E1', "Unit Height");
-                $sheet->setCellValue('F1', "Unit Weight");
-                while ($row = $stmt->fetch(PDO::FETCH_NAMED)) {
-                    $sheet->setCellValue('A'.$i, $row['sku_id']);
-                    $sheet->setCellValue('B'.$i, $row['sku_desc']);
-                    $sheet->setCellValue('C'.$i, $row['sku_sig_length']);
-                    $sheet->setCellValue('D'.$i, $row['sku_sig_width']);
-                    $sheet->setCellValue('E'.$i, $row['sku_sig_height']);
-                    $sheet->setCellValue('F'.$i, $row['sku_sig_weight']);
-                    $i++;
-                }
             }
+        } //end try
             
             // OUTPUT
             $writer = new Xlsx($spreadsheet);
