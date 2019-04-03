@@ -1,6 +1,18 @@
 <?php
     $user = new USER;
     $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
+
+    if(isset($_SESSION["fname"]))
+            {
+                $fname = $_SESSION['fname'];
+                $userID = $_SESSION['user_id'];
+                $loginCheck = $fname.'
+                               <a href="/logout.php">Logout</a>';
+            } else
+            {
+                $loginCheck = '<a href="/login.php">Login</a>';
+            }
+    
 ?>
 
     <section class="main-logo">
@@ -36,7 +48,7 @@
             </form>
         </section>
         <section class="name">
-            <i class="fas fa-user"></i> <?php $user->isLogin(); ?>
+            <i class="fas fa-user"></i> <?php echo $loginCheck; ?>
         </section>
     </section>
     <section class="main-nav-ham">

@@ -103,6 +103,7 @@ if(isset($_GET['error'])){
 
                                     <input required type="password" placeholder="Password" id="password" name="password">
                                     <?php echo '<span class="error">' .$passwordError.'</span>'; ?>
+                                
                                     <div class="center">
                                         <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
                                     </div>

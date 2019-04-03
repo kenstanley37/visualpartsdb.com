@@ -400,7 +400,7 @@ if(isset($_GET['export'])){
                                     {
                                         ?>
                                             <figure class="card-responsive bg-white shadow">
-                                                <div  class="card-img modal-hover">
+                                                <div class="card-img modal-hover">
                                                     <a href="<?php echo $image['sku_image_url']; ?>">
                                                         <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />
                                                     </a>
@@ -427,7 +427,6 @@ if(isset($_GET['export'])){
                                         }
                                         ?>
                             </section>
-                            
                         </section>
                         
             <?php
@@ -435,11 +434,13 @@ if(isset($_GET['export'])){
             {
             ?>
             <section class="nav">
-                <section class="display shadow bg-white">
-                    <h2 class="block-title shadow">Not Found</h2>
-                    <section class="not-found">
-                        <p>Sorry, nothing was found for SKU "<i class="error"><?php echo $sku; ?></i>"</p>
-                        <p>Please try again!</p>
+                <section class="display">
+                    <section class="login shadow">
+                        <h2 class="login-title">Not Found</h2>
+                        <section class="not-found">
+                            <p>Sorry, nothing was found for SKU "<i class="error"><?php echo $sku; ?></i>"</p>
+                            <p>Please try again!</p>
+                        </section>
                     </section>
                 </section>
             </section>

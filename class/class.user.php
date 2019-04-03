@@ -33,30 +33,7 @@
         public function __destruct()
         {
             $this->conn = null;
-        } // end destruct
-
-        // *************************************************************
-        // Usage: isLogin()
-        // Logged In: If user is logged in show name with link to user profile
-        // Not Logged In: show link to login screen
-        // *************************************************************
-        
-        function isLogin()
-        {
-            if(isset($_SESSION["fname"]))
-            {
-                $fname = $_SESSION['fname'];
-                $userID = $_SESSION['user_id'];
-                $loginCheck = '<a href="/profile.php?userid='.$userID.'">'.$fname.'</a>
-                               <a href="/logout.php">Logout</a>';
-            } else
-            {
-                $loginCheck = '<a href="/login.php">Login</a>';
-            }
-            
-            echo $loginCheck;
-        } // end isLogin
-        
+        } // end destruct 
         
         /**
         * This function logs the user in by setting the session

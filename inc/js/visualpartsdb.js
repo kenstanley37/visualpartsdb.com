@@ -14,7 +14,7 @@ function startup(){
 }
   
 function myImgModal(){
-    $( ".modal-hover a" ).hover(function() {
+    $( ".modal-hover img" ).hover(function() {
         img = $(this).attr('href');
         alt = $(this).children('img').attr('alt');
         $('.larger-img img').attr('src', img);

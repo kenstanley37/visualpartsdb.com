@@ -54,7 +54,7 @@ $updateRequest = $vpd->skuUpdateRequest('active');
                 <section class="display">
                     <section class="login shadow">
                         <h3 class="login-title">Active Part Update Request</h3>
-                        <table class="table-nores shadow">
+                        <table class="table shadow">
                         <thead>
                             <tr>
                                 <td scope="col">SKU</td>

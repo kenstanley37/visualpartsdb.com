@@ -139,43 +139,32 @@ button:hover {
     border: none !important;
 }
 
-.inactive {
-    padding: 5px 10px 5px 10px;
+.inactive, .active, .danger, .info {
     border-radius: 5px;
-    /* background-color: #87CEFA;  */
-    background-color: #cccccc;
-    color: #666666;
+    padding: 5px 10px 5px 10px;
+    width: 75px;
+    border: none;
+    color: #fff;
 	font-size: 10px;
 	font-weight: 600;
-    border: none;
+}
+
+.inactive {
+    /* background-color: #87CEFA;  */
+    background-color: #cccccc;
 }
 
 .active {
-    background-color: green !important; 
-    padding: 5px;
-    color: #fff;
-    border-radius: 10px;
+    background-color: green !important;
 }
 
 .danger {
-    padding: 5px 10px 5px 10px;
-    border-radius: 5px;
     background-color: #f44b42; 
-    color: #fff;
-	font-size: 10px;
-	font-weight: 600;
-    border: none;
+
 }
 
 .info {
-    padding: 5px 10px 5px 10px;
-    border-radius: 5px;
     background-color: #FFA500; 
-    color: #000;
-	font-size: 10px;
-	font-weight: 600;
-    border: none;
-    /*box-shadow: 2px 2px 8px 1px #888888;*/
 }
 
 .align-right {
@@ -187,14 +176,15 @@ button:hover {
 }
 
 .tb1-color {
-    background-color: lightskyblue;
-    color: #000;
+    color: #fff;
+    background-color: #0487CC;
 }
 .text-white {
     color: #fff;
 }
 
 .valign-top {
+    vertical-align:top;
     vertical-align:top;
 }
 
@@ -423,7 +413,7 @@ section {
 .search-main .nav, .main .nav {
     grid-area: nav;
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 100% !important;
     justify-content: center;
     position: relative;
     height: 100%;
@@ -560,7 +550,6 @@ section {
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 35px;
     border-radius: 10px;
 }
 
@@ -978,9 +967,13 @@ main {
     height: 300px;
 }
 
-.card-responsive, .card-resonsive img {
+.card-responsive {
     height: 100px !important;
     width: 100px !important;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
 }
 /* On mouse-over, add a deeper shadow */
 .card:hover, .card-responsive {
@@ -995,12 +988,22 @@ main {
     word-wrap:  break-word;
 }
 
-.card img, .card-responsive img {
+.card img {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    object-fit: cover;
+    margin-left: 0;
+    margin-right: 0;
     max-width: 100%;
+    object-fit: cover;
+    position: relative;
+    padding: 15px;
+}
+
+.card-responsive img {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100px !important;
+    height: 100px !important;
     object-fit: cover;
     position: relative;
     padding: 15px;
@@ -1070,11 +1073,6 @@ main {
 .sku-edit {
     width: 95%;
     padding: 15px;
-}
-
-.edit-table textarea {
-    height: 100%;
-    width: 100%;
 }
 
 .form-contact input, .form-contact textarea {
@@ -1212,16 +1210,35 @@ main {
 	outline: none;
 }
 .select-css option {
-	font-weight:normal;
+	font-weight: normal;
 }
 
 .edit-table {
     height: 350px !important;
 }
 
+.edit-table th {
+    height: 25px !important;
+}
+
+.edit-table textarea {
+    height: 270px !important;
+    width: 100% !important;
+}
+
 .edit-img .card {
-    max-width: 300px !important;
+    width: 250px !important;
     height: 450px !important;
+}
+
+.edit-img img {
+    width: 200px !important;
+    height: 300px !important;
+    object-fit: cover;
+}
+
+.edit-img .tb1-color {
+    
 }
 
 /*
@@ -1878,7 +1895,6 @@ footer {
             "mcontent"
             "mcontent2";
         grid-column-gap: 15px;
-
         justify-content: center; 
         overflow: hidden;
     }
@@ -1973,6 +1989,7 @@ only screen and (max-width: 900px),
     /* Force table to not be like tables anymore */
     .table {
         border: 0;
+        max-width: 100% !important;
     }
     
     .table thead {
@@ -2249,7 +2266,7 @@ only screen and (max-width: 890px),
     }
     */
     .login {
-        width: 100%;
+        width: 90%;
     }
 
 }
@@ -2262,9 +2279,9 @@ only screen and (max-width: 300px),
         font-size: 6px !important;
         font-weight: 900 !important;
     }
-
 }
 
 .nav-show {
     visibility: visible !important;
 }
+
