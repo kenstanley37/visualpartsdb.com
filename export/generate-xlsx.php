@@ -141,7 +141,8 @@ if(isset($_GET['unit'])){
                 $sheet->setCellValue('N1', "Pallet Width");
                 $sheet->setCellValue('O1', "Pallet Height");
                 $sheet->setCellValue('P1', "Pallet Weight");
-                while ($row = $stmt->fetch(PDO::FETCH_NAMED)) {
+                while ($row = $stmt->fetch(PDO::FETCH_NAMED)) 
+                {
                     $sheet->setCellValue('A'.$i, $row['sku_id']);
                     $sheet->setCellValue('B'.$i, $row['sku_desc']);
                     $sheet->setCellValue('C'.$i, $row['sku_sig_length']);
@@ -161,7 +162,7 @@ if(isset($_GET['unit'])){
                     $i++;
                 }
             }
-        } //end try
+
             
             // OUTPUT
             $writer = new Xlsx($spreadsheet);
