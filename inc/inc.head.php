@@ -46,7 +46,7 @@
     <!-- CSS MENU -->
     <script src="/inc/cssmenu/cssmenu.js"></script>
     <!-- DataTables -->
-    <script type="text/javascript" src="/vendor/DataTables/datatables.min.js"></script>
+    <script src="/vendor/DataTables/datatables.min.js"></script>
     <!-- Visual Parts DB JS -->
     <script src="/inc/js/visualpartsdb.js"></script>
     
