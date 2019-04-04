@@ -1023,6 +1023,7 @@ main {
     font-size: 10px;
     color: #303030;
     padding-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .index-main #member {
