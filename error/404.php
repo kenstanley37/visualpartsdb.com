@@ -32,7 +32,12 @@ $vail = new VALIDATE;
        ?>
         <main class="main">
             <section class="content">
-                <h1>OOPS! The file you are looking for was not found</h1>
+                <section class="display">
+                    <section class="login">
+                        <h1 class="login-title">File not found</h1>
+                        <p>OOPS! The file you are looking for was not found</p>
+                    </section>
+                </section>
             </section>
         </main>
         <footer>

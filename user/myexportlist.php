@@ -103,7 +103,7 @@ if(!isset($_SESSION['user_id']))
                                                         if($listactive==1)
                                                         {
                                                             ?>
-                                                           <span class="active">ACTIVE</span>
+                                                           <button class="btn active" disabled>ACTIVE</button>
                                                             <?php
                                                         } else 
                                                         {
