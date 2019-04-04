@@ -108,7 +108,7 @@ $pending = $user->userList('pending');
                                         </td>
                                         <td data-label="Role">
                                             <form action="/processors/userManagement.php" method="post">
-                                                <input type="number" name="userID" value="<?php echo $userID; ?>" hidden>
+                                                <input type="number" name="userID" value="<?php echo $row['user_id']; ?>" hidden>
                                                 <table>
                                                     <tr>
                                                         <td>
@@ -130,7 +130,7 @@ $pending = $user->userList('pending');
                                         </td> 
                                         <td>
                                             <form action="/admin/deleteuser.php" method="post">
-                                                <input hidden type="text" name="userID" value="<?php echo $userID; ?>">
+                                                <input hidden type="text" name="userID" value="<?php echo $row['user_id']; ?>">
                                                 <button type="submit" name="remUser" class="btn danger">DELETE</button>
                                             </form>
                                         </td>
