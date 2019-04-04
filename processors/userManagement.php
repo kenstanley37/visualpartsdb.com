@@ -46,6 +46,7 @@
         // Change user to ADMIN role
         if(isset($_POST['setToAdmin']))
         {
+            echo 'im working';
             if($rank != 'ADMIN')
             {
                 header("location: /noaccess.php");
