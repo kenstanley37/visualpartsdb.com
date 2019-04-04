@@ -155,9 +155,9 @@ $image_count = $vpd->getImageCount();
                                     <a href="/search.php?search=<?php echo $key['sku_image_sku_id']; ?>">
                                         <img class="article-img" src="<?php echo $key['sku_image_thumb']; ?>" alt="<?php echo $key['sku_image_sku_id'].'-'.$key['sku_image_description']; ?>" />
                                     </a>
-                                </div>
-                                 <a href="/search.php?search=<?php echo $key['sku_image_sku_id']; ?>">
+                                 </div>
                                     <figcaption>
+                                        <a href="/search.php?search=<?php echo $key['sku_image_sku_id']; ?>">
                                             <div class="card-sku-num">
                                                 <h4><?php echo $key['sku_image_sku_id']; ?></h4>
                                             </div>
@@ -167,8 +167,9 @@ $image_count = $vpd->getImageCount();
                                             <div class="card-sku-desc">
                                                 <p><?php echo $key['sku_desc'];?></p>
                                             </div>
+                                        </a>
                                     </figcaption>
-                                 </a>
+                                 
                             </figure>
                             <?php
                         }

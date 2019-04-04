@@ -52,7 +52,7 @@ $mylistcontent =  $user->myListContent($listid);
         </aside>
         <main class="main">
             <section class="title">
-                <h1 class="blue-header">List Contents</h1>
+                <h1 class="blue-header">List Contents</h1><a href="javascript://" onclick="history.back();">Back</a>
             </section>
             <section class="nav">
                 

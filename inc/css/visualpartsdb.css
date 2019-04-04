@@ -268,7 +268,6 @@ section {
 
 .border-red {
     border: 1px solid red;
-    border
 }
 
 .nav-btn {
@@ -446,7 +445,7 @@ section {
     padding: 10px;
 }
 
-..my-search-main .nav a:hover, .search-main .nav a:hover, .main .nav a:hover {
+.my-search-main .nav a:hover, .search-main .nav a:hover, .main .nav a:hover {
     border-bottom: 1px solid #000;
 }
 
@@ -483,7 +482,7 @@ section {
     padding-bottom: 25px;
 }
 
-.my-search-main .update-form, .search-main .update-form. .main .update-form {
+.my-search-main .update-form, .search-main .update-form, .main .update-form {
     display: grid;
     grid-template-columns: 90%;
     grid-template-areas: 
@@ -1375,7 +1374,7 @@ main {
 
 
 .search-desc  table {
-    max-width 50px !important;
+    max-width: 50px !important;
 }
 
 .sku-unit-data, .sku-case-data, .sku-pallet-data, .sku-user-data {
