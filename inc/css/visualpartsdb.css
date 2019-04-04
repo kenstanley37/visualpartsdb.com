@@ -280,7 +280,7 @@ section {
 .nav-btn button {
     width: 160px !important;
     padding: 5px;
-    background-color: #007bff;
+    background-color: #0487CC;
     color: #fff !important;  
     border: 0 !important;
 }
@@ -296,7 +296,7 @@ section {
 }
 
 .nav-btn .active {
-    background-color: #ffa500 !important; 
+    background-color: #FFA500 !important; 
     color: #000 !important;
 }
 
@@ -706,7 +706,7 @@ header .name {
 }
 
 header i {
-    color: orange;
+    color: #FFA500;
 }
 
 header a {
