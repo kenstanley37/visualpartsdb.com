@@ -89,7 +89,7 @@ $company = $user->dropDownCompany();
                 </section>
             </section>
             <section class="form">
-                <span> <?php if(isset($result)){echo $result;} ?></span>
+                <span class="error"> <?php if(isset($result)){echo $result;} ?></span>
             </section>
         </main>
         <footer>
