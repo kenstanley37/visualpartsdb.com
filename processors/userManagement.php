@@ -24,7 +24,6 @@
         {
             $userID = $_POST['activeSwitch'];
             $result = $user->activeSwitch($userID);
-            echo $result;
             header("location: /admin/user.php");
         }
         
@@ -46,12 +45,11 @@
         // Change user to ADMIN role
         if(isset($_POST['setToAdmin']))
         {
-            echo 'im working';
             if($rank != 'ADMIN')
             {
                 header("location: /noaccess.php");
             } else 
-                {
+            {
                 $userID = $_POST['userID'];
                 $role = 2;
                 $result = $user->setUserRole($userID, $role);
