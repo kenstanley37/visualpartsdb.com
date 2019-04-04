@@ -61,11 +61,15 @@ $mylistcontent =  $user->myListContent($listid);
                 <section class="display">
                     <section class="login shadow">
                         <h2 class="login-title"><?php echo strtoupper($mylistcontent[0]['pl_list_name']); ?></h2>
+                       
                         <table class="table shadow">
                             <thead>
                                 <tr>
                                     <td>SKU</td>
-                                    <td colspan="2">Description</td>
+                                    <td>Description</td>
+                                    <td class="align-right ">
+                                        <a href="/export/generate-xlsx.php?unit=excel&list=<?php echo strtoupper($mylistcontent[0]['pl_id']); ?>"><i class="far fa-file-excel"></i> Excel</a>
+                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,7 +80,7 @@ $mylistcontent =  $user->myListContent($listid);
                                 <tr valign="middle">
                                     <td data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
                                     <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                    <td>
+                                    <td class="align-right">
                                         <form action="/processors/userManagement.php" method="post">
                                             <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
                                             <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
