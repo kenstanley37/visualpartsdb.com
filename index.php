@@ -182,10 +182,8 @@ $image_count = $vpd->getImageCount();
                 </section>
                 <section class="member-info shadow">
                     <h3 class="title">Benefits & Requirements</h3>
-                    <ul>Benefits:
-                        <li>
-                            View case and pallet information
-                        </li>
+                    <h4>Benefits</h4>
+                    <ul>
                         <li>
                             Export data to Excel (PDF and CVS coming soon)
                         </li>
@@ -199,7 +197,8 @@ $image_count = $vpd->getImageCount();
                             Request updates on SKUs
                         </li>
                     </ul>
-                    <ul>Requirements
+                    <h4>Requirements</h4>
+                    <ul>
                         <li>
                             Must be a customer or supplier
                         </li>
@@ -226,7 +225,7 @@ $image_count = $vpd->getImageCount();
 
                                 <input type="text" name="company" id="company" placeholder="Company" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
                                     
-                                <textarea name="messagearea" id="messagearea" placeholder="Message" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
+                                <textarea name="messagearea" placeholder="Message" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
                                 
                                 <button type="submit" value="SUBMIT" name="RegisterRequest">SEND</button><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
                             </fieldset>
