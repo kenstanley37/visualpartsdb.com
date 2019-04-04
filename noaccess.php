@@ -1,51 +1,47 @@
 <?php
 session_start();
-include("inc/inc.path.php");
+include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
+require_once($path."class/class.visualdb.php");
 require_once($path."class/class.func.php");
+
+$vpd = new VISUALDB;
+$vail = new VALIDATE;
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Visual Parts Database: No Access</title>
-    <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
+    <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
     <div class="wrapper">
-        <header class="header">
+        <header>
             <?php include($path."inc/inc.header.php"); ?>
         </header>
-        <aside class="admin-nav hidden">
         <?php
         if($user->accessCheck() == "ADMIN")
         {
             ?>
+            <nav class="adminnav">
                 <?php include($path."inc/inc.adminnavbar.php"); ?>
+            </nav>
             <?php
         }
        ?>
-        </aside>
         <main class="main">
-            <section class="title">
-                <section class="">
-                    <h1 class="blue-header">Access Restricted</h1>
-                </section>
-            </section>
-            
-            <section class="nav">
+            <section class="content">
                 <section class="display">
-                     <section class="login shadow">
-                        <div class="form-contact">
-                            <h3 class="login-title">Error</h3>
-                            <p>You do not have access to view the requested page. Please contact the administrator if you believe this is in error.</p>
-                        </div>
+                    <section class="login shadow">
+                        <h1 class="login-title">No Access</h1>
+                        <p>OOPS! You do not have access to the request file</p>
                     </section>
                 </section>
             </section>
         </main>
         <footer>
-            <?php include($path."/inc/inc.footer.php"); ?>
+            <?php include("inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

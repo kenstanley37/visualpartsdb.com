@@ -381,6 +381,8 @@ section {
 .larger-img {
     display: grid;
     justify-items: center;
+    padding: 15px;
+    max-height: 500px;
 }
 
 .larger-img p {
@@ -388,11 +390,8 @@ section {
 }
 
 .larger-img img {
-    margin-top: 35px;
+    height: 100%;
     object-fit: cover;
-    width: 90%;
-    object-position: 50% 50%;
-    max-width: 600px;
 }
 
 .my-search-main .title, .search-main .title, .main .title {

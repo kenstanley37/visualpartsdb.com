@@ -411,8 +411,8 @@ if(isset($_GET['export'])){
                                     ?>
                                     </section>
                                 </section>
-                                <section class="larger-img">
-                                    <img class="shadow" src="<?php echo $imageResult[0]['sku_image_url']; ?>" alt="<?php echo $imageResult[0]['sku_image_sku_id'].'-'.$imageResult[0]['sku_image_description']; ?>" >
+                                <section class="larger-img shadow bg-white">
+                                    <img  src="<?php echo $imageResult[0]['sku_image_url']; ?>" alt="<?php echo $imageResult[0]['sku_image_sku_id'].'-'.$imageResult[0]['sku_image_description']; ?>" >
                                 </section>
                             <?php 
                                 } else
@@ -423,9 +423,9 @@ if(isset($_GET['export'])){
                                 <section class="larger-img">
                                     <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
                                 </section>
-                                            <?php
-                                        }
-                                        ?>
+                                    <?php
+                                }
+                                ?>
                             </section>
                         </section>
                         
