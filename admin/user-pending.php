@@ -80,7 +80,6 @@ $pending = $user->userList('pending');
                                     $date = $row['user_reg_date'];
                                     $dateadded = date_create($date);
                                     $addDate = date_format($dateadded, 'm/d/Y');
-                                    $userID = $row['user_id'];
                                     ?>
                                     <tr>
                                         <td data-label="ID">
