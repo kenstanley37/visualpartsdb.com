@@ -50,10 +50,10 @@
             {
                 header("location: /noaccess.php");
             } else 
-            {
-            $userID = $_POST['userID'];
-            $role = 2;
-            $result = $user->setUserRole($userID, $role);
+                {
+                $userID = $_POST['userID'];
+                $role = 2;
+                $result = $user->setUserRole($userID, $role);
                 if($result)
                 {
                     header("location: /admin/user.php");
