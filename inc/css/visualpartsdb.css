@@ -1049,6 +1049,10 @@ main {
     text-align: center;
 }
 
+.member-info h4 {
+    padding-top: 25px;
+}
+
 .index-main #member .member-info {
     grid-area: memberinfo;
     width: 100%;
