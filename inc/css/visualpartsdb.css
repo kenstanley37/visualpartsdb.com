@@ -381,7 +381,8 @@ section {
     display: grid;
     justify-items: center;
     padding: 15px;
-    max-height: 500px;
+    max-width: 600px;
+    max-height: 600px;
 }
 
 .larger-img p {
@@ -389,7 +390,9 @@ section {
 }
 
 .larger-img img {
-    height: 100%;
+    max-width: 90%;
+    max-height: 90%;
+    
     object-fit: cover;
 }
 
