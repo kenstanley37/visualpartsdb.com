@@ -54,7 +54,14 @@
             $userID = $_POST['userID'];
             $role = 2;
             $result = $user->setUserRole($userID, $role);
-            header("location: /admin/user.php");
+                if($result)
+                {
+                    header("location: /admin/user.php");
+                } else 
+                {
+                    header("location: /admin/user.php?error");
+                }
+            
             }
         }
 
