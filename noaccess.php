@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../inc/inc.path.php");
+include("inc/inc.path.php");
 require_once($path."class/class.user.php");
 require_once($path."class/class.visualdb.php");
 require_once($path."class/class.func.php");

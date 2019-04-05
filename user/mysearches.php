@@ -62,13 +62,13 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
         }
         ?>
         </aside>
-        <main class="my-search-main">  
+        <main class="main">  
             <section class="title">
                     <h2 class="blue-header">My Searches</h2>
             </section>
             
             <article class="nav">
-                <section class="display">
+                <section class="grid-wrap600">
                     <section class="login shadow">
                         <section class="form-contact">
                             <h2 class="login-title">Date Range</h2>
@@ -100,11 +100,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                             </form>
                         </section>
                     </section>
-                </section>
-            </article>
-            
-            <section class="form">
-                <section class="display">
+                
                     <section class="login shadow">
                         <h2 class="login-title">Charts</h2>
                         <section class="charts">
@@ -112,45 +108,42 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                             <article id="my-search-pie" class="my-search-pie"></article>
                         </section>
                     </section>
-                </section>
-            </section>
-            
-            
-            <article class="content">            
-               <section class="display">
-                   <section class="login shadow">
+                </section> <!-- end grid-wrap -->
+            </article>
+
+            <article class="content2">            
+                   <section class="login shadow bg-white">
                         <h2 class="login-title">My Searches</h2>
-                    <table class="table shadow">
-                        <thead>
-                            <tr>
-                                <th>Part Number</th>
-                                <th>Description</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead> 
-                        <tbody>
-                            <?php
-                                foreach($searchHist as $row)
-                                {
-                                    ?>
-                                        <tr>
-                                            <td scope="row" data-label="SKU">
-                                                <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
-                                            </td>
-                                            <td data-label="Description">
-                                                <?php echo $row['sku_desc']; ?>
-                                            </td>
-                                            <td data-label="Count">
-                                                <?php echo $row['count']; ?>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                }
-                            ?>
-                        </tbody>
-                    </table>
+                        <table class="table shadow">
+                            <thead>
+                                <tr>
+                                    <th>Part Number</th>
+                                    <th>Description</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <?php
+                                    foreach($searchHist as $row)
+                                    {
+                                        ?>
+                                            <tr>
+                                                <td scope="row" data-label="SKU">
+                                                    <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
+                                                </td>
+                                                <td data-label="Description">
+                                                    <?php echo $row['sku_desc']; ?>
+                                                </td>
+                                                <td data-label="Count">
+                                                    <?php echo $row['count']; ?>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
                    </section>
-                </section>
             </article>
             <article class="my-search-foot"></article>
         </main>

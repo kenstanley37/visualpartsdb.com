@@ -98,7 +98,7 @@ if(!isset($_GET['code'])){
 
             </section>
             <section class="title">
-                <h1 class="blue-header">Register</h1>
+                <h1 class="blue-header">Set Password</h1>
             </section>
             
             <section clas="form">
@@ -106,48 +106,12 @@ if(!isset($_GET['code'])){
                     <section class="login">
                          <section class="form-contact">
                             <form action="password_reset.php" method="post">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">SET PASSWORD</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <label for="password1">Password</label>
-                                            </td>
-                                            <td>
-                                                <input required type="password" name="password1" id="password1">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label for="password1">Password Again</label>
-                                            </td>
-                                            <td>
-                                                <input required type="password" name="password2" id="password2">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" class="align-right">
-                                                <button class="btn active" type="submit" name="passwordupdate">Set Password</button>
-                                            </td>
-                                        </tr>
-                                        <?php 
-                                            if(!empty($error))
-                                            {
-                                                ?>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <span class="error"><?php echo $error; ?></span>
-                                                    </td>
-                                                </tr>
-                                                <?php
-                                            }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                <input required type="password" name="password1" id="password1" placeholder="Password">
+                                <input required type="password" name="password2" id="password2" placeholder="Password Again">
+                                <button class="btn active" type="submit" name="passwordupdate">Set Password</button>
+                                <span class="error"><?php echo $error; ?></span>
+                                
+
                             </form>
                         </section>
                     </section>

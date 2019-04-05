@@ -18,7 +18,12 @@ html, body {
 }
 
 .center {
-    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-self: center;
+    justify-items: center;
+
 }
 
 .toupper {
@@ -392,11 +397,10 @@ section {
 .larger-img img {
     max-width: 90%;
     max-height: 90%;
-    
     object-fit: cover;
 }
 
-.my-search-main .title, .search-main .title, .main .title {
+.main-export .title, .my-search-main .title, .search-main .title, .main .title {
     grid-area: title;
     display: grid;
     grid-template-columns: 45% 45%;
@@ -466,9 +470,8 @@ section {
     grid-area: mcontent;
     display: grid;
     grid-template-columns: 90%;
-    grid-row-gap: 55px;
     grid-template-rows: auto;
-    align-content: flex-start;
+    justify-items: center;
     justify-content: center;
     position: relative;
     padding-bottom: 25px;
@@ -517,7 +520,7 @@ section {
     justify-items: center;
 }
 
-.grid-wrap250, .grid-wrap300 {
+.grid-wrap250, .grid-wrap300, .grid-wrap600 {
     display: grid;
     width: 100%;
     grid-gap: 25px;
@@ -534,7 +537,11 @@ section {
 }
 
 .grid-wrap300 {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+}
+
+.grid-wrap600 {
+    grid-template-columns: repeat(auto-fit, minmax(600px, 700px));
 }
 
 .main .update-form .update-sku table {
@@ -551,7 +558,6 @@ section {
     justify-content: center;
     align-items: center;
     width: 100%;
-    border-radius: 10px;
 }
 
 .display p {
@@ -982,7 +988,7 @@ main {
 }
 
 /* Add some padding inside the card container */
-.card figcaption, .card-responsive figcaption {  
+figcaption, .card figcaption, .card-responsive figcaption {  
     display: grid;
     grid-row-gap: 15px;
     padding: 0 15px 5px 15px;
@@ -1114,11 +1120,6 @@ main {
     max-height: 300px;
 }
 
-.g-recaptcha {
-    display: inline-block;
-    align-self: center;
-}
-
 .sku-edit button, .form-contact button {
     background-color: #0487cc !important;
     color: #fff;
@@ -1149,9 +1150,18 @@ main {
 }
 
 .login {
-    min-width: 60%;
+    max-width: 90%;
+    position: relative;
 }
 
+.hw300 {
+    max-width: 600px;
+    padding: 25px;
+}
+
+.form-contact {
+    
+}
 .login input, .login span {
     padding: 10px;
 }
@@ -1493,11 +1503,12 @@ footer {
 
 .charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    grid-template-rows: 300px;
+    grid-template-columns: 300px 300px;
+    grid-template-areas: 
+        "graph" "chart";
+    grid-template-rows: 200px;
     padding: 25px;
     justify-content: center;
-
 }
 
 .dash-top {
@@ -1809,10 +1820,9 @@ footer {
         margin: 0;
         font-size: 15px;
     }
-
+    
     header .navlinks section {
         display: inline-block;
-        padding: 20px;
     }
 
     header .searchbox {
@@ -1903,12 +1913,7 @@ footer {
         grid-column-gap: 15px;
         justify-content: center; 
         overflow: hidden;
-    }
-    
-    .charts {
-        width: 90%;
-    }
-    
+    } 
 }
 
 /* 
@@ -1928,7 +1933,7 @@ only screen and (max-width: 900px),
         position: absolute;
         right: -25px;
         top: 65px;
-        width: 300px;
+        width: 250px;
         z-index: 20;
         background: #368cbf;
         grid-area: mainnavbar;
@@ -1995,7 +2000,7 @@ only screen and (max-width: 900px),
     /* Force table to not be like tables anymore */
     .table {
         border: 0;
-        max-width: 100% !important;
+        max-width: 90% !important;
     }
     
     .table thead {
@@ -2205,6 +2210,8 @@ only screen and (max-width: 890px),
     }
 
     .g-recaptcha {
+        margin-left: 60px;
+        text-align: center;
         transform: scale(0.77);
         -webkit-transform: scale(0.77);
         transform-origin: 0 0;
@@ -2221,7 +2228,7 @@ only screen and (max-width: 890px),
     }
     
     .search-control .addtolist {
-        display:flex;
+        display: flex;
         justify-content: center;
     }
     
@@ -2271,10 +2278,29 @@ only screen and (max-width: 890px),
         width: 300% !important;
     }
     */
-    .login {
-        width: 90%;
+    
+    .hw300 {
+        width: 250px;
+        padding: 25px;
     }
-
+    
+    .login {
+        width: 250px;
+    }
+    
+    .charts {
+        display: grid;
+        grid-template-columns: 300px;
+        grid-template-areas: 
+            "chart";
+        grid-template-rows: 200px;
+        padding: 25px;
+        justify-content: center;
+    }
+    
+    .my-search-graph {
+        display: none;
+    }
 }
 
 @media 

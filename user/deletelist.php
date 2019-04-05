@@ -53,33 +53,35 @@ if(isset($_POST['deletelist']))
         </aside>
         <main class="main">
             <section class="title">
-                <h1>Delete List</h1>
+                <h1 class="blue-header">Delete List</h1>
             </section>
             <section class="form">
-                <table class="table t300">
-                    <caption>Delete list and <?php echo $listcount; ?> parts? </caption>
-                    <thead>
-                        <td>List Name</td>
-                        <td>Parts</td>
-                    </thead>
-                    <tbody>
-                        <td><?php echo strtoupper($listname); ?></td>
-                        <td><?php echo $listcount; ?></td>
-                    </tbody>
-                    <tfoot>
-                        <td>
-                            <form action="/processors/userManagement.php" method="post">
-                                <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
-                                <button class="danger" type="submit" name="deletelist" id="deletelist" value="<?php echo $listid;?>">Delete</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="/user/myexportlist.php">
-                                <button class="info" type="submit">Cancel</button>
-                            </form>
-                        </td>
-                    </tfoot>
-                </table>
+                <section class="login shadow">
+                    <h2 class="login-title">Delete list and <?php echo $listcount; ?> parts? </h2>
+                    <table class="table t300">
+                        <thead>
+                            <td>List Name</td>
+                            <td>Parts</td>
+                        </thead>
+                        <tbody>
+                            <td><?php echo strtoupper($listname); ?></td>
+                            <td><?php echo $listcount; ?></td>
+                        </tbody>
+                        <tfoot>
+                            <td>
+                                <form action="/processors/userManagement.php" method="post">
+                                    <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
+                                    <button class="danger" type="submit" name="deletelist" id="deletelist" value="<?php echo $listid;?>">Delete</button>
+                                </form>
+                            </td>
+                            <td class="align-right">
+                                <form action="/user/myexportlist.php">
+                                    <button class="info" type="submit">Cancel</button>
+                                </form>
+                            </td>
+                        </tfoot>
+                    </table>
+                </section>
             </section>
         </main>
         <footer>

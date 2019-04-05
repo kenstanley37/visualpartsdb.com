@@ -10,6 +10,9 @@ $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
 
+$userName = '';
+$searchUserID = '';
+
 if(!isset($_SESSION['user_id']))
 {
     header('location: /');
@@ -31,16 +34,16 @@ if(isset($_GET['dfrom']))
 {
     $dateStart = $_GET['dfrom'];
     $dateEnd = $_GET['dto'];
-    if(isset($_GET['usersID']))
+    $searchUserID = $_GET['usersID'];
+    if(!empty($searchUserID))
     {
-        $userID = $_GET['usersID'];
-    } else {
-        $userID = '';
-    }
+       $userName = $user->userFullName($searchUserID); 
+    } 
 } 
 $result = '';
 $dropdown = $user->getUserList();
-$searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
+$searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,13 +66,13 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
         }
         ?>
         </aside>
-        <main class="my-search-main">  
+        <main class="main">  
             <section class="title">
                 <h2 class="blue-header">Search History</h2>
             </section>
             
             <article class="nav">
-                <section class="display">
+                <section class="grid-wrap600">
                     <section class="login shadow">
                         <section class="form-contact">
                             <h2 class="login-title">Date Range</h2>
@@ -90,8 +93,8 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                                     {
                                     ?>
                                     <option value="<?php echo $row['user_id']; ?>"
-                                        <?php if($row['user_id'] == $userID ){ echo 'selected';}?>>
-                                        <?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?>
+                                        <?php if($row['user_id'] == $searchUserID ){ echo 'selected';}?>>
+                                        <?php echo $row['user_fName'].' '.$row['user_lName']; ?> 
                                     </option>
                                     <?php
                                     }
@@ -101,11 +104,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                             </form>
                         </section>
                     </section>
-                </section>
-            </article>
-            
-            <section class="form">
-                <section class="display">
+                    
                     <section class="login shadow">
                         <h2 class="login-title">Charts</h2>
                         <section class="charts">
@@ -114,13 +113,14 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                         </section>
                     </section>
                 </section>
-            </section>
-            
-            
-            <article class="content">            
-                <section class="display">
-                    <section class="login shadow">
-                        <h2 class="login-title">Search History</h2>
+            </article>
+                    
+            <article class="content2">            
+                    <section class="login shadow bg-white">
+                        <h2 class="login-title">Search History <?php if(!empty($userName)){ echo 'for '.$userName;} ?></h2>
+                        <?php if(!empty($searchHist))
+                        {
+                        ?>
                         <table class="table shadow">
                             <thead>
                                 <tr>
@@ -150,8 +150,17 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                                 ?>
                             </tbody>
                         </table>
+                        <?php
+                        } else 
+                        {
+                            ?>
+                                <p>No history for selected date range</p>
+                            <?php
+
+                        }
+                        ?>
                     </section>
-                </section>
+
             </article>
             <article class="my-search-foot"></article>
         </main>

@@ -394,7 +394,7 @@
                             return 'noaccount';
                         } 
                     } else {
-                      echo 'No record found';
+                      return 'No record found';
                     }
                      return true;
                 }

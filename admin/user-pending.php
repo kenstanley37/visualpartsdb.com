@@ -52,7 +52,7 @@ $pending = $user->userList('pending');
             </section>
             <section class="nav">
                 <section class="display">
-                    <section class="login">
+                    <section class="login shadow">
                         <h2 class="login-title">Verification Pending</h2>
                         <?php 
                         if(!empty($pending))
