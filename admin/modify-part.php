@@ -57,7 +57,7 @@ if(isset($_GET['error']))
                             <h3 class="login-title">Part #</h3>
                             <form action="/processors/sku_handler.php" method="post">
                                 <fieldset>
-                                    <input type="text" name="sku" required>
+                                    <input type="text" name="sku" placeholder="Part Number" required>
                                     
                                     <button type="submit" name="modifysearch" class="info" >Modify</button>
                                     

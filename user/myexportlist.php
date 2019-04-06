@@ -47,9 +47,9 @@ if(!isset($_SESSION['user_id']))
                 <h2 class="blue-header">My List</h2>
             </section>
 
-            <section class="form">
-                <section class="grid-wrap600">
-                        <section class="hw300 shadow bg-white">
+            <section class="content">
+                <section class="grid-temp-30-70">
+                        <section class="w100p shadow bg-white">
                             <h2 class="login-title">Create List</h2>
                              <section class="form-contact">
                                 <form action="/processors/userManagement.php" method="post">
@@ -60,7 +60,7 @@ if(!isset($_SESSION['user_id']))
                             </section>
                         </section>
 
-                        <section class="hw300 shadow bg-white">
+                        <section class="w100p shadow bg-white">
                             <h2 class="blue-header pad-bot-35">Lists</h2>
                             <table class="table shadow">
                                 <thead>
@@ -140,8 +140,6 @@ if(!isset($_SESSION['user_id']))
                                 }
                             ?>
                         </section>
-
-                    
                 </section>
                 
             </section>
