@@ -305,6 +305,31 @@ section {
     color: #000 !important;
 }
 
+.grid-temp-30-70 {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 29% 69%;
+    grid-column-gap: 25px;
+    justify-content: center;
+    justify-items: center;
+}
+
+.w100p, .wt100p {
+    padding: 25px;
+    width: 100%;
+}
+
+.wh300 {
+    padding: 25px;
+    height: 300px;
+    width: 300px;
+}
+
+.w600 {
+    padding: 25px;
+    width: 600px;
+}
+
 
 /***************************** 
 ** index.php grid 
@@ -459,7 +484,7 @@ section {
 .my-search-main .form, .search-main .form, .main .form {
     grid-area: form;
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 90%;
     grid-template-rows: auto;
     justify-items: center;
     justify-content: center;
@@ -1575,7 +1600,7 @@ footer {
     border-collapse: collapse;
     margin: 0;
     padding: 0;
-    max-width: 100%;
+    max-width: 90%;
     table-layout: fixed;
     position: relative;
     min-width: 100%;
@@ -2000,7 +2025,7 @@ only screen and (max-width: 900px),
     /* Force table to not be like tables anymore */
     .table {
         border: 0;
-        max-width: 90% !important;
+        max-width: 100%;
     }
     
     .table thead {
@@ -2029,6 +2054,7 @@ only screen and (max-width: 900px),
         display: block;
         font-size: .8em;
         text-align: right;
+        word-wrap: break-word;
     }
 
     .table td::before {
@@ -2124,6 +2150,11 @@ only screen and (max-width: 900px),
     
     .search-user-functions .just-left, .search-user-functions .just-right  {
         justify-self: center;
+    }
+    
+    .grid-temp-30-70 {
+        grid-template-columns: 100%;
+        grid-row-gap: 35px;
     }
 }
 
@@ -2301,6 +2332,11 @@ only screen and (max-width: 890px),
     .my-search-graph {
         display: none;
     }
+    
+    .wt100p {
+        width: 100%;
+        padding: 5px;
+    }
 }
 
 @media 
@@ -2311,6 +2347,8 @@ only screen and (max-width: 300px),
         font-size: 6px !important;
         font-weight: 900 !important;
     }
+    
+    
 }
 
 .nav-show {

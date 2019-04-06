@@ -71,9 +71,9 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                 <h2 class="blue-header">Search History</h2>
             </section>
             
-            <article class="nav">
-                <section class="grid-wrap600">
-                    <section class="login shadow">
+            <article class="content">
+                <section class="grid-temp-30-70">
+                    <section class="w100p shadow bg-white">
                         <section class="form-contact">
                             <h2 class="login-title">Date Range</h2>
                             <form action="/admin/search-history.php" method="get">
@@ -105,7 +105,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                         </section>
                     </section>
                     
-                    <section class="login shadow">
+                    <section class="w100p bg-white shadow">
                         <h2 class="login-title">Charts</h2>
                         <section class="charts">
                             <article id="my-search-graph" class="my-search-graph"></article>
@@ -116,7 +116,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
             </article>
                     
             <article class="content2">            
-                    <section class="login shadow bg-white">
+                    <section class="wt100p shadow bg-white">
                         <h2 class="login-title">Search History <?php if(!empty($userName)){ echo 'for '.$userName;} ?></h2>
                         <?php if(!empty($searchHist))
                         {

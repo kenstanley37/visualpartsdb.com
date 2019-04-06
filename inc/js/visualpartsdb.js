@@ -11,6 +11,7 @@ function startup(){
     datePickerSetup();
     mySearchCharts();
     myImgModal();
+    adminSearchCharts();
 }
   
 function myImgModal(){
@@ -89,15 +90,73 @@ function mySearchCharts(){
     var dfrom = $('#dfrom').val();
     var dto = $('#dto').val();
     var usersID = '';
-    userID = $('#users option:selected').val();
-    if(userID == ''){
-        userID = $('#tempID').val();
+    usersID = $('#users option:selected').val();
+    if(usersID == ''){
+        usersID = $('#tempID').val();
     }
 
     var data ={};
     data['dfrom'] = dfrom;
     data['dto'] = dto;
-    data['userID'] = userID;
+    data['userID'] = usersID;
+    $.ajax({
+       type: "POST",
+       url: url,
+       data: data, // set $_POST.
+       success: function(data)
+       {
+           console.log(data);
+           chart = c3.generate({
+               bindto: '#my-search-pie',
+                data: {
+        //          x: 'name',
+                  json: data,
+                  type: 'pie',
+                },
+                legend: {
+                    show: false
+                },
+              });
+           
+           chart = c3.generate({
+               bindto: '#my-search-graph',
+                data: {
+        //          x: 'name',
+                  json: data,
+                  type: 'bar',
+                },
+               legend: {
+                    show: false
+                },
+               bar: {
+                    width: {
+                        ratio: 1 // this makes bar width 50% of length between ticks
+                    }
+                   
+                // or
+                //width: 100 // this makes bar width 100px
+                },
+               
+
+              });
+       },
+       error: function (data) {
+            console.log('An error occurred.');
+            console.log(data);
+        }
+     });
+    
+}
+
+function adminSearchCharts(){
+    var dfrom = $('#dfrom').val();
+    var dto = $('#dto').val();
+    var usersID = '';
+    usersID = $('#users option:selected').val();
+    var data ={};
+    data['dfrom'] = dfrom;
+    data['dto'] = dto;
+    data['userID'] = usersID;
     $.ajax({
        type: "POST",
        url: url,
