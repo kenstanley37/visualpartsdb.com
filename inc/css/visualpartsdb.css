@@ -330,6 +330,14 @@ section {
     width: 600px;
 }
 
+.break-word {
+    word-wrap: break-word;
+}
+
+.fz12 {
+    font-size: 12px !important;
+}
+
 
 /***************************** 
 ** index.php grid 
@@ -404,15 +412,17 @@ section {
 .img-viewer {
     display: grid;
     width: 100%;
+    max-height: 400px;
     grid-template-columns: 150px auto; 
+    grid-template-rows: auto;
 }
 
 .larger-img {
     display: grid;
     justify-items: center;
+    grid-template-rows: auto;
     padding: 15px;
-    max-width: 600px;
-    max-height: 600px;
+
 }
 
 .larger-img p {

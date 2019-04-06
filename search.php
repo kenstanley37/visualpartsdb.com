@@ -218,24 +218,20 @@ if(isset($_GET['export'])){
                                                 <td class="grey-text">
                                                     <i class="fas fa-ruler"></i>
                                                 </td>
-                                                <td class="grey-text">
-                                                    UOM
-                                                </td>
-                                                <td class="grey-text">
-                                                    INCHES
-                                                </td>
+                                                <td>UOM</td>
+                                                <td>INCHES</td>
                                             </tr>
                                             <tr>
-                                                <td class="grey-text"><i class="fas fa-weight"></i></td>
-                                                <td class="grey-text">WEIGHT</td>
-                                                <td class="grey-text">LBS</td>
+                                                <td><i class="fas fa-weight"></i></td>
+                                                <td>WEIGHT</td>
+                                                <td>LBS</td>
                                             </tr>
                                             <tr class="sku-description">
                                                 <td><i class="fas fa-file-alt"></i></td>
                                                 <td colspan="2">Description</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3">
+                                                <td class="fz12 break-word" colspan="3">
                                                     <?php echo $dataResult['sku_desc']; ?>
                                                 </td>
                                             </tr>
@@ -382,10 +378,6 @@ if(isset($_GET['export'])){
                         
                         <section class="content2">
                             <section class="img-viewer">
-                                
-                                    <!--
-                                    <h2 class="center-title up-25 pad-bot-50 blue-header">IMAGES</h2> --> 
-                                    
                                 <?php 
                                 if(!empty($imageResult))
                                 {
