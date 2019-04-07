@@ -11,12 +11,12 @@
     
     
 
-    if(isset($_POST['dfrom'])){ 
+    if(isset($_POST['MySearchCharts'])){ 
         $dfrom = $_POST['dfrom'];
         $dto = $_POST['dto'];
         $userID = $_POST['userID'];
         
-        $result = $vpd->mysqlToJson($dfrom, $dto, $userID);
+        $result = $vpd->searchHistToJson($dfrom, $dto, $userID);
         
         //echo $result();
         return $result; 

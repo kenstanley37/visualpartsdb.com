@@ -26,8 +26,6 @@ if(isset($_POST['RegisterRequest']))
     $phone = $vail->sanitizeString($_POST['phone']);
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
-
-    echo $message;
     
     $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
 
@@ -47,7 +45,7 @@ if(isset($_POST['RegisterRequest']))
         $phone = '';
         $company = '';
         $message = '';
-        $rrSuccess = 'Thank you';
+        $rrSuccess = '<span class="error">Thank you</span>';
     }
 } 
 
@@ -58,6 +56,7 @@ if(isset($_GET['noaccess'])){
 $sku_count = $vpd->getSkuCount();
 $search_count = $vpd->getSearchCount();
 $image_count = $vpd->getImageCount();
+
 
 ?>
 <!DOCTYPE html>

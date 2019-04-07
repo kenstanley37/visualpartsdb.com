@@ -11,7 +11,9 @@ function startup(){
     datePickerSetup();
     mySearchCharts();
     myImgModal();
-    adminSearchCharts();
+    //adminSearchCharts();
+    dashBoardCharts();
+    $('.error').fadeOut(3500);
 }
   
 function myImgModal(){
@@ -21,8 +23,16 @@ function myImgModal(){
         $('.larger-img img').attr('src', img);
         $('.larger-img img').attr('alt', alt);
     });  
-}
     
+    $( ".modal-hover a" ).click(function(e) {
+        e.preventDefault();
+        img = $(this).attr('href');
+        alt = $(this).children('img').attr('alt');
+        $('.larger-img img').attr('src', img);
+        $('.larger-img img').attr('alt', alt);
+    });   
+}
+
 function datePickerSetup(){
     $( function() {
         var dateFormat = "yy-mm-dd",
@@ -74,7 +84,6 @@ function hamburgerNav(){
         $('.admin-nav-links').toggleClass('nav-show');
     });
 
-    
     $('.main-nav-bars').click(function(){
         $('.main-nav-bar').toggleClass('nav-show');
     });
@@ -99,6 +108,7 @@ function mySearchCharts(){
     data['dfrom'] = dfrom;
     data['dto'] = dto;
     data['userID'] = usersID;
+    data['MySearchCharts'] = 'MySearchCharts';
     $.ajax({
        type: "POST",
        url: url,
@@ -131,13 +141,10 @@ function mySearchCharts(){
                bar: {
                     width: {
                         ratio: 1 // this makes bar width 50% of length between ticks
-                    }
-                   
+                    } 
                 // or
                 //width: 100 // this makes bar width 100px
                 },
-               
-
               });
        },
        error: function (data) {
@@ -189,13 +196,10 @@ function adminSearchCharts(){
                bar: {
                     width: {
                         ratio: 1 // this makes bar width 50% of length between ticks
-                    }
-                   
+                    } 
                 // or
                 //width: 100 // this makes bar width 100px
                 },
-               
-
               });
        },
        error: function (data) {
@@ -203,5 +207,58 @@ function adminSearchCharts(){
             console.log(data);
         }
      });
-    
+}
+
+function dashBoardCharts(){
+    var dfrom = $('#dfrom').val();
+    var dto = $('#dto').val();
+    var usersID = '';
+    usersID = $('#users option:selected').val();
+    var data ={};
+    data['dfrom'] = dfrom;
+    data['dto'] = dto;
+    data['userID'] = usersID;
+    $.ajax({
+       type: "POST",
+       url: url,
+       data: data, // set $_POST.
+       success: function(data)
+       {
+           console.log(data);
+           chart = c3.generate({
+               bindto: '#my-search-pie',
+                data: {
+        //          x: 'name',
+                  json: data,
+                  type: 'pie',
+                },
+                legend: {
+                    show: false
+                },
+              });
+           
+           chart = c3.generate({
+               bindto: '#my-search-graph',
+                data: {
+        //          x: 'name',
+                  json: data,
+                  type: 'bar',
+                },
+               legend: {
+                    show: false
+                },
+               bar: {
+                    width: {
+                        ratio: 1 // this makes bar width 50% of length between ticks
+                    } 
+                // or
+                //width: 100 // this makes bar width 100px
+                },
+              });
+       },
+       error: function (data) {
+            console.log('An error occurred.');
+            console.log(data);
+        }
+     });
 }

@@ -17,8 +17,8 @@ if(isset($_GET['search']))
     $sku = $_GET['search'];
     $sku = $vail->sanitizeString($sku);
     $sku = strtoupper($sku);
-    $dataResult = $vpd->skuSearchData($sku);
-    $imageResult = $vpd->skuSearchImage($sku);
+    $dataResult = $vpd->getSkuData($sku);
+    $imageResult = $vpd->getSkuImage($sku);
     
     $createDate = $dataResult['sku_rec_date'];
     $createDate = date_create($createDate);

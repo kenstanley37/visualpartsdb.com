@@ -62,12 +62,11 @@ if(isset($_GET['error']))
                                     <textarea placeholder="Part description" name="desc" rows="4" cols="30" maxlength="100" required></textarea>
                                     
                                     <button type="submit" name="addpart" class="info" >Add</button>
-                                   
+                                    <?php if(isset($error)){echo '<span class="error">'.$error.'</span>';} ?>
                                 </fieldset>
                             </form>
                         </div>
                     </section>
-                <?php if(isset($error)){echo '<span>'.$error.'</span>';} ?>
                 </section>
             </section>
         </main>

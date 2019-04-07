@@ -23,7 +23,6 @@ html, body {
     justify-content: center;
     align-self: center;
     justify-items: center;
-
 }
 
 .toupper {
@@ -99,6 +98,10 @@ a:hover {
     background-color: red;
 }
 
+.bg-green {
+    background-color: green;
+}
+
 .bg-offwhite {
     background-color: navajowhite;
 }
@@ -113,6 +116,10 @@ a:hover {
 
 .bg-grey {
     background-color: #efefef !important;
+}
+
+.bg-orange {
+    background-color: #ffa500;
 }
 
 button:hover {
@@ -338,6 +345,26 @@ section {
     font-size: 12px !important;
 }
 
+.fz25 {
+    font-size: 25px !important;
+}
+
+.fz35 {
+    font-size: 35px !important;
+}
+
+
+.fz55 {
+    font-size: 55px !important;
+}
+
+.fz75 {
+    font-size: 75px !important;
+}
+
+.bold {
+    font-weight: bold;
+}
 
 /***************************** 
 ** index.php grid 
@@ -434,8 +461,6 @@ section {
 .larger-img p {
     line-height: 25px;
 }
-
-
 
 .main-export .title, .my-search-main .title, .search-main .title, .main .title {
     grid-area: title;
@@ -1550,35 +1575,37 @@ footer {
 
 .dash-top {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-template-rows: auto auto auto;
-    grid-template-areas: 
-        "topbox1 topbox2 topbox3";
-    grid-gap: 30px;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 25px;
     justify-content: center;
-    align-content: start;
-    border: 5px solid skyblue;
+    justify-items: center;
 }
 
-.dash-top .dash1 {
+.dash1, .dash2, .dash3, .dash4 {
+    display: grid;
+    grid-template-rows: 125px 25px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 150px;
+    min-width: 300px;
+}
+
+.dash4 {
+    grid-template-rows: 80px 45px 25px;
+}
+
+.dash1 {
     grid-area: topbox1;
-    height: 150px;
-    min-width: 300px;
-    border: 5px solid skyblue;
 }
 
-.dash-top .dash2 {
+.dash2 {
     grid-area: topbox2;
-    height: 150px;
-    min-width: 300px;
-    border: 5px solid skyblue;
 }
 
-.dash-top .dash3 {
+.dash3 {
     grid-area: topbox3;
-    height: 150px;
-    min-width: 300px;
-    border: 5px solid skyblue;
 }
 
 .dash-middle {

@@ -5,14 +5,29 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
-
+     /**
+     * USER handles user related methods
+     *
+     * @author Ken Stanley <ken@stanleysoft.org>
+     * @license MIT
+     */
     class USER
     {
+         /**
+         * database connection
+         *
+         * @var string
+         */
         private $conn;
 
-        // *************************************************************
-        // Constructor to connect to the database
-        // *************************************************************
+        /**
+        * Constructor to connect to the database
+        *
+        * @throws \PDOException
+        *
+        * @author Ken Stanley <ken@stanleysoft.org>
+        *
+        */
         public function __construct()
         {
             try 
@@ -27,9 +42,12 @@
             }
         } // end construct
         
-        // *************************************************************
-        // Destruct - end database connection
-        // *************************************************************
+        /**
+        * Destruct
+        * Destories the connection to the database
+        *
+        * @author Ken Stanley <ken@stanleysoft.org>
+        */
         public function __destruct()
         {
             $this->conn = null;
@@ -800,6 +818,49 @@
             }
         } // end regRequestList
         
+        /**
+        * Returns the amount of active register request
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return $count INT 
+        */
+        public function getRegRequestCount()
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM register_request");
+                $stmt->execute();
+                $count = $stmt->rowCount();
+                return $count;
+                
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end regRequestList
+        
+         /**
+        * Returns the amount of pending invited users
+        * 
+        * @author Ken Stanley <ken@stanleysoft.org>
+        * @return $count INT 
+        */
+        public function getUserPendingCount()
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM user where user_verify is Null");
+                $stmt->execute();
+                $count = $stmt->rowCount();
+                return $count;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end regRequestList
+        
          /**
         * Deletes register request from the database
         *
@@ -1376,7 +1437,5 @@
             header("Location: /");
             exit();
         }
-        
-        
     } // End Class
 ?>

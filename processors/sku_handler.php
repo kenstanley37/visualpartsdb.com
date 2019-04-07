@@ -70,13 +70,14 @@
         $desc = $vail->sanitizeString($_POST['desc']);
         
         $result = $vpd->addSku($sku, $desc);
-        
+        /*
         if($result)
         {
             header('location: /admin/update-sku.php?sku='.$sku);
         } else 
         {
-            header('location: /admin/add-part.php?error=notfound');
+            header('location: /admin/part-add.php?error=notfound');
         }
+        */
     }
 ?>

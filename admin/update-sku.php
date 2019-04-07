@@ -25,6 +25,12 @@ if(isset($_GET['sku']))
 {
     $sku = $_GET['sku'];
     $sku = strtoupper($sku);
+    if(isset($_GET['submit']))
+    {
+        $result = $_GET['submit'];
+        if($result == 'successful')
+        $message = 'Record was updated successfully';
+    } 
 }
 else 
 {
@@ -58,7 +64,7 @@ $count = 0;
             <section class="nav">
                 <section class="display">
                     <section class="sku-edit bg-white shadow">
-                        <h3 class="login-title"><?php echo $sku; ?></h3>
+                        <h3 class="login-title">SKU# <?php echo $sku; ?></h3>
                         <form id="UpdateSkuForm" method="post" action="/processors/sku_handler.php">
                         <input type="text" name="sku" value="<?php echo $sku; ?>" hidden>
                         <section class="grid-wrap250">
@@ -223,6 +229,12 @@ $count = 0;
                             </table>                       
                         </section> <!-- end Case Data -->
                             <button class="btn info" type="submit" name="skuUpdate" form="UpdateSkuForm">Submit</button>
+                            <?php 
+                                if(isset($message))
+                                {
+                                    echo '<span class="error">'.$message.'</span>';  
+                                }
+                            ?>
                         </form>
                     </section>
                 </section>
@@ -234,8 +246,8 @@ $count = 0;
                         <h2 class="login-title">Images</h2>
                         <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
                             Select image to upload:
-                            <input type="file" name="file" id="file">
-                            <input type="text" name="desc" id="desc" placeholder="Caption">
+                            <input type="file" name="file" id="file" required>
+                            <input type="text" name="desc" id="desc" placeholder="Caption" required>
                             <input type="hidden" id="skuId" name="skuId" value="<?php echo $skuData['sku_id']; ?>">
                             <input class="btn-blue" type="submit" value="Upload Image" name="imageSubmit">
                         </form>
