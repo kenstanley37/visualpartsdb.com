@@ -752,6 +752,7 @@
                     
                     // since we are formatting in JSON we need to set the header before returning the data.
                     if(!empty($data)){
+                    arsort($data,1);
                     header("Access-Control-Allow-Origin: *");//this allows coors
                     header('Content-Type: application/json');
                     

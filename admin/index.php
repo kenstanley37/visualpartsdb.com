@@ -86,7 +86,7 @@ $mostSearchedSku = $vpd->getMostSearchedSkuCount(30);
                 <div class="dash-top">
                     <div class="dash5">
                         <div id="dash5"></div>
-                        <div>test</div>
+                        <div>Top 10 Last 30 Days Searched</div>
                     </div>
                 </div>
             </section>
