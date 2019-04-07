@@ -210,42 +210,27 @@ function adminSearchCharts(){
 }
 
 function dashBoardCharts(){
-    var dfrom = $('#dfrom').val();
-    var dto = $('#dto').val();
-    var usersID = '';
-    usersID = $('#users option:selected').val();
     var data ={};
-    data['dfrom'] = dfrom;
-    data['dto'] = dto;
-    data['userID'] = usersID;
+    data['top30days'] = 'top30days';
     $.ajax({
        type: "POST",
        url: url,
        data: data, // set $_POST.
-       success: function(data)
+       success: function(resultData)
        {
-           console.log(data);
-           chart = c3.generate({
-               bindto: '#my-search-pie',
-                data: {
-        //          x: 'name',
-                  json: data,
-                  type: 'pie',
-                },
-                legend: {
-                    show: false
-                },
-              });
+ 
+           console.log(resultData);
            
            chart = c3.generate({
-               bindto: '#my-search-graph',
+               bindto: '#dash5',
                 data: {
         //          x: 'name',
-                  json: data,
+                  json: resultData,
                   type: 'bar',
+                  order: 'null',
                 },
                legend: {
-                    show: false
+                    show: true
                 },
                bar: {
                     width: {
@@ -253,7 +238,7 @@ function dashBoardCharts(){
                     } 
                 // or
                 //width: 100 // this makes bar width 100px
-                },
+                }
               });
        },
        error: function (data) {

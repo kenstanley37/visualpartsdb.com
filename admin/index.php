@@ -25,7 +25,10 @@ if(!isset($_SESSION['user_id']))
 $regRequestCount = $user->getRegRequestCount();
 $pendingUser = $user->getUserPendingCount();
 $skuUpdateCount = $vpd->getSkuUpdateRequestCount();
-$mostSearchedSku = $vpd->getMostSearchedSkuCount(1);
+/*
+* @param INT is the number of days to look back
+*/
+$mostSearchedSku = $vpd->getMostSearchedSkuCount(30);
 
 
 ?>
@@ -73,16 +76,19 @@ $mostSearchedSku = $vpd->getMostSearchedSkuCount(1);
                     <a href="/admin/update-request.php?sku=active">
                         <div class="dash4 bg-orange shadow" id="dash3">
                             <div class="fz35 bold text-white"><?php echo $mostSearchedSku[0]['sku_search_sku']; ?></div>
-                            <div class="fz15 bold text-white"><?php echo $mostSearchedSku[0]['Count']; ?> Searches</div>
+                            <div class="fz15 bold text-white"><?php echo $mostSearchedSku[0]['skuCount']; ?> Searches</div>
                             <div class="text-white">Past 30 Days Most Searched SKU</div>
                         </div>
                     </a>
                 </div>
             </section>
             <section class="content2">
-                <section class="dash-middle">
-                    <section class="dash4">100% Width</section>
-                </section>
+                <div class="dash-top">
+                    <div class="dash5">
+                        <div id="dash5"></div>
+                        <div>test</div>
+                    </div>
+                </div>
             </section>
         </main>
         <footer>

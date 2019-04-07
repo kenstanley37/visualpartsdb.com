@@ -119,7 +119,7 @@ a:hover {
 }
 
 .bg-orange {
-    background-color: #ffa500;
+    background-color: #da621e;
 }
 
 button:hover {
@@ -1594,6 +1594,15 @@ footer {
 
 .dash4 {
     grid-template-rows: 80px 45px 25px;
+}
+
+.dash5 {
+    width: 90%;
+    height: 200px;
+}
+
+#dash5 {
+
 }
 
 .dash1 {

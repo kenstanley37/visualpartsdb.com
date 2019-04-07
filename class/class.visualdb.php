@@ -718,6 +718,53 @@
         } // end searchHistoryToJson
         
         /**
+        * Returns the top 10 most searched SKUs in JSON format for C3 processing
+        *
+        * @param type $days INT number of days to look back
+        *
+        * @return $data jSON format for C3
+        *
+        * @throws \PDOException
+        *
+        * @author Ken Stanley <ken@stanleysoft.org>
+        */
+        public function top30SearchHistToJson($days)
+        {
+            $time = new DateTime('now');
+            $newtime = $time->modify('-'.$days.' days')->format('Y-m-d');
+            try {
+                    $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as skuCount FROM sku_search 
+                    WHERE sku_search_date >= :days 
+                    GROUP by sku_search_sku
+                    ORDER BY count(sku_search_sku) desc
+                    LIMIT 10");
+                    $count->bindparam(":days", $days);
+                
+                    $count->execute();
+                    $data = array(); // set an array for JSON output
+                    
+                    while($countrow = $count->fetch(PDO::FETCH_ASSOC))
+                    {
+                        //Create an array that C3 can read correctly
+                        $index = $countrow['sku_search_sku'];
+                        $data[$index] = $countrow['skuCount'];                
+                    }
+                    
+                    // since we are formatting in JSON we need to set the header before returning the data.
+                    if(!empty($data)){
+                    header("Access-Control-Allow-Origin: *");//this allows coors
+                    header('Content-Type: application/json');
+                    
+                    print json_encode($data);
+                    }
+                }   
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }	
+        } // end searchHistoryToJson
+        
+        /**
         * Returns sku update request records based on $type
         *
         * @param type $type STRING can be 'active', 'complete', 'sku#'
@@ -832,11 +879,11 @@
             $newtime = $time->modify('-'.$days.' days')->format('Y-m-d');
             try
             {
-                $stmt = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as Count 
-                    FROM sku_search 
-                    WHERE sku_search_date > :date
+                $stmt = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as skuCount FROM sku_search 
+                    WHERE sku_search_date >= :date 
                     GROUP by sku_search_sku
-                    ORDER by Count desc LIMIT 1");
+                    ORDER BY count(sku_search_sku) desc
+                    LIMIT 1");
                 $stmt->bindparam(":date", $newtime);
                 $stmt->execute();
                 

@@ -9,16 +9,16 @@
     $vail = new VALIDATE;
     $user = new USER;
     
-    
-
     if(isset($_POST['MySearchCharts'])){ 
         $dfrom = $_POST['dfrom'];
         $dto = $_POST['dto'];
         $userID = $_POST['userID'];
-        
         $result = $vpd->searchHistToJson($dfrom, $dto, $userID);
-        
-        //echo $result();
+        return $result; 
+    }
+
+    if(isset($_POST['top30days'])){ 
+        $result = $vpd->top30SearchHistToJson(30);
         return $result; 
     }
 
