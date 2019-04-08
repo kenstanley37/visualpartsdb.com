@@ -9,8 +9,6 @@ $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
 
-$userListActive = $user->userList('active'); 
-
 if(!isset($_SESSION['user_id']))
 {
     header('location: /');
@@ -31,6 +29,9 @@ if(isset($_GET['register']))
         $result = 'Registeration request has been sent';
     }
 }
+
+$pending = $user->userList('active');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +62,11 @@ if(isset($_GET['register']))
             <section class="nav">
                 <section class="display">
                     <section class="login shadow">
-                        <h2 class="login-title">Members</h2>
+                        <h2 class="login-title">Active Members</h2>
+                        <?php 
+                        if(!empty($pending))
+                        {
+                        ?>
                         <table class="table shadow">
                             <thead>
                                 <tr>
@@ -76,83 +81,80 @@ if(isset($_GET['register']))
                                     <td></td>
                                 </tr>
                             </thead>
-                        <tbody>
-                        <?php 
-                        if(!empty($userListActive))
-                        {
-                            foreach($userListActive as $row)
+                            <tbody>
+                        <?php
+
+                                foreach($pending as $row)
+                                {
+                                    $date = $row['user_reg_date'];
+                                    $dateadded = date_create($date);
+                                    $addDate = date_format($dateadded, 'm/d/Y');
+                                    ?>
+                                    <tr>
+                                        <td data-label="ID">
+                                            <?php echo $row['user_id']; ?>
+                                        </td>
+                                        <td data-label="First">
+                                            <?php echo $row['user_fName']; ?>
+                                        </td>
+                                        <td data-label="Last">
+                                            <?php echo $row['user_lName']; ?>
+                                        </td>
+                                        <td data-label="Email">
+                                            <?php echo $row['user_email']; ?>
+                                        </td>
+                                        <td data-label="Company">
+                                            <?php echo $row['company_name']; ?>
+                                        </td>
+                                        <td data-label="Status">
+                                            <form method="post" action="/processors/userManagement.php">
+                                                <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
+                                                <button type="submit" class="btn <?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>">
+                                                    <?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td data-label="Role">
+                                            <form action="/processors/userManagement.php" method="post">
+                                                <input type="number" name="userID" value="<?php echo $row['user_id']; ?>" hidden>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <button class="btn <?php if($row['role_name'] == 'USER'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToUser">
+                                                                USER 
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn <?php if($row['role_name'] == 'ADMIN'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToAdmin">
+                                                                ADMIN 
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                        </td>
+                                        <td data-label="Member Since">
+                                            <?php echo $addDate; ?>
+                                        </td> 
+                                        <td>
+                                            <form action="/admin/deleteuser.php" method="post">
+                                                <input hidden type="text" name="userID" value="<?php echo $row['user_id']; ?>">
+                                                <button type="submit" name="remUser" class="btn danger">DELETE</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    }
+                                } else 
                             {
-                                $date = $row['user_reg_date'];
-                                $dateadded = date_create($date);
-                                $addDate = date_format($dateadded, 'm/d/Y');
-                                $userID = $row['user_id'];
                                 ?>
-                                <tr>
-                                    <td data-label="ID">
-                                        <?php echo $row['user_id']; ?>
-                                    </td>
-                                    <td data-label="First">
-                                        <?php echo $row['user_fName']; ?>
-                                    </td>
-                                    <td data-label="Last">
-                                        <?php echo $row['user_lName']; ?>
-                                    </td>
-                                    <td data-label="Email">
-                                        <?php echo $row['user_email']; ?>
-                                    </td>
-                                    <td data-label="Company">
-                                        <?php echo $row['company_name']; ?>
-                                    </td>
-                                    <td data-label="Status">
-                                        <form method="post" action="/processors/userManagement.php">
-                                            <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
-                                            <button type="submit" class="btn <?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>">
-                                                <?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?>
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td data-label="Role">
-                                        <form action="/processors/userManagement.php" method="post">
-                                            <input type="number" name="userID" value="<?php echo $userID; ?>" hidden>
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <button class="btn <?php if($row['role_name'] == 'USER'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToUser">
-                                                            USER 
-                                                        </button>
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn <?php if($row['role_name'] == 'ADMIN'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToAdmin">
-                                                            ADMIN 
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </form>
-                                    </td>
-                                    <td data-label="Member Since">
-                                        <?php echo $addDate; ?>
-                                    </td> 
-                                    <td>
-                                        <form action="/admin/deleteuser.php" method="post">
-                                            <input hidden type="text" name="userID" value="<?php echo $userID; ?>">
-                                            <button type="submit" name="remUser" class="btn danger">DELETE</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <p>There are currently no pending users.</p>
                                 <?php
-                                }
-                            } else 
-                        {
-                            ?>
-                                <p>There are no users! Please created one.</p>
-                            <?php
-                        }
-                            ?>
-                         </tbody>
-                    </table> 
+                            }
+                                ?>
+                             </tbody>
+                        </table> 
                     </section>
-                    
                 </section>
             </section>    
         </main>

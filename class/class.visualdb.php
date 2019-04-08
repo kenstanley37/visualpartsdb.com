@@ -728,7 +728,7 @@
         *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
-        public function top30SearchHistToJson($days)
+        public function topSearchHistToJson($days)
         {
             $time = new DateTime('now');
             $newtime = $time->modify('-'.$days.' days')->format('Y-m-d');
@@ -738,32 +738,34 @@
                     GROUP by sku_search_sku
                     ORDER BY count(sku_search_sku) desc
                     LIMIT 10");
-                    $count->bindparam(":days", $days);
+                    $count->bindparam(":days", $newtime);
                 
                     $count->execute();
                     $data = array(); // set an array for JSON output
-                    
+                    //$ticker = 0;
                     while($countrow = $count->fetch(PDO::FETCH_ASSOC))
                     {
                         //Create an array that C3 can read correctly
                         $index = $countrow['sku_search_sku'];
-                        $data[$index] = $countrow['skuCount'];                
+                        //array_push($data, $ticker, $countrow['sku_search_sku'], $countrow['skuCount']);
+                        $data[$index] = $countrow['skuCount'];     
+                        //$ticker++;
                     }
-                    
+                                
                     // since we are formatting in JSON we need to set the header before returning the data.
                     if(!empty($data)){
-                    arsort($data,1);
+                    //krsort($data);
                     header("Access-Control-Allow-Origin: *");//this allows coors
                     header('Content-Type: application/json');
                     
-                    print json_encode($data);
+                    print json_encode($data, JSON_NUMERIC_CHECK);
                     }
                 }   
                 catch(PDOException $e)
                 {
                     echo $e->getMessage();
                 }	
-        } // end searchHistoryToJson
+        } 
         
         /**
         * Returns sku update request records based on $type

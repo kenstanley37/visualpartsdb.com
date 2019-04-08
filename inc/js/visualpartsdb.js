@@ -12,7 +12,13 @@ function startup(){
     mySearchCharts();
     myImgModal();
     //adminSearchCharts();
-    dashBoardCharts();
+    if($("#dash5").length){
+        top30days();
+    }
+    if($("#dash6").length){
+        top7days();
+    }
+    
     $('.error').fadeOut(3500);
 }
   
@@ -209,7 +215,7 @@ function adminSearchCharts(){
      });
 }
 
-function dashBoardCharts(){
+function top30days(){
     var data ={};
     data['top30days'] = 'top30days';
     $.ajax({
@@ -226,13 +232,52 @@ function dashBoardCharts(){
                 data: {
         //          x: 'name',
                   json: resultData,
-                  type: 'bar',
-                  order: 'null',
+                  type: 'pie',
+                  order: 'desc',
                 },
                legend: {
-                    show: true
+                    show: false
                 },
-               bar: {
+               pie: {
+                    width: {
+                        ratio: 1 // this makes bar width 50% of length between ticks
+                    } 
+                // or
+                //width: 100 // this makes bar width 100px
+                }
+              });
+       },
+       error: function (data) {
+            console.log('An error occurred.');
+            console.log(data);
+        }
+     });
+}
+
+function top7days(){
+    var data ={};
+    data['top7days'] = 'top7days';
+    $.ajax({
+       type: "POST",
+       url: url,
+       data: data, // set $_POST.
+       success: function(resultData)
+       {
+ 
+           console.log(resultData);
+           
+           chart = c3.generate({
+               bindto: '#dash6',
+                data: {
+        //          x: 'name',
+                  json: resultData,
+                  type: 'pie',
+                  order: 'desc',
+                },
+               legend: {
+                    show: false
+                },
+               pie: {
                     width: {
                         ratio: 1 // this makes bar width 50% of length between ticks
                     } 

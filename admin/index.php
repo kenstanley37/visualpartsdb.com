@@ -28,7 +28,9 @@ $skuUpdateCount = $vpd->getSkuUpdateRequestCount();
 /*
 * @param INT is the number of days to look back
 */
-$mostSearchedSku = $vpd->getMostSearchedSkuCount(30);
+$mostSearched30 = $vpd->getMostSearchedSkuCount(30);
+$mostSearched7 = $vpd->getMostSearchedSkuCount(7);
+$mostSearched1 = $vpd->getMostSearchedSkuCount(1);
 
 
 ?>
@@ -73,20 +75,38 @@ $mostSearchedSku = $vpd->getMostSearchedSkuCount(30);
                             <div class="text-white">Update Request</div>
                         </div>
                     </a>
-                    <a href="/admin/update-request.php?sku=active">
-                        <div class="dash4 bg-orange shadow" id="dash3">
-                            <div class="fz35 bold text-white"><?php echo $mostSearchedSku[0]['sku_search_sku']; ?></div>
-                            <div class="fz15 bold text-white"><?php echo $mostSearchedSku[0]['skuCount']; ?> Searches</div>
+                    <a href="/admin/update-sku.php?sku=<?php echo $mostSearched30[0]['sku_search_sku']; ?>">
+                        <div class="dash4 bg-blue shadow" id="dash4">
+                            <div class="fz35 bold text-white"><?php echo $mostSearched30[0]['sku_search_sku']; ?></div>
+                            <div class="fz15 bold text-white"><?php echo $mostSearched30[0]['skuCount']; ?> Searches</div>
                             <div class="text-white">Past 30 Days Most Searched SKU</div>
+                        </div>
+                    </a>
+                    <a href="/admin/update-sku.php?sku=<?php echo $mostSearched7[0]['sku_search_sku']; ?>">
+                        <div class="dash4 bg-red shadow" id="dash4">
+                            <div class="fz35 bold text-white"><?php echo $mostSearched7[0]['sku_search_sku']; ?></div>
+                            <div class="fz15 bold text-white"><?php echo $mostSearched7[0]['skuCount']; ?> Searches</div>
+                            <div class="text-white">Past 7 Days Most Searched SKU</div>
+                        </div>
+                    </a>
+                    <a href="/admin/update-sku.php?sku=<?php echo $mostSearched1[0]['sku_search_sku']; ?>">
+                        <div class="dash4 bg-green shadow" id="dash4">
+                            <div class="fz35 bold text-white"><?php echo $mostSearched1[0]['sku_search_sku']; ?></div>
+                            <div class="fz15 bold text-white"><?php echo $mostSearched1[0]['skuCount']; ?> Searches</div>
+                            <div class="text-white">Past 1 Day Most Searched SKU</div>
                         </div>
                     </a>
                 </div>
             </section>
             <section class="content2">
-                <div class="dash-top">
-                    <div class="dash5">
+                <div class="dash-bottom">
+                    <div class="dash5-left bg-orange shadow">
                         <div id="dash5"></div>
-                        <div>Top 10 Last 30 Days Searched</div>
+                        <div class="text-white">Past 30 Days Most Searched SKUs</div>
+                    </div>
+                    <div class="dash5-right bg-orange shadow">
+                        <div id="dash6"></div>
+                        <div class="text-white">Past 7 Days Most Searched SKUs</div>
                     </div>
                 </div>
             </section>

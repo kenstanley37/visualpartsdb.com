@@ -18,7 +18,12 @@
     }
 
     if(isset($_POST['top30days'])){ 
-        $result = $vpd->top30SearchHistToJson(30);
+        $result = $vpd->topSearchHistToJson(30);
+        return $result; 
+    }
+
+    if(isset($_POST['top7days'])){ 
+        $result = $vpd->topSearchHistToJson(7);
         return $result; 
     }
 

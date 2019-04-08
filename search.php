@@ -208,7 +208,6 @@ if(isset($_GET['export'])){
                     </section>
 
                     <section class="content pad-bot-50">
-                        <section class="display">
                             <section class="grid-wrap250 sku-data">
                                 <div class="sku-content shadow bg-white">
                                     <h3>INFORMATION</h3>
@@ -373,50 +372,49 @@ if(isset($_GET['export'])){
                                 }
                                 ?>
                             </section>
-                        </section>
                     </section>
                         
-                        <section class="content2">
-                            <section class="img-viewer">
-                                <?php 
-                                if(!empty($imageResult))
-                                {
-                                    ?>
-                                <section class="display sku-images flex-start">
-                                    <section class="grid-wrap250">
-                                        <?php
-                                    foreach($imageResult as $image)
-                                    {
-                                        ?>
-                                            <figure class="card-responsive bg-white shadow">
-                                                <div class="card-img modal-hover">
-                                                    <a href="<?php echo $image['sku_image_url']; ?>">
-                                                        <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />
-                                                    </a>
-                                                </div>
-                                            </figure>
-                                        <?php
-                                    }
-                                    ?>
-                                    </section>
-                                </section>
-                                <section class="larger-img shadow bg-white">
-                                    <img  src="<?php echo $imageResult[0]['sku_image_url']; ?>" alt="<?php echo $imageResult[0]['sku_image_sku_id'].'-'.$imageResult[0]['sku_image_description']; ?>" >
-                                </section>
+                    <section class="content2">
+                        <section class="img-viewer">
                             <?php 
-                                } else
+                            if(!empty($imageResult))
+                            {
+                                ?>
+                            <section class="display sku-images flex-start">
+                                <section class="grid-wrap250">
+                                    <?php
+                                foreach($imageResult as $image)
                                 {
                                     ?>
-
-                                <section></section>
-                                <section class="larger-img">
-                                    <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
-                                </section>
+                                        <figure class="card-responsive bg-white shadow">
+                                            <div class="card-img modal-hover">
+                                                <a href="<?php echo $image['sku_image_url']; ?>">
+                                                    <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />
+                                                </a>
+                                            </div>
+                                        </figure>
                                     <?php
                                 }
                                 ?>
+                                </section>
                             </section>
+                            <section class="larger-img shadow bg-white">
+                                <img  src="<?php echo $imageResult[0]['sku_image_url']; ?>" alt="<?php echo $imageResult[0]['sku_image_sku_id'].'-'.$imageResult[0]['sku_image_description']; ?>" >
+                            </section>
+                        <?php 
+                            } else
+                            {
+                                ?>
+
+                            <section></section>
+                            <section class="larger-img">
+                                <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
+                            </section>
+                                <?php
+                            }
+                            ?>
                         </section>
+                    </section>
                         
             <?php
             } else
