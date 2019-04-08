@@ -79,21 +79,21 @@ $mostSearched1 = $vpd->getMostSearchedSkuCount(1);
                         <div class="dash4 bg-blue shadow" id="dash4">
                             <div class="fz35 bold text-white"><?php echo $mostSearched30[0]['sku_search_sku']; ?></div>
                             <div class="fz15 bold text-white"><?php echo $mostSearched30[0]['skuCount']; ?> Searches</div>
-                            <div class="text-white">Past 30 Days Most Searched SKU</div>
+                            <div class="text-white">Top Searched 30 Days</div>
                         </div>
                     </a>
                     <a href="/admin/update-sku.php?sku=<?php echo $mostSearched7[0]['sku_search_sku']; ?>">
                         <div class="dash4 bg-red shadow" id="dash4">
                             <div class="fz35 bold text-white"><?php echo $mostSearched7[0]['sku_search_sku']; ?></div>
                             <div class="fz15 bold text-white"><?php echo $mostSearched7[0]['skuCount']; ?> Searches</div>
-                            <div class="text-white">Past 7 Days Most Searched SKU</div>
+                            <div class="text-white">Top Searched 7 days</div>
                         </div>
                     </a>
                     <a href="/admin/update-sku.php?sku=<?php echo $mostSearched1[0]['sku_search_sku']; ?>">
                         <div class="dash4 bg-green shadow" id="dash4">
                             <div class="fz35 bold text-white"><?php echo $mostSearched1[0]['sku_search_sku']; ?></div>
                             <div class="fz15 bold text-white"><?php echo $mostSearched1[0]['skuCount']; ?> Searches</div>
-                            <div class="text-white">Past 1 Day Most Searched SKU</div>
+                            <div class="text-white">Top Searched Past Day</div>
                         </div>
                     </a>
                 </div>
@@ -102,11 +102,11 @@ $mostSearched1 = $vpd->getMostSearchedSkuCount(1);
                 <div class="dash-bottom">
                     <div class="dash5-left bg-orange shadow">
                         <div id="dash5"></div>
-                        <div class="text-white">Past 30 Days Most Searched SKUs</div>
+                        <div class="text-white">Top 10 30 Days</div>
                     </div>
                     <div class="dash5-right bg-orange shadow">
                         <div id="dash6"></div>
-                        <div class="text-white">Past 7 Days Most Searched SKUs</div>
+                        <div class="text-white">Top 7 30 Days</div>
                     </div>
                 </div>
             </section>

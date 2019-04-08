@@ -873,6 +873,7 @@ header .name a {
 .index-bg {
     grid-area: indexbg;
     background-image: url(/images/index-background-search.png);
+    
           /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: 0px 120px;
@@ -1400,9 +1401,6 @@ figcaption, .card figcaption, .card-responsive figcaption {
     width: 95vw;
     padding-top: 50px;
 }
-.search-nav {
-
-}
 
 .search-user-functions {
     width: 100%;
@@ -1919,7 +1917,7 @@ footer {
 
     header .searchbox {
         grid-area: searchboxnav;
-        padding-bottom: 15px;
+
     }
 
     header .navlinks section {
@@ -2141,8 +2139,6 @@ only screen and (max-width: 900px),
         grid-area: adminextra;
         grid-column: 1 / span 6;
     }
-    
-    
     
     .index-search input {
         width: 150px;
@@ -2413,8 +2409,43 @@ only screen and (max-width: 890px),
         padding: 5px;
     }
     
-    .dash-top, .dash-bottom  {
+    .dash-top {
+        display: grid;
+        width: 100%;
         grid-template-columns: 100%;
+        grid-gap: 25px;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .dash1, .dash2, .dash3, .dash4, .dash5 {
+        display: grid;
+        grid-template-rows: 125px 25px;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+
+    }
+
+    .dash4 {
+        grid-template-rows: 80px 45px 25px;
+    }
+
+    .dash-bottom {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 100%;
+        grid-gap: 25px;
+        justify-items: center;
+    }
+
+    .fz15 {
+        font-size: 12px;
+    }
+    
+    .fz35 {
+        font-size: 25px;
     }
 }
 
