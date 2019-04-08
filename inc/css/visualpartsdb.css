@@ -341,6 +341,10 @@ section {
     width: 600px;
 }
 
+.mh500 {
+    max-height: 290px;
+}
+
 .break-word {
     word-wrap: break-word;
 }

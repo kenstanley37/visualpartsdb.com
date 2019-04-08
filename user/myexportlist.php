@@ -49,7 +49,7 @@ if(!isset($_SESSION['user_id']))
 
             <section class="content">
                 <section class="grid-temp-30-70">
-                        <section class="w100p shadow bg-white">
+                        <section class="w100p mh500 shadow bg-white">
                             <h2 class="login-title">Create List</h2>
                              <section class="form-contact">
                                 <form action="/processors/userManagement.php" method="post">
