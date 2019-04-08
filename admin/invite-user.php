@@ -59,18 +59,18 @@ $company = $user->dropDownCompany();
                             <h3 class="login-title">Register Invite</h3>
                             <form id="addUser" method="post" action="/processors/register_request.php">
                                 <fieldset>
+                                    <label class="label" for="regcompany">Select company</label>
                                     <select class="select-css" name="regcompany" id="regcompany" required>
-                                            <label for="regcompany">Company</label>
-                                            <option placeholder="Company" value=""></option>
-                                            <?php foreach($company as $row)
-                                            {
-                                                ?>
-                                                <option value="<?php echo $row['company_id']; ?>">
-                                                    <?php echo $row['company_name']; ?>
-                                                </option>
-                                                <?php
-                                            }
-                                            ?>
+                                        <option placeholder="Company" value=""></option>
+                                        <?php foreach($company as $row)
+                                        {
+                                        ?>
+                                        <option value="<?php echo $row['company_id']; ?>">
+                                            <?php echo $row['company_name']; ?>
+                                        </option>
+                                        <?php
+                                        }
+                                        ?>
                                         </select>
                                     
                                     <input placeholder="First Name" type="text" name="regfname" required>

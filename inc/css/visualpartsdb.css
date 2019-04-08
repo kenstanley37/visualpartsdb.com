@@ -1180,6 +1180,10 @@ figcaption, .card figcaption, .card-responsive figcaption {
     font-size: 12px;
 }
 
+.form-contact select {
+    margin-top: 10px;
+}
+
 .form-contact textarea {
     margin-bottom: 30px;
     max-width: 100%;

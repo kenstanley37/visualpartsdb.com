@@ -62,6 +62,10 @@ if(!isset($_SESSION['user_id']))
 
                         <section class="w100p shadow bg-white">
                             <h2 class="blue-header pad-bot-35">Lists</h2>
+                            <?php
+                                if($listcount >= 1)
+                                {
+                                    ?>
                             <table class="table shadow">
                                 <thead>
                                     <tr align="middle">
@@ -75,9 +79,7 @@ if(!isset($_SESSION['user_id']))
                                     </tr>
                                 </thead>
                                 <tbody>
-                            <?php
-                                if($listcount >= 1)
-                                {
+                                    <?php
                                     foreach($myList as $row)
                                     {
                                         $date = $row['pl_list_added'];
