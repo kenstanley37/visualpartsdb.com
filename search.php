@@ -430,7 +430,10 @@ if(isset($_GET['export'])){
                         <div></div>
                         <div>
                             <?php 
-                                echo $ad['sku_ad_other'];
+                                foreach($skuAds as $ad)
+                                {
+                                    echo $ad['sku_ad_other'];
+                                }
                             ?>
                         </div>
                         <div></div>
