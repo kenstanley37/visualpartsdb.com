@@ -19,6 +19,7 @@ if(isset($_GET['search']))
     $sku = strtoupper($sku);
     $dataResult = $vpd->getSkuData($sku);
     $imageResult = $vpd->getSkuImage($sku);
+    $skuAds = $vpd->getSkuAds($sku);
     
     $createDate = $dataResult['sku_rec_date'];
     $createDate = date_create($createDate);
@@ -414,6 +415,14 @@ if(isset($_GET['export'])){
                             }
                             ?>
                         </section>
+                    </section>
+                    <section class="sku-ads">
+                    <?php 
+                        foreach($skuAds as $ad)
+                        {
+                            echo $ad['sku_ad_link'];
+                        }
+                    ?>
                     </section>
                         
             <?php

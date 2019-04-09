@@ -422,10 +422,23 @@ section {
     grid-auto-rows: auto ;
     grid-template-areas: 
         "nav nav" 
-        "title title"
+        "title skuads"
         "form form"
         "mcontent2 mcontent";
     grid-row-gap: 15px;
+}
+
+.sku-ads {
+    grid-area: skuads;
+    display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: auto;
+    /*
+    justify-content: flex-end;
+    justify-items: flex-end;
+    */
+    position: relative;
+    padding-bottom: 25px;
 }
 
 .my-search-main {

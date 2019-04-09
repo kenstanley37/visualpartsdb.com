@@ -73,6 +73,36 @@
         }
         
         /**
+        * Pulls all the SKU ads from the database 
+        *
+        * @param type $sku STRING the sku ID
+        *
+        * @return $result array of results
+        * @throws \PDOException
+        *
+        * @author Ken Stanley <ken@stanleysoft.org>
+        */
+        public function getSkuAds($sku)
+        {
+            $sku = strtoupper($sku);
+
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM sku_ads 
+                    WHERE sku_ad_sku_id=:sku");
+                $stmt->bindparam(":sku", $sku);
+                $stmt->execute();
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end getSkuAds
+        
+        /**
         * Searches the database for the requested sku and returns information
         * Sets the search ticker
         *
