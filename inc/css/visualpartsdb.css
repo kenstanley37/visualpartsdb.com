@@ -2299,8 +2299,7 @@ only screen and (max-width: 890px),
     .index-search {
         grid-area: indexsearch;
         display: grid;
-        max-height: 300px;
-        min-height: 300px;
+        height: 265px;
         z-index: 1;
         margin-bottom: 35px;
         width: 100%;
