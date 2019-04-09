@@ -93,29 +93,31 @@ if(isset($_GET['error'])){
             </section>
             
             <section class="nav">
-                <section class="display">
-                     <section class="login shadow">
+                   
+            </section>
+            <secion class="content">
+                  <section class="login shadow">
                         <div class="form-contact">
                             <h3 class="login-title">LOGIN</h3>
                             <form action="login.php" method="post">
-                                    <input required type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
-                                    <?php if(isset($emailError)){echo '<span class="error">' .$emailError.'</span>';} ?>
+                                <input required type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
+                                <?php if(isset($emailError)){echo '<span class="error">' .$emailError.'</span>';} ?>
 
-                                    <input required type="password" placeholder="Password" id="password" name="password">
-                                    <?php echo '<span class="error">' .$passwordError.'</span>'; ?>
+                                <input required type="password" placeholder="Password" id="password" name="password">
+                                <?php echo '<span class="error">' .$passwordError.'</span>'; ?>
+
+                                <div class="center">
+                                    <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
+                                </div>
+                                <?php echo '<span class="error">' .$captchaError.'</span>'; ?>
                                 
-                                    <div class="center">
-                                        <div class="g-recaptcha" data-sitekey="6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k"></div>
-                                    </div>
-                                    <?php echo '<span class="error">' .$captchaError.'</span>'; ?>
-                                    <input class="btn-blue" type="submit" name="Login" value="Login">
+                                <input class="btn-blue" type="submit" name="Login" value="Login">
 
-                                    <a href="/user/reset.php">Forgot password?</a>
+                                <a href="/user/reset.php">Forgot password?</a>
                             </form>
                         </div>
                     </section>
-                </section>
-            </section>
+            </secion>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>

@@ -136,6 +136,7 @@ button:hover {
 
 .error {
     color: red;
+    width: 100%;
     margin-top: 55px;
     padding-bottom: 75px !important;
 }
@@ -350,24 +351,23 @@ section {
 }
 
 .fz12 {
-    font-size: 12px !important;
+    font-size: 12px;
 }
 
 .fz25 {
-    font-size: 25px !important;
+    font-size: 25px;
 }
 
 .fz35 {
-    font-size: 35px !important;
+    font-size: 35px;
 }
 
-
 .fz55 {
-    font-size: 55px !important;
+    font-size: 55px;
 }
 
 .fz75 {
-    font-size: 75px !important;
+    font-size: 75px;
 }
 
 .bold {
@@ -621,23 +621,6 @@ section {
 
 .main .form h2, .main .content h2 {
     justify-self: flex-start;
-}
-
-.display {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.display p {
-    display:contents;
-}
-
-.display .not-found p {
-    display: block;
-    line-height: 35px;
 }
 
 /*
@@ -1176,6 +1159,11 @@ figcaption, .card figcaption, .card-responsive figcaption {
     transition: all .3s;
 }
 
+.form-contact span {
+     width: 100%;
+    border: none;
+}
+
 .form-contact a {
     text-align: center;
     font-size: 12px;
@@ -1223,7 +1211,7 @@ figcaption, .card figcaption, .card-responsive figcaption {
 }
 
 .login {
-    max-width: 90%;
+    max-width: 350px;
     position: relative;
 }
 
@@ -1586,6 +1574,7 @@ footer {
     width: 100%;
     grid-template-columns: repeat(3, minmax(350px, 1fr));
     grid-gap: 25px;
+    border: 1px solid red;
 }
 
 .dash1, .dash2, .dash3, .dash4, .dash5 {
@@ -1608,9 +1597,10 @@ footer {
     grid-template-columns: 50% 50%;
     grid-gap: 25px;
     justify-items: center;
+    border: 1px solid red;
 }
 
-.dash5-left {
+.dash5-left, .dash5-right {
     display: grid;
     grid-template-rows: 275px 25px;
     justify-content: center;
@@ -1622,16 +1612,6 @@ footer {
 
 #dash5, #dash6 {
     max-height: 275px;
-}
-
-.dash5-right {
-    display: grid;
-    grid-template-rows: 275px 25px;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    width: 100%;
-    height: 300px;
 }
 
 .dash-middle {
@@ -2425,7 +2405,6 @@ only screen and (max-width: 890px),
         justify-content: center;
         justify-items: center;
         align-items: center;
-
     }
 
     .dash4 {
@@ -2439,14 +2418,7 @@ only screen and (max-width: 890px),
         grid-gap: 25px;
         justify-items: center;
     }
-
-    .fz15 {
-        font-size: 12px;
-    }
-    
-    .fz35 {
-        font-size: 25px;
-    }
+ 
 }
 
 @media 
@@ -2456,6 +2428,14 @@ only screen and (max-width: 300px),
         width: 100% !important;
         font-size: 6px !important;
         font-weight: 900 !important;
+    }
+    
+    .fz15 {
+        font-size: 12px !important;
+    }
+    
+    .fz35 {
+        font-size: 25px !important;
     }
     
     
