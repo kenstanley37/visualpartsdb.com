@@ -19,7 +19,7 @@ function startup(){
         top7days();
     }
     
-    $('.error').fadeOut(3500);
+    //$('.error').fadeOut(3500);
 }
   
 function myImgModal(){
