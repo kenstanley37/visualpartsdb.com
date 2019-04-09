@@ -94,6 +94,15 @@ if(isset($_GET['export'])){
                         </section>
                     </section>
             
+                    <section class="sku-ad-banner">
+                    <?php 
+                        foreach($skuAds as $ad)
+                        {
+                            echo $ad['sku_ad_banner'];
+                        }
+                    ?>
+                    </section> 
+            
                     <section class="nav search-nav">
                         <section class="search-user-functions">
                             <section class="contain1 just-left">
@@ -209,170 +218,170 @@ if(isset($_GET['export'])){
                     </section>
 
                     <section class="content pad-bot-50">
-                            <section class="grid-wrap250 sku-data">
-                                <div class="sku-content shadow bg-white">
-                                    <h3>INFORMATION</h3>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="grey-text">
-                                                    <i class="fas fa-ruler"></i>
-                                                </td>
-                                                <td>UOM</td>
-                                                <td>INCHES</td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-weight"></i></td>
-                                                <td>WEIGHT</td>
-                                                <td>LBS</td>
-                                            </tr>
-                                            <tr class="sku-description">
-                                                <td><i class="fas fa-file-alt"></i></td>
-                                                <td colspan="2">Description</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fz12 break-word" colspan="3">
-                                                    <?php echo $dataResult['sku_desc']; ?>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                
-                                <div class="sku-content shadow bg-white">
-                                    <h3>UNIT DATA</h3>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td><i class="fas fa-ruler"></i></td>
-                                                <td>Length</td>
-                                                <td><?php echo $dataResult['sku_unit_length']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-ruler-horizontal"></i></td>
-                                                <td>Width</td>
-                                                <td><?php echo $dataResult['sku_unit_width']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-ruler-vertical"></i></td>
-                                                <td>Height</td>
-                                                <td><?php echo $dataResult['sku_unit_height']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-weight"></i></td>
-                                                <td>Weight</td>
-                                                <td><?php echo $dataResult['sku_unit_weight']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-cog"></i></td>
-                                                <td>Qty Per</td>
-                                                <td>1</td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                </div>
-                                
-                                <div class="sku-content shadow bg-white">
-                                    <h3>CASE DATA</h3>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td><i class="fas fa-ruler"></i></td>
-                                                <td>Length</td>
-                                                <td><?php echo $dataResult['sku_case_length']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-ruler-horizontal"></i></td>
-                                                <td>Width</td>
-                                                <td><?php echo $dataResult['sku_case_width']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-ruler-vertical"></i></td>
-                                                <td>Height</td>
-                                                <td><?php echo $dataResult['sku_case_height']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-weight"></i></td>
-                                                <td>Weight</td>
-                                                <td><?php echo $dataResult['sku_case_weight']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-cog"></i></td>
-                                                <td>Qty Per</td>
-                                                <td><?php echo $dataResult['sku_case_qty']; ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                </div>
-                                
-                                <div class="sku-content shadow bg-white">
-                                    <h3>PALLET DATA</h3>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td><i class="fas fa-ruler"></i></td>
-                                                <td>Length</td>
-                                                <td><?php echo $dataResult['sku_pallet_length']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-ruler-horizontal"></i></td>
-                                                <td>Width</td>
-                                                <td><?php echo $dataResult['sku_pallet_width']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-ruler-vertical"></i></td>
-                                                <td>Height</td>
-                                                <td><?php echo $dataResult['sku_pallet_height']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-weight"></i></td>
-                                                <td>Weight</td>
-                                                <td><?php echo $dataResult['sku_pallet_weight']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-cog"></i></td>
-                                                <td>Qty Per</td>
-                                                <td><?php echo $dataResult['sku_pallet_qty']; ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                </div>
-                                
-                                <?php
-                                if($user->accessCheck() == 'ADMIN')
-                                {
-                                ?>
-                                <div class="sku-content shadow bg-white">
-                                    <h3>USER DATA</h3>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td><i class="fas fa-ruler"></i></td>
-                                                <td>Created by</td>
-                                                <td><?php echo $dataResult['sku_rec_added']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-ruler-horizontal"></i></td>
-                                                <td>Created Date</td>
-                                                <td><?php echo $createDate; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-ruler-vertical"></i></td>
-                                                <td>Updated By</td>
-                                                <td><?php echo $dataResult['sku_rec_update_by']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-weight"></i></td>
-                                                <td>Updated Date</td>
-                                                <td><?php echo $updateDate; ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                </div>
-                                <?php
-                                }
-                                ?>
-                            </section>
+                        <section class="grid-wrap250 sku-data">
+                            <div class="sku-content shadow bg-white">
+                                <h3>INFORMATION</h3>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="grey-text">
+                                                <i class="fas fa-ruler"></i>
+                                            </td>
+                                            <td>UOM</td>
+                                            <td>INCHES</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-weight"></i></td>
+                                            <td>WEIGHT</td>
+                                            <td>LBS</td>
+                                        </tr>
+                                        <tr class="sku-description">
+                                            <td><i class="fas fa-file-alt"></i></td>
+                                            <td colspan="2">Description</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fz12 break-word" colspan="3">
+                                                <?php echo $dataResult['sku_desc']; ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="sku-content shadow bg-white">
+                                <h3>UNIT DATA</h3>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fas fa-ruler"></i></td>
+                                            <td>Length</td>
+                                            <td><?php echo $dataResult['sku_unit_length']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-ruler-horizontal"></i></td>
+                                            <td>Width</td>
+                                            <td><?php echo $dataResult['sku_unit_width']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-ruler-vertical"></i></td>
+                                            <td>Height</td>
+                                            <td><?php echo $dataResult['sku_unit_height']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-weight"></i></td>
+                                            <td>Weight</td>
+                                            <td><?php echo $dataResult['sku_unit_weight']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-cog"></i></td>
+                                            <td>Qty Per</td>
+                                            <td>1</td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </div>
+
+                            <div class="sku-content shadow bg-white">
+                                <h3>CASE DATA</h3>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fas fa-ruler"></i></td>
+                                            <td>Length</td>
+                                            <td><?php echo $dataResult['sku_case_length']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-ruler-horizontal"></i></td>
+                                            <td>Width</td>
+                                            <td><?php echo $dataResult['sku_case_width']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-ruler-vertical"></i></td>
+                                            <td>Height</td>
+                                            <td><?php echo $dataResult['sku_case_height']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-weight"></i></td>
+                                            <td>Weight</td>
+                                            <td><?php echo $dataResult['sku_case_weight']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-cog"></i></td>
+                                            <td>Qty Per</td>
+                                            <td><?php echo $dataResult['sku_case_qty']; ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </div>
+
+                            <div class="sku-content shadow bg-white">
+                                <h3>PALLET DATA</h3>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fas fa-ruler"></i></td>
+                                            <td>Length</td>
+                                            <td><?php echo $dataResult['sku_pallet_length']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-ruler-horizontal"></i></td>
+                                            <td>Width</td>
+                                            <td><?php echo $dataResult['sku_pallet_width']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-ruler-vertical"></i></td>
+                                            <td>Height</td>
+                                            <td><?php echo $dataResult['sku_pallet_height']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-weight"></i></td>
+                                            <td>Weight</td>
+                                            <td><?php echo $dataResult['sku_pallet_weight']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-cog"></i></td>
+                                            <td>Qty Per</td>
+                                            <td><?php echo $dataResult['sku_pallet_qty']; ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </div>
+
+                            <?php
+                            if($user->accessCheck() == 'ADMIN')
+                            {
+                            ?>
+                            <div class="sku-content shadow bg-white">
+                                <h3>USER DATA</h3>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fas fa-ruler"></i></td>
+                                            <td>Created by</td>
+                                            <td><?php echo $dataResult['sku_rec_added']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-ruler-horizontal"></i></td>
+                                            <td>Created Date</td>
+                                            <td><?php echo $createDate; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-ruler-vertical"></i></td>
+                                            <td>Updated By</td>
+                                            <td><?php echo $dataResult['sku_rec_update_by']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-weight"></i></td>
+                                            <td>Updated Date</td>
+                                            <td><?php echo $updateDate; ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </section>
                     </section>
                         
                     <section class="content2">
@@ -416,15 +425,16 @@ if(isset($_GET['export'])){
                             ?>
                         </section>
                     </section>
-                    <section class="sku-ads">
-                    <?php 
-                        foreach($skuAds as $ad)
-                        {
-                            echo $ad['sku_ad_link'];
-                        }
-                    ?>
-                    </section>
-                        
+            
+                    <section class="sku-ad-other">
+                        <div></div>
+                        <div>
+                            <?php 
+                                echo $ad['sku_ad_other'];
+                            ?>
+                        </div>
+                        <div></div>
+                    </section> 
             <?php
             } else
             {

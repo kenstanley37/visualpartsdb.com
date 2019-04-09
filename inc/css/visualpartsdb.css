@@ -424,20 +424,25 @@ section {
         "nav nav" 
         "title skuads"
         "form form"
-        "mcontent2 mcontent";
+        "mcontent2 mcontent"
+        "skuadother skuadother";
     grid-row-gap: 15px;
 }
 
-.sku-ads {
+.sku-ad-banner {
     grid-area: skuads;
     display: grid;
     grid-template-columns: 90%;
-    grid-template-rows: auto;
-    /*
-    justify-content: flex-end;
-    justify-items: flex-end;
-    */
-    position: relative;
+    justify-content: center;
+    z-index: 0;
+}
+
+.sku-ad-other {
+    max-width: 100%;
+    grid-area: skuadother;    
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    z-index: 0;
     padding-bottom: 25px;
 }
 
@@ -453,7 +458,6 @@ section {
         "mcontent2 mcontent2";
     grid-column-gap: 15px;
     grid-row-gap: 55px;
-    justify-content: center; 
     justify-content: center; 
 }
 
@@ -1626,6 +1630,7 @@ footer {
 .dash5-left {
     display: grid;
     grid-template-rows: 275px 25px;
+    grid-template-rows: 275px 25px;
     justify-content: center;
     justify-items: center;
     align-items: center;
@@ -2206,12 +2211,31 @@ only screen and (max-width: 900px),
         grid-template-areas: 
             "nav" 
             "title"
+            "skuads"
             "form"
             "mcontent"
-            "mcontent2";
+            "mcontent2"
+            "skuadother";
         grid-column-gap: 15px;
         grid-row-gap: 15px;
         justify-content: center;
+    }
+    
+    .sku-ad-banner {
+        grid-area: skuads;
+        display: grid;
+        grid-template-columns: 98%;
+        justify-content: center;
+        z-index: 0;
+    }
+    
+    .sku-ad-other {
+        max-width: 100%;
+        grid-area: skuadother;    
+        display: grid;
+        grid-template-columns: 1% 98% 1%;
+        z-index: 0;
+        padding-bottom: 25px;
     }
     
     .search-user-functions {
