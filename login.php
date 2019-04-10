@@ -40,7 +40,7 @@ if(isset($_POST['Login'])){
      $request = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$_POST['g-recaptcha-response']);
      // The result is in a JSON format. Decoding..
      $response = json_decode($request);	     
-    print_r($response);
+    
     if($response->success) {
         $vail->validEmail($email);
         if(empty($pass)){
