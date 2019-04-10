@@ -50,7 +50,7 @@ $mostSearched1 = $vpd->getMostSearchedSkuCount(1);
         </aside>
         <main class="main">
             <section class="title">
-                <h2 class="blue-header">Dashboard</h2>
+                <h2 class="blue-header">Admin Dashboard</h2>
             </section>
             <section class="nav">
                 
@@ -102,11 +102,11 @@ $mostSearched1 = $vpd->getMostSearchedSkuCount(1);
                 <div class="dash-bottom">
                     <div class="dash5-left bg-orange shadow">
                         <div id="dash5"></div>
-                        <div class="text-white">Top 10 30 Days</div>
+                        <div class="text-white">Top 10 -> 30 Days</div>
                     </div>
                     <div class="dash5-right bg-orange shadow">
                         <div id="dash6"></div>
-                        <div class="text-white">Top 7 30 Days</div>
+                        <div class="text-white">Top 10 -> 7 Days</div>
                     </div>
                 </div>
             </section>

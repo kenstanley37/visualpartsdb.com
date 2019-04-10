@@ -1,7 +1,0 @@
-Domain name and live hosting
-
-One link that links to a page on your domain.
-https://visualpartsdb.com/
-
-One link that links to the whois information.
-https://www.godaddy.com/whois/results.aspx?domain=visualpartsdb.com
