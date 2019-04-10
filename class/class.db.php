@@ -1,21 +1,34 @@
 <?php
 /**
-     * Database handles the database connection methods
+ * Database handles the database connection methods
+ *
+ * @author Ken Stanley <ken@stanleysoft.org>
+ * @license MIT
+ */
+class Database
+{   
+    /**
+     * The host server address
      *
      * @author Ken Stanley <ken@stanleysoft.org>
      * @license MIT
      */
-class Database
-{   
     private $host = "localhost";
+    /** The database name*/
     private $db_name = "stanle14_vpd";
+    /** The database user name*/
     private $username = "stanle14_vpd";
+    /** The database password*/
     private $password = "*#bOJJ@G7Kh?";
+    /** The connection string */
     public $conn;
      
-    // ******************************
-    // Database connection using PDO
-    // ******************************
+    /**
+     * Makes connection with the database
+     *
+     * @author Ken Stanley <ken@stanleysoft.org>
+     * @license MIT
+     */
     public function dbConnection()
 	{
      

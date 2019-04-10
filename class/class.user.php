@@ -1,7 +1,21 @@
 <?php
+/**
+* The user class handles all user related methods
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+
+
+    /**
+     * Import PHPMailer classes into the global namespace
+     * These must be at the top of your script, not inside a function
+     *
+     * @author Ken Stanley <ken@stanleysoft.org>
+     * @license MIT
+     */
+    
     require_once('class.db.php');
-    // Import PHPMailer classes into the global namespace
-    // These must be at the top of your script, not inside a function
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
@@ -534,7 +548,7 @@
         /**
         * Sets the $_SESSION after login
         *
-        * @param integer $email the users database ID
+        * @param integer $userID the users database ID
         * @param string $fname the users first name
         * @param string $lname the users last name
         * @author Ken Stanley <ken@stanleysoft.org>
@@ -625,8 +639,8 @@
         /**
         * Returns an array of users based on status
         *
-        * @param string $userID can be 'active' 'pending' or 'disabled'
-        *   will return data based on selection
+        * @param string $type can be 'active' 'pending' or 'disabled'
+        * *  will return data based on selection
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return array of results
         */
@@ -1225,7 +1239,7 @@
         * Removes a sku from a users list
         *
         * @param string $sku is the part number
-        * @param string $sku is the part number
+        * @param int $list is list id number
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */

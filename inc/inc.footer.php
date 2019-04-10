@@ -1,9 +1,10 @@
 <?php
-    /**
-    * Author - Ken Stanley
-    * File Name - inc.footer.php
-    * Revision Date - April, 10 2019
-    */
+/**
+* The footer for all pages
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
 ?>
     <section class="ft1">
         A StanleySoft Product
