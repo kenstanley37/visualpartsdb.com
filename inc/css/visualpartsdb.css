@@ -500,7 +500,7 @@ section {
     grid-template-rows: auto;
     justify-content: center;
     position: relative;
-    padding-top: 25px;
+    padding: 25px 0 25px 0;;
 }
 
 .search-title {
