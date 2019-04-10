@@ -1108,6 +1108,8 @@ figcaption, .card figcaption, .card-responsive figcaption {
 }
 
 .card .card-img, .card-responsive .card-img {
+    display: grid;
+    justify-content: center;
 
 }
 
