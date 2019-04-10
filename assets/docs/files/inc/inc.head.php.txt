@@ -1,9 +1,10 @@
 <?php
-    /**
-    * Author - Ken Stanley
-    * File Name - inc.head.php
-    * Revision Date - April, 10 2019
-    */
+/**
+* The head of the site
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
     $useridgtag = '';
     
     if(isset($_SESSION['user_id']))

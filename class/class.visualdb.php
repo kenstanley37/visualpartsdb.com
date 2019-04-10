@@ -1,4 +1,18 @@
 <?php
+/**
+* VIUALDB class handles all SKU information getters and setters
+* 
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+
+/**
+* Subheader for the VISUALDB class
+* 
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+
     /**Load the database class*/
     require_once('class.db.php');
     /**

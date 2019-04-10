@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - inc.useradmin.php
-* Revision Date - April, 10 2019
+* Admin Nav Bar
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 ?>
 

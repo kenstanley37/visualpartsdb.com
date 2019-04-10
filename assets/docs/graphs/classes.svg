@@ -23,10 +23,10 @@
 <polygon fill="none" stroke="black" points="78.5,-160 24.5,-160 24.5,-124 78.5,-124 78.5,-160"/>
 <text text-anchor="middle" x="51.5" y="-139.2" font-family="Courier,monospace" font-size="11.00">USER</text>
 </g>
-<!-- \\Database -->
-<g id="node3" class="node"><title>\\Database</title>
+<!-- \\DATABASE -->
+<g id="node3" class="node"><title>\\DATABASE</title>
 <polygon fill="none" stroke="black" points="87,-106 16,-106 16,-70 87,-70 87,-106"/>
-<text text-anchor="middle" x="51.5" y="-85.2" font-family="Courier,monospace" font-size="11.00">Database</text>
+<text text-anchor="middle" x="51.5" y="-85.2" font-family="Courier,monospace" font-size="11.00">DATABASE</text>
 </g>
 <!-- \\VISUALDB -->
 <g id="node4" class="node"><title>\\VISUALDB</title>

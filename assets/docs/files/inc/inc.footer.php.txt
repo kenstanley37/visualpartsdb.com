@@ -1,6 +1,6 @@
 <?php
 /**
-* The footer for all pages
+* The footer for the site
 *
 * @author Ken Stanley <ken@stanleysoft.org>
 * @license MIT

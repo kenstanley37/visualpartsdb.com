@@ -1,15 +1,11 @@
 <?php
 /**
-* @author  Ken Stanley <ken@stanleysoft.org>
-* File Name - generate-xlsx.php
-* Revision Date - April, 10 2019
+* Generates Excel files from database query
+* @credit https://github.com/PHPOffice/PhpSpreadsheet
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 session_start();
-/*
-    Credit: 
-    https://github.com/PHPOffice/PhpSpreadsheet
-*/
-
 include("../inc/inc.path.php");
 require_once($path."class/class.db.php");
 require_once($path."class/class.user.php");

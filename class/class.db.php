@@ -1,11 +1,17 @@
 <?php
 /**
+* Controls the database access for the entire site
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+
+/**
  * Database handles the database connection methods
  *
  * @author Ken Stanley <ken@stanleysoft.org>
  * @license MIT
  */
-class Database
+class DATABASE
 {   
     /**
      * The host server address

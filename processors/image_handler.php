@@ -1,8 +1,16 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - image_handler.php
-* Revision Date - April, 10 2019
+* Image handler file. Controller for setting and getting images and descriptions
+* 
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+
+/**
+* All the requires and includes for this script
+* 
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
     include("../inc/inc.path.php");
     require($path.'class/class.visualdb.php');

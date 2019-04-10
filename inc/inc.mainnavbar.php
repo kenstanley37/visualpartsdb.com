@@ -1,9 +1,10 @@
 <?php
-    /**
-    * Author - Ken Stanley
-    * File Name -inc.mainnavbar.php
-    * Revision Date - April, 10 2019
-    */
+/**
+* The main nav bar
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
 $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 ?>
 

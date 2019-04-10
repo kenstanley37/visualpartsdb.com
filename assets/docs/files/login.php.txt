@@ -1,8 +1,9 @@
 <?php
 /**
-* @author  Ken Stanley <ken@stanleysoft.org>
-* File Name - login.php
-* Revision Date - April, 10 2019
+* Login page
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 session_start();
 include("inc/inc.path.php");
