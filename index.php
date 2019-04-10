@@ -70,6 +70,14 @@ $image_count = $vpd->getImageCount();
 <head>
     <title>Visual Parts Database</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x"></script>
+      <script>
+      grecaptcha.ready(function() {
+          grecaptcha.execute('6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x', {action: 'homepage'}).then(function(token) {
+             ...
+          });
+      });
+  </script>
 </head>
 <body>
     <div class="wrapper">
