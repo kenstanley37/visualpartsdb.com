@@ -48,7 +48,7 @@ if(isset($_POST['RegisterRequest']))
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
     
-    print_r($recaptcha_response);
+    print_r($test);
     // Take action based on the score returned:
     if ($recaptcha->success) {
         $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
