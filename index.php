@@ -23,6 +23,7 @@ $email = '';
 $phone = '';
 $company = '';
 $message = '';
+$recaptcha = '';
 
 if(isset($_POST['RegisterRequest']))
 {
@@ -32,6 +33,9 @@ if(isset($_POST['RegisterRequest']))
     $phone = $vail->sanitizeString($_POST['phone']);
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
+    $recaptcha = $_POST['recaptcha_response'];
+    echo $recaptcha; 
+    die;
     
     $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
 
@@ -71,13 +75,14 @@ $image_count = $vpd->getImageCount();
     <title>Visual Parts Database</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x"></script>
-      <script>
-      grecaptcha.ready(function() {
-          grecaptcha.execute('6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x', {action: 'homepage'}).then(function(token) {
-             ...
-          });
-      });
-  </script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x', { action: 'contact' }).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="wrapper">
@@ -239,6 +244,8 @@ $image_count = $vpd->getImageCount();
                                 <input type="text" name="company" id="company" placeholder="Company" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
                                     
                                 <textarea name="messagearea" placeholder="Message" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
+                                
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
                                 
                                 <button type="submit" value="SUBMIT" name="RegisterRequest">SEND</button><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
                             </fieldset>

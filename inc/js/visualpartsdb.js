@@ -2,7 +2,8 @@ $(document).ready(function(){
     url = '/processors/ajax.php';
     $('#dataTable').DataTable();
     startup();
-    
+    var test = $('#recaptchaResponse').value;
+    console.log(test);
 });
 
 function startup(){
