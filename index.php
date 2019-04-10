@@ -34,28 +34,40 @@ if(isset($_POST['RegisterRequest']))
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
     $recaptcha = $_POST['recaptcha_response'];
-    echo $recaptcha; 
-    die;
-    
-    $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
 
-    if($result == 'alreadyregistered'){
-        $requestResult = 'Email address is already registered';
-    }
+    // Build POST request:
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_secret = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
+    $recaptcha_response = $_POST['recaptcha_response'];
 
-    if($result == 'alreadyrequested'){
-        $requestResult = 'Email already awaiting approval';
-    }
+    // Make and decode POST request:
+    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+    $recaptcha = json_decode($recaptcha);
 
-    if($result == 'success'){
-        $requestResult = '';
-        $fname = '';
-        $lname = '';
-        $email = '';
-        $phone = '';
-        $company = '';
-        $message = '';
-        $rrSuccess = '<span class="error">Thank you</span>';
+    // Take action based on the score returned:
+    if ($recaptcha->score >= 0.5) {
+        $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
+
+        if($result == 'alreadyregistered'){
+            $requestResult = 'Email address is already registered';
+        }
+
+        if($result == 'alreadyrequested'){
+            $requestResult = 'Email already awaiting approval';
+        }
+
+        if($result == 'success'){
+            $requestResult = '';
+            $fname = '';
+            $lname = '';
+            $email = '';
+            $phone = '';
+            $company = '';
+            $message = '';
+            $rrSuccess = '<span class="error">Thank you</span>';
+        }
+    } else {
+        $requestResult = 'You did not pass recaptcha verification';
     }
 } 
 
