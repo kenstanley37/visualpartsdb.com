@@ -33,8 +33,10 @@ if(isset($_POST['RegisterRequest']))
     $phone = $vail->sanitizeString($_POST['phone']);
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
-    $recaptcha = $_POST['recaptcha_response'];
 
+    $siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
+    $secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
+    
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_secret = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
@@ -43,7 +45,8 @@ if(isset($_POST['RegisterRequest']))
     // Make and decode POST request:
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
-
+    
+    print_r($response);
     // Take action based on the score returned:
     if ($recaptcha->success) {
         $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
