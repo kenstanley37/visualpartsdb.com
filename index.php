@@ -42,6 +42,8 @@ if(isset($_POST['RegisterRequest']))
     $recaptcha_secret = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
     $recaptcha_response = $_POST['recaptcha_response'];
 
+    $test = json_decode($recaptcha_response);
+    
     // Make and decode POST request:
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
