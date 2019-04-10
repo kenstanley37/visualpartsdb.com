@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - password_reset.php
+* Revision Date - April, 10 2019
+*/
 session_start();
 include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
@@ -9,17 +14,6 @@ $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
 $error='';
-
-/*
-if(!isset($_SESSION['user_id']))
-{
-    header('location: /');
-} else 
-{
-    $userID = $_SESSION['user_id'];
-    $user->activeCheck($userID);
-}
-*/
 
 if(isset($_SESSION['temp_id']))
 {

@@ -24,7 +24,6 @@
         * Constructor to connect to the database
         *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         *
         */
@@ -44,7 +43,7 @@
         
         /**
         * Destruct
-        * Destories the connection to the database
+        * Destorys the connection to the database
         *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
@@ -58,7 +57,6 @@
         *
         * @param Place   $umail  the users email address
         * @param integer $upass the users password
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -146,7 +144,6 @@
         * Checks if the user has been disabled
         *
         * @param interger $userID the users ID number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return send to location /user/disabled.php or true
         */
@@ -187,7 +184,6 @@
             * @param string $lname users last name
             * @param string $email users email address
             * @param string $company users company
-            * 
             * @author Ken Stanley <ken@stanleysoft.org>
             * @return true or pdo error
             */
@@ -272,7 +268,6 @@
             * Password reset function. Sends an email to the user to reset the password
             *
             * @param string $email  the users email address
-            * 
             * @author Ken Stanley <ken@stanleysoft.org>
             * @return true or false
             */
@@ -373,7 +368,6 @@
             *
             * @param integer $userID the users ID from the database
             * @param string  $code the code from the email verification
-            * 
             * @author Ken Stanley <ken@stanleysoft.org>
             * @return true, noaccount, no record found
             */
@@ -426,7 +420,6 @@
         * Checks if an email is already in the database
         *
         * @param string $email  the users email address
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -457,7 +450,6 @@
         *
         * @param integer $userID the users database ID
         * @param integer $password the users new password
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true
         */
@@ -482,7 +474,6 @@
         * Removes all traces of the user from the database. 
         *
         * @param integer $userid the users database ID
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -546,7 +537,6 @@
         * @param integer $email the users database ID
         * @param string $fname the users first name
         * @param string $lname the users last name
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true
         */
@@ -588,7 +578,6 @@
         * Returns the users First and Last name as one field
         *
         * @param integer $userID the users database ID
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return $fullname
         */
@@ -614,7 +603,6 @@
         /**
         * Returns a list of all companies as an array
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return array of companies
         */
@@ -638,8 +626,7 @@
         * Returns an array of users based on status
         *
         * @param string $userID can be 'active' 'pending' or 'disabled'
-        * will return data based on selection
-        * 
+        *   will return data based on selection
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return array of results
         */
@@ -687,7 +674,6 @@
         * Toggles the users active status in the database
         *
         * @param integer $userID the users database ID
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true
         */
@@ -735,7 +721,6 @@
         * @param int $phone the users phone number
         * @param string $company the users company
         * @param string $message the users request message
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return 'success' or 'alreadyrequested' or'alreadyregistered'
         */
@@ -797,7 +782,6 @@
         /**
         * Returns an array of users that have requested membership
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return $result array
         */
@@ -865,7 +849,6 @@
         * Deletes register request from the database
         *
         * @param integer $regID the ID from the database of the register request
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -917,7 +900,6 @@
         * Records how many records are in the users list
         *
         * @param integer $listID the users list ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return integer row count
         */
@@ -944,7 +926,6 @@
         * Deletes a list and the assoicated SKUs from the user_part_list_skus table
         *
         * @param integer $listID the users list ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -977,7 +958,6 @@
         *
         * @param string $listname the users list name
         * @param string $listdescription the users list description
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1008,7 +988,6 @@
         * Removes the user active list then sets selected list as active
         *
         * @param string $listid the users list ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1035,7 +1014,6 @@
          /**
         * Removes all of the user list active status
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1060,7 +1038,6 @@
         * Returns the name of a user list 
         *
         * @param string $listid can be list ID from the database or 'none'
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return integer list id
         */
@@ -1089,7 +1066,6 @@
         /**
         * Returns the users active list name 
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return string list name
         */
@@ -1117,7 +1093,6 @@
          /**
         * Returns the ID of the users active list
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return integer list id
         */
@@ -1148,7 +1123,6 @@
         *
         * @param integer $userID the users ID
         * @param string $type can be 'list' or 'sku' to either get a count of the list or skus
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return list count or sku count
         */
@@ -1195,7 +1169,6 @@
         * Adds a sku to the users active list
         *
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1220,7 +1193,6 @@
         * Checks if the sku is already in the users active list
         *
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -1254,7 +1226,6 @@
         *
         * @param string $sku is the part number
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -1281,7 +1252,6 @@
         * Returns an array of all the users list
         *
         * @param string $listid is the list ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return array $result
         */
@@ -1311,7 +1281,6 @@
         * Add record to the database of user and requested sku to be updated
         *
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1336,7 +1305,6 @@
         * RChecks if the user has already requested a sku update
         *
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -1371,7 +1339,6 @@
         *
         * @param integer $user is the user ID from the database
         * @param integer $role is 1 for USER or 2 for ADMIN 
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1396,7 +1363,6 @@
         * Returns the users current Role name
         *
         * @param integer $user is the users ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return string $role = role name
         */
@@ -1426,8 +1392,7 @@
         * Destories session and sends user to the landing page
         *
         * @param string $sku is the part number
-        * @param string $sku is the part number
-        * 
+        * @param string $sku is the part number 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */

@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - inc.adminnavbar.php
+* Revision Date - April, 10 2019
+*/
 // get the php file being used. This will be used to set the class
 $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 ?>

@@ -1,4 +1,10 @@
 <?php
+/**
+     * Database handles the database connection methods
+     *
+     * @author Ken Stanley <ken@stanleysoft.org>
+     * @license MIT
+     */
 class Database
 {   
     private $host = "localhost";

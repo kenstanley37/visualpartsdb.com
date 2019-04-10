@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - search-history.php
+* Revision Date - April, 10 2019
+*/
 session_start();
 
 include("../inc/inc.path.php");

@@ -1,4 +1,9 @@
 <?php
+    /**
+    * Author - Ken Stanley
+    * File Name - inc.header.php
+    * Revision Date - April, 10 2019
+    */
     $user = new USER;
     $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 

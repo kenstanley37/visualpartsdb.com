@@ -1,3 +1,11 @@
+<?php
+/**
+* Author - Ken Stanley
+* File Name - inc.useradmin.php
+* Revision Date - April, 10 2019
+*/
+?>
+
 <nav>
     <ul>
         <li><a href="/admin/user.php">Members</a></li>

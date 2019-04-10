@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - sku_handler.php
+* Revision Date - April, 10 2019
+*/
     session_start();
     include("../inc/inc.path.php");
     require_once($path.'class/class.visualdb.php');
@@ -34,10 +39,7 @@
         $pallet_qty = $_POST['pallet-qty'];
         
         $result = $vpd->setSkuData($sku, $sku_desc, $unit_length, $unit_width, $unit_height, $unit_weight, $case_length, $case_width, $case_height, $case_weight, $case_qty, $pallet_length, $pallet_width, $pallet_height, $pallet_weight, $pallet_qty);
-        
-        //echo $sku_desc;
-
-        
+            
         if($result == 'true')
         {
             header("location: /admin/update-sku.php?sku=".$sku."&submit=successful");
@@ -70,14 +72,5 @@
         $desc = $vail->sanitizeString($_POST['desc']);
         
         $result = $vpd->addSku($sku, $desc);
-        /*
-        if($result)
-        {
-            header('location: /admin/update-sku.php?sku='.$sku);
-        } else 
-        {
-            header('location: /admin/part-add.php?error=notfound');
-        }
-        */
     }
 ?>

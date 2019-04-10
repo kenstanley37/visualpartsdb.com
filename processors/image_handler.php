@@ -1,12 +1,25 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - image_handler.php
+* Revision Date - April, 10 2019
+*/
     include("../inc/inc.path.php");
     require($path.'class/class.visualdb.php');
     require_once($path."class/class.func.php");
+    require_once($path."class/user.func.php");
 
     $vpd = new VISUALDB;
     $vail = new VALIDATE;
-    
+    $user = new USER;
+
     if(isset($_FILES['file'])){
+        $access = $user->accessCheck();
+        if($access != 'ADMIN')
+        {
+            header('location: /noaccess.php');
+        }
+        
         $filesize = $_FILES['file']['size'];
         $file = $_FILES['file'];
         $skuId = $_POST['skuId'];

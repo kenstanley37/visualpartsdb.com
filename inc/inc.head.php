@@ -1,4 +1,9 @@
 <?php
+    /**
+    * Author - Ken Stanley
+    * File Name - inc.head.php
+    * Revision Date - April, 10 2019
+    */
     $useridgtag = '';
     
     if(isset($_SESSION['user_id']))
