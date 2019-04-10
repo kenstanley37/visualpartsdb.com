@@ -330,6 +330,11 @@ section {
     width: 100%;
 }
 
+.w75p {
+    padding: 25px;
+    width: 75%;
+}
+
 .wh300 {
     padding: 25px;
     height: 300px;
@@ -2483,6 +2488,16 @@ only screen and (max-width: 890px),
     .fz35 {
         font-size: 25px;
     }
+    
+    .w600 {
+        padding: 25px;
+        max-width: 250px;
+    }
+    
+    .w75p {
+        padding: 25px;
+        width: 90%;
+        }
 }
 
 @media 

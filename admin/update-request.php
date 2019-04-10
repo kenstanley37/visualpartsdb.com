@@ -50,11 +50,10 @@ $updateRequest = $vpd->skuUpdateRequest('active');
             <section class="title">
                 <h2 class="blue-header">SKU Update Request</h2>
             </section>
-            <section class="nav">
-                <section class="display">
-                    <section class="login shadow">
-                        <h3 class="login-title">Active Part Update Request</h3>
-                        <table class="table shadow">
+            <section class="content">
+                <section class="w75p shadow bg-white">
+                    <h3 class="login-title">Active Part Update Request</h3>
+                    <table class="table shadow">
                         <thead>
                             <tr>
                                 <td scope="col">SKU</td>
@@ -66,19 +65,18 @@ $updateRequest = $vpd->skuUpdateRequest('active');
                         <?php
                         foreach($updateRequest as $row)
                         {
-                            $skuID = $row['update_sku'];
-                            ?>
-                                <tr>
-                                    <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
-                                    <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                    <td data-label="Count" class="align-right"><a href="/admin/update-request-sku.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
-                                </tr>  
-                            <?php
+                        $skuID = $row['update_sku'];
+                        ?>
+                            <tr>
+                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
+                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                <td data-label="Count" class="align-right"><a href="/admin/update-request-sku.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
+                            </tr>  
+                        <?php
                         }
-                    ?>
+                        ?>
                         </tbody>
                     </table>
-                    </section>
                 </section>
             </section>
         </main>
