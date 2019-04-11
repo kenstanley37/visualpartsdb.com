@@ -37,7 +37,9 @@ if(isset($_POST['RegisterRequest']))
     //$siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
     //$secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
     
+    $dude = 'https://www.google.com/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${req.body['g-recaptcha-response']}
    $url = 'https://www.google.com/recaptcha/api/siteverify';
+  header("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");  
 $data = ['secret' => '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG', 'response' => $_GET['token']];
 
 $options = ['http' => ['method' => 'POST', 'content' => http_build_query($data),],];
