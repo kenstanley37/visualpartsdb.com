@@ -39,7 +39,7 @@ if(isset($_POST['RegisterRequest']))
     
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-    $recaptcha_secret = '6LcoTokUAAAAAOJmN26GyTHtvhVxzJ7fb7JHsu9A';
+    $recaptcha_secret = '6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k';
     $recaptcha_response = $_POST['recaptcha_response'];
 
     // Make and decode POST request:
