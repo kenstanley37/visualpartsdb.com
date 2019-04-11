@@ -39,7 +39,8 @@ if(isset($_POST['RegisterRequest']))
     
     $captcha;
     $captcha = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
-    print_r($captcha);
+    print_r(json_decode($captcha));
+    die;
     if(!$captcha){
     echo '<h2>Please check the the captcha form.</h2>';
         
