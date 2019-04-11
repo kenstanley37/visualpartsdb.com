@@ -34,21 +34,40 @@ if(isset($_POST['RegisterRequest']))
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
 
-    $siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
-    $secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
+    //$siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
+    //$secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
     
-    // Build POST request:
-    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-    $recaptcha_secret = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
-    $recaptcha_response = $_POST['recaptcha_response'];
+    $captcha;
+    $captcha = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+    if(!$captcha){
+    echo '<h2>Please check the the captcha form.</h2>';
+    exit;
+    }
+    $secretKey = "6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x";
+    $ip = $_SERVER['REMOTE_ADDR'];
 
-    $test = json_decode($recaptcha_response);
+    // post request to server
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = array('secret' => $secretKey, 'response' => $captcha);
+
+    $options = array(
+    'http' => array(
+          'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+          'method'  => 'POST',
+          'content' => http_build_query($data)
+        )
+    );
+    $context  = stream_context_create($options);
+    $response = file_get_contents($url, false, $context);
+    $responseKeys = json_decode($response,true);
+    header('Content-type: application/json');
+    if($responseKeys["success"]) {
+        echo json_encode(array('success' => 'true'));
+    } else {
+        echo json_encode(array('success' => 'false'));
+    }
     
-    // Make and decode POST request:
-    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-    $recaptcha = json_decode($recaptcha);
-    
-    print_r($test);
+    print_r($test123);
     // Take action based on the score returned:
     if ($recaptcha->success) {
         $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
@@ -262,7 +281,7 @@ $image_count = $vpd->getImageCount();
                                     
                                 <textarea name="messagearea" placeholder="Message" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
                                 
-                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
+                                <input type="hidden" name="token" id="recaptchaResponse" value="">
                                 
                                 <button type="submit" value="SUBMIT" name="RegisterRequest">SEND</button><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
                             </fieldset>
