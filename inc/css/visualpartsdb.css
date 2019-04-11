@@ -1181,8 +1181,12 @@ figcaption, .card figcaption, .card-responsive figcaption {
 }
 
 .form-contact input, .form-contact textarea {
-    border-bottom: 1px solid #cacaca !important;
+    border: 0;
+    border-bottom: 1px solid #cacaca;
     color: #202020;
+    width: 100%;
+    background-color: transparent;
+    transition: all .3s;
 }
 
 .form-contact input {
@@ -1190,17 +1194,7 @@ figcaption, .card figcaption, .card-responsive figcaption {
     height: 40px;
 }
 
-.form-contact input, .form-contact textarea {
-    /*
-    display: block;
-    */
-    width: 100%;
-    border: none;
-    background-color: transparent;
-    transition: all .3s;
-}
-
-.form-contact a {
+.form-contact a, .form-contact label {
     text-align: center;
     font-size: 12px;
 }
@@ -1215,6 +1209,11 @@ figcaption, .card figcaption, .card-responsive figcaption {
     min-width: 100%;
     height: 100px;
     max-height: 300px;
+}
+
+.form-contact fieldset
+{
+    margin-top: 15px;
 }
 
 .sku-edit button, .form-contact button {
@@ -1354,21 +1353,6 @@ figcaption, .card figcaption, .card-responsive figcaption {
     
 }
 
-/*
-.index-main #member .member-request form.regform {
-    display: table;
-}
-
-.index-main #member .member-request div.regform {
-    display: table-row;
-}
-
-.index-main #member .member-request label, .index-main #member .member-request input {
-    display: table-cell;
-    margin-bottom: 10px;
-}
-
-*/
 .index-main #member .member-request i, #member span {
     padding-left: 10px;
     color: red;
@@ -1380,11 +1364,7 @@ figcaption, .card figcaption, .card-responsive figcaption {
 }
 
 /***************************************
-*
-*
 * START SEARCH RESULTS STYLE
-*
-*
 ****************************************/
 
 
@@ -2417,13 +2397,7 @@ only screen and (max-width: 890px),
         position: relative;
         padding: 15px;
     }
-    /*
-    
-    .card-sku-num table, .card-sku-num input {
-        width: 300% !important;
-    }
-    */
-    
+
     .hw300 {
         width: 250px;
         padding: 25px;
@@ -2518,3 +2492,6 @@ only screen and (max-width: 300px),
     visibility: visible !important;
 }
 
+.required {
+    border-bottom: 1px solid red !important;
+}

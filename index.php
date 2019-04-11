@@ -17,8 +17,8 @@ $user = new USER;
 
 $randomImage =  $vpd->randImage('6');
 
-$fname = '';
-$lname = '';
+$first_name = '';
+$last_name = '';
 $email = '';
 $phone = '';
 $company = '';
@@ -27,8 +27,8 @@ $recaptcha = '';
 
 if(isset($_POST['RegisterRequest']))
 {
-    $fname = $vail->sanitizeString($_POST['fname']);
-    $lname = $vail->sanitizeString($_POST['lname']);
+    $first_name = $vail->sanitizeString($_POST['firstname']);
+    $last_name = $vail->sanitizeString($_POST['lastname']);
     $email = $vail->sanitizeString($_POST['email']);
     $phone = $vail->sanitizeString($_POST['phone']);
     $company = $vail->sanitizeString($_POST['company']);
@@ -48,7 +48,7 @@ if(isset($_POST['RegisterRequest']))
 
     // Take action based on the score returned:
     if ($recaptcha->success) {
-        $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
+        $result = $user->registerRequest($first_name,$last_name,$email,$phone,$company,$message);
 
         if($result == 'alreadyregistered'){
             $requestResult = 'Email address is already registered';
@@ -245,19 +245,24 @@ $image_count = $vpd->getImageCount();
                         <h3 class="title">Request Membership</h3>
                         <form action="/index.php#requestForm" method="post" class="form-example" id="requestForm">
                             <fieldset>
-
-                                <input type="text" name="fname" id="fname" placeholder="First Name" value = "<?php if(!empty($fname)){ echo $fname;} ?>" required>
-
-                                <input type="text" name="lname" id="lname" placeholder="Last Name" value="<?php if(!empty($lname)){ echo $lname;} ?>" required>
- 
-                                <input type="email" name="email" id="email" placeholder="Email" value="<?php if(isset($email)){ echo $email;} ?>" required>
+                                <label for="fname">First Name</label>
+                                <input class="required" type="text" name="fname" id="fname" placeholder="" value = "<?php if(!empty($first_name)){ echo $first_name;} ?>" required>
+                                
+                                <label for="lname">Last Name</label>
+                                <input class="required" type="text" name="lname" id="lname" placeholder="" value="<?php if(!empty($last_name)){ echo $last_name;} ?>" required>
+                                
+                                <label for="email">Email</label>
+                                <input class="required" type="email" name="email" id="email" placeholder="" value="<?php if(isset($email)){ echo $email;} ?>" required>
                                     <?php if(!empty($requestResult)){echo '<span>'.$requestResult.'</span>';}?>
-
-                                <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="Phone xxx-xxx-xxxx" value="<?php if(!empty($phone)){ echo $phone;} ?>" required>
-
-                                <input type="text" name="company" id="company" placeholder="Company" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
-                                    
-                                <textarea name="messagearea" placeholder="Message" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
+                                
+                                <label for="phone">Phone</label>
+                                <input class="required" type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="xxx-xxx-xxxx" value="<?php if(!empty($phone)){ echo $phone;} ?>" required>
+                                
+                                <label for="company">Company</label>
+                                <input class="required" type="text" name="company" id="company" placeholder="" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
+                                
+                                <label for="messagearea">Message</label>
+                                <textarea name="messagearea" placeholder="Please tell us if you are doing business with us" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
                                 
                                 <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
                                 
