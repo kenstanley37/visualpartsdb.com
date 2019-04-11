@@ -39,14 +39,13 @@ if(isset($_POST['RegisterRequest']))
     
     $captcha;
     $captcha = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
-    print_r(json_decode($captcha));
-    die;
+
     if(!$captcha){
-    echo '<h2>Please check the the captcha form.</h2>';
-        
-    exit;
+        echo '<h2>Please check the the captcha form.</h2>';
+
+        exit;
     }
-    $secretKey = "6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x";
+    $secretKey = "6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG";
     $ip = $_SERVER['REMOTE_ADDR'];
 
     // post request to server
