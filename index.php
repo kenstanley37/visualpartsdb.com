@@ -34,27 +34,19 @@ if(isset($_POST['RegisterRequest']))
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
 
-    //$siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
-    //$secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
+    $siteKey = '6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k';
+    $secretKey = '6LcoTokUAAAAAOJmN26GyTHtvhVxzJ7fb7JHsu9A';
     
-   $url = 'https://www.google.com/recaptcha/api/siteverify';
-  header("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");  
-$data = ['secret' => '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG', 'response' => $_GET['token']];
+    // Build POST request:
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_secret = '6LcoTokUAAAAAOJmN26GyTHtvhVxzJ7fb7JHsu9A';
+    $recaptcha_response = $_POST['recaptcha_response'];
 
-$options = ['http' => ['method' => 'POST', 'content' => http_build_query($data),],];
-$context = stream_context_create($options);
-$result = file_get_contents($url, false, $context);
-
-echo '$result var_dump:<br>';
-var_dump($result);
-echo '$result print_r:<br>';
-print_r($result);
-$object = json_decode($result);
-echo '<br><br><br>$object var_dump:<br>';
-print_r($object);
-echo '<br>$object print_r:<br>';
-var_dump($object);
+    // Make and decode POST request:
+    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+    $recaptcha = json_decode($recaptcha);
     
+    print_r($recaptcha);
     // Take action based on the score returned:
     if ($recaptcha->success) {
         $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
@@ -268,7 +260,7 @@ $image_count = $vpd->getImageCount();
                                     
                                 <textarea name="messagearea" placeholder="Message" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
                                 
-                                <input type="hidden" name="token" id="recaptchaResponse" value="">
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
                                 
                                 <button type="submit" value="SUBMIT" name="RegisterRequest">SEND</button><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
                             </fieldset>
