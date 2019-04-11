@@ -39,8 +39,10 @@ if(isset($_POST['RegisterRequest']))
     
     $captcha;
     $captcha = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+    print_r($captcha);
     if(!$captcha){
     echo '<h2>Please check the the captcha form.</h2>';
+        
     exit;
     }
     $secretKey = "6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x";
