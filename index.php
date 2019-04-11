@@ -37,39 +37,23 @@ if(isset($_POST['RegisterRequest']))
     //$siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
     //$secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
     
-    $captcha;
-    $captcha = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+   $url = 'https://www.google.com/recaptcha/api/siteverify';
+$data = ['secret' => '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG', 'response' => $_GET['token']];
 
-    if(!$captcha){
-        echo '<h2>Please check the the captcha form.</h2>';
+$options = ['http' => ['method' => 'POST', 'content' => http_build_query($data),],];
+$context = stream_context_create($options);
+$result = file_get_contents($url, false, $context);
 
-        exit;
-    }
-    $secretKey = "6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG";
-    $ip = $_SERVER['REMOTE_ADDR'];
-
-    // post request to server
-    $url = 'https://www.google.com/recaptcha/api/siteverify';
-    $data = array('secret' => $secretKey, 'response' => $captcha);
-
-    $options = array(
-    'http' => array(
-          'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-          'method'  => 'POST',
-          'content' => http_build_query($data)
-        )
-    );
-    $context  = stream_context_create($options);
-    $response = file_get_contents($url, false, $context);
-    $responseKeys = json_decode($response,true);
-    header('Content-type: application/json');
-    if($responseKeys["success"]) {
-        echo json_encode(array('success' => 'true'));
-    } else {
-        echo json_encode(array('success' => 'false'));
-    }
+echo '$result var_dump:<br>';
+var_dump($result);
+echo '$result print_r:<br>';
+print_r($result);
+$object = json_decode($result);
+echo '<br><br><br>$object var_dump:<br>';
+print_r($object);
+echo '<br>$object print_r:<br>';
+var_dump($object);
     
-    print_r($test123);
     // Take action based on the score returned:
     if ($recaptcha->success) {
         $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
