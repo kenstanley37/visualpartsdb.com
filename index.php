@@ -34,12 +34,12 @@ if(isset($_POST['RegisterRequest']))
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
 
-    $siteKey = '6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k';
-    $secretKey = '6LcoTokUAAAAAOJmN26GyTHtvhVxzJ7fb7JHsu9A';
+    $siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
+    $secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
     
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-    $recaptcha_secret = '6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k';
+    $recaptcha_secret = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
     $recaptcha_response = $_POST['recaptcha_response'];
 
     // Make and decode POST request:
