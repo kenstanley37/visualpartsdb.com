@@ -13,9 +13,9 @@
 * @license MIT
 */
     include("../inc/inc.path.php");
-    require($path.'class/class.visualdb.php');
+    require_once($path.'class/class.visualdb.php');
     require_once($path."class/class.func.php");
-    require_once($path."class/user.func.php");
+    require_once($path."class/class.user.php");
 
     $vpd = new VISUALDB;
     $vail = new VALIDATE;

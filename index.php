@@ -14,7 +14,7 @@ require_once($path."class/class.func.php");
 $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
-
+/** requesting 6 images from the database */
 $randomImage =  $vpd->randImage('6');
 
 $first_name = '';

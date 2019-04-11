@@ -14,44 +14,62 @@ require_once($path."class/class.func.php");
 $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
-
+/** requesting 6 images from the database */
 $randomImage =  $vpd->randImage('6');
 
-$fname = '';
-$lname = '';
+$first_name = '';
+$last_name = '';
 $email = '';
 $phone = '';
 $company = '';
 $message = '';
+$recaptcha = '';
 
 if(isset($_POST['RegisterRequest']))
 {
-    $fname = $vail->sanitizeString($_POST['fname']);
-    $lname = $vail->sanitizeString($_POST['lname']);
+    $first_name = $vail->sanitizeString($_POST['firstname']);
+    $last_name = $vail->sanitizeString($_POST['lastname']);
     $email = $vail->sanitizeString($_POST['email']);
     $phone = $vail->sanitizeString($_POST['phone']);
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
+
+    $siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
+    $secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
     
-    $result = $user->registerRequest($fname,$lname,$email,$phone,$company,$message);
+    // Build POST request:
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_secret = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
+    $recaptcha_response = $_POST['recaptcha_response'];
 
-    if($result == 'alreadyregistered'){
-        $requestResult = 'Email address is already registered';
-    }
+    // Make and decode POST request:
+    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+    $recaptcha = json_decode($recaptcha);
 
-    if($result == 'alreadyrequested'){
-        $requestResult = 'Email already awaiting approval';
-    }
+    // Take action based on the score returned:
+    if ($recaptcha->success) {
+        $result = $user->registerRequest($first_name,$last_name,$email,$phone,$company,$message);
 
-    if($result == 'success'){
-        $requestResult = '';
-        $fname = '';
-        $lname = '';
-        $email = '';
-        $phone = '';
-        $company = '';
-        $message = '';
-        $rrSuccess = '<span class="error">Thank you</span>';
+        if($result == 'alreadyregistered'){
+            $requestResult = 'Email address is already registered';
+        }
+
+        if($result == 'alreadyrequested'){
+            $requestResult = 'Email already awaiting approval';
+        }
+
+        if($result == 'success'){
+            $requestResult = '';
+            $fname = '';
+            $lname = '';
+            $email = '';
+            $phone = '';
+            $company = '';
+            $message = '';
+            $rrSuccess = '<span class="error">Thank you</span>';
+        }
+    } else {
+        $rrSuccess = 'You did not pass reCAPTCHA verification';
     }
 } 
 
@@ -70,6 +88,15 @@ $image_count = $vpd->getImageCount();
 <head>
     <title>Visual Parts Database</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x', { action: 'contact' }).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="wrapper">
@@ -218,19 +245,26 @@ $image_count = $vpd->getImageCount();
                         <h3 class="title">Request Membership</h3>
                         <form action="/index.php#requestForm" method="post" class="form-example" id="requestForm">
                             <fieldset>
-
-                                <input type="text" name="fname" id="fname" placeholder="First Name" value = "<?php if(!empty($fname)){ echo $fname;} ?>" required>
-
-                                <input type="text" name="lname" id="lname" placeholder="Last Name" value="<?php if(!empty($lname)){ echo $lname;} ?>" required>
- 
-                                <input type="email" name="email" id="email" placeholder="Email" value="<?php if(isset($email)){ echo $email;} ?>" required>
+                                <label for="fname">First Name</label>
+                                <input class="required" type="text" name="fname" id="fname" placeholder="" value = "<?php if(!empty($first_name)){ echo $first_name;} ?>" required>
+                                
+                                <label for="lname">Last Name</label>
+                                <input class="required" type="text" name="lname" id="lname" placeholder="" value="<?php if(!empty($last_name)){ echo $last_name;} ?>" required>
+                                
+                                <label for="email">Email</label>
+                                <input class="required" type="email" name="email" id="email" placeholder="" value="<?php if(isset($email)){ echo $email;} ?>" required>
                                     <?php if(!empty($requestResult)){echo '<span>'.$requestResult.'</span>';}?>
-
-                                <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="Phone xxx-xxx-xxxx" value="<?php if(!empty($phone)){ echo $phone;} ?>" required>
-
-                                <input type="text" name="company" id="company" placeholder="Company" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
-                                    
-                                <textarea name="messagearea" placeholder="Message" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
+                                
+                                <label for="phone">Phone</label>
+                                <input class="required" type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="xxx-xxx-xxxx" value="<?php if(!empty($phone)){ echo $phone;} ?>" required>
+                                
+                                <label for="company">Company</label>
+                                <input class="required" type="text" name="company" id="company" placeholder="" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
+                                
+                                <label for="messagearea">Message</label>
+                                <textarea name="messagearea" placeholder="Please tell us if you are doing business with us" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
+                                
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
                                 
                                 <button type="submit" value="SUBMIT" name="RegisterRequest">SEND</button><span><?php if(isset($rrSuccess)){echo $rrSuccess;} ?></span>
                             </fieldset>
