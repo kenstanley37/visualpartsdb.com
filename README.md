@@ -20,6 +20,6 @@ This software uses the following software
 * [C3](https://c3js.org/)
 * [D3](https://d3js.org/)
 * [PHP 7](http://php.net/)
-* [reCAPTCHA](https://developers.google.com/recaptcha/)
+* [reCAPTCHA v3](https://developers.google.com/recaptcha/)
 * [Font Awesome](https://fontawesome.com/)
 * [PHPMailer](https://github.com/PHPMailer/PHPMailer)
