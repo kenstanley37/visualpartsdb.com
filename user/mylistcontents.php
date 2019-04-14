@@ -57,52 +57,46 @@ $mylistcontent =  $user->myListContent($listid);
         </aside>
         <main class="main">
             <section class="title">
-                <h1 class="blue-header">List Contents</h1><a href="javascript://" onclick="history.back();">Back</a>
+                <h2 class="blue-header">List Contents</h2><a href="javascript://" onclick="history.back();">Back</a>
             </section>
-            <section class="nav">
-                
-            </section>
-            <section class="form">
-                <section class="display">
-                    <section class="login shadow">
-                        <h2 class="login-title"><?php echo strtoupper($mylistcontent[0]['pl_list_name']); ?></h2>
-                       
-                        <table class="table shadow">
-                            <thead>
-                                <tr>
-                                    <td>SKU</td>
-                                    <td>Description</td>
-                                    <td class="align-right ">
-                                        <a href="/export/generate-xlsx.php?unit=excel&list=<?php echo strtoupper($mylistcontent[0]['pl_id']); ?>"><i class="far fa-file-excel"></i> Excel</a>
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                 foreach($mylistcontent as $row)
-                        {
-                            ?>
-                                <tr valign="middle">
-                                    <td data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
-                                    <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                    <td class="align-right">
-                                        <form action="/processors/userManagement.php" method="post">
-                                            <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
-                                            <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
-                                            <input name="myListContent" value="myListContent" hidden>
-                                            <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
-                                        </form>
-                                    </td>
-                                </tr>  
+            <div class="form">
+                <section class="w600 bg-white shadow">
+                    <h2 class="login-title"><?php echo strtoupper($mylistcontent[0]['pl_list_name']); ?></h2>
+
+                    <table id="dataTable" class="display nowrap">
+                        <thead>
+                            <tr>
+                                <td>SKU</td>
+                                <td>Description</td>
+                                <td class="align-right ">
+                                    <a href="/export/generate-xlsx.php?unit=excel&list=<?php echo strtoupper($mylistcontent[0]['pl_id']); ?>"><i class="far fa-file-excel"></i> Excel</a>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <?php
-                        }
+                             foreach($mylistcontent as $row)
+                    {
                         ?>
-                            </tbody>
-                        </table>
-                    </section>
-                    
+                            <tr>
+                                <td data-label="SKU"><a href="/search.php?search=<?php echo $row['pls_list_sku']; ?>"><?php echo $row['pls_list_sku']; ?></a></td>
+                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                <td class="align-right">
+                                    <form action="/processors/userManagement.php" method="post">
+                                        <input name="listID" value="<?php echo $row['pls_list_id']; ?>" hidden>
+                                        <input name="skuID" value="<?php echo $row['pls_list_sku']; ?>" hidden>
+                                        <input name="myListContent" value="myListContent" hidden>
+                                        <button class="btn danger" type="submit" name="remSkuFromList" id="remSkuFromList">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>  
+                        <?php
+                    }
+                    ?>
+                        </tbody>
+                    </table>
                 </section>
-            </section>
+            </div>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>

@@ -1,9 +1,28 @@
+
+
+
 $(document).ready(function(){
+    $('table').css('visibility', 'visible');
     url = '/processors/ajax.php';
-    $('#dataTable').DataTable();
+    
     startup();
     var test = $('#recaptchaResponse').value;
     console.log(test);
+    
+    $('#dataTable').DataTable({
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal( {
+                    header: function ( row ) {
+                        var data = row.data();
+                        return 'Details for '+data[0]+' '+data[1];
+                    }
+                } ),
+                renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+            }
+        }
+    });
+    
 });
 
 function startup(){
@@ -19,8 +38,6 @@ function startup(){
     if($("#dash6").length){
         top7days();
     }
-    
-    //$('.error').fadeOut(3500);
 }
   
 function myImgModal(){
@@ -106,10 +123,7 @@ function mySearchCharts(){
     var dfrom = $('#dfrom').val();
     var dto = $('#dto').val();
     var usersID = '';
-    usersID = $('#users option:selected').val();
-    if(usersID == ''){
-        usersID = $('#tempID').val();
-    }
+    usersID = $('#tempID').val();
 
     var data ={};
     data['dfrom'] = dfrom;

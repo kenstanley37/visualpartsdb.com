@@ -38,7 +38,8 @@
     <!-- CSS MENU -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/cssmenu/cssmenu.css" />
     <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="/vendor/DataTables/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/vendor/DataTables/dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/vendor/DataTables/responsive.dataTables.min.css"/>
     <!-- VisualPartsDB CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/visualpartsdb.css" />
     
@@ -52,7 +53,8 @@
     <!-- CSS MENU -->
     <script src="/inc/cssmenu/cssmenu.js"></script>
     <!-- DataTables -->
-    <script src="/vendor/DataTables/datatables.min.js"></script>
+    <script src="/vendor/DataTables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/DataTables/dataTables.responsive.min.js"></script>
     <!-- Visual Parts DB JS -->
     <script src="/inc/js/visualpartsdb.js"></script>
     

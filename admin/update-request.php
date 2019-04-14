@@ -55,15 +55,20 @@ $updateRequest = $vpd->skuUpdateRequest('active');
             <section class="title">
                 <h2 class="blue-header">SKU Update Request</h2>
             </section>
-            <section class="content">
-                <section class="w75p shadow bg-white">
+            <div class="content">
+                <div class="grid-temp-30-70 w100p">
+                    <div class="w100p shadow lh25 bg-white mh500">
+                        <h2 class="login-title">Description</h2>
+                        <p>This list shows the amount of users who have requested the data/images of the SKU to be updated.</p>
+                    </div>
+                    <section class="w100p shadow bg-white">
                     <h3 class="login-title">Active Part Update Request</h3>
-                    <table class="table shadow">
+                    <table id="dataTable" class="display nowrap">
                         <thead>
                             <tr>
-                                <td scope="col">SKU</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Count</td>
+                                <td>SKU</td>
+                                <td>Description</td>
+                                <td class="align-right">Times Requested</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,7 +88,9 @@ $updateRequest = $vpd->skuUpdateRequest('active');
                         </tbody>
                     </table>
                 </section>
-            </section>
+                </div>
+                
+            </div>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>

@@ -29,20 +29,12 @@ $dateStart = strtotime('-1 day', strtotime($date));
 $dateStart = date("Y-m-d", $dateStart);
 $dateEnd = date("Y-m-d");
 
-if(isset($_GET['dfrom']))
+if(isset($_GET['mySearches']))
 {
     $dateStart = $_GET['dfrom'];
     $dateEnd = $_GET['dto'];
-    if(isset($_GET['usersID']))
-    {
-        $userID = $_GET['usersID'];
-    } else {
-        $userID = '';
-    }
 } 
-$userID = $_SESSION['user_id']; // check if admin and set $userID
 $result = '';
-$dropdown = $user->getUserList();
 $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
 ?>
 <!DOCTYPE html>
@@ -73,9 +65,9 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
             </section>
             
             <article class="content">
-                <section class="grid-temp-30-70">
-                    <section class="w100p shadow bg-white">
-                        <section class="form-contact">
+                <div class="grid-temp-30-70 w100p">
+                    <div class="w100p shadow bg-white">
+                        <div class="form-contact">
                             <h2 class="login-title">Date Range</h2>
                             <form action="/user/mysearches.php" method="get">
                             <input type="text" name="tempID" id="tempID" value="<?php echo $userID; ?>" hidden>
@@ -85,41 +77,26 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
 
                             <label for="dto">Date To:</label>
                             <input placeholder="To Date:" type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
-
-                            <select id="users" name="usersID" hidden>
-                                <option value=""></option>
-                                <?php
-                                foreach($dropdown as $row)
-                                {
-                                ?>
-                                <option value="<?php echo $row['user_id']; ?>"
-                                    <?php if($row['user_id'] == $userID ){ echo 'selected';}?>>
-                                    <?php echo $row['user_fName']; ?> <?php echo $row['user_lName']; ?>
-                                </option>
-                                <?php
-                                }
-                                ?>
-                            </select>    
-
-                            <input class="btn-blue" type="submit" value="View">    
+                                
+                            <input class="btn-blue" type="submit" name="mySearches" value="View">    
                             </form>
-                        </section>
-                    </section>
+                        </div>
+                    </div>
                 
                     <section class="w100p shadow bg-white">
                         <h2 class="login-title">Charts</h2>
-                        <section class="charts">
-                            <article id="my-search-graph" class="my-search-graph"></article>
-                            <article id="my-search-pie" class="my-search-pie"></article>
-                        </section>
+                        <div class="charts">
+                            <div id="my-search-graph" class="my-search-graph"></div>
+                            <div id="my-search-pie" class="my-search-pie"></div>
+                        </div>
                     </section>
-                </section> <!-- end grid-wrap -->
+                </div> <!-- end grid-wrap -->
             </article>
 
-            <article class="content2">            
-                <section class="wt100p shadow bg-white">
+            <div class="content2">            
+                <section class="w100p shadow bg-white">
                     <h2 class="login-title">My Searches</h2>
-                    <table class="table shadow" >
+                    <table id="dataTable" class="display nowrap">
                         <thead>
                             <tr>
                                 <th>Part Number</th>
@@ -133,7 +110,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                             {
                             ?>
                             <tr>
-                                <td scope="row" data-label="SKU">
+                                <td data-label="SKU">
                                 <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
                                 </td>
                                 <td data-label="Description">
@@ -149,8 +126,8 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                         </tbody>
                     </table>
                 </section>
-            </article>
-            <article class="my-search-foot"></article>
+            </div>
+            <div class="my-search-foot"></div>
         </main>
         <footer>
             <?php include($path."inc/inc.footer.php"); ?>

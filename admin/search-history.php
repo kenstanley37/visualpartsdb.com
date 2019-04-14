@@ -76,9 +76,9 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                 <h2 class="blue-header">Search History</h2>
             </section>
             
-            <article class="content">
-                <section class="grid-temp-30-70">
-                    <section class="w100p shadow bg-white">
+            <div class="content">
+                <div class="grid-temp-30-70 w100p">
+                    <div class="w100p shadow bg-white">
                         <section class="form-contact">
                             <h2 class="login-title">Date Range</h2>
                             <form action="/admin/search-history.php" method="get">
@@ -92,7 +92,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                                 
                                 <label for="users" hidden>Select User:</label>
                                 <select class="select-css" id="users" name="usersID">
-                                    <option value=""></option>
+                                    <option value="">Select User</option>
                                     <?php
                                     foreach($dropdown as $row)
                                     {
@@ -108,66 +108,65 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                                 <input class="btn-blue" type="submit" value="Search">
                             </form>
                         </section>
-                    </section>
+                    </div>
                     
                     <section class="w100p bg-white shadow">
                         <h2 class="login-title">Charts</h2>
-                        <section class="charts">
-                            <article id="my-search-graph" class="my-search-graph"></article>
-                            <article id="my-search-pie" class="my-search-pie"></article>
-                        </section>
+                        <div class="charts">
+                            <div id="my-search-graph" class="my-search-graph"></div>
+                            <div id="my-search-pie" class="my-search-pie"></div>
+                        </div>
                     </section>
-                </section>
-            </article>
+                </div>
+            </div>
                     
-            <article class="content2">            
-                    <section class="wt100p shadow bg-white">
-                        <h2 class="login-title">Search History <?php if(!empty($userName)){ echo 'for '.$userName;} ?></h2>
-                        <?php if(!empty($searchHist))
-                        {
-                        ?>
-                        <table class="table shadow">
-                            <thead>
-                                <tr>
-                                    <th>Part Number</th>
-                                    <th>Description</th>
-                                    <th># Searches</th>
-                                </tr>
-                            </thead> 
-                            <tbody>
-                                <?php
-                                    foreach($searchHist as $row)
-                                    {
-                                        ?>
-                                            <tr>
-                                                <td scope="row" data-label="SKU">
-                                                    <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
-                                                </td>
-                                                <td data-label="Description">
-                                                    <?php echo $row['sku_desc']; ?>
-                                                </td>
-                                                <td data-label="Count">
-                                                    <?php echo $row['count']; ?>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                        <?php
-                        } else 
-                        {
-                            ?>
-                                <p>No history for selected date range</p>
+            <div class="content2">            
+                <section class="w100p shadow bg-white">
+                    <h2 class="login-title">Search History <?php if(!empty($userName)){ echo 'for '.$userName;} ?></h2>
+                    <?php if(!empty($searchHist))
+                    {
+                    ?>
+                    <table id="dataTable" class="display nowrap">
+                        <thead>
+                            <tr>
+                                <th class="align-left">Part Number</th>
+                                <th class="align-left">Description</th>
+                                <th class="align-left">Search Count</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
                             <?php
-
-                        }
+                                foreach($searchHist as $row)
+                                {
+                                    ?>
+                                        <tr>
+                                            <td data-label="SKU">
+                                                <a class="sku-name" href="/search.php?search=<?php echo $row['sku_search_sku']; ?>"><?php echo $row['sku_search_sku']; ?></a>
+                                            </td>
+                                            <td data-label="Description">
+                                                <?php echo $row['sku_desc']; ?>
+                                            </td>
+                                            <td data-label="Count">
+                                                <?php echo $row['count']; ?>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php
+                    } else 
+                    {
                         ?>
-                    </section>
+                            <p>No history for selected date range</p>
+                        <?php
 
-            </article>
-            <article class="my-search-foot"></article>
+                    }
+                    ?>
+                </section>
+            </div>
+            <div class="my-search-foot"></div>
         </main>
         <footer>
             <?php include($path."inc/inc.footer.php"); ?>

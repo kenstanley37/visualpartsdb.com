@@ -114,23 +114,23 @@ $image_count = $vpd->getImageCount();
         ?>
         </aside>
         <main id="aboutvpd" class="index-main">
-            <section class="index-bg"></section>
+            <div class="index-bg"></div>
             <article class="index-search">
-                <h1>Visual Parts Database</h1>
-                <section class="search-bar">                
+                <h2>Visual Parts Database</h2>
+                <div class="search-bar">                
                     <form class="search" action="/search.php" method="get">
                         <label hidden for="search">Search</label>
                         <input class="toupper" type="search" name="search" id="search" placeholder="Part Number"><button type="submit">SEARCH</button>
                     </form>
-                </section>
-                <section class="records">
+                </div>
+                <div class="records">
                     <p><?php echo number_format($sku_count);?> Parts </p>
                     <p><?php echo number_format($image_count);?> Pictures </p>
                     <p><?php echo number_format($search_count);?> Searches</p>
-                </section>
+                </div>
             </article>
             <article class="main-intro">
-                <section class="brands indexCard shadow">
+                <div class="brands indexCard shadow">
                     <h2 class="block-title shadow">Brands</h2>
                     <p>Our database of parts contains information on over 50,000 components from popular brands such as:</p>
                     <ul>
@@ -156,7 +156,7 @@ $image_count = $vpd->getImageCount();
                             <a href="https://professional.electrolux.com/">Professional</a>
                         </li>
                     </ul>
-                </section>
+                </div>
                 <section class="information shadow">
                     <h2 class="block-title shadow">Information</h2>
                     <p>We record part information such as weight, length, height, and depth. We record this data at the different stages of the product</p>
@@ -177,7 +177,7 @@ $image_count = $vpd->getImageCount();
                         </tbody>
                     </table>
                 </section>
-                <section id="staticImg">
+                <div id="staticImg">
                     <?php
                         foreach($randomImage as $key)
                         {
@@ -188,30 +188,29 @@ $image_count = $vpd->getImageCount();
                                         <img class="article-img" src="<?php echo $key['sku_image_thumb']; ?>" alt="<?php echo $key['sku_image_sku_id'].'-'.$key['sku_image_description']; ?>" />
                                     </a>
                                  </div>
-                                    <figcaption>
-                                        <a href="/search.php?search=<?php echo $key['sku_image_sku_id']; ?>">
-                                            <div class="card-sku-num">
-                                                <h4><?php echo $key['sku_image_sku_id']; ?></h4>
-                                            </div>
-                                            <div class="card-image-desc">
-                                                <p><?php echo $key['sku_image_description'];?></p>
-                                            </div>
-                                            <div class="card-sku-desc">
-                                                <p><?php echo $key['sku_desc'];?></p>
-                                            </div>
-                                        </a>
-                                    </figcaption>
-                                 
+                                <figcaption>
+                                    <a href="/search.php?search=<?php echo $key['sku_image_sku_id']; ?>">
+                                        <div class="card-sku-num">
+                                            <h4><?php echo $key['sku_image_sku_id']; ?></h4>
+                                        </div>
+                                        <div class="card-image-desc">
+                                            <p><?php echo $key['sku_image_description'];?></p>
+                                        </div>
+                                        <div class="card-sku-desc">
+                                            <p><?php echo $key['sku_desc'];?></p>
+                                        </div>
+                                    </a>
+                                </figcaption>
                             </figure>
                             <?php
                         }
                     ?>
-                </section>
+                </div>
             </article> <!-- end main-intro -->
             <article id="member">
-                <section class="member-header">
+                <div class="member-header">
                     <h2>Membership Information</h2>
-                </section>
+                </div>
                 <section class="member-info shadow">
                     <h3 class="title">Benefits & Requirements</h3>
                     <h4>Benefits</h4>
@@ -238,7 +237,6 @@ $image_count = $vpd->getImageCount();
                             Suppliers keep their own product up to date (images and data)
                         </li>
                     </ul>
-                    
                 </section>
                 <section class="member-request shadow">
                     <div class="form-contact">
@@ -246,23 +244,23 @@ $image_count = $vpd->getImageCount();
                         <form action="/index.php#requestForm" method="post" class="form-example" id="requestForm">
                             <fieldset>
                                 <label for="fname">First Name</label>
-                                <input class="required" type="text" name="fname" id="fname" placeholder="" value = "<?php if(!empty($first_name)){ echo $first_name;} ?>" required>
+                                <input class="required" type="text" name="fname" id="fname" placeholder="required" value = "<?php if(!empty($first_name)){ echo $first_name;} ?>" required>
                                 
                                 <label for="lname">Last Name</label>
-                                <input class="required" type="text" name="lname" id="lname" placeholder="" value="<?php if(!empty($last_name)){ echo $last_name;} ?>" required>
+                                <input class="required" type="text" name="lname" id="lname" placeholder="required" value="<?php if(!empty($last_name)){ echo $last_name;} ?>" required>
                                 
                                 <label for="email">Email</label>
-                                <input class="required" type="email" name="email" id="email" placeholder="" value="<?php if(isset($email)){ echo $email;} ?>" required>
+                                <input class="required" type="email" name="email" id="email" placeholder="required" value="<?php if(isset($email)){ echo $email;} ?>" required>
                                     <?php if(!empty($requestResult)){echo '<span>'.$requestResult.'</span>';}?>
                                 
                                 <label for="phone">Phone</label>
-                                <input class="required" type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="xxx-xxx-xxxx" value="<?php if(!empty($phone)){ echo $phone;} ?>" required>
+                                <input class="required" type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="required xxx-xxx-xxxx" value="<?php if(!empty($phone)){ echo $phone;} ?>" required>
                                 
                                 <label for="company">Company</label>
-                                <input class="required" type="text" name="company" id="company" placeholder="" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
+                                <input class="required" type="text" name="company" id="company" placeholder="required" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
                                 
                                 <label for="messagearea">Message</label>
-                                <textarea name="messagearea" placeholder="Please tell us if you are doing business with us" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
+                                <textarea class="pad-35" name="messagearea" placeholder="Please tell us if you are doing business with us" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
                                 
                                 <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
                                 

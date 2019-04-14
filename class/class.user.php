@@ -1361,7 +1361,8 @@
             try
             {
                 $stmt = $this->conn->prepare("UPDATE user SET user_role_id = :role_id 
-                    WHERE user_id = :user_id");
+                    WHERE user_id = :user_id
+                    ORDER by user_id");
                 $stmt->bindparam(":user_id", $user);
                 $stmt->bindparam(":role_id", $role);
                 $stmt->execute();

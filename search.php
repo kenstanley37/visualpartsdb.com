@@ -1,6 +1,6 @@
 <?php
 /**
-* Search Page
+* Search page to display results
 *
 * @author Ken Stanley <ken@stanleysoft.org>
 * @license MIT
@@ -94,24 +94,24 @@ if(isset($_GET['export'])){
             if(!empty($dataResult))
             {
                 ?>  
-                    <section class="title">
+                    <div class="title">
                         <section class="search-title">
                             <h2 class="blue-header">PART #: <?php echo $dataResult['sku_id']; ?></h2>
                         </section>
-                    </section>
+                    </div>
             
-                    <section class="sku-ad-banner">
+                    <div class="sku-ad-banner">
                     <?php 
                         foreach($skuAds as $ad)
                         {
                             echo $ad['sku_ad_banner'];
                         }
                     ?>
-                    </section> 
+                    </div> 
             
-                    <section class="nav search-nav">
-                        <section class="search-user-functions">
-                            <section class="contain1 just-left">
+                    <div class="nav search-nav">
+                        <div class="search-user-functions">
+                            <div class="contain1 just-left">
                                 <table class="table-nores">
                                     <tbody>
                                         <tr>
@@ -157,8 +157,8 @@ if(isset($_GET['export'])){
                                         </tr>
                                     </tbody>
                                 </table>
-                            </section>
-                            <section class="contain2 just-right">
+                            </div>
+                            <div class="contain2 just-right">
                                 <?php if(isset($_SESSION['user_id'])){ 
                                         if(empty($activelist)){
                                             ?>
@@ -215,16 +215,16 @@ if(isset($_GET['export'])){
                                             <?php
                                         }
                                 } ?> 
-                                </section>
-                        </section>
-                    </section>
+                                </div>
+                        </div>
+                    </div>
             
-                    <section class="form">
+                    <div class="form">
                         
-                    </section>
+                    </div>
 
-                    <section class="content pad-bot-50">
-                        <section class="grid-wrap250 sku-data">
+                    <div class="content pad-bot-50">
+                        <div class="grid-wrap250 sku-data">
                             <div class="sku-content shadow bg-white">
                                 <h3>INFORMATION</h3>
                                 <table>
@@ -387,17 +387,17 @@ if(isset($_GET['export'])){
                             <?php
                             }
                             ?>
-                        </section>
-                    </section>
+                        </div>
+                    </div>
                         
-                    <section class="content2">
-                        <section class="img-viewer">
+                    <div class="content2">
+                        <div class="img-viewer">
                             <?php 
                             if(!empty($imageResult))
                             {
                                 ?>
-                            <section class="display sku-images flex-start">
-                                <section class="grid-wrap250">
+                            <div class="display sku-images flex-start">
+                                <div class="grid-wrap250"> 
                                     <?php
                                 foreach($imageResult as $image)
                                 {
@@ -412,27 +412,27 @@ if(isset($_GET['export'])){
                                     <?php
                                 }
                                 ?>
-                                </section>
-                            </section>
-                            <section class="larger-img shadow bg-white">
+                                </div>
+                            </div>
+                            <div class="larger-img shadow bg-white">
                                 <img  src="<?php echo $imageResult[0]['sku_image_url']; ?>" alt="<?php echo $imageResult[0]['sku_image_sku_id'].'-'.$imageResult[0]['sku_image_description']; ?>" >
-                            </section>
+                            </div>
                         <?php 
                             } else
                             {
                                 ?>
 
-                            <section></section>
-                            <section class="larger-img">
+                            <div></div>
+                            <div class="larger-img">
                                 <p>No images currently exists for this product. Please click the Request Data Update button to inform us of missing information.</p>
-                            </section>
+                            </div>
                                 <?php
                             }
                             ?>
-                        </section>
-                    </section>
+                        </div>
+                    </div>
             
-                    <section class="sku-ad-other">
+                    <div class="sku-ad-other">
                         <div></div>
                         <div>
                             <?php 
@@ -443,7 +443,7 @@ if(isset($_GET['export'])){
                             ?>
                         </div>
                         <div></div>
-                    </section> 
+                    </div> 
             <?php
             } else
             {

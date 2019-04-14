@@ -114,6 +114,10 @@ a:hover {
     background-color: #0487CC;
 }
 
+.bg-offblue {
+    background-color: lightblue;
+}
+
 .bg-grey {
     background-color: #efefef !important;
 }
@@ -187,6 +191,10 @@ button:hover {
     text-align: right !important;
 }
 
+.align-left {
+    text-align: left !important;
+}
+
 .just-right {
     justify-content: flex-end !important;
 }
@@ -195,13 +203,17 @@ button:hover {
     color: #fff;
     background-color: #0487CC;
 }
+
 .text-white {
     color: #fff;
 }
 
+.text-dsb {
+    color: darkslateblue;
+}
+
 .valign-top {
-    vertical-align:top;
-    vertical-align:top;
+    vertical-align: top;
 }
 
 .bg-clr-grey {
@@ -210,6 +222,10 @@ button:hover {
 
 .pad-bot-50 {
     padding-bottom: 75px !important;
+}
+
+.pad-25 {
+    padding: 25px;
 }
 
 .center-title {
@@ -265,6 +281,10 @@ section {
     border-radius: 5px 5px 0 0;
 }
 
+.pad-15 {
+    padding: 15px;
+}
+
 .pad-35 {
     padding-top: 15px !important;
     padding-bottom: 15px !important;
@@ -284,6 +304,14 @@ section {
 
 .border-red {
     border: 1px solid red;
+}
+
+.border-black {
+    border: 1px solid #000;
+}
+
+.border-white {
+    border: 1px solid #fff;
 }
 
 .nav-btn {
@@ -318,15 +346,19 @@ section {
 
 .grid-temp-30-70 {
     display: grid;
-    width: 100%;
     grid-template-columns: 29% 69%;
     grid-column-gap: 25px;
     justify-content: center;
     justify-items: center;
+    padding: 0 !important;
 }
 
 .w100p, .wt100p {
     padding: 25px;
+    width: 100%;
+}
+
+.w100p-nopad {
     width: 100%;
 }
 
@@ -377,6 +409,10 @@ section {
 
 .bold {
     font-weight: bold;
+}
+
+.lh25 {
+    line-height: 25px;
 }
 
 /***************************** 
@@ -559,8 +595,7 @@ section {
     position: relative;
 }
 
-.my-search-main .content, .search-main .content, .main .content {
-    grid-area: mcontent;
+.my-search-main .content, .search-main .content, .main .content, .my-search-main .content2, .search-main .content2, .main .content2 {
     display: grid;
     grid-template-columns: 90%;
     grid-template-rows: auto;
@@ -570,15 +605,12 @@ section {
     padding-bottom: 25px;
 }
 
+.my-search-main .content, .search-main .content, .main .content {
+    grid-area: mcontent;
+}
+
 .my-search-main .content2, .search-main .content2, .main .content2 {
     grid-area: mcontent2;
-    display: grid;
-    grid-template-columns: 90%;
-    grid-template-rows: auto;
-    justify-items: center;
-    justify-content: center;
-    position: relative;
-    padding-bottom: 25px;
 }
 
 .my-search-main .update-form, .search-main .update-form, .main .update-form {
@@ -644,7 +676,7 @@ section {
 .main .form h2, .main .content h2 {
     justify-self: flex-start;
 }
-
+/*
 .display {
     display: flex;
     position: relative;
@@ -660,6 +692,11 @@ section {
 .display .not-found p {
     display: block;
     line-height: 35px;
+}
+*/
+
+.display {
+    max-width: 100%;
 }
 
 /*
@@ -791,7 +828,7 @@ header .navlinks {
     margin: 0;
 }
 
-header .navlinks section {
+header .navlinks div {
     display: inline-block;
     padding: 20px;
 }
@@ -923,7 +960,7 @@ header .name a {
     width: 100%;
 }
 
-.index-search h1 {
+.index-search h2 {
     color: rgb(255, 255, 255);
     padding-bottom: 50px;
     font-size: 50px;
@@ -1178,6 +1215,10 @@ figcaption, .card figcaption, .card-responsive figcaption {
 .sku-edit {
     width: 95%;
     padding: 15px;
+}
+
+.form-contact .required:placeholder-shown {
+    color: red;
 }
 
 .form-contact input, .form-contact textarea {
@@ -1585,38 +1626,52 @@ footer {
     justify-content: center;
 }
 
-.dash-top {
+.dash-top, .dash-bottom {
     display: grid;
-    width: 100%;
     grid-template-columns: repeat(3, minmax(350px, 1fr));
     grid-gap: 25px;
+    grid-row-gap: 35px;
+    justify-content: center;
+}
+
+.dash-bottom {
+    grid-template-columns: 540px 540px;
 }
 
 .dash1, .dash2, .dash3, .dash4, .dash5 {
     display: grid;
-    grid-template-rows: 125px 25px;
+    grid-template-columns: 100%;
+    grid-template-rows: 100px 25px;
     justify-content: center;
     justify-items: center;
     align-items: center;
-    height: 150px;
-    min-width: 300px;
+    min-width: 100px;
+    position: relative;
+}
+
+.dash1 div, .dash2 div, .dash3 div, .dash4 div, .dash div {
+    padding-bottom: 10px;
+}
+
+.dash-top .view {
+    display: grid;
+    width: 100%;
+    height: 50px;
+    grid-template-columns: 35px 35px;
+    text-align: center;
+    border-radius: 0 0 5px 5px;
+    background-color: #efefef;
+    vertical-align: middle;
+    align-content: center;
+    justify-content: center;
 }
 
 .dash4 {
     grid-template-rows: 80px 45px 25px;
 }
 
-.dash-bottom {
+.dash5-left, .dash5-right {
     display: grid;
-    width: 100%;
-    grid-template-columns: 50% 50%;
-    grid-gap: 25px;
-    justify-items: center;
-}
-
-.dash5-left {
-    display: grid;
-    grid-template-rows: 275px 25px;
     grid-template-rows: 275px 25px;
     justify-content: center;
     justify-items: center;
@@ -1629,33 +1684,6 @@ footer {
     max-height: 275px;
 }
 
-.dash5-right {
-    display: grid;
-    grid-template-rows: 275px 25px;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    width: 100%;
-    height: 300px;
-}
-
-.dash-middle {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-template-rows: auto;
-    grid-template-areas: 
-        "middlebox";
-    grid-gap: 0;
-    justify-content: center;
-    align-content: start;
-    border: 5px solid skyblue;
-}
-
-.dash-middle .dash4 {
-    grid-area: middlebox;
-    width: 100%;
-    border: 1px solid #000;
-}
 
 /***************************************
 *
@@ -1916,7 +1944,7 @@ footer {
         font-size: 15px;
     }
     
-    header .navlinks section {
+    header .navlinks div {
         display: inline-block;
     }
 
@@ -1925,7 +1953,7 @@ footer {
 
     }
 
-    header .navlinks section {
+    header .navlinks div {
         margin: 0;
         padding: 0;
     }
@@ -2125,7 +2153,7 @@ only screen and (max-width: 900px),
         font-size: 15px;
     }
 
-    header .navlinks section {
+    header .navlinks div {
         display: inline-block;
         padding: 20px;
     }
@@ -2135,7 +2163,7 @@ only screen and (max-width: 900px),
         padding-bottom: 15px;
     }
 
-    header .navlinks section {
+    header .navlinks div {
         margin: 0;
         padding: 0;
     }
@@ -2490,8 +2518,4 @@ only screen and (max-width: 300px),
 
 .nav-show {
     visibility: visible !important;
-}
-
-.required {
-    border-bottom: 1px solid red !important;
 }
