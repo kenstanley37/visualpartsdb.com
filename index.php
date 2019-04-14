@@ -17,22 +17,21 @@ $user = new USER;
 /** requesting 6 images from the database */
 $randomImage =  $vpd->randImage('6');
 
-$first_name = '';
-$last_name = '';
-$email = '';
-$phone = '';
-$company = '';
-$message = '';
-$recaptcha = '';
-
 if(isset($_POST['RegisterRequest']))
 {
-    $first_name = $vail->sanitizeString($_POST['firstname']);
-    $last_name = $vail->sanitizeString($_POST['lastname']);
+    $first_name = $vail->sanitizeString($_POST['first_name']);
+    $last_name = $vail->sanitizeString($_POST['last_name']);
     $email = $vail->sanitizeString($_POST['email']);
     $phone = $vail->sanitizeString($_POST['phone']);
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
+    
+    $_SESSION['reg_first_name'] = $first_name;
+    $_SESSION['reg_last_name'] = $last_name;
+    $_SESSION['reg_email'] = $email;
+    $_SESSION['reg_phone'] = $phone;
+    $_SESSION['reg_company'] = $company;
+    $_SESSION['reg_message'] = $message;
     
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -57,8 +56,8 @@ if(isset($_POST['RegisterRequest']))
 
         if($result == 'success'){
             $requestResult = '';
-            $fname = '';
-            $lname = '';
+            $first_name = '';
+            $last_name = '';
             $email = '';
             $phone = '';
             $company = '';
@@ -232,23 +231,23 @@ $image_count = $vpd->getImageCount();
                         <form action="/index.php#requestForm" method="post" class="form-example" id="requestForm">
                             <fieldset>
                                 <label for="fname">First Name</label>
-                                <input class="required" type="text" name="fname" id="fname" placeholder="required" value = "<?php if(!empty($first_name)){ echo $first_name;} ?>" required>
+                                <input class="required" type="text" name="first_name" id="fname" placeholder="required" value = "<?php if(isset($_SESSION['reg_first_name'])){ echo $_SESSION['reg_first_name'];} ?>" required>
                                 
                                 <label for="lname">Last Name</label>
-                                <input class="required" type="text" name="lname" id="lname" placeholder="required" value="<?php if(!empty($last_name)){ echo $last_name;} ?>" required>
+                                <input class="required" type="text" name="last_name" id="lname" placeholder="required" value="<?php if(isset($_SESSION['reg_last_name'])){ echo $_SESSION['reg_last_name'];} ?>" required>
                                 
                                 <label for="email">Email</label>
-                                <input class="required" type="email" name="email" id="email" placeholder="required" value="<?php if(isset($email)){ echo $email;} ?>" required>
+                                <input class="required" type="email" name="email" id="email" placeholder="required" value="<?php if(isset($_SESSION['reg_email'])){ echo $_SESSION['reg_email'];} ?>" required>
                                     <?php if(!empty($requestResult)){echo '<span>'.$requestResult.'</span>';}?>
                                 
                                 <label for="phone">Phone</label>
-                                <input class="required" type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="required xxx-xxx-xxxx" value="<?php if(!empty($phone)){ echo $phone;} ?>" required>
+                                <input class="required" type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="required xxx-xxx-xxxx" value="<?php if(isset($_SESSION['reg_phone'])){ echo $_SESSION['reg_phone'];} ?>" required>
                                 
                                 <label for="company">Company</label>
-                                <input class="required" type="text" name="company" id="company" placeholder="required" <?php if(!empty($company)){ echo 'value='.$company;} ?> required>
+                                <input class="required" type="text" name="company" id="company" placeholder="required" <?php if(isset($_SESSION['reg_company'])){ echo 'value='.$_SESSION['reg_company'];} ?> required>
                                 
                                 <label for="messagearea">Message</label>
-                                <textarea class="pad-35" name="messagearea" placeholder="Please tell us if you are doing business with us" id="messagearea"><?php if(!empty($message)){ echo $message;} ?></textarea>
+                                <textarea class="pad-35" name="messagearea" placeholder="Please tell us if you are doing business with us" id="messagearea"><?php if(isset($_SESSION['reg_message'])){ echo $_SESSION['reg_message'];} ?></textarea>
                                 
                                 <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
                                 

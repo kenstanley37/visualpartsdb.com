@@ -739,57 +739,65 @@
         * @return 'success' or 'alreadyrequested' or'alreadyregistered'
         */
         public function registerRequest($fname, $lname, $email, $phone, $company, $message)
-        {
-                try
+        {   
+            try
+            {
+                // Lets check if the user is already registered
+                $stmt = $this->conn->prepare("SELECT * FROM user WHERE user_email=:user_email");
+                $stmt->bindparam(":user_email", $email);
+                $stmt->execute();
+                $rowCount = $stmt->rowCount();
+                if($rowCount >= 1)
                 {
-                    // Lets check if the user is already registered
-                    $stmt = $this->conn->prepare("SELECT * FROM user WHERE user_email=:user_email");
-                    $stmt->bindparam(":user_email", $email);
-                    $stmt->execute();
-                    $rowCount = $stmt->rowCount();
-                    if($rowCount >= 1)
+                    return 'alreadyregistered';
+                } else {
+                    // So the user isn't registered. Lets check if they have already requested to register
+                    try
                     {
-                        return 'alreadyregistered';
-                    } else {
-                        // So the user isn't registered. Lets check if they have already requested to register
-                        try
+                        $stmt = $this->conn->prepare("SELECT * FROM register_request WHERE rr_email=:user_email");
+                        $stmt->bindparam(":user_email", $email);
+                        $stmt->execute();
+                        if($stmt->rowCount() == 1)
                         {
-                            $stmt = $this->conn->prepare("SELECT * FROM register_request WHERE rr_email=:user_email");
-                            $stmt->bindparam(":user_email", $email);
-                            $stmt->execute();
-                            if($stmt->rowCount() == 1)
+                            return 'alreadyrequested';
+                        } else {
+                            try
                             {
-                                return 'alreadyrequested';
-                            } else {
-                                try
-                                {
-                                    $stmt = $this->conn->prepare("INSERT INTO register_request (rr_fname, rr_lname, rr_email, rr_phone, rr_company, rr_message) VALUES (:fname, :lname, :email, :phone, :company, :message)");
-                                    $stmt->bindparam(":fname", $fname);
-                                    $stmt->bindparam(":lname", $lname);
-                                    $stmt->bindparam(":email", $email);
-                                    $stmt->bindparam(":phone", $phone);
-                                    $stmt->bindparam(":company", $company);
-                                    $stmt->bindparam(":message", $message);
-                                    $stmt->execute();
-                                    return 'success';
+                                $stmt = $this->conn->prepare("INSERT INTO register_request (rr_fname, rr_lname, rr_email, rr_phone, rr_company, rr_message) VALUES (:fname, :lname, :email, :phone, :company, :message)");
+                                $stmt->bindparam(":fname", $fname);
+                                $stmt->bindparam(":lname", $lname);
+                                $stmt->bindparam(":email", $email);
+                                $stmt->bindparam(":phone", $phone);
+                                $stmt->bindparam(":company", $company);
+                                $stmt->bindparam(":message", $message);
+                                $stmt->execute();
 
-                                }
-                                catch(PDOException $e)
-                                {
-                                    echo $e->getMessage();
-                                }
+                                unset($_SESSION['reg_first_name']);
+                                unset($_SESSION['reg_last_name']);
+                                unset($_SESSION['reg_email']);
+                                unset($_SESSION['reg_phone']);
+                                unset($_SESSION['reg_company']);
+                                unset($_SESSION['reg_message']);
+
+                                return 'success';
+
+                            }
+                            catch(PDOException $e)
+                            {
+                                echo $e->getMessage();
                             }
                         }
-                        catch(PDOException $e)
-                        {
-                            echo $e->getMessage();
-                        }
+                    }
+                    catch(PDOException $e)
+                    {
+                        echo $e->getMessage();
                     }
                 }
-                catch(PDOException $e)
-                {
-                    echo $e->getMessage();
-                }
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
         } // end registerRequest
         
         
