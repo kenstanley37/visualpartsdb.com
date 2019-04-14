@@ -40,7 +40,7 @@
     <!-- CSS MENU -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/cssmenu/cssmenu.css" />
     <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="/vendor/DataTables/dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" type="text/css" href="/vendor/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css"/>
     <!-- VisualPartsDB CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/visualpartsdb.css" />
