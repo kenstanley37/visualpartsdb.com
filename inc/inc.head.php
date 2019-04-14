@@ -50,7 +50,7 @@
     <script src="/inc/js/jquery-3.3.1.min.js"></script>
     <script src="/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <!-- DataTables -->
-    <script type="javascript" src="/vendor/DataTables/dataTables.min.js"></script>
+    <script src="/vendor/DataTables/dataTables.min.js"></script>
     <script src="/vendor/DataTables/dataTables.responsive.min.js"></script>
     <!-- Graphs and Charts -->
     <script src="/vendor/d3/d3.min.js"></script>
