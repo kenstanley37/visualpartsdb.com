@@ -2,13 +2,6 @@
 
 
 $(document).ready(function(){
-    $('table').css('visibility', 'visible');
-    url = '/processors/ajax.php';
-    
-    startup();
-    var test = $('#recaptchaResponse').value;
-    console.log(test);
-    
     $('#dataTable').DataTable({
         responsive: {
             details: {
@@ -22,7 +15,8 @@ $(document).ready(function(){
             }
         }
     });
-    
+    url = '/processors/ajax.php';
+    startup();
 });
 
 function startup(){
