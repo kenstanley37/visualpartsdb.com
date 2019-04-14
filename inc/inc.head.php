@@ -13,6 +13,8 @@
     } else {
         $useridgtag = "Anonymous";
     }
+
+     
 ?>
     <!-- Google Adsense -->
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -67,6 +69,16 @@
         gtag('js', new Date());
         gtag('set', {'user_id': '<?php echo $useridgtag; ?>'}); // Set the user ID using signed-in user_id.
         gtag('config', 'UA-132361266-1');
+    </script>
+
+     <script src="https://www.google.com/recaptcha/api.js?render=6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x', { action: 'contact' }).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
     </script>
 
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>

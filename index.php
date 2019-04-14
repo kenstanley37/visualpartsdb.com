@@ -33,9 +33,6 @@ if(isset($_POST['RegisterRequest']))
     $phone = $vail->sanitizeString($_POST['phone']);
     $company = $vail->sanitizeString($_POST['company']);
     $message = $vail->sanitizeString($_POST['messagearea']);
-
-    $siteKey = '6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x';
-    $secretKey = '6Leie50UAAAAAI4hVD-vzusG43XbZZdev2zDi4VG';
     
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -88,15 +85,6 @@ $image_count = $vpd->getImageCount();
 <head>
     <title>Visual Parts Database</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x"></script>
-    <script>
-        grecaptcha.ready(function () {
-            grecaptcha.execute('6Leie50UAAAAAKxWAQy4g3oDbuSDN6-OZyP0KI_x', { action: 'contact' }).then(function (token) {
-                var recaptchaResponse = document.getElementById('recaptchaResponse');
-                recaptchaResponse.value = token;
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="wrapper">
