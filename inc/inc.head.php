@@ -41,7 +41,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/cssmenu/cssmenu.css" />
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/ju/jq-3.3.1/dt-1.10.18/af-2.3.3/r-2.2.2/datatables.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/vendor/DataTables/responsive.dataTables.min.css"/>
+
     <!-- VisualPartsDB CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/visualpartsdb.css" />
     
@@ -51,7 +51,6 @@
     <script src="/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <!-- DataTables -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/ju/jq-3.3.1/dt-1.10.18/af-2.3.3/r-2.2.2/datatables.min.js"></script>
-    <script src="/vendor/DataTables/Responsive-2.2.2/dataTables.responsive.min.js"></script>
     <!-- Graphs and Charts -->
     <script src="/vendor/d3/d3.min.js"></script>
     <script src="/vendor/c3-0.6.12/c3.min.js"></script>
