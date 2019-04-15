@@ -37,8 +37,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/reset.css" />
     <!-- CSS MENU -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/cssmenu/cssmenu.css" />
-    <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/ju/jq-3.3.1/jszip-2.5.0/dt-1.10.18/af-2.3.3/b-1.5.6/b-colvis-1.5.6/b-flash-1.5.6/b-html5-1.5.6/b-print-1.5.6/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.css"/>
+
 
     <!-- VisualPartsDB CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/visualpartsdb.css" />
@@ -46,10 +45,7 @@
     <!-- JavaScript -->
     <script src="/inc/js/jquery-3.3.1.min.js"></script>
     <script src="/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-    <!-- DataTables -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/ju/jq-3.3.1/jszip-2.5.0/dt-1.10.18/af-2.3.3/b-1.5.6/b-colvis-1.5.6/b-flash-1.5.6/b-html5-1.5.6/b-print-1.5.6/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.js"></script>
+
     <!-- Graphs and Charts -->
     <script src="/vendor/d3/d3.min.js"></script>
     <script src="/vendor/c3-0.6.12/c3.min.js"></script>

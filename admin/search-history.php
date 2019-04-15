@@ -126,7 +126,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                     <?php if(!empty($searchHist))
                     {
                     ?>
-                    <table id="dataTable" class="display nowrap">
+                    <table class="table display nowrap">
                         <thead>
                             <tr>
                                 <th class="align-left">Part Number</th>
