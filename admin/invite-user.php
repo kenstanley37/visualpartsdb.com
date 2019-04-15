@@ -31,7 +31,7 @@ if(isset($_GET['register']))
     $temp = $_GET['register'];
     if($temp == 'successful')
     {
-        $result = 'Registeration request has been sent';
+        $result = 'User has been invited';
     }
 }
 
