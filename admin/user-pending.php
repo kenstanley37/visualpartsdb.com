@@ -60,7 +60,7 @@ $pending = $user->userList('pending');
                 <div class="grid-temp-30-70 w100p">
                     <div class="w100p shadow lh25 bg-white">
                         <h2 class="login-title">Description</h2>
-                        <p>This list contains the users who have been sent an inventation request and have not set a password yet.</p>
+                        <p>This list contains the users who have been sent an invitation request and have not set a password yet.</p>
                     </div>
                 <section class="w100p shadow bg-white">
                     <h2 class="login-title">Verification Pending</h2>
