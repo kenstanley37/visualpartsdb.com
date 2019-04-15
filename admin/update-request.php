@@ -63,7 +63,7 @@ $updateRequest = $vpd->skuUpdateRequest('active');
                     </div>
                     <section class="w100p shadow bg-white">
                     <h3 class="login-title">Active Part Update Request</h3>
-                    <table id="dataTable" class="display nowrap">
+                    <table class="table nowrap">
                         <thead>
                             <tr>
                                 <td>SKU</td>

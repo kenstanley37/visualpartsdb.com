@@ -20,40 +20,28 @@ $activelistID = $user->getMyActiveListID();
 
 if(isset($_GET['search']))
 {
+    
+    
     $sku = $_GET['search'];
     $sku = $vail->sanitizeString($sku);
     $sku = strtoupper($sku);
-    $dataResult = $vpd->getSkuData($sku);
-    $imageResult = $vpd->getSkuImage($sku);
-    $skuAds = $vpd->getSkuAds($sku);
-    
-    $createDate = $dataResult['sku_rec_date'];
-    $createDate = date_create($createDate);
-    $createDate = date_format($createDate, 'm/d/Y');
-    
-    $updateDate = $dataResult['sku_rec_update'];
-    $updateDate = date_create($updateDate);
-    $updateDate = date_format($updateDate, 'm/d/Y');
-}
-
-if(isset($_POST['imageSubmit']))
-{
-    $image = $_POST['fileToUpload'];
-    $sku = $_POST['skuId'];
-    $sku = $vail->sanitizeString($sku);
-    $sku = strtoupper($sku);
-    $result = $vpd->addImage($sku, $image);
-}
-
-if(isset($_GET['imageupload'])){
-    if($_GET['imageupload'] == 'descriptionrequired') {
-        $vpd->imageMessage = 'Please enter a description';
+    if($vpd->checkSku($sku))
+    {
+        $dataResult = $vpd->getSkuData($sku);
+        $imageResult = $vpd->getSkuImage($sku);
+        $skuAds = $vpd->getSkuAds($sku);
+        $createDate = $dataResult['sku_rec_date'];
+        $createDate = date_create($createDate);
+        $createDate = date_format($createDate, 'm/d/Y');
+        $updateDate = $dataResult['sku_rec_update'];
+        $updateDate = date_create($updateDate);
+        $updateDate = date_format($updateDate, 'm/d/Y');
+    } else {
+        header('location: /desc-search.php?desc='.$sku.'');
     }
     
-    if($_GET['imageupload'] == 'notsupported') {
-        $vpd->imageMessage = 'Only GIF, JPEG, and PNG are supported';
-    }
 }
+
 
 if(isset($_GET['export'])){
     $sku = $_GET['sku'];
@@ -123,13 +111,7 @@ if(isset($_GET['export'])){
                                                 </form>
 
                                             </td>
-                                            <!-- PDF coming soon
-                                            <td>
-                                                <a class="btn" href="/export/generate-xlsx.php?unit=excel&sku=<?php echo $dataResult['sku_id']; ?>">
-                                                    <img src="/assets/msoffice/icons8-pdf-30.png" alt="PDF Export">
-                                                </a>
-                                            </td>
-                                            -->
+
                                             <td class="nav-btn">
                                                  <?php
                                                     if(isset($_SESSION['user_id']))
@@ -448,15 +430,11 @@ if(isset($_GET['export'])){
             } else
             {
             ?>
-            <section class="nav">
-                <section class="display">
-                    <section class="login shadow">
-                        <h2 class="login-title">Not Found</h2>
-                        <section class="not-found">
-                            <p>Sorry, nothing was found for SKU "<i class="error"><?php echo $sku; ?></i>"</p>
-                            <p>Please try again!</p>
-                        </section>
-                    </section>
+            <section class="form">
+                <section class="w600 shadow bg-white">
+                    <h2 class="login-title">Not Found</h2>
+                    <p>Sorry, nothing was found for SKU "<i class="error"><?php echo $sku; ?></i>"</p>
+                    <p>Please try again!</p>
                 </section>
             </section>
                 <?php

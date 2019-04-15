@@ -63,7 +63,7 @@ $mylistcontent =  $user->myListContent($listid);
                 <section class="w600 bg-white shadow">
                     <h2 class="login-title"><?php echo strtoupper($mylistcontent[0]['pl_list_name']); ?></h2>
 
-                    <table id="dataTable" class="display nowrap">
+                    <table class="table nowrap">
                         <thead>
                             <tr>
                                 <td>SKU</td>

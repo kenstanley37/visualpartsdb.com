@@ -63,7 +63,7 @@ $company = $user->dropDownCompany();
                         <h2 class="login-title">Description</h2>
                         <p>Adds a user account and sends out a verification link in email.</p>
                     </div>
-                    <div class="w100p bg-white shadow">
+                    <div class="w600 bg-white shadow">
                          <div class="form-contact">
                             <h3 class="login-title">Register Invite</h3>
                             <form id="addUser" method="post" action="/processors/register_request.php">

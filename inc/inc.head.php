@@ -32,8 +32,6 @@
     <!-- CSS -->
     <!-- jQuery -->
     <link rel="stylesheet" type="text/css" media="screen" href="/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.css" >
-    <link rel="stylesheet" type="text/css" media="screen" href="/vendor/jquery-ui-1.12.1.custom/jquery-ui.structure.min.css" >
-    <link rel="stylesheet" type="text/css" media="screen" href="/vendor/jquery-ui-1.12.1.custom/jquery-ui.theme.min.css" >
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/fontawesome.min.css" > <!--load all styles -->
     <link rel="stylesheet" type="text/css" media="screen" href="/vendor/c3-0.6.12/c3.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/reset.css" />
@@ -44,7 +42,6 @@
 
     <!-- VisualPartsDB CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/visualpartsdb.css" />
-    
 
     <!-- JavaScript -->
     <script src="/inc/js/jquery-3.3.1.min.js"></script>

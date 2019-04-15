@@ -67,7 +67,7 @@ $regRequest =  $user->regRequestList();
                          if(!empty($regRequest))
                          {
                              ?>
-                           <table id="dataTable" class="display nowrap">
+                           <table class="table shadow">
                                 <thead>
                                     <tr>
                                         <td>First Name</td>

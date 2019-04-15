@@ -71,7 +71,7 @@ if(!isset($_SESSION['user_id']))
                             if($listcount >= 1)
                             {
                                 ?>
-                        <table id="dataTable" class="display nowrap">
+                        <table class="table nowrap">
                             <thead>
                                 <tr>
                                     <td>Status</td>

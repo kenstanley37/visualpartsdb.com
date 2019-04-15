@@ -76,7 +76,7 @@ $pending = $user->userList('active');
                         if(!empty($pending))
                         {
                         ?>
-                        <table id="dataTable" class="display nowrap">
+                        <table  class="table display nowrap">
                             <thead>
                                 <tr>
                                     <td>First Name</td>
@@ -122,13 +122,15 @@ $pending = $user->userList('active');
                                         <td data-label="Role">
                                             <form action="/processors/userManagement.php" method="post">
                                                 <input type="number" name="userID" value="<?php echo $row['user_id']; ?>" hidden>
-                                                <table>
+                                                <table class="tbl-btns">
                                                     <tr>
                                                         <td>
                                                             <button class="btn <?php if($row['role_name'] == 'USER'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToUser">
                                                                 USER 
                                                             </button>
                                                         </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>
                                                             <button class="btn <?php if($row['role_name'] == 'ADMIN'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToAdmin">
                                                                 ADMIN 

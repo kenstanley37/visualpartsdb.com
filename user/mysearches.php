@@ -96,7 +96,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
             <div class="content2">            
                 <section class="w100p shadow bg-white">
                     <h2 class="login-title">My Searches</h2>
-                    <table id="dataTable" class="display nowrap">
+                    <table class="table nowrap">
                         <thead>
                             <tr>
                                 <th>Part Number</th>

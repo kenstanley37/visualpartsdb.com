@@ -58,7 +58,7 @@ $updateRequest = $vpd->skuUpdateRequest($sku);
             <div class="content">
                 <section class="w600 shadow bg-white">
                     <h3 class="login-title">Requested By User</h3>
-                    <table id="dataTable" class="display nowrap">
+                    <table class="table nowrap">
                         <thead>
                             <tr>
                                 <th>List Name</th>

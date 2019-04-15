@@ -367,6 +367,11 @@ section {
     width: 75%;
 }
 
+.w50p {
+    padding: 25px;
+    width: 50%;
+}
+
 .wh300 {
     padding: 25px;
     height: 300px;
@@ -418,6 +423,19 @@ section {
 
 .lh25 {
     line-height: 25px;
+}
+
+.tbl_img img, .tbl_img i {
+    width: 50px;
+    height: 50px;
+}
+
+.tbl_img td, .tbl_img i {
+    vertical-align: middle;
+}
+
+.tbl_img i {
+    font-size: 25px;
 }
 
 /***************************** 
@@ -681,7 +699,14 @@ section {
 .main .form h2, .main .content h2 {
     justify-self: flex-start;
 }
-/*
+
+
+.#dataTable {
+    max-width: 100% !important;
+}
+
+
+ /*
 .display {
     display: flex;
     position: relative;
@@ -1691,23 +1716,28 @@ footer {
 
 
 /***************************************
-*
-*
 * START default table setup
-*
-*
 ****************************************/
+
+table {
+    min-width: 100% !important;
+}
+
+.table input[type=text],
+.table input[type=password] {
+    box-sizing : border-box;
+}
 
 .table, .table-nores {
     border: 1px solid #ccc;
     border-collapse: collapse;
     margin: 0;
     padding: 0;
-    max-width: 90%;
     table-layout: fixed;
     position: relative;
-    min-width: 100%;
+    align-content: center;
 }
+
 
 .table caption, .table-nores caption {
     font-size: 1.5em;
@@ -1726,7 +1756,6 @@ footer {
     font-size: 12px; 
     font-weight: 700; 
     line-height: 20px;
-
     padding: .625em;
     text-align: left;
     overflow-wrap: break-word;
@@ -1743,8 +1772,8 @@ footer {
 }
 
 .table thead tr, .table-nores thead tr {
-    background: #4682B4;  /* fallback for old browsers */
-    color: #fff;
+    background: lightblue;  /* fallback for old browsers */
+    color: #000;
 }
 
 .table a, .table-nores a {
@@ -1755,12 +1784,15 @@ footer {
     border-bottom: 1px solid #000;
 }
 
+.tbl-buttons {
+    display: block;
+}
+
+
+
+
 /***************************************
-*
-*
 * START User Management Style
-*
-*
 ****************************************/
 
 .admin-main {
@@ -1825,7 +1857,6 @@ footer {
 .admin-main .disabled {
 	border: 3px solid red;
 }
-
 
 #myImg {
   border-radius: 5px;
@@ -1908,14 +1939,8 @@ footer {
 
 
 /***************************************
-*
-*
 * START MEDIA QUERIES
-*
-*
 ****************************************/
-/* Change styles for span and cancel button on extra small screens */
-
 
 @media screen and (min-width: 1201px){
     
@@ -2500,7 +2525,7 @@ only screen and (max-width: 890px),
     
     .w600 {
         padding: 25px;
-        max-width: 250px;
+        width: 100%;
     }
     
     .w75p {
