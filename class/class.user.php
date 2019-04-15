@@ -1,7 +1,21 @@
 <?php
+/**
+* The user class handles all user related methods
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+
+
+    /**
+     * Import PHPMailer classes into the global namespace
+     * These must be at the top of your script, not inside a function
+     *
+     * @author Ken Stanley <ken@stanleysoft.org>
+     * @license MIT
+     */
+    
     require_once('class.db.php');
-    // Import PHPMailer classes into the global namespace
-    // These must be at the top of your script, not inside a function
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
@@ -24,7 +38,6 @@
         * Constructor to connect to the database
         *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         *
         */
@@ -44,7 +57,7 @@
         
         /**
         * Destruct
-        * Destories the connection to the database
+        * Destorys the connection to the database
         *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
@@ -58,7 +71,6 @@
         *
         * @param Place   $umail  the users email address
         * @param integer $upass the users password
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -146,7 +158,6 @@
         * Checks if the user has been disabled
         *
         * @param interger $userID the users ID number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return send to location /user/disabled.php or true
         */
@@ -187,7 +198,6 @@
             * @param string $lname users last name
             * @param string $email users email address
             * @param string $company users company
-            * 
             * @author Ken Stanley <ken@stanleysoft.org>
             * @return true or pdo error
             */
@@ -272,7 +282,6 @@
             * Password reset function. Sends an email to the user to reset the password
             *
             * @param string $email  the users email address
-            * 
             * @author Ken Stanley <ken@stanleysoft.org>
             * @return true or false
             */
@@ -373,7 +382,6 @@
             *
             * @param integer $userID the users ID from the database
             * @param string  $code the code from the email verification
-            * 
             * @author Ken Stanley <ken@stanleysoft.org>
             * @return true, noaccount, no record found
             */
@@ -426,7 +434,6 @@
         * Checks if an email is already in the database
         *
         * @param string $email  the users email address
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -457,7 +464,6 @@
         *
         * @param integer $userID the users database ID
         * @param integer $password the users new password
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true
         */
@@ -482,7 +488,6 @@
         * Removes all traces of the user from the database. 
         *
         * @param integer $userid the users database ID
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -543,10 +548,9 @@
         /**
         * Sets the $_SESSION after login
         *
-        * @param integer $email the users database ID
+        * @param integer $userID the users database ID
         * @param string $fname the users first name
         * @param string $lname the users last name
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true
         */
@@ -588,7 +592,6 @@
         * Returns the users First and Last name as one field
         *
         * @param integer $userID the users database ID
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return $fullname
         */
@@ -614,7 +617,6 @@
         /**
         * Returns a list of all companies as an array
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return array of companies
         */
@@ -637,9 +639,8 @@
         /**
         * Returns an array of users based on status
         *
-        * @param string $userID can be 'active' 'pending' or 'disabled'
-        * will return data based on selection
-        * 
+        * @param string $type can be 'active' 'pending' or 'disabled'
+        * *  will return data based on selection
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return array of results
         */
@@ -687,7 +688,6 @@
         * Toggles the users active status in the database
         *
         * @param integer $userID the users database ID
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true
         */
@@ -735,69 +735,75 @@
         * @param int $phone the users phone number
         * @param string $company the users company
         * @param string $message the users request message
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return 'success' or 'alreadyrequested' or'alreadyregistered'
         */
         public function registerRequest($fname, $lname, $email, $phone, $company, $message)
-        {
-                try
+        {   
+            try
+            {
+                // Lets check if the user is already registered
+                $stmt = $this->conn->prepare("SELECT * FROM user WHERE user_email=:user_email");
+                $stmt->bindparam(":user_email", $email);
+                $stmt->execute();
+                $rowCount = $stmt->rowCount();
+                if($rowCount >= 1)
                 {
-                    // Lets check if the user is already registered
-                    $stmt = $this->conn->prepare("SELECT * FROM user WHERE user_email=:user_email");
-                    $stmt->bindparam(":user_email", $email);
-                    $stmt->execute();
-                    $rowCount = $stmt->rowCount();
-                    if($rowCount >= 1)
+                    return 'alreadyregistered';
+                } else {
+                    // So the user isn't registered. Lets check if they have already requested to register
+                    try
                     {
-                        return 'alreadyregistered';
-                    } else {
-                        // So the user isn't registered. Lets check if they have already requested to register
-                        try
+                        $stmt = $this->conn->prepare("SELECT * FROM register_request WHERE rr_email=:user_email");
+                        $stmt->bindparam(":user_email", $email);
+                        $stmt->execute();
+                        if($stmt->rowCount() == 1)
                         {
-                            $stmt = $this->conn->prepare("SELECT * FROM register_request WHERE rr_email=:user_email");
-                            $stmt->bindparam(":user_email", $email);
-                            $stmt->execute();
-                            if($stmt->rowCount() == 1)
+                            return 'alreadyrequested';
+                        } else {
+                            try
                             {
-                                return 'alreadyrequested';
-                            } else {
-                                try
-                                {
-                                    $stmt = $this->conn->prepare("INSERT INTO register_request (rr_fname, rr_lname, rr_email, rr_phone, rr_company, rr_message) VALUES (:fname, :lname, :email, :phone, :company, :message)");
-                                    $stmt->bindparam(":fname", $fname);
-                                    $stmt->bindparam(":lname", $lname);
-                                    $stmt->bindparam(":email", $email);
-                                    $stmt->bindparam(":phone", $phone);
-                                    $stmt->bindparam(":company", $company);
-                                    $stmt->bindparam(":message", $message);
-                                    $stmt->execute();
-                                    return 'success';
+                                $stmt = $this->conn->prepare("INSERT INTO register_request (rr_fname, rr_lname, rr_email, rr_phone, rr_company, rr_message) VALUES (:fname, :lname, :email, :phone, :company, :message)");
+                                $stmt->bindparam(":fname", $fname);
+                                $stmt->bindparam(":lname", $lname);
+                                $stmt->bindparam(":email", $email);
+                                $stmt->bindparam(":phone", $phone);
+                                $stmt->bindparam(":company", $company);
+                                $stmt->bindparam(":message", $message);
+                                $stmt->execute();
 
-                                }
-                                catch(PDOException $e)
-                                {
-                                    echo $e->getMessage();
-                                }
+                                unset($_SESSION['reg_first_name']);
+                                unset($_SESSION['reg_last_name']);
+                                unset($_SESSION['reg_email']);
+                                unset($_SESSION['reg_phone']);
+                                unset($_SESSION['reg_company']);
+                                unset($_SESSION['reg_message']);
+
+                                return 'success';
+
+                            }
+                            catch(PDOException $e)
+                            {
+                                echo $e->getMessage();
                             }
                         }
-                        catch(PDOException $e)
-                        {
-                            echo $e->getMessage();
-                        }
+                    }
+                    catch(PDOException $e)
+                    {
+                        echo $e->getMessage();
                     }
                 }
-                catch(PDOException $e)
-                {
-                    echo $e->getMessage();
-                }
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
         } // end registerRequest
         
         
         /**
         * Returns an array of users that have requested membership
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return $result array
         */
@@ -865,7 +871,6 @@
         * Deletes register request from the database
         *
         * @param integer $regID the ID from the database of the register request
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -917,7 +922,6 @@
         * Records how many records are in the users list
         *
         * @param integer $listID the users list ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return integer row count
         */
@@ -944,7 +948,6 @@
         * Deletes a list and the assoicated SKUs from the user_part_list_skus table
         *
         * @param integer $listID the users list ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -977,7 +980,6 @@
         *
         * @param string $listname the users list name
         * @param string $listdescription the users list description
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1008,7 +1010,6 @@
         * Removes the user active list then sets selected list as active
         *
         * @param string $listid the users list ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1035,7 +1036,6 @@
          /**
         * Removes all of the user list active status
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1060,7 +1060,6 @@
         * Returns the name of a user list 
         *
         * @param string $listid can be list ID from the database or 'none'
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return integer list id
         */
@@ -1089,7 +1088,6 @@
         /**
         * Returns the users active list name 
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return string list name
         */
@@ -1117,7 +1115,6 @@
          /**
         * Returns the ID of the users active list
         *
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return integer list id
         */
@@ -1148,7 +1145,6 @@
         *
         * @param integer $userID the users ID
         * @param string $type can be 'list' or 'sku' to either get a count of the list or skus
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return list count or sku count
         */
@@ -1195,7 +1191,6 @@
         * Adds a sku to the users active list
         *
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1220,7 +1215,6 @@
         * Checks if the sku is already in the users active list
         *
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -1253,8 +1247,7 @@
         * Removes a sku from a users list
         *
         * @param string $sku is the part number
-        * @param string $sku is the part number
-        * 
+        * @param int $list is list id number
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -1281,7 +1274,6 @@
         * Returns an array of all the users list
         *
         * @param string $listid is the list ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return array $result
         */
@@ -1311,7 +1303,6 @@
         * Add record to the database of user and requested sku to be updated
         *
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1336,7 +1327,6 @@
         * RChecks if the user has already requested a sku update
         *
         * @param string $sku is the part number
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */
@@ -1371,7 +1361,6 @@
         *
         * @param integer $user is the user ID from the database
         * @param integer $role is 1 for USER or 2 for ADMIN 
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or pdo error
         */
@@ -1380,7 +1369,8 @@
             try
             {
                 $stmt = $this->conn->prepare("UPDATE user SET user_role_id = :role_id 
-                    WHERE user_id = :user_id");
+                    WHERE user_id = :user_id
+                    ORDER by user_id");
                 $stmt->bindparam(":user_id", $user);
                 $stmt->bindparam(":role_id", $role);
                 $stmt->execute();
@@ -1396,7 +1386,6 @@
         * Returns the users current Role name
         *
         * @param integer $user is the users ID from the database
-        * 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return string $role = role name
         */
@@ -1426,8 +1415,7 @@
         * Destories session and sends user to the landing page
         *
         * @param string $sku is the part number
-        * @param string $sku is the part number
-        * 
+        * @param string $sku is the part number 
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return true or false
         */

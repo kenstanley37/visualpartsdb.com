@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - update-request-sku.php
+* Revision Date - April, 10 2019
+*/
 session_start();
 include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
@@ -35,7 +40,7 @@ $updateRequest = $vpd->skuUpdateRequest($sku);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: Update Request SKU</title>
+    <title>Visual Parts Database: SKU Update Request</title>
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -50,38 +55,40 @@ $updateRequest = $vpd->skuUpdateRequest($sku);
             <section class="title">
                 <h2>Update Request: <?php echo ucfirst($sku); ?></h2>
             </section>
-            <section class="nav">
-                    <table class="table shadow">
-                        <caption>Requested By User</caption>
+            <div class="content">
+                <section class="w600 shadow bg-white">
+                    <h3 class="login-title">Requested By User</h3>
+                    <table class="table nowrap">
                         <thead>
                             <tr>
-                                <td scope="col">List Name</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Requested By</td>
-                                <td scope="col">Date</td>
+                                <th>List Name</th>
+                                <th>Description</th>
+                                <th>Requested By</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                    <?php
-                    foreach($updateRequest as $row)
-                    {
-                        $date = $row['update_request_date'];
-                        $dateadded = date_create($date);
-                        $addDate = date_format($dateadded, 'm/d/Y');
-                        $skuID = $row['update_sku'];
-                        ?>
-                            <tr>
-                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $sku; ?>"><?php echo $sku; ?></a></td>
-                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                <td data-label="User"><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
-                                <td data-label="Date"><?php echo $addDate; ?></td>
-                            </tr>    
                         <?php
-                    }
-                ?>
-                    </tbody>
-                </table>
-            </section>
+                        foreach($updateRequest as $row)
+                        {
+                            $date = $row['update_request_date'];
+                            $dateadded = date_create($date);
+                            $addDate = date_format($dateadded, 'm/d/Y');
+                            $skuID = $row['update_sku'];
+                            ?>
+                                <tr>
+                                    <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $sku; ?>"><?php echo $sku; ?></a></td>
+                                    <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                    <td data-label="User"><?php echo $row['user_fName'].' '.$row['user_lName']; ?></td>
+                                    <td data-label="Date"><?php echo $addDate; ?></td>
+                                </tr>    
+                            <?php
+                        }
+                    ?>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>

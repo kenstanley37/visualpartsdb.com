@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - deleteuser.php
+* Revision Date - April, 10 2019
+*/
 session_start();
 include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
@@ -58,40 +63,36 @@ else
                 
             </section>
             <section class="form">
-                <section class="display">
-                    <section class="login shadow">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <td colspan="2">
-                                        <?php echo $userName; ?> currently has <?php echo $userListCount; ?> list and <?php echo $userListSkuCount; ?> SKUs.
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="2">
-                                        Are you sure you want to delete <?php echo $userName; ?>?
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form action="/processors/userManagement.php" method="post">
-                                            <input hidden type="text" name="userID" value="<?php echo $remUserID; ?>">
-                                            <button name="remUser" type="submit" class="btn danger">YES</button>
-                                        </form>
-                                    </td>
-                                    <td class="align-right">
-                                        <a href="/admin/user.php" class="btn info">NO</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </section>
-                    
+                <section class="w600 shadow bg-white">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td colspan="2">
+                                    <?php echo $userName; ?> currently has <?php echo $userListCount; ?> list and <?php echo $userListSkuCount; ?> SKUs.
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    Are you sure you want to delete <?php echo $userName; ?>?
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="/processors/userManagement.php" method="post">
+                                        <input hidden type="text" name="userID" value="<?php echo $remUserID; ?>">
+                                        <button name="remUser" type="submit" class="btn danger">YES</button>
+                                    </form>
+                                </td>
+                                <td class="align-right">
+                                    <a href="/admin/user.php" class="btn info">NO</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </section>
-
             <section class="content">
             </section>
         </main>

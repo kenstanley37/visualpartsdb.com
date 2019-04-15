@@ -1,7 +1,21 @@
 <?php
-    require_once('class.db.php');
+/**
+* VIUALDB class handles all SKU information getters and setters
+* 
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
 
-     /**
+/**
+* Subheader for the VISUALDB class
+* 
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+
+    /**Load the database class*/
+    require_once('class.db.php');
+    /**
      * VISUALDB handles all sku related methods
      *
      * @author Ken Stanley <ken@stanleysoft.org>
@@ -26,9 +40,7 @@
         * Constructor to connect to the database
         *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
-        *
         */
         public function __construct()
         {
@@ -50,7 +62,7 @@
         
         /**
         * Destruct
-        * Destories the connection to the database
+        * Destorys the connection to the database
         *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
@@ -63,8 +75,7 @@
         /**
         * Set the success or error message of image upload
         *
-        * @param type $message a string that contains the message
-        *
+        * @param string $message a string that contains the message
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function imageMessage($message)
@@ -73,14 +84,40 @@
         }
         
         /**
+        * Pulls all the SKU ads from the database 
+        *
+        * @param string $sku the sku ID
+        * @return $result array of results
+        * @throws \PDOException
+        * @author Ken Stanley <ken@stanleysoft.org>
+        */
+        public function getSkuAds($sku)
+        {
+            $sku = strtoupper($sku);
+
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM sku_ads 
+                    WHERE sku_ad_sku_id=:sku");
+                $stmt->bindparam(":sku", $sku);
+                $stmt->execute();
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end getSkuAds
+        
+        /**
         * Searches the database for the requested sku and returns information
         * Sets the search ticker
         *
-        * @param type $sku STRING the sku ID
-        *
+        * @param string $sku the sku ID
         * @return $result the database row for requested sku
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function getSkuData($sku)
@@ -107,8 +144,12 @@
                 {
                     // lets update the search ticker for this sku
                     $this->setSearchTicket($sku, $userID);
+                    return $result;
+                } else {
+                    $result = $this->getDescSearch($sku);
+                    return $result;
                 }
-                return $result;
+                
             }
             catch(PDOException $e)
             {
@@ -117,13 +158,48 @@
         } // end skuSearchData
         
         /**
+        * Searches the database for the requested sku and returns information
+        * Sets the search ticker
+        *
+        * @param string $sku the sku ID
+        * @return $result the database row for requested sku
+        * @throws \PDOException
+        * @author Ken Stanley <ken@stanleysoft.org>
+        */
+        public function getDescSearch($sku)
+        {
+            $sku = strtoupper($sku);
+
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM sku 
+                    LEFT JOIN sku_image on sku_image_sku_id = sku_id 
+                    WHERE sku_desc like '%$sku%'
+                    GROUP BY sku_id
+                    ORDER BY sku_id desc");
+                //$stmt->bindparam(":sku", '%'.$sku.'%');
+                $stmt->execute();
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                if($stmt->rowCount() >= 1)
+                {
+                    return $result;
+                } 
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end skuSearchData
+        
+        
+        /**
         * Adds record to the database of the sku the user searched for
         *
-        * @param type $sku STRING the sku ID
-        * @param type $userID INT the users ID
-        *
+        * @param string $sku the sku ID
+        * @param int $userID the users ID
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function setSearchTicket($sku, $userID)
@@ -144,12 +220,9 @@
          /**
         * Searches the database for the requested sku and returns an array of image data
         *
-        * @param type $sku STRING the sku ID
-        *
+        * @param string $sku the sku ID
         * @return $result array the database rows for requested sku
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function getSkuImage($sku)
@@ -169,20 +242,15 @@
             {
                 echo $e->getMessage();
             }
-            
-            
         }
         
          /**
         * Updates the caption of the SKU
         *
-        * @param type $imageID INT the image ID
-        * @param type $caption STRING the submitted caption
-        *
+        * @param int $imageID the image ID
+        * @param string $caption the submitted caption
         * @return true
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function setImageCaption($imageID, $caption)
@@ -207,14 +275,11 @@
         *   Creates a record in the database of where the image is located
         *   Copies two files to a location on the harddrive. One for full image and the other for icon
         *
-        * @param type $sku STRING the sku ID
-        * @param type $desc STRING the submitted caption
-        * @param type $image IMAGE the image file
-        *
+        * @param string $sku STRING the sku ID
+        * @param string $desc STRING the submitted caption
+        * @param resource $image IMAGE the image file
         * @return 1 or 0
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function addImage($sku, $desc, $image)
@@ -325,14 +390,11 @@
         * Removes an image from a SKU 
         * Removed the image url from the database and the removes the image from the HD
         *
-        * @param type $image_id STRING the image ID
-        * @param type $image_url STRING location of the file
-        * @param type $thumb STRING location of the thumb file
-        *
+        * @param string $image_id the image ID
+        * @param string $image_url location of the file
+        * @param string $image_thumb location of the thumb file
         * @return true
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function remImage($image_id, $image_url, $image_thumb)
@@ -355,13 +417,10 @@
         /**
         * Resizes an image to 300 by 300
         *
-        * @param type $resourceType IMAGE is the image file
-        * @param type $image_width INT the image width
-        * @param type $image_height INT the image height
-        *
+        * @param resource $resourceType is the image file
+        * @param int $image_width the image width
+        * @param int $image_height the image height
         * @return $imageLayer the new image
-        *
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         function resizeImageThumb($resourceType,$image_width,$image_height) {
@@ -369,10 +428,7 @@
             $h = $image_height;
             $max_width = 300;
             $max_height = 300;
-            //try max width first...
-            
-            //if (($w <= $max_width) && ($h <= $max_height)) { return $image; } //no resizing needed
-            
+             
             //try max width first...
             $ratio = $max_width / $w;
             $new_w = $max_width;
@@ -393,13 +449,10 @@
         /**
         * Resizes an image to 800 by 600
         *
-        * @param type $resourceType IMAGE is the image file
-        * @param type $image_width INT the image width
-        * @param type $image_height INT the image height
-        *
+        * @param resource $resourceType is the image file
+        * @param int $image_width the image width
+        * @param int $image_height the image height
         * @return $imageLayer the new image
-        *
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         function resizeImageFull($resourceType,$image_width,$image_height) {
@@ -407,9 +460,6 @@
             $h = $image_height;
             $max_width = 800;
             $max_height = 600;
-            //try max width first...
-            
-            //if (($w <= $max_width) && ($h <= $max_height)) { return $image; } //no resizing needed
             
             //try max width first...
             $ratio = $max_width / $w;
@@ -431,15 +481,12 @@
         /**
         * Adds image location to database from the addImage method
         *
-        * @param type $sku STRING the image ID
-        * @param type $url STRING location of the file
-        * @param type $thumb STRING location of the thumb file
-        * @param type $desc STRING caption for the image
-        *
+        * @param string $sku the image ID
+        * @param string $url location of the file
+        * @param string $thumb location of the thumb file
+        * @param string $desc caption for the image
         * @return true
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function AddImageUrl($sku, $url, $thumb, $desc) {
@@ -464,12 +511,9 @@
         /**
         * Returns an array of random image data 
         *
-        * @param type $num INT the number of records to return
-        *
+        * @param int $num the number of records to return
         * @return $result array of image data
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function randImage($num) 
@@ -494,14 +538,11 @@
         /**
         * Returns search data based off date range and user ID
         *
-        * @param type $dateFrom DATE the from date
-        * @param type $dateTo DATE the to date
-        * @param type $userID INT the users ID
-        *
+        * @param date $dateFrom DATE the from date
+        * @param date $dateTo DATE the to date
+        * @param int $userID INT the users ID
         * @return $result an array of data
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function mySearches($dateFrom, $dateTo, $userID)
@@ -558,9 +599,7 @@
         * Returns the number of skus in the database
         *
         * @return $result INT the number of records in the database
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function getSkuCount()
@@ -582,9 +621,7 @@
         * Returns the number of searches in the database
         *
         * @return $result INT number of records in the database
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function getSearchCount()
@@ -606,9 +643,7 @@
         * Returns the number of image records in the database
         *
         * @return $result INT number of records in the database
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function getImageCount()
@@ -631,14 +666,11 @@
         * Returns an array of records in JSON format that C3 can read and work with
         * This is for making charts and graphs based on search history
         *
-        * @param type $dateFrom DATE the from date
-        * @param type $dateTo DATE the to date
-        * @param type $userID the user ID
-        *
+        * @param date $dateFrom the from date
+        * @param date $dateTo the to date
+        * @param int $userID the user ID
         * @return $data jSON format for C3
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function searchHistToJson($dateFrom, $dateTo, $userID)
@@ -720,12 +752,9 @@
         /**
         * Returns the top 10 most searched SKUs in JSON format for C3 processing
         *
-        * @param type $days INT number of days to look back
-        *
+        * @param int $days number of days to look back
         * @return $data jSON format for C3
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function topSearchHistToJson($days)
@@ -770,15 +799,12 @@
         /**
         * Returns sku update request records based on $type
         *
-        * @param type $type STRING can be 'active', 'complete', 'sku#'
-        *   'active' returns all records that not been updated yet
-        *   'complete' returns all records that have been updated
-        *   'sku#' returns results for selected sku only
-        *
+        * @param string $type can be 'active', 'complete', 'sku#'
+        * *  'active' returns all records that not been updated yet
+        * *  'complete' returns all records that have been updated
+        * *  'sku#' returns results for selected sku only
         * @return $result
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function skuUpdateRequest($type)
@@ -871,8 +897,7 @@
         /**
         * Returns most searched SKU by ID and Count
         * 
-        * @param type $days INT number of days to look back
-        *
+        * @param int $days number of days to look back
         * @author Ken Stanley <ken@stanleysoft.org>
         * @return $result array 
         */
@@ -902,26 +927,24 @@
         /**
         * Updates a SKUs data
         *
-        * @param type $sku STRING the sku ID
-        * @param type $sku_desc STRING description of the SKU
-        * @param type $unit_length INT unit length
-        * @param type $unit_width INT unit width
-        * @param type $unit_height INT unit height
-        * @param type $unit_weight INT unit weight
-        * @param type $case_length INT case length
-        * @param type $case_height INT case height
-        * @param type $case_weight INT case weight
-        * @param type $case_qty INT case quantity
-        * @param type $pallet_length INT pallet length
-        * @param type $pallet_width INT pallet width
-        * @param type $pallet_height INT pallet height
-        * @param type $pallet_weight INT pallet weight
-        * @param type $pallet_qty INT pallet quantity
-        *
+        * @param string $sku the sku ID
+        * @param string $sku_desc description of the SKU
+        * @param int $unit_length unit length
+        * @param int $unit_width unit width
+        * @param int $unit_height unit height
+        * @param int $unit_weight unit weight
+        * @param int $case_length case length
+        * @param int $case_width case width
+        * @param int $case_height case height
+        * @param int $case_weight case weight
+        * @param int $case_qty case quantity
+        * @param int $pallet_length pallet length
+        * @param int $pallet_width pallet width
+        * @param int $pallet_height pallet height
+        * @param int $pallet_weight pallet weight
+        * @param int $pallet_qty pallet quantity
         * @return true or false
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function setSkuData($sku, 
@@ -1002,12 +1025,9 @@
         /**
         * Updates the sku update request to show completed
         *
-        * @param type $sku STRING the sku ID
-        *
+        * @param string $sku the sku ID
         * @return true
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function setRequestUpdate($sku) 
@@ -1040,12 +1060,9 @@
         /**
         * Checks if sku exists in the database
         *
-        * @param type $sku STRING the sku ID
-        *
+        * @param string $sku the sku ID
         * @return true or false
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function checkSku($sku)
@@ -1075,13 +1092,10 @@
         /**
         * Adds a new sku to the database along with the description
         *
-        * @param type $sku STRING new sku ID
-        * @param type $desc STRING the new sku description
-        *
+        * @param string $sku new sku ID
+        * @param string $desc the new sku description
         * @return true
-        *
         * @throws \PDOException
-        *
         * @author Ken Stanley <ken@stanleysoft.org>
         */
         public function addSku($sku, $desc)

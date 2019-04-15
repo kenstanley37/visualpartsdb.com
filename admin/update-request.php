@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - update-request.php
+* Revision Date - April, 10 2019
+*/
 session_start();
 include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
@@ -50,37 +55,42 @@ $updateRequest = $vpd->skuUpdateRequest('active');
             <section class="title">
                 <h2 class="blue-header">SKU Update Request</h2>
             </section>
-            <section class="nav">
-                <section class="display">
-                    <section class="login shadow">
-                        <h3 class="login-title">Active Part Update Request</h3>
-                        <table class="table shadow">
+            <div class="content">
+                <div class="grid-temp-30-70 w100p">
+                    <div class="w100p shadow lh25 bg-white mh500">
+                        <h2 class="login-title">Description</h2>
+                        <p>This list shows the amount of users who have requested the data/images of the SKU to be updated.</p>
+                    </div>
+                    <section class="w100p shadow bg-white">
+                    <h3 class="login-title">Active Part Update Request</h3>
+                    <table class="table nowrap">
                         <thead>
                             <tr>
-                                <td scope="col">SKU</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Count</td>
+                                <td>SKU</td>
+                                <td>Description</td>
+                                <td class="align-right">Times Requested</td>
                             </tr>
                         </thead>
                         <tbody>
                         <?php
                         foreach($updateRequest as $row)
                         {
-                            $skuID = $row['update_sku'];
-                            ?>
-                                <tr>
-                                    <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
-                                    <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
-                                    <td data-label="Count" class="align-right"><a href="/admin/update-request-sku.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
-                                </tr>  
-                            <?php
+                        $skuID = $row['update_sku'];
+                        ?>
+                            <tr>
+                                <td data-label="SKU"><a href="/admin/update-sku.php?sku=<?php echo $skuID; ?>"><?php echo $skuID; ?></a></td>
+                                <td data-label="Desc"><?php echo $row['sku_desc']; ?></td>
+                                <td data-label="Count" class="align-right"><a href="/admin/update-request-sku.php?sku=<?php echo $skuID; ?>"><?php echo $row['count']; ?></a></td>
+                            </tr>  
+                        <?php
                         }
-                    ?>
+                        ?>
                         </tbody>
                     </table>
-                    </section>
                 </section>
-            </section>
+                </div>
+                
+            </div>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>

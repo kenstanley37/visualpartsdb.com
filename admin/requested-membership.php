@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - requested-membership.php
+* Revision Date - April, 10 2019
+*/
 session_start();
 include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
@@ -27,7 +32,7 @@ $regRequest =  $user->regRequestList();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: User Management</title>
+    <title>Visual Parts Database: Requested Membership</title>
     <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
@@ -48,11 +53,15 @@ $regRequest =  $user->regRequestList();
         </aside>
         <main class="main">
             <section class="title">
-                <h1 class="blue-header">Requested Membership</h1>
+                <h2 class="blue-header">Requested Membership</h2>
             </section>
-            <section class="nav">
-                <section class="display">
-                    <section class="login shadow">
+            <div class="content">
+                <div class="grid-temp-30-70 w100p">
+                    <section class="w100p shadow lh25 bg-white">
+                        <h2 class="login-title">Description</h2>
+                        <p>This is a list of users who have requested membership through the form on the home page.</p>
+                    </section>
+                    <section class="w100p shadow bg-white">
                         <h2 class="login-title">Member Request</h2>
                         <?php 
                          if(!empty($regRequest))
@@ -121,10 +130,8 @@ $regRequest =  $user->regRequestList();
                             </tbody>
                         </table> 
                     </section>
-                    
-                </section>
-               
-            </section>    
+                </div> 
+            </div>    
         </main>
         <footer>
         <?php include($path."inc/inc.footer.php"); ?>

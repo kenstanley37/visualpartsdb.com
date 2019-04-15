@@ -1,3 +1,12 @@
+<?php
+/**
+* Admin Nav Bar
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+?>
+
 <nav>
     <ul>
         <li><a href="/admin/user.php">Members</a></li>

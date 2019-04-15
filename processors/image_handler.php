@@ -1,12 +1,33 @@
 <?php
+/**
+* Image handler file. Controller for setting and getting images and descriptions
+* 
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
+
+/**
+* All the requires and includes for this script
+* 
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
     include("../inc/inc.path.php");
-    require($path.'class/class.visualdb.php');
+    require_once($path.'class/class.visualdb.php');
     require_once($path."class/class.func.php");
+    require_once($path."class/class.user.php");
 
     $vpd = new VISUALDB;
     $vail = new VALIDATE;
-    
+    $user = new USER;
+
     if(isset($_FILES['file'])){
+        $access = $user->accessCheck();
+        if($access != 'ADMIN')
+        {
+            header('location: /noaccess.php');
+        }
+        
         $filesize = $_FILES['file']['size'];
         $file = $_FILES['file'];
         $skuId = $_POST['skuId'];

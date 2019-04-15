@@ -1,4 +1,9 @@
 <?php
+/**
+* Author - Ken Stanley
+* File Name - index.php
+* Revision Date - April, 10 2019
+*/
 session_start();
 include("../inc/inc.path.php");
 require_once($path."class/class.user.php");
@@ -50,66 +55,69 @@ $mostSearched1 = $vpd->getMostSearchedSkuCount(1);
         </aside>
         <main class="main">
             <section class="title">
-                <h2 class="blue-header">Dashboard</h2>
+                <h2 class="blue-header">Admin Dashboard</h2>
             </section>
-            <section class="nav">
-                
-            </section>
-            <section class="content">
+            <div class="content">
                 <div class="dash-top">
                     <a href="/admin/requested-membership.php">
-                        <div class="dash1 bg-blue shadow" id="dash1">
-                            <div class="fz75 bold text-white"><?php echo $regRequestCount; ?></div>
-                            <div class="text-white">Active Register Request</div>
+                        <div class="dash1 bg-white shadow rounded text-dsb" id="dash1">
+                            <div class="fz35 bold"><?php echo $regRequestCount; ?></div>
+                            <div>Active Register Request</div>
+                            <div class="view bold">View <i class="fas fa-angle-right"></i></div>
                         </div>
                     </a>
                     <a href="/admin/user-pending.php">
-                        <div class="dash2 bg-red shadow" id="dash2">
-                            <div class="fz75 bold text-white"><?php echo $pendingUser; ?></div>
-                            <div class="text-white">Pending Users</div>
+                        <div class="dash2 bg-white shadow rounded text-dsb" id="dash2">
+                            <div class="fz35 bold"><?php echo $pendingUser; ?></div>
+                            <div>Pending Users</div>
+                            <div class="view bold">View <i class="fas fa-angle-right"></i></div>
                         </div>
                     </a>
                     <a href="/admin/update-request.php?sku=active">
-                        <div class="dash3 bg-green shadow" id="dash3">
-                            <div class="fz75 bold text-white"><?php echo $skuUpdateCount; ?></div>
-                            <div class="text-white">Update Request</div>
+                        <div class="dash3 bg-white shadow rounded text-dsb" id="dash3">
+                            <div class="fz35 bold"><?php echo $skuUpdateCount; ?></div>
+                            <div>Update Request</div>
+                            <div class="view bold">View <i class="fas fa-angle-right"></i></div>
                         </div>
                     </a>
                     <a href="/admin/update-sku.php?sku=<?php echo $mostSearched30[0]['sku_search_sku']; ?>">
-                        <div class="dash4 bg-blue shadow" id="dash4">
-                            <div class="fz35 bold text-white"><?php echo $mostSearched30[0]['sku_search_sku']; ?></div>
-                            <div class="fz15 bold text-white"><?php echo $mostSearched30[0]['skuCount']; ?> Searches</div>
-                            <div class="text-white">Top Searched 30 Days</div>
+                        <div class="dash4 bg-white shadow rounded text-dsb" >
+                            <div class="fz25 bold"><?php echo $mostSearched30[0]['sku_search_sku']; ?></div>
+                            <div class="fz15 bold"><?php echo $mostSearched30[0]['skuCount']; ?> Searches</div>
+                            <div>Top Searched 30 Days</div>
+                            <div class="view bold">View <i class="fas fa-angle-right"></i></div>
                         </div>
                     </a>
                     <a href="/admin/update-sku.php?sku=<?php echo $mostSearched7[0]['sku_search_sku']; ?>">
-                        <div class="dash4 bg-red shadow" id="dash4">
-                            <div class="fz35 bold text-white"><?php echo $mostSearched7[0]['sku_search_sku']; ?></div>
-                            <div class="fz15 bold text-white"><?php echo $mostSearched7[0]['skuCount']; ?> Searches</div>
-                            <div class="text-white">Top Searched 7 days</div>
+                        <div class="dash4 bg-white shadow rounded text-dsb" >
+                            <div class="fz25 bold"><?php echo $mostSearched7[0]['sku_search_sku']; ?></div>
+                            <div class="fz15 bold"><?php echo $mostSearched7[0]['skuCount']; ?> Searches</div>
+                            <div>Top Searched 7 days</div>
+                            <div class="view bold">View <i class="fas fa-angle-right"></i></div>
                         </div>
                     </a>
                     <a href="/admin/update-sku.php?sku=<?php echo $mostSearched1[0]['sku_search_sku']; ?>">
-                        <div class="dash4 bg-green shadow" id="dash4">
-                            <div class="fz35 bold text-white"><?php echo $mostSearched1[0]['sku_search_sku']; ?></div>
-                            <div class="fz15 bold text-white"><?php echo $mostSearched1[0]['skuCount']; ?> Searches</div>
-                            <div class="text-white">Top Searched Past Day</div>
+                        <div class="dash4 bg-white shadow rounded text-dsb" >
+                            <div class="fz25 bold"><?php echo $mostSearched1[0]['sku_search_sku']; ?></div>
+                            <div class="fz15 bold"><?php echo $mostSearched1[0]['skuCount']; ?> Searches</div>
+                            <div>Top Searched Past Day</div>
+                            <div class="view bold">View <i class="fas fa-angle-right"></i></div>
                         </div>
                     </a>
                 </div>
-            </section>
-            <section class="content2">
+            </div>
+            <div class="content2">
                 <div class="dash-bottom">
-                    <div class="dash5-left bg-orange shadow">
+                    <div class="dash5-left bg-white shadow">
                         <div id="dash5"></div>
-                        <div class="text-white">Top 10 30 Days</div>
+                        <div>Top 10 -> 30 Days</div>
                     </div>
-                    <div class="dash5-right bg-orange shadow">
+                    <div class="dash5-right bg-white shadow">
                         <div id="dash6"></div>
-                        <div class="text-white">Top 7 30 Days</div>
+                        <div>Top 10 -> 7 Days</div>
                     </div>
                 </div>
-            </section>
+            </div>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>

@@ -1,10 +1,11 @@
 <?php
-session_start();
-/*
-    Credit: 
-    https://github.com/PHPOffice/PhpSpreadsheet
+/**
+* Generates Excel files from database query
+* @credit https://github.com/PHPOffice/PhpSpreadsheet
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
-
+session_start();
 include("../inc/inc.path.php");
 require_once($path."class/class.db.php");
 require_once($path."class/class.user.php");

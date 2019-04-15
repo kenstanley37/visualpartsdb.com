@@ -1,4 +1,10 @@
 <?php
+/**
+* The main nav bar
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
+*/
 $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 ?>
 
