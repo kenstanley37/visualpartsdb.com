@@ -103,19 +103,19 @@ if(isset($_GET['error'])){
                     <div class="form-contact">
                         <h3 class="login-title">LOGIN</h3>
                         <form action="login.php" method="post">
-                                <input required type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
-                                <?php if(isset($emailError)){echo '<span class="error">' .$emailError.'</span>';} ?>
+                            <input required type="text" placeholder="Email" id="email" name='email' <?php if(!empty($email)){echo 'value="'.$email.'"';} ?>>
+                            <?php if(isset($emailError)){echo '<span class="error">' .$emailError.'</span>';} ?>
 
-                                <input required type="password" placeholder="Password" id="password" name="password">
-                                <?php echo '<span class="error">' .$passwordError.'</span>'; ?>
+                            <input required type="password" placeholder="Password" id="password" name="password">
+                            <?php echo '<span class="error">' .$passwordError.'</span>'; ?>
 
-                                <div class="center">
-                                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
-                                </div>
-                                <?php echo '<span class="error">' .$captchaError.'</span>'; ?>
-                                <input class="btn-blue" type="submit" name="Login" value="Login">
+                            <div class="center">
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="">
+                            </div>
+                            <?php echo '<span class="error">' .$captchaError.'</span>'; ?>
+                            <input class="btn-blue" type="submit" name="Login" value="Login">
 
-                                <a href="/user/reset.php">Forgot password?</a>
+                            <a href="/user/reset.php">Forgot password?</a>
                         </form>
                     </div>
                 </section>

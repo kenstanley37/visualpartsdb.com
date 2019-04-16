@@ -39,7 +39,7 @@ if(isset($_GET['code']))
     }
 }
 
-
+/*
 if(!isset($_GET['code'])){
     $result = '';
     if(isset($_POST['passwordupdate'])){
@@ -65,7 +65,7 @@ if(!isset($_GET['code'])){
     }
     
 }
-
+*/
 
 ?>
 <!DOCTYPE html>
@@ -88,24 +88,21 @@ if(!isset($_GET['code'])){
        ?>
         </aside>
         <main class="main">
-            <section class="nav">
-
-            </section>
             <section class="title">
                 <h1 class="blue-header">Set Password</h1>
             </section>
             
-            <div clas="content">
+            <div class="content">
                 <div class="w600 shadow bg-white">
-                    <h2 class="login-title">Test</h2>
-                     <section class="form-contact">
+                    <h2 class="login-title">New Password</h2>
+                     <div class="form-contact">
                         <form action="password_reset.php" method="post">
                             <input required type="password" name="password1" id="password1" placeholder="Password">
                             <input required type="password" name="password2" id="password2" placeholder="Password Again">
                             <button class="btn active" type="submit" name="passwordupdate">Set Password</button>
                             <span class="error"><?php echo $error; ?></span>
                         </form>
-                    </section>
+                    </div>
                 </div>
             </div>   
         </main>
