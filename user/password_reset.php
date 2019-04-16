@@ -89,7 +89,7 @@ if(!isset($_GET['code'])){
         </aside>
         <main class="main">
             <section class="title">
-                <h1 class="blue-header">Set Password</h1>
+                <h2 class="blue-header">Set Password</h2>
             </section>
             
             <div class="content">
