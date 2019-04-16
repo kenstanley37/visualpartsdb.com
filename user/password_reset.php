@@ -39,7 +39,6 @@ if(isset($_GET['code']))
     }
 }
 
-/*
 if(!isset($_GET['code'])){
     $result = '';
     if(isset($_POST['passwordupdate'])){
@@ -65,7 +64,7 @@ if(!isset($_GET['code'])){
     }
     
 }
-*/
+
 
 ?>
 <!DOCTYPE html>
