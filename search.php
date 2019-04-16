@@ -386,7 +386,7 @@ if(isset($_GET['export'])){
                                     ?>
                                         <figure class="card-responsive bg-white shadow">
                                             <div class="card-img modal-hover">
-                                                <a href="<?php echo $image['sku_image_url']; ?>">
+                                                <a class="hover-change" href="<?php echo $image['sku_image_url']; ?>">
                                                     <img class="article-img" src="<?php echo $image['sku_image_thumb']; ?>" alt="<?php echo $image['sku_image_sku_id'].'-'.$image['sku_image_description']; ?>" />
                                                 </a>
                                             </div>

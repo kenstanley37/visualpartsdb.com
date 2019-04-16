@@ -2,19 +2,6 @@
 
 
 $(document).ready(function(){
-    $('#dataTable').DataTable({
-        responsive: {
-            details: {
-                display: $.fn.dataTable.Responsive.display.modal( {
-                    header: function ( row ) {
-                        var data = row.data();
-                        return 'Details for '+data[0]+' '+data[1];
-                    }
-                } ),
-                renderer: $.fn.dataTable.Responsive.renderer.tableAll()
-            }
-        }
-    });
     url = '/processors/ajax.php';
     startup();
 });
@@ -35,14 +22,14 @@ function startup(){
 }
   
 function myImgModal(){
-    $( ".modal-hover a" ).hover(function() {
+    $( ".hover-change" ).hover(function() {
         img = $(this).attr('href');
         alt = $(this).children('img').attr('alt');
         $('.larger-img img').attr('src', img);
         $('.larger-img img').attr('alt', alt);
     });  
     
-    $( ".modal-hover a" ).click(function(e) {
+    $( ".hover-change" ).click(function(e) {
         e.preventDefault();
         img = $(this).attr('href');
         alt = $(this).children('img').attr('alt');
