@@ -95,26 +95,20 @@ if(!isset($_GET['code'])){
                 <h1 class="blue-header">Set Password</h1>
             </section>
             
-            <section clas="form">
-                <section class="display">
-                    <section class="login">
-                         <section class="form-contact">
-                            <form action="password_reset.php" method="post">
-                                <input required type="password" name="password1" id="password1" placeholder="Password">
-                                <input required type="password" name="password2" id="password2" placeholder="Password Again">
-                                <button class="btn active" type="submit" name="passwordupdate">Set Password</button>
-                                <span class="error"><?php echo $error; ?></span>
-                                
+            <section clas="content">
+                <section class="w600 shadow bg-white">
+                     <section class="form-contact">
+                        <form action="password_reset.php" method="post">
+                            <input required type="password" name="password1" id="password1" placeholder="Password">
+                            <input required type="password" name="password2" id="password2" placeholder="Password Again">
+                            <button class="btn active" type="submit" name="passwordupdate">Set Password</button>
+                            <span class="error"><?php echo $error; ?></span>
 
-                            </form>
-                        </section>
+
+                        </form>
                     </section>
                 </section>
-            </section>
-           
-            <section class="content">
-                
-            </section>    
+            </section>   
         </main>
         <footer>
             <?php include($path."inc/inc.footer.php"); ?>
