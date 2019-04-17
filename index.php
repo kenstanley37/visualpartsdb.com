@@ -102,12 +102,12 @@ $image_count = $vpd->getImageCount();
         </aside>
         <main id="aboutvpd" class="index-main">
             <div class="index-bg"></div>
-            <article class="index-search">
-                <h2>Visual Parts Database</h2>
+            <section class="index-search">
+                <h2 class="main-title">Visual Parts Database</h2>
                 <div class="search-bar">                
                     <form class="search" action="/search.php" method="get">
                         <label hidden for="search">Search</label>
-                        <input class="toupper" type="search" name="search" id="search" placeholder="Part Number"><button type="submit">SEARCH</button>
+                        <input class="toupper" type="search" name="search" id="search" placeholder="Part Number or Keyword" required><button type="submit">SEARCH</button>
                     </form>
                 </div>
                 <div class="records">
@@ -115,7 +115,7 @@ $image_count = $vpd->getImageCount();
                     <p><?php echo number_format($image_count);?> Pictures </p>
                     <p><?php echo number_format($search_count);?> Searches</p>
                 </div>
-            </article>
+            </section>
             <article class="main-intro">
                 <div class="brands indexCard shadow">
                     <h2 class="block-title shadow">Brands</h2>

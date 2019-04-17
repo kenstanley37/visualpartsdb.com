@@ -700,12 +700,6 @@ section {
     justify-self: flex-start;
 }
 
-
-.#dataTable {
-    max-width: 100% !important;
-}
-
-
  /*
 .display {
     display: flex;
@@ -809,11 +803,7 @@ section {
 }
 
 /***************************************
-*
-*
 * START HEADER Style
-*
-*
 ****************************************/
 
 /* header styling */
@@ -2221,7 +2211,7 @@ only screen and (max-width: 900px),
     .index-search .search-bar {
         width: 300px;
         height: 35px;
-        margin-top: 25px;
+        margin-top: 0;
     }
     
     .index-search .search-bar form {
@@ -2523,15 +2513,27 @@ only screen and (max-width: 890px),
         font-size: 25px;
     }
     
-    .w600 {
+    .w600, .w400 {
         padding: 25px;
         width: 100%;
     }
     
-    .w75p {
+    .w75p, .w50p {
         padding: 25px;
         width: 90%;
-        }
+    }
+    
+    .main-title {
+        font-size: 22px !important;
+    }
+    
+    .index-search h2 {
+        padding-bottom: 0;
+    }
+    
+    .search-bar input::placeholder {
+        font-size: 10px;
+    }
 }
 
 @media 
