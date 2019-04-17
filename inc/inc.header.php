@@ -13,7 +13,7 @@
                 $fname = $_SESSION['fname'];
                 $userID = $_SESSION['user_id'];
                 $loginCheck = $fname.'
-                               <a href="/logout.php">Logout</a>';
+                               <a class="fz12" href="/logout.php">Logout</a>';
             } else
             {
                 $loginCheck = '<a href="/login.php">Login</a>';
@@ -22,7 +22,7 @@
 ?>
 
     <div class="main-logo">
-        <a href="/"><h1 class="heading"><i class="fas fa-images"></i> Visual Parts Database</h1></a>
+        <a href="/"><h1 class="heading"><i class="fas fa-images"> </i>  Visual Parts Database</h1></a>
     </div>
     <div class="main-nav-bar">
         <nav class="navlinks">
