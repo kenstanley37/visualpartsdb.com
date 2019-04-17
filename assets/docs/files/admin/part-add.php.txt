@@ -55,23 +55,21 @@ if(isset($_GET['error']))
             <section class="title">
                 <h2 class="blue-header">Add Part</h2>
             </section>
-            <section class="nav">
-                <section class="display">
-                    <section class="login shadow">
-                        <div class="form-contact">
-                            <h3 class="login-title">NEW SKU</h3>
-                            <form action="/processors/sku_handler.php" method="post">
-                                <fieldset>
-                                    <input placeholder="Part #" type="text" name="sku" required>
+            <section class="content">
+                <section class="w600 shadow bg-white">
+                    <div class="form-contact">
+                        <h3 class="login-title">NEW SKU</h3>
+                        <form action="/processors/sku_handler.php" method="post">
+                            <fieldset>
+                                <input placeholder="Part #" type="text" name="sku" required>
 
-                                    <textarea placeholder="Part description" name="desc" rows="4" cols="30" maxlength="100" required></textarea>
-                                    
-                                    <button type="submit" name="addpart" class="info" >Add</button>
-                                    <?php if(isset($error)){echo '<span class="error">'.$error.'</span>';} ?>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </section>
+                                <textarea placeholder="Part description" name="desc" rows="4" cols="30" maxlength="100" required></textarea>
+
+                                <button type="submit" name="addpart" class="info" >Add</button>
+                                <?php if(isset($error)){echo '<span class="error">'.$error.'</span>';} ?>
+                            </fieldset>
+                        </form>
+                    </div>
                 </section>
             </section>
         </main>

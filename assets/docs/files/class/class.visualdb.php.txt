@@ -144,14 +144,55 @@
                 {
                     // lets update the search ticker for this sku
                     $this->setSearchTicket($sku, $userID);
+                    return $result;
+                } else {
+                    $result = $this->getDescSearch($sku);
+                    return $result;
                 }
-                return $result;
+                
             }
             catch(PDOException $e)
             {
                 echo $e->getMessage();
             }
         } // end skuSearchData
+        
+        /**
+        * Searches the database for the requested sku and returns information
+        * Sets the search ticker
+        *
+        * @param string $sku the sku ID
+        * @return $result the database row for requested sku
+        * @throws \PDOException
+        * @author Ken Stanley <ken@stanleysoft.org>
+        */
+        public function getDescSearch($sku)
+        {
+            $sku = strtoupper($sku);
+
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT * FROM sku 
+                    LEFT JOIN sku_image on sku_image_sku_id = sku_id 
+                    WHERE sku_desc like '%$sku%'
+                    GROUP BY sku_id
+                    ORDER BY sku_id desc");
+                //$stmt->bindparam(":sku", '%'.$sku.'%');
+                $stmt->execute();
+                $result = array(array());
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                if($stmt->rowCount() >= 1)
+                {
+                    return $result;
+                } 
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        } // end skuSearchData
+        
         
         /**
         * Adds record to the database of the sku the user searched for

@@ -55,16 +55,16 @@ $updateRequest = $vpd->skuUpdateRequest($sku);
             <section class="title">
                 <h2>Update Request: <?php echo ucfirst($sku); ?></h2>
             </section>
-            <section class="content">
-                <section class="w600 shadow">
+            <div class="content">
+                <section class="w600 shadow bg-white">
                     <h3 class="login-title">Requested By User</h3>
-                    <table class="table shadow">
+                    <table class="table nowrap">
                         <thead>
                             <tr>
-                                <td scope="col">List Name</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Requested By</td>
-                                <td scope="col">Date</td>
+                                <th>List Name</th>
+                                <th>Description</th>
+                                <th>Requested By</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +88,7 @@ $updateRequest = $vpd->skuUpdateRequest($sku);
                         </tbody>
                     </table>
                 </section>
-            </section>
+            </div>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>

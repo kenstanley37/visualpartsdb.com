@@ -21,42 +21,39 @@
     
 ?>
 
-    <section class="main-logo">
+    <div class="main-logo">
         <a href="/"><h1 class="heading"><i class="fas fa-images"></i> Visual Parts Database</h1></a>
-    </section>
-    <section class="main-nav-bar">
+    </div>
+    <div class="main-nav-bar">
         <nav class="navlinks">
-            <!--
-            <section><a href="/" class="<?php if($basename == ''){ echo 'button1';}?>">Home</a></section>
-            -->
-            <section>
+            <div>
                 <?php if(isset($_SESSION['user_id']))
             { 
                 ?> 
                 <a href="/user/mysearches.php" class="<?php if($basename == 'mysearches.php'){ echo 'button1';}?>">My Searches</a>
                 <?php
             } ?>
-            </section>
-            <section>
+            </div>
+            <div>
             <?php if(isset($_SESSION['user_id']))
             { 
                 ?>
                 <a href="/user/myexportlist.php" class="<?php if($basename == 'myexportlist.php'){ echo 'button1';}?>">My List</a>
                 <?php
             } ?>
-            </section>
+            </div>
         </nav>
-         <section class="searchbox">
+         <div class="searchbox">
             <form class="search" action="/search.php" method="get">
                 <input class="toupper" type="search" name="search" id="nav-search" placeholder="search">
                 <input type="submit" class="submit_3" value="Search" />
             </form>
-        </section>
-        <section class="name">
+        </div>
+        <div class="name">
             <i class="fas fa-user"></i> <?php echo $loginCheck; ?>
-        </section>
-    </section>
-    <section class="main-nav-ham">
+        </div>
+    </div>
+    <div class="main-nav-ham">
         <i class="fas fa-bars main-nav-bars"></i>
-    </section>
+    </div>
     

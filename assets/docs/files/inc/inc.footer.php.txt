@@ -6,6 +6,6 @@
 * @license MIT
 */
 ?>
-    <section class="ft1">
+    <div class="ft1">
         A StanleySoft Product
-    </section>
+    </div>

@@ -55,22 +55,20 @@ if(isset($_GET['error']))
             <section class="title">
                 <h2 class="blue-header">Modify Part</h2>
             </section>
-            <section class="nav">
-                <section class="display">
-                    <section class="login shadow">
-                        <div class="form-contact">
-                            <h3 class="login-title">Part #</h3>
-                            <form action="/processors/sku_handler.php" method="post">
-                                <fieldset>
-                                    <input type="text" name="sku" placeholder="Part Number" required>
-                                    
-                                    <button type="submit" name="modifysearch" class="info" >Modify</button>
-                                    
-                                    <?php if(isset($error)){echo '<span class="error">'.$error.'</span>';} ?>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </section>
+            <section class="content">
+                <section class="w600 shadow bg-white">
+                    <div class="form-contact">
+                        <h3 class="login-title">Part #</h3>
+                        <form action="/processors/sku_handler.php" method="post">
+                            <fieldset>
+                                <input type="text" name="sku" placeholder="Part Number" required>
+
+                                <button type="submit" name="modifysearch" class="info" >Modify</button>
+
+                                <?php if(isset($error)){echo '<span class="error">'.$error.'</span>';} ?>
+                            </fieldset>
+                        </form>
+                    </div>
                 </section>
             </section>
         </main>

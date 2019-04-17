@@ -31,7 +31,7 @@ if(isset($_GET['register']))
     $temp = $_GET['register'];
     if($temp == 'successful')
     {
-        $result = 'Registeration request has been sent';
+        $result = 'User has been invited';
     }
 }
 
@@ -57,16 +57,20 @@ $company = $user->dropDownCompany();
             <section class="title">
                 <h2 class="blue-header">Invite User</h2>
             </section>
-            <section class="nav">
-                <section class="display">
-                    <div class="login shadow">
+            <div class="content">
+                <div class="grid-temp-30-70 w100p">
+                    <div class="w100p lh25 shadow bg-white mh500">
+                        <h2 class="login-title">Description</h2>
+                        <p>Adds a user account and sends out a verification link in email.</p>
+                    </div>
+                    <div class="w600 bg-white shadow">
                          <div class="form-contact">
                             <h3 class="login-title">Register Invite</h3>
                             <form id="addUser" method="post" action="/processors/register_request.php">
                                 <fieldset>
                                     <label class="label" for="regcompany">Select company</label>
                                     <select class="select-css" name="regcompany" id="regcompany" required>
-                                        <option placeholder="Company" value=""></option>
+                                        <option value="">Select Company</option>
                                         <?php foreach($company as $row)
                                         {
                                         ?>
@@ -84,18 +88,13 @@ $company = $user->dropDownCompany();
                                     
                                     <input placeholder="Email" type="email" name="regemail" required>
                                     <button class=" info" type="submit" name="regsubmit" value="Submit">Submit</button>
+                                    <span class="error"> <?php if(isset($result)){echo $result;} ?></span>
                                 </fieldset>
                             </form>
                         </div>
                     </div>
-                   
-                    
-                    
-                </section>
-            </section>
-            <section class="form">
-                <span class="error"> <?php if(isset($result)){echo $result;} ?></span>
-            </section>
+                </div>
+            </div>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>

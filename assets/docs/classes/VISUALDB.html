@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-856227175"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-82993809"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-856227175" class="accordion-body collapse in">
+            <div id="namespace-82993809" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -190,6 +190,7 @@
                                                                     <a href="../classes/VISUALDB.html#method_imageMessage" class="">imageMessage()</a><br />
                                                                     <a href="../classes/VISUALDB.html#method_getSkuAds" class="">getSkuAds()</a><br />
                                                                     <a href="../classes/VISUALDB.html#method_getSkuData" class="">getSkuData()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getDescSearch" class="">getDescSearch()</a><br />
                                                                     <a href="../classes/VISUALDB.html#method_setSearchTicket" class="">setSearchTicket()</a><br />
                                                                     <a href="../classes/VISUALDB.html#method_getSkuImage" class="">getSkuImage()</a><br />
                                                                     <a href="../classes/VISUALDB.html#method_setImageCaption" class="">setImageCaption()</a><br />
@@ -517,6 +518,56 @@ Destorys the connection to the database</em></p>
                 <h3 class="public ">getSkuData()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getSkuData(string  <span class="argument">$sku</span>) : \$result</pre>
+                <p><em>Searches the database for the requested sku and returns information
+Sets the search ticker</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>the database row for requested sku</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getDescSearch" name="method_getDescSearch" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getDescSearch()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getDescSearch(string  <span class="argument">$sku</span>) : \$result</pre>
                 <p><em>Searches the database for the requested sku and returns information
 Sets the search ticker</em></p>
                 
@@ -1800,7 +1851,7 @@ This is for making charts and graphs based on search history</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 11th, 2019 at 06:49.
+                    on April 16th, 2019 at 05:46.
                 </section>
             </section>
         </section>

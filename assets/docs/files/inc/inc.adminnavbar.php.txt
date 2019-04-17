@@ -9,8 +9,8 @@ $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 ?>
 
 
-<section class="admin-nav-links">
-    <section id='cssmenu'>
+<div class="admin-nav-links">
+    <div id='cssmenu'>
         <ul>
             <li><a href='/admin/'>Dashboard</a>
             <li><a href='#'>User Management</a>
@@ -30,5 +30,5 @@ $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
             </li>
             <li><a href="/admin/search-history.php">Search History</a></li>
         </ul>
-    </section>
-</section>
+    </div>
+</div>

@@ -62,20 +62,23 @@ $pending = $user->userList('active');
         </aside>
         <main class="main">
             <section class="title">
-                <h1 class="blue-header">Member List</h1>
+                <h2 class="blue-header">Member List</h2>
             </section>
-            <section class="nav">
-                <section class="display">
-                    <section class="login shadow">
-                        <h2 class="login-title">Active Members</h2>
+            <div class="content">
+                <div class="grid-temp-30-70 w100p">
+                    <div class="w100p shadow lh25 bg-white mh500">
+                        <h2 class="login-title">Description</h2>
+                        <p>This list contains the users who have been sent an inventation request and have not set a password yet.</p>
+                    </div>
+                    <div class="w100p shadow bg-white">
+                        <h2 class="login-title">Members</h2>
                         <?php 
                         if(!empty($pending))
                         {
                         ?>
-                        <table class="table shadow">
+                        <table  class="table display nowrap">
                             <thead>
                                 <tr>
-                                    <td>ID</td>
                                     <td>First Name</td>
                                     <td>Last Name</td>
                                     <td>Email</td>
@@ -96,9 +99,6 @@ $pending = $user->userList('active');
                                     $addDate = date_format($dateadded, 'm/d/Y');
                                     ?>
                                     <tr>
-                                        <td data-label="ID">
-                                            <?php echo $row['user_id']; ?>
-                                        </td>
                                         <td data-label="First">
                                             <?php echo $row['user_fName']; ?>
                                         </td>
@@ -122,13 +122,15 @@ $pending = $user->userList('active');
                                         <td data-label="Role">
                                             <form action="/processors/userManagement.php" method="post">
                                                 <input type="number" name="userID" value="<?php echo $row['user_id']; ?>" hidden>
-                                                <table>
+                                                <table class="tbl-btns">
                                                     <tr>
                                                         <td>
                                                             <button class="btn <?php if($row['role_name'] == 'USER'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToUser">
                                                                 USER 
                                                             </button>
                                                         </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>
                                                             <button class="btn <?php if($row['role_name'] == 'ADMIN'){ echo "active";} else { echo "inactive";} ?>" type="submit" name="setToAdmin">
                                                                 ADMIN 
@@ -159,9 +161,9 @@ $pending = $user->userList('active');
                                 ?>
                              </tbody>
                         </table> 
-                    </section>
-                </section>
-            </section>    
+                    </div>
+                </div>   
+            </div>
         </main>
         <footer>
         <?php include($path."inc/inc.footer.php"); ?>
