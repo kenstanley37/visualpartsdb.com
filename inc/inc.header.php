@@ -8,17 +8,17 @@
     $user = new USER;
     $basename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 
+    /** Check if the user is logged in and display the correct link */
     if(isset($_SESSION["fname"]))
             {
                 $fname = $_SESSION['fname'];
                 $userID = $_SESSION['user_id'];
                 $loginCheck = $fname.'
-                               <a class="fz12" href="/logout.php">Logout</a>';
+                               <a class="fz12" href="/logout.php">(LOGOUT)</a>';
             } else
             {
                 $loginCheck = '<a href="/login.php">Login</a>';
             }
-    
 ?>
 
     <div class="main-logo">

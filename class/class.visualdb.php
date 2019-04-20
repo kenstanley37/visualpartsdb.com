@@ -552,7 +552,7 @@
             
             if($user->accessCheck() != 'ADMIN'){
                 $userID = $_SESSION['user_id'];
-            }
+            } 
                 
             // lets update the search ticker for this sku
             try {
