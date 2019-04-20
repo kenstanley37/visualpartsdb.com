@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - disabled.php
-* Revision Date - April, 10 2019
+* VIEW for user account being disabled
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 session_start();
 include("../inc/inc.path.php");

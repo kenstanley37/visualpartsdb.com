@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - password_reset.php
-* Revision Date - April, 10 2019
+* VIEW for resetting the password
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 session_start();
 include("../inc/inc.path.php");

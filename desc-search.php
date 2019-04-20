@@ -1,6 +1,6 @@
 <?php
 /**
-* Search page to display results
+* VIEW for description search
 *
 * @author Ken Stanley <ken@stanleysoft.org>
 * @license MIT

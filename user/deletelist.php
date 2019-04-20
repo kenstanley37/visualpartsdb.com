@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - deletelist.php
-* Revision Date - April, 10 2019
+* VIEW for user deleting a list
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 session_start();
 include("../inc/inc.path.php");

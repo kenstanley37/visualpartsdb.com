@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - 404.php
-* Revision Date - April, 10 2019
+* VIEW for 404 errors
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 session_start();
 include("../inc/inc.path.php");
@@ -37,7 +38,7 @@ $vail = new VALIDATE;
        ?>
         <main class="main">
             <section class="content">
-                <section class="w600 shadow">
+                <section class="w600 shadow bg-white">
                     <h1 class="login-title">File not found</h1>
                     <p>OOPS! The file you are looking for was not found</p>
                 </section>

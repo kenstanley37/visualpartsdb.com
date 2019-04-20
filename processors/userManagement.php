@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - userManagement.php
-* Revision Date - April, 10 2019
+* Handles all user management methods
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
     session_start();
     include("../inc/inc.path.php");

@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - ajax.php
-* Revision Date - April, 10 2019
+* Ajax request
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
     session_start();
     include("../inc/inc.path.php");
@@ -35,4 +36,11 @@
         return $result; 
     }
 
+     if(isset($_POST['MyHistSearchCharts'])){ 
+        $dfrom = $_POST['dfrom'];
+        $dto = $_POST['dto'];
+        $userID = $_POST['userID'];
+        $result = $vpd->searchHistToJson($dfrom, $dto, $userID);
+        return $result; 
+    }
 ?>

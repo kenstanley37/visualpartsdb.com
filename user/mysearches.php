@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - mysearches.php
-* Revision Date - April, 10 2019
+* VIEW for users My Searches
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 session_start();
 
@@ -83,7 +84,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
                         </div>
                     </div>
                 
-                    <section class="w100p shadow bg-white">
+                    <section class="w100p shadow bg-white" id="mySearchCharts">
                         <h2 class="login-title">Charts</h2>
                         <div class="charts">
                             <div id="my-search-graph" class="my-search-graph"></div>

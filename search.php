@@ -46,11 +46,9 @@ if(isset($_GET['search']))
 if(isset($_GET['export'])){
     $sku = $_GET['sku'];
     $type = $_GET['export'];
-    
     $sku = $vail->sanitizeString($sku);
     $type = $vail->sanitizeString($type);
     $result = $vpd->exportData($sku, $type);
-    
 }
 
 ?>

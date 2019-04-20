@@ -7,12 +7,19 @@ $(document).ready(function(){
 });
 
 function startup(){
+    if($('#MyHistSearchCharts').length != 0) {
+        adminSearchCharts();
+    }
+    
+    if($('#mySearchCharts').length != 0) {
+        mySearchCharts();
+    }
+    
     navScroll();
     hamburgerNav();
     datePickerSetup();
-    mySearchCharts();
     myImgModal();
-    //adminSearchCharts();
+    
     if($("#dash5").length){
         top30days();
     }
@@ -21,6 +28,7 @@ function startup(){
     }
 }
   
+/* for the search page. when hovering over an image a larger image will display */
 function myImgModal(){
     $( ".hover-change" ).hover(function() {
         img = $(this).attr('href');
@@ -38,6 +46,7 @@ function myImgModal(){
     });   
 }
 
+/* jQuery UI data picker setup */
 function datePickerSetup(){
     $( function() {
         var dateFormat = "yy-mm-dd",
@@ -70,6 +79,7 @@ function datePickerSetup(){
       } );
 }
     
+/* changes the shadow on the header when the user scrolls */
 function navScroll(){
     //change nav bar design on scroll down
     $(window).scroll(function(){
@@ -95,11 +105,15 @@ function hamburgerNav(){
     
 }
 
+/* checks the width of the browser window */
 function checkWidth(){
     var $window = $('window');
     var $pane = $('')
 }
 
+
+
+/* creates the charts for the users "My Searches" page */
 function mySearchCharts(){
     var dfrom = $('#dfrom').val();
     var dto = $('#dto').val();
@@ -111,6 +125,7 @@ function mySearchCharts(){
     data['dto'] = dto;
     data['userID'] = usersID;
     data['MySearchCharts'] = 'MySearchCharts';
+    
     $.ajax({
        type: "POST",
        url: url,
@@ -154,15 +169,16 @@ function mySearchCharts(){
             console.log(data);
         }
      });
-    
 }
 
+/* creates the charts for the users "Search History" page */
 function adminSearchCharts(){
     var dfrom = $('#dfrom').val();
     var dto = $('#dto').val();
     var usersID = '';
     usersID = $('#users option:selected').val();
     var data ={};
+    data['MyHistSearchCharts'] = 'submit';
     data['dfrom'] = dfrom;
     data['dto'] = dto;
     data['userID'] = usersID;
@@ -211,6 +227,7 @@ function adminSearchCharts(){
      });
 }
 
+/* creates the charts for the dash board top 30 */
 function top30days(){
     var data ={};
     data['top30days'] = 'top30days';
@@ -250,6 +267,7 @@ function top30days(){
      });
 }
 
+/* creates the charts for the dash board top 7 */
 function top7days(){
     var data ={};
     data['top7days'] = 'top7days';

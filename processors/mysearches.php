@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - mysearches.php
-* Revision Date - April, 10 2019
+* my searches processor
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
     session_start();
     include("../inc/inc.path.php");
@@ -25,15 +26,4 @@
         header("location: /user/mysearches.php?dfrom=$dateFrom&dto=$dateTo&usersID=$userID");
         
     }
-/*    
-        if($result)
-        {
-            header('location: /search.php?search='.$skuId.'&imageupload=successful');    
-        } else 
-        {
-            header('location: /search.php?search='.$skuId.'&imageupload=notsupported');
-        }
-    }
-    
-*/
 ?>

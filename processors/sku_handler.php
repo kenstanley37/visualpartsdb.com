@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - sku_handler.php
-* Revision Date - April, 10 2019
+* handles sku images. IE: updating, adding, etc
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
     session_start();
     include("../inc/inc.path.php");

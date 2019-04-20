@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - search-history.php
-* Revision Date - April, 10 2019
+* VIEW for user search history
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
 session_start();
 
@@ -35,7 +36,7 @@ $dateStart = strtotime('-1 day', strtotime($date));
 $dateStart = date("Y-m-d", $dateStart);
 $dateEnd = date("Y-m-d");
 
-if(isset($_GET['dfrom']))
+if(isset($_GET['search-history']))
 {
     $dateStart = $_GET['dfrom'];
     $dateEnd = $_GET['dto'];
@@ -76,7 +77,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                 <h2 class="blue-header">Search History</h2>
             </section>
             
-            <div class="content">
+            <div class="content" id="MyHistSearchCharts">
                 <div class="grid-temp-30-70 w100p">
                     <div class="w100p shadow bg-white">
                         <section class="form-contact">
@@ -87,11 +88,11 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                                 <label for="dfrom">Date From: </label>
                                 <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
                                 
-                                 <label for="dto">Date To:</label>
+                                 <label for="admindto">Date To:</label>
                                 <input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
                                 
-                                <label for="users" hidden>Select User:</label>
-                                <select class="select-css" id="users" name="usersID">
+                                <label for="adminusers" hidden>Select User:</label>
+                                <select class="select-css adminusers" id="users" name="usersID">
                                     <option value="">Select User</option>
                                     <?php
                                     foreach($dropdown as $row)
@@ -105,7 +106,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                                     }
                                     ?>
                                 </select> 
-                                <input class="btn-blue" type="submit" value="Search">
+                                <input class="btn-blue" type="submit" value="Search" name="search-history">
                             </form>
                         </section>
                     </div>

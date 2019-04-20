@@ -1,8 +1,9 @@
 <?php
 /**
-* Author - Ken Stanley
-* File Name - register_request.php
-* Revision Date - April, 10 2019
+* processor for the requested request on the main page
+*
+* @author Ken Stanley <ken@stanleysoft.org>
+* @license MIT
 */
     session_start();
     include("../inc/inc.path.php");
@@ -32,15 +33,4 @@
         }
         
     }
-/*    
-        if($result)
-        {
-            header('location: /search.php?search='.$skuId.'&imageupload=successful');    
-        } else 
-        {
-            header('location: /search.php?search='.$skuId.'&imageupload=notsupported');
-        }
-    }
-    
-*/
 ?>
