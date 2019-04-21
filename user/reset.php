@@ -60,14 +60,14 @@ if(isset($_POST['reset']))
                 <h1 class="blue-header">Password Reset</h1>
             </section>
             <section class="form">
-                <div class="login shadow">
+                <div class="w600 shadow bg-white">
                     <div class="form-contact">
                         <h3 class="login-title">Reset Password</h3>
                         <form action="reset.php" method="post">
                             <fieldset>
                                 <input placeholder="Email" type="email" name="email" required>
 
-                                <p>This will send a reset link</p>
+                                <p>This will send a reset link in your email</p>
                                 
                                 <p class="error"><?php echo $error; ?></p>
 
