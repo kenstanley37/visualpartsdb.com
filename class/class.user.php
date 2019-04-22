@@ -575,7 +575,7 @@
         {
             try
             {
-                $stmt = $this->conn->prepare("SELECT * FROM user");
+                $stmt = $this->conn->prepare("SELECT * FROM user ORDER BY user_id");
                 $stmt->execute();
                 $result = array(array());
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -653,7 +653,8 @@
                     $stmt = $this->conn->prepare("SELECT * FROM user
                         LEFT JOIN company on company_id = user_company
                         LEFT JOIN role on role_id = user_role_id
-                        WHERE user_verify = 1");
+                        WHERE user_verify = 1
+                        ORDER BY user_lName");
                     $stmt->execute();
                     $result = array(array());
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -662,7 +663,8 @@
                     $stmt = $this->conn->prepare("SELECT * FROM user
                         LEFT JOIN company on company_id = user_company
                         LEFT JOIN role on role_id = user_role_id
-                        WHERE user_verify is null ");
+                        WHERE user_verify is null
+                        ORDER BY user_lName");
                     $stmt->execute();
                     $result = array(array());
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -671,7 +673,8 @@
                     $stmt = $this->conn->prepare("SELECT * FROM user
                         LEFT JOIN company on company_id = user_company
                         LEFT JOIN role on role_id = user_role_id
-                        WHERE user_active = 0");
+                        WHERE user_active = 0
+                        ORDER BY user_lName");
                     $stmt->execute();
                     $result = array(array());
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -844,7 +847,7 @@
             {
                 echo $e->getMessage();
             }
-        } // end regRequestList
+        } // end getRegRequestCount
         
          /**
         * Returns the amount of pending invited users
@@ -865,7 +868,7 @@
             {
                 echo $e->getMessage();
             }
-        } // end regRequestList
+        } // end getUserPendingCount
         
          /**
         * Deletes register request from the database

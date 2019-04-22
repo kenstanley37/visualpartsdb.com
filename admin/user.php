@@ -69,7 +69,7 @@ $pending = $user->userList('active');
                 <div class="grid-temp-30-70 w100p">
                     <div class="w100p shadow lh25 bg-white mh500">
                         <h2 class="login-title">Description</h2>
-                        <p>This list contains the users who have been sent an inventation request and have not set a password yet.</p>
+                        <p>A list of all members of the website</p>
                     </div>
                     <div class="w100p shadow bg-white">
                         <h2 class="login-title">Members</h2>

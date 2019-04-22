@@ -67,18 +67,11 @@ $error='';
                                     <a href="database-final.sql" target="_blank">Database Script</a>
                                 </td>
                             </tr>
-                            <?php 
-                                if(!empty($error))
-                                {
-                                    ?>
-                                    <tr>
-                                        <td colspan="2">
-                                            <span class="error"><?php echo $error; ?></span>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            ?>
+                            <tr>
+                                <td class="fz16">
+                                    <a href="docs" target="_blank">PHP Documentation</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
