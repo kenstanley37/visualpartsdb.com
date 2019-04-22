@@ -112,7 +112,7 @@ if(!isset($_SESSION['user_id']))
                                                         } else 
                                                         {
                                                             ?>
-                                                            <button class="btn inactive" type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive" id="makeActive">Set Active</button>
+                                                            <button class="btn inactive" type="submit" value="<?php echo $row['pl_id'];?>" name="makeActive">Set Active</button>
                                                             <?php
                                                         }
 
@@ -126,10 +126,10 @@ if(!isset($_SESSION['user_id']))
                                             <td data-label="Export"><a href="/export/generate-xlsx.php?unit=excel&list=<?php echo $row['pl_id']; ?>"><i class="far fa-file-excel"></i></a></td>
                                             <td>
                                                 <form action="/user/deletelist.php" method="post">
-                                                    <input type="text" hidden value="<?php echo $listid; ?>" name="listid" id="listid">
-                                                    <input type="text" hidden value="<?php echo $row['pl_list_name']; ?>" name="listname" id="list-name">
-                                                    <input type="text" hidden value="<?php echo $count; ?>" name="listcount" id="listcount">
-                                                    <button class="btn danger" type="submit" name="deletelist" id="deletelist" value="<?php echo $row['pl_id'];?>">Delete</button>
+                                                    <input type="text" hidden value="<?php echo $listid; ?>" name="listid">
+                                                    <input type="text" hidden value="<?php echo $row['pl_list_name']; ?>" name="listname">
+                                                    <input type="text" hidden value="<?php echo $count; ?>" name="listcount">
+                                                    <button class="btn danger" type="submit" name="deletelist" value="<?php echo $row['pl_id'];?>">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

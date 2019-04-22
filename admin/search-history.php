@@ -88,10 +88,9 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $searchUserID);
                                 <label for="dfrom">Date From: </label>
                                 <input type="text" name="dfrom" id="dfrom" value="<?php echo $dateStart; ?>">
                                 
-                                 <label for="admindto">Date To:</label>
+                                 <label for="dto">Date To:</label>
                                 <input type="text" name="dto" id="dto" value="<?php echo $dateEnd; ?>">
                                 
-                                <label for="adminusers" hidden>Select User:</label>
                                 <select class="select-css adminusers" id="users" name="usersID">
                                     <option value="">Select User</option>
                                     <?php

@@ -56,7 +56,7 @@ if(isset($_GET['error']))
             <section class="title">
                 <h2 class="blue-header">Modify Part</h2>
             </section>
-            <section class="content">
+            <div class="content">
                 <section class="w600 shadow bg-white">
                     <div class="form-contact">
                         <h3 class="login-title">Part #</h3>
@@ -71,7 +71,7 @@ if(isset($_GET['error']))
                         </form>
                     </div>
                 </section>
-            </section>
+            </div>
         </main>
         <footer>
             <?php include($path."/inc/inc.footer.php"); ?>
