@@ -8,9 +8,22 @@
 session_start();
 include("../inc/inc.path.php");
 require_once($path."class/class.func.php");
+require_once($path."class/class.user.php");
 
+$user = new USER;
 $vail = new VALIDATE;
 
+if(!isset($_SESSION['user_id']))
+{
+    header('location: /');
+} else 
+{
+    $userID = $_SESSION['user_id'];
+    $user->activeCheck($userID);
+    if($user->accessCheck() != 'ADMIN'){
+        header('location: /noaccess.php');
+    }
+}
 
 ?>
 <!DOCTYPE html>
