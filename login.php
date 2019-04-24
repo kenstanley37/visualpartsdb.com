@@ -41,6 +41,10 @@ if(isset($_POST['Login'])){
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
     
+   // var_dump($recaptcha);
+   // echo number_format($recaptcha->success,2);
+   // die;
+    
     if($recaptcha->success) {
         $vail->validEmail($email);
         if(empty($pass)){
