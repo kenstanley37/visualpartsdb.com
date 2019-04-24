@@ -145,7 +145,7 @@
                 $end += $jump;
                 $xmlofsitemaps .= '
                     <sitemap>
-                      <loc>http://visualpartsdb.com/sitemaps/'.$sitemap.'</loc>
+                      <loc>https://visualpartsdb.com/sitemaps/'.$sitemap.'</loc>
                       <lastmod>'.$date.'</lastmod>
                    </sitemap>
                 ';
