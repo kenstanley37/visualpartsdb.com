@@ -131,7 +131,8 @@
                         
                     }
                     $xmlsitemap .= '</urlset>';
-                    $sitemap ='sitemap'.$count.'.xml';
+                    $xmlsitemap = gzencode($xmlsitemap);
+                    $sitemap ='sitemap'.$count.'.xml.gz';
                     file_put_contents($sitemap, $xmlsitemap); // saves the sitemap on server
 
                     // outputs the sitemap (delete this instruction if you not want to display the sitemap in browser)
