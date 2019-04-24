@@ -126,6 +126,7 @@
                         $xmlsitemap .= '
                         <url>
                             <loc>https://visualpartsdb.com/search.php?search='.$row['sku_id'].'</loc>
+                            <lastmod>'.$date.'</lastmod>
                         </url>';
                         
                     }
