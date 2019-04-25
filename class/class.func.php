@@ -114,7 +114,6 @@
                 try 
                 {
                     $query = "SELECT * FROM sku LIMIT $start, $end";
-                    echo $query.'<br>';
                     $stmt = $this->conn->prepare($query);
                     $stmt->execute();
                     $result = $stmt->fetchAll();
@@ -133,6 +132,7 @@
                     $xmlsitemap .= '</urlset>';
                     $xmlsitemap = gzencode($xmlsitemap);
                     $sitemap ='sitemap'.$count.'.xml.gz';
+                    echo $sitemap.'<br>';
                     file_put_contents($sitemap, $xmlsitemap); // saves the sitemap on server
 
                     // outputs the sitemap (delete this instruction if you not want to display the sitemap in browser)
@@ -154,7 +154,9 @@
                 
             }
             $xmlofsitemaps .= '</sitemapindex>';
-            file_put_contents('sitemap.xml', $xmlofsitemaps); // saves the sitemap on server
+            $xmlofsitemaps = gzencode($xmlofsitemaps);
+            echo 'sitemap.xml.gz';
+            file_put_contents('sitemap.xml.gz', $xmlofsitemaps); // saves the sitemap on server
         } // end 
         
     }
