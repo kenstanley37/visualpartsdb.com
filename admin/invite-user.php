@@ -33,6 +33,9 @@ if(isset($_GET['register']))
     if($temp == 'successful')
     {
         $result = 'User has been invited';
+    } else if($temp == 'exists')
+    {
+        $result = 'User is already in the system';
     }
 }
 
@@ -81,7 +84,7 @@ $company = $user->dropDownCompany();
                                         <?php
                                         }
                                         ?>
-                                        </select>
+                                    </select>
                                     
                                     <input placeholder="First Name" type="text" name="regfname" required>
                                     

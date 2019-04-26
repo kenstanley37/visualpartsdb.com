@@ -53,7 +53,7 @@ $updateRequest = $vpd->skuUpdateRequest($sku);
         </aside>
         <main class="main">
             <section class="title">
-                <h2>Update Request: <?php echo ucfirst($sku); ?></h2>
+                <h2 class="login-title">Update Request: <?php echo ucfirst($sku); ?></h2>
             </section>
             <div class="content">
                 <section class="w600 shadow bg-white">

@@ -13,8 +13,6 @@ require_once($path."class/class.func.php");
 $vail = new VALIDATE;
 
 // Register API keys at https://www.google.com/recaptcha/admin
-$siteKey = '6LcoTokUAAAAAK1eqc2ZGpJ1vg0dhLPLdUOJ_B_k';
-$secretKey = '6LcoTokUAAAAAOJmN26GyTHtvhVxzJ7fb7JHsu9A';
 
 $emailError = '';
 $passwordError = '';
@@ -45,7 +43,7 @@ if(isset($_POST['Login'])){
    // echo number_format($recaptcha->success,2);
    // die;
     
-    if($recaptcha->success) {
+    if($recaptcha->score > 0) {
         $vail->validEmail($email);
         if(empty($pass)){
             $passwordError = 'Please enter your password';

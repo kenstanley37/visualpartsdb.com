@@ -24,6 +24,11 @@
         $lname =  $vail->sanitizeString($_POST['reglname']);
         $email =  $vail->sanitizeString($_POST['regemail']);
         $company =  $vail->sanitizeString($_POST['regcompany']);
+        $existsCheck = $user->checkID($email);
+        if($existsCheck)
+        {
+            header('location: /admin/invite-user.php?register=exists');
+        }
         $user->addUserVerify($fname, $lname, $email, $company);
         if($user == true)
         {

@@ -15,6 +15,8 @@ $vpd = new VISUALDB;
 $vail = new VALIDATE;
 $user = new USER;
 
+$checkID = ''; // set if the logged in user id = user list id
+
 if(!isset($_SESSION['user_id']))
 {
     header('location: /');
@@ -37,6 +39,8 @@ if(isset($_GET['register']))
 }
 
 $pending = $user->userList('active');
+
+
 
 ?>
 <!DOCTYPE html>
@@ -98,8 +102,15 @@ $pending = $user->userList('active');
                                     $date = $row['user_reg_date'];
                                     $dateadded = date_create($date);
                                     $addDate = date_format($dateadded, 'm/d/Y');
+                                    if($userID == $row['user_id'])
+                                    {
+                                        $checkID = 'TRUE';
+                                    } else
+                                    {
+                                        $checkID = 'FALSE';
+                                    }
                                     ?>
-                                    <tr>
+                                    <tr <?php if($checkID == 'TRUE'){echo 'class="bg-grey"';} ?>>
                                         <td data-label="First">
                                             <?php echo $row['user_fName']; ?>
                                         </td>
@@ -113,14 +124,24 @@ $pending = $user->userList('active');
                                             <?php echo $row['company_name']; ?>
                                         </td>
                                         <td data-label="Status">
+                                            <?php if($checkID == 'FALSE')
+                                            {
+                                            ?>
                                             <form method="post" action="/processors/userManagement.php">
                                                 <input type="text" name="activeSwitch" value="<?php echo $row['user_id']; ?>" hidden>
                                                 <button type="submit" class="btn <?php if($row['user_active'] == 1){ echo "active";} else{ echo "danger";}; ?>">
                                                     <?php if($row['user_active'] == 1){ echo "Active";} else{ echo "Disabled";}; ?>
                                                 </button>
                                             </form>
+                                            <?php
+                                            }
+                                            ?>
+                                            
                                         </td>
                                         <td data-label="Role">
+                                            <?php if($checkID == 'FALSE')
+                                            {
+                                            ?>
                                             <form action="/processors/userManagement.php" method="post">
                                                 <input type="number" name="userID" value="<?php echo $row['user_id']; ?>" hidden>
                                                 <table class="tbl-btns">
@@ -140,15 +161,24 @@ $pending = $user->userList('active');
                                                     </tr>
                                                 </table>
                                             </form>
+                                            <?php
+                                            }
+                                            ?>
                                         </td>
                                         <td data-label="Member Since">
                                             <?php echo $addDate; ?>
                                         </td> 
                                         <td>
+                                            <?php if($checkID == 'FALSE')
+                                            {
+                                            ?>
                                             <form action="/admin/deleteuser.php" method="post">
                                                 <input hidden type="text" name="userID" value="<?php echo $row['user_id']; ?>">
                                                 <button type="submit" name="remUser" class="btn danger">DELETE</button>
                                             </form>
+                                            <?php
+                                            }
+                                            ?>
                                         </td>
                                     </tr>
                                     <?php

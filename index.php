@@ -242,7 +242,7 @@ $image_count = $vpd->getImageCount();
                                 
                                 <label for="email">Email</label>
                                 <input class="required" type="email" name="email" id="email" placeholder="required" value="<?php if(isset($_SESSION['reg_email'])){ echo $_SESSION['reg_email'];} ?>" required>
-                                    <?php if(!empty($requestResult)){echo '<span>'.$requestResult.'</span>';}?>
+                                <span><?php if(!empty($requestResult)){echo $requestResult;}?></span>
                                 
                                 <label for="phone">Phone</label>
                                 <input class="required" type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  placeholder="required xxx-xxx-xxxx" value="<?php if(isset($_SESSION['reg_phone'])){ echo $_SESSION['reg_phone'];} ?>" required>

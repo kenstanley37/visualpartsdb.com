@@ -1258,6 +1258,10 @@ figcaption, .card figcaption, .card-responsive figcaption {
     margin-top: 15px;
 }
 
+.form-contact .form-example span {
+    display: block;
+}
+
 .sku-edit button, .form-contact button {
     background-color: #0487cc !important;
     color: #fff;
