@@ -940,7 +940,7 @@ header .name a {
     background-image: url(/images/index-background-search.png);
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
-    background-position: 0px 120px;
+    background-position: -170px 120px !important;
     background-repeat: no-repeat;
     z-index: 0; 
     margin-bottom: 35px;
