@@ -33,7 +33,8 @@
          * @var string
          */
         private $conn;
-
+        private $stmp_email = 'register@visualpartsdb.com';  
+        private $stmp_pass = 'gDHHM(z;pq9K'; 
         /**
         * Constructor to connect to the database
         *
@@ -204,7 +205,8 @@
         
             public function addUserVerify($fname, $lname, $email, $company)
             {
-                
+                $email_stmp = $this->stmp_email;
+                $email_pass = $this->stmp_pass;
                 $admin = $_SESSION['user_id'];
                 $adminName = $this->userFullName($admin);
                 
@@ -248,8 +250,8 @@
                     $mail->isSMTP();                                // Set mailer to use SMTP
                     $mail->Host = 'visualpartsdb.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;                         // Enable SMTP authentication
-                    $mail->Username = 'register@visualpartsdb.com';     // SMTP username
-                    $mail->Password = 'gDHHM(z;pq9K';                           // SMTP password
+                    $mail->Username = $email_stmp;     // SMTP username
+                    $mail->Password = $email_pass;                           // SMTP password
                     $mail->SMTPSecure = 'ssl';                      // Enable TLS encryption, `ssl` also accepted
                     $mail->Port = 465;                              // TCP port to connect to
 
@@ -318,8 +320,8 @@
                             $mail->isSMTP();                                // Set mailer to use SMTP
                             $mail->Host = 'visualpartsdb.com';  // Specify main and backup SMTP servers
                             $mail->SMTPAuth = true;                         // Enable SMTP authentication
-                            $mail->Username = 'register@visualpartsdb.com';     // SMTP username
-                            $mail->Password = 'gDHHM(z;pq9K';                           // SMTP password
+                            $mail->Username = $email_stmp;     // SMTP username
+                            $mail->Password = $email_pass;                           // SMTP password
                             $mail->SMTPSecure = 'ssl';                      // Enable TLS encryption, `ssl` also accepted
                             $mail->Port = 465;                              // TCP port to connect to
 
