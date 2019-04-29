@@ -687,54 +687,54 @@
                     {  
                         if(empty($dateFrom) || empty($dateTo))
                         {            
-                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count  FROM sku_search 
+                            $stmt = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count  FROM sku_search 
                             left join sku on sku_id = sku_search_sku
                             WHERE sku_search_by = :userID 
                             GROUP by sku_search_sku
                             ORDER BY count desc");
-                            $count->bindparam(":userID", $userID);
+                            $stmt->bindparam(":userID", $userID);
                             
                         } else {                
-                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            $stmt = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
                             left join user on user_id = sku_search_by
                             left join sku on sku_id = sku_search_sku
                              WHERE sku_search_by = :userID and date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
                              GROUP by sku_search_sku
                              ORDER BY count desc");
-                            $count->bindparam(":userID", $userID);
-                            $count->bindparam(":dateFrom", $dateFrom);
-                            $count->bindparam(":dateTo", $dateTo);
+                            $stmt->bindparam(":userID", $userID);
+                            $stmt->bindparam(":dateFrom", $dateFrom);
+                            $stmt->bindparam(":dateTo", $dateTo);
                             
                         }
                     } else 
                     {
                         if(empty($dateFrom) || empty($dateTo))
                         {                
-                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            $stmt = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
                             left join sku on sku_id = sku_search_sku
                             left join user on user_id = sku_search_by
                             GROUP by sku_search_sku
                             ORDER BY count desc");
                         } else {
-                            $count = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
+                            $stmt = $this->conn->prepare("SELECT sku_search_sku, count(sku_search_sku) as count FROM sku_search 
                             left join user on user_id = sku_search_by
                             left join sku on sku_id = sku_search_sku
                                 WHERE date(sku_search_date) >= :dateFrom and date(sku_search_date) <= :dateTo 
                               GROUP by sku_search_sku
                               ORDER BY count desc
                               ");
-                            $count->bindparam(":dateFrom", $dateFrom);
-                            $count->bindparam(":dateTo", $dateTo);
+                            $stmt->bindparam(":dateFrom", $dateFrom);
+                            $stmt->bindparam(":dateTo", $dateTo);
                         }
                     }    
-                    $count->execute();
+                    $stmt->execute();
                     $data = array(); // set an array for JSON output
                
-                    while($countrow = $count->fetch(PDO::FETCH_ASSOC))
+                    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
                     {
                         //Create an array that C3 can read correctly
-                        $index = $countrow['sku_search_sku'];
-                        $data[$index] = $countrow['count'];                
+                        $index = $row['sku_search_sku'];
+                        $data[$index] = $row['count'];                
                     }
                     // since we are formatting in JSON we need to set the header before returning the data.
                     if(!empty($data)){

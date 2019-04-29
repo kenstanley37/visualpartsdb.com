@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function(){
     url = '/processors/ajax.php';
     startup();
@@ -111,8 +108,6 @@ function checkWidth(){
     var $pane = $('')
 }
 
-
-
 /* creates the charts for the users "My Searches" page */
 function mySearchCharts(){
     var dfrom = $('#dfrom').val();
@@ -132,6 +127,7 @@ function mySearchCharts(){
        data: data, // set $_POST.
        success: function(data)
        {
+           //data.sort(function(a, b){return b - a});
            console.log(data);
            chart = c3.generate({
                bindto: '#my-search-pie',
@@ -151,13 +147,14 @@ function mySearchCharts(){
         //          x: 'name',
                   json: data,
                   type: 'bar',
+                    order: 'desc',
                 },
                legend: {
                     show: false
                 },
                bar: {
                     width: {
-                        ratio: 1 // this makes bar width 50% of length between ticks
+                        ratio: 1 
                     } 
                 // or
                 //width: 100 // this makes bar width 100px

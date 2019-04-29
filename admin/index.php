@@ -99,8 +99,8 @@ $mostSearched1 = $vpd->getMostSearchedSkuCount(1);
                     </a>
                     <a href="/admin/update-sku.php?sku=<?php echo $mostSearched1[0]['sku_search_sku']; ?>">
                         <div class="dash4 bg-white shadow rounded text-dsb" >
-                            <div class="fz25 bold"><?php echo $mostSearched1[0]['sku_search_sku']; ?></div>
-                            <div class="fz15 bold"><?php echo $mostSearched1[0]['skuCount']; ?> Searches</div>
+                            <div class="fz25 bold"><?php if(!empty($mostSearched1[0]['sku_search_sku'])){echo $mostSearched1[0]['sku_search_sku'];} ?></div>
+                            <div class="fz15 bold"><?php if(!empty($mostSearched1[0]['skuCount'])){echo $mostSearched1[0]['skuCount'].' Searches';} ?> </div>
                             <div>Top Searched Past Day</div>
                             <div class="view bold">View <i class="fas fa-angle-right"></i></div>
                         </div>

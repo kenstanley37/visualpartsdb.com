@@ -37,6 +37,7 @@ if(isset($_GET['mySearches']))
 } 
 $result = '';
 $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

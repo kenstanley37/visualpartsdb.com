@@ -29,7 +29,6 @@ if(isset($_GET['search']))
     {
         $dataResult = $vpd->getSkuData($sku);
         $imageResult = $vpd->getSkuImage($sku);
-        $skuAds = $vpd->getSkuAds($sku);
         $createDate = $dataResult['sku_rec_date'];
         $createDate = date_create($createDate);
         $createDate = date_format($createDate, 'm/d/Y');
@@ -85,15 +84,6 @@ if(isset($_GET['export'])){
                             <h2 class="blue-header">PART #: <?php echo $dataResult['sku_id']; ?></h2>
                         </section>
                     </div>
-            
-                    <div class="sku-ad-banner">
-                    <?php 
-                        foreach($skuAds as $ad)
-                        {
-                            echo $ad['sku_ad_banner'];
-                        }
-                    ?>
-                    </div> 
             
                     <div class="nav search-nav">
                         <div class="search-user-functions">
@@ -411,19 +401,6 @@ if(isset($_GET['export'])){
                             ?>
                         </div>
                     </div>
-            
-                    <div class="sku-ad-other">
-                        <div></div>
-                        <div>
-                            <?php 
-                                foreach($skuAds as $ad)
-                                {
-                                    echo $ad['sku_ad_other'];
-                                }
-                            ?>
-                        </div>
-                        <div></div>
-                    </div> 
             <?php
             } else
             {

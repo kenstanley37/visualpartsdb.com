@@ -5,6 +5,8 @@
 * @author Ken Stanley <ken@stanleysoft.org>
 * @license MIT
 */
+
+    // google analytics tracking by user
     $useridgtag = '';
     
     if(isset($_SESSION['user_id']))
@@ -74,5 +76,8 @@
             });
         });
     </script>
+
+    <!-- auto google ads -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <script> (adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "ca-pub-1367051821928582", enable_page_level_ads: true }); </script>
 
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
