@@ -244,7 +244,7 @@ $count = 0;
             </div>
 
             <div class="content">
-                <section class=" w600 form-contact shadow">
+                <section class=" w600 form-contact shadow bg-white">
                     <h2 class="login-title">Images</h2>
                     <form action="/processors/image_handler.php" method="post" enctype="multipart/form-data">
                         Select image to upload:
