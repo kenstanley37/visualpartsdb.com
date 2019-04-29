@@ -249,7 +249,7 @@
                     $mail->Host = 'visualpartsdb.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;                         // Enable SMTP authentication
                     $mail->Username = 'register@visualpartsdb.com';     // SMTP username
-                    $mail->Password = 'on55f}tkd[k(';                           // SMTP password
+                    $mail->Password = 'gDHHM(z;pq9K';                           // SMTP password
                     $mail->SMTPSecure = 'ssl';                      // Enable TLS encryption, `ssl` also accepted
                     $mail->Port = 465;                              // TCP port to connect to
 
