@@ -289,7 +289,8 @@
             */
             public function sendPassLink($email)
             {
-
+                $email_stmp = $this->stmp_email;
+                $email_pass = $this->stmp_pass;
                 //Load Composer's autoloader
                 require '../vendor/autoload.php';
                 // for user registeration
