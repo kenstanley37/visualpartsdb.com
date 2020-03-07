@@ -90,20 +90,66 @@ $image_count = $vpd->getImageCount();
     <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
+    <header id="header">
+        <div class="container-fluid">
+            <header>
+                <?php include($path."inc/inc.header.php"); ?>
+            </header>   
+            <!--
+            <aside class="admin-nav-bar hidden">
+                <?php
+                if($user->accessCheck() == "ADMIN")
+                {
+                ?>
+                    <?php include($path."inc/inc.adminnavbar.php"); ?>
+                <?php
+                }
+                ?>
+            </aside>
+            -->
+            <div class="logo float-left">
+            <h1 class="text-light"><a href="index.html"><span>Siimple</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <button type="button" class="nav-toggle"><i class="bx bx-menu"></i></button>
+        <nav class="nav-menu">
+            <ul>
+            <li class="active"><a href="#header">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#why-us">Why Us</a></li>
+            <li class="drop-down"><a href="">Drop Down</a>
+                <ul>
+                <li><a href="#">Drop Down 1</a></li>
+                <li class="drop-down"><a href="#">Drop Down 2</a>
+                    <ul>
+                    <li><a href="#">Deep Drop Down 1</a></li>
+                    <li><a href="#">Deep Drop Down 2</a></li>
+                    <li><a href="#">Deep Drop Down 3</a></li>
+                    <li><a href="#">Deep Drop Down 4</a></li>
+                    <li><a href="#">Deep Drop Down 5</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Drop Down 3</a></li>
+                <li><a href="#">Drop Down 4</a></li>
+                <li><a href="#">Drop Down 5</a></li>
+                </ul>
+            </li>
+            <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
+
+        </div
+
+
+        </div>
+    </header>
+    
+
     <div class="wrapper">
-        <header>
-            <?php include($path."inc/inc.header.php"); ?>
-        </header>
-        <aside class="admin-nav-bar hidden">
-        <?php
-        if($user->accessCheck() == "ADMIN")
-        {
-        ?>
-            <?php include($path."inc/inc.adminnavbar.php"); ?>
-        <?php
-        }
-        ?>
-        </aside>
+        
+        
         <main id="aboutvpd" class="index-main">
             <div class="index-bg"></div>
             <section class="index-search">
@@ -173,7 +219,7 @@ $image_count = $vpd->getImageCount();
                         foreach($randomImage as $key)
                         {
                             ?>
-                             <figure class="card bg-white shadow">
+                             <figure class="card bg-white shadow-card">
                                 <div class="card-img">
                                     <a href="/search.php?search=<?php echo $key['sku_image_sku_id']; ?>">
                                         <img class="article-img" src="<?php echo $key['sku_image_thumb']; ?>" alt="<?php echo $key['sku_image_sku_id'].'-'.$key['sku_image_description']; ?>" />

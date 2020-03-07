@@ -32,27 +32,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- jQuery -->
-    <link rel="stylesheet" type="text/css" media="screen" href="/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.css" >
-    <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/fontawesome.min.css" > <!--load all styles -->
-    <link rel="stylesheet" type="text/css" media="screen" href="/vendor/c3-0.6.12/c3.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/reset.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
     <!-- CSS MENU -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/cssmenu/cssmenu.css" />
+    <!-- BOXICONS -->
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
 
     <!-- VisualPartsDB CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="/inc/css/visualpartsdb.css" />
 
-    <!-- JavaScript -->
-    <script src="/inc/js/jquery-3.3.1.min.js"></script>
-    <script src="/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 
     <!-- Graphs and Charts -->
     <script src="/vendor/d3/d3.min.js"></script>
     <script src="/vendor/c3-0.6.12/c3.min.js"></script>
     <!-- CSS MENU -->
+    <!--
     <script src="/inc/cssmenu/cssmenu.js"></script>
+        -->
     <!-- Visual Parts DB JS -->
     <script src="/inc/js/visualpartsdb.js"></script>
     
