@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-733937777"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-733937777" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/DATABASE.html">DATABASE</a></li>
+                                                    <li class="class"><a href="../classes/USER.html">USER</a></li>
+                                                    <li class="class"><a href="../classes/VALIDATE.html">VALIDATE</a></li>
+                                                    <li class="class"><a href="../classes/VISUALDB.html">VISUALDB</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>VISUALDB</h1>
+                    <p><em>VISUALDB handles all sku related methods</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/VISUALDB.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method___destruct" class="">__destruct()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_imageMessage" class="">imageMessage()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getSkuAds" class="">getSkuAds()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getSkuData" class="">getSkuData()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getDescSearch" class="">getDescSearch()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_setSearchTicket" class="">setSearchTicket()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getSkuImage" class="">getSkuImage()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_setImageCaption" class="">setImageCaption()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_addImage" class="">addImage()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_remImage" class="">remImage()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_resizeImageThumb" class="">resizeImageThumb()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_resizeImageFull" class="">resizeImageFull()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_AddImageUrl" class="">AddImageUrl()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_randImage" class="">randImage()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_mySearches" class="">mySearches()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getSkuCount" class="">getSkuCount()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getSearchCount" class="">getSearchCount()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getImageCount" class="">getImageCount()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_searchHistToJson" class="">searchHistToJson()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_topSearchHistToJson" class="">topSearchHistToJson()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_skuUpdateRequest" class="">skuUpdateRequest()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getSkuUpdateRequestCount" class="">getSkuUpdateRequestCount()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_getMostSearchedSkuCount" class="">getMostSearchedSkuCount()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_setSkuData" class="">setSkuData()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_setRequestUpdate" class="">setRequestUpdate()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_checkSku" class="">checkSku()</a><br />
+                                                                    <a href="../classes/VISUALDB.html#method_addSku" class="">addSku()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/VISUALDB.html#property_imageMessage" class="">$imageMessage</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/VISUALDB.html#property_conn" class="">$conn</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/class.class.visualdb.html"><div class="path-wrapper">class\class.visualdb.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\VISUALDB</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                license
+                            </th>
+                            <td>
+                                                                    <p>MIT</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_imageMessage" name="property_imageMessage" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$imageMessage</h3>
+                <pre class="signature">$imageMessage : string</pre>
+                <p><em>Image message</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_conn" name="property_conn" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$conn</h3>
+                <pre class="signature">$conn : string</pre>
+                <p><em>database connection</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct() </pre>
+                <p><em>Constructor to connect to the database</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___destruct" name="method___destruct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__destruct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__destruct() </pre>
+                <p><em>Destruct
+Destorys the connection to the database</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_imageMessage" name="method_imageMessage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">imageMessage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">imageMessage(string  <span class="argument">$message</span>) </pre>
+                <p><em>Set the success or error message of image upload</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$message </td>
+                                <td><p>a string that contains the message</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSkuAds" name="method_getSkuAds" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSkuAds()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSkuAds(string  <span class="argument">$sku</span>) : \$result</pre>
+                <p><em>Pulls all the SKU ads from the database</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>array of results</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSkuData" name="method_getSkuData" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSkuData()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSkuData(string  <span class="argument">$sku</span>) : \$result</pre>
+                <p><em>Searches the database for the requested sku and returns information
+Sets the search ticker</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>the database row for requested sku</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getDescSearch" name="method_getDescSearch" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getDescSearch()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getDescSearch(string  <span class="argument">$sku</span>) : \$result</pre>
+                <p><em>Searches the database for the requested sku and returns information
+Sets the search ticker</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>the database row for requested sku</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSearchTicket" name="method_setSearchTicket" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSearchTicket()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSearchTicket(string  <span class="argument">$sku</span>, integer  <span class="argument">$userID</span>) </pre>
+                <p><em>Adds record to the database of the sku the user searched for</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$userID </td>
+                                <td><p>the users ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSkuImage" name="method_getSkuImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSkuImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSkuImage(string  <span class="argument">$sku</span>) : \$result</pre>
+                <p><em>Searches the database for the requested sku and returns an array of image data</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>array the database rows for requested sku</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setImageCaption" name="method_setImageCaption" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setImageCaption()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setImageCaption(integer  <span class="argument">$imageID</span>, string  <span class="argument">$caption</span>) : true</pre>
+                <p><em>Updates the caption of the SKU</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$imageID </td>
+                                <td><p>the image ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$caption </td>
+                                <td><p>the submitted caption</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    true
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addImage" name="method_addImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addImage(string  <span class="argument">$sku</span>, string  <span class="argument">$desc</span>, resource  <span class="argument">$image</span>) : \1</pre>
+                <p><em>Adds a new image to a SKU
+  Creates a record in the database of where the image is located
+  Copies two files to a location on the harddrive. One for full image and the other for icon</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>STRING the sku ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$desc </td>
+                                <td><p>STRING the submitted caption</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>resource</td>
+                                <td>$image </td>
+                                <td><p>IMAGE the image file</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \1
+                                            &mdash; <p>or 0</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_remImage" name="method_remImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">remImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">remImage(string  <span class="argument">$image_id</span>, string  <span class="argument">$image_url</span>, string  <span class="argument">$image_thumb</span>) : true</pre>
+                <p><em>Removes an image from a SKU
+Removed the image url from the database and the removes the image from the HD</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$image_id </td>
+                                <td><p>the image ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$image_url </td>
+                                <td><p>location of the file</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$image_thumb </td>
+                                <td><p>location of the thumb file</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    true
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_resizeImageThumb" name="method_resizeImageThumb" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">resizeImageThumb()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">resizeImageThumb(resource  <span class="argument">$resourceType</span>, integer  <span class="argument">$image_width</span>, integer  <span class="argument">$image_height</span>) : \$imageLayer</pre>
+                <p><em>Resizes an image to 300 by 300</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>resource</td>
+                                <td>$resourceType </td>
+                                <td><p>is the image file</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$image_width </td>
+                                <td><p>the image width</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$image_height </td>
+                                <td><p>the image height</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \$imageLayer
+                                            &mdash; <p>the new image</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_resizeImageFull" name="method_resizeImageFull" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">resizeImageFull()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">resizeImageFull(resource  <span class="argument">$resourceType</span>, integer  <span class="argument">$image_width</span>, integer  <span class="argument">$image_height</span>) : \$imageLayer</pre>
+                <p><em>Resizes an image to 800 by 600</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>resource</td>
+                                <td>$resourceType </td>
+                                <td><p>is the image file</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$image_width </td>
+                                <td><p>the image width</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$image_height </td>
+                                <td><p>the image height</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \$imageLayer
+                                            &mdash; <p>the new image</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_AddImageUrl" name="method_AddImageUrl" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">AddImageUrl()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">AddImageUrl(string  <span class="argument">$sku</span>, string  <span class="argument">$url</span>, string  <span class="argument">$thumb</span>, string  <span class="argument">$desc</span>) : true</pre>
+                <p><em>Adds image location to database from the addImage method</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the image ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$url </td>
+                                <td><p>location of the file</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$thumb </td>
+                                <td><p>location of the thumb file</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$desc </td>
+                                <td><p>caption for the image</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    true
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_randImage" name="method_randImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">randImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">randImage(integer  <span class="argument">$num</span>) : \$result</pre>
+                <p><em>Returns an array of random image data</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$num </td>
+                                <td><p>the number of records to return</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>array of image data</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_mySearches" name="method_mySearches" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">mySearches()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">mySearches(\date  <span class="argument">$dateFrom</span>, \date  <span class="argument">$dateTo</span>, integer  <span class="argument">$userID</span>) : \$result</pre>
+                <p><em>Returns search data based off date range and user ID</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\date</td>
+                                <td>$dateFrom </td>
+                                <td><p>DATE the from date</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\date</td>
+                                <td>$dateTo </td>
+                                <td><p>DATE the to date</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$userID </td>
+                                <td><p>INT the users ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>an array of data</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSkuCount" name="method_getSkuCount" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSkuCount()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSkuCount() : \$result</pre>
+                <p><em>Returns the number of skus in the database</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>INT the number of records in the database</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSearchCount" name="method_getSearchCount" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSearchCount()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSearchCount() : \$result</pre>
+                <p><em>Returns the number of searches in the database</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>INT number of records in the database</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getImageCount" name="method_getImageCount" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getImageCount()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getImageCount() : \$result</pre>
+                <p><em>Returns the number of image records in the database</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>INT number of records in the database</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_searchHistToJson" name="method_searchHistToJson" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">searchHistToJson()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">searchHistToJson(\date  <span class="argument">$dateFrom</span>, \date  <span class="argument">$dateTo</span>, integer  <span class="argument">$userID</span>) : \$data</pre>
+                <p><em>Returns an array of records in JSON format that C3 can read and work with
+This is for making charts and graphs based on search history</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\date</td>
+                                <td>$dateFrom </td>
+                                <td><p>the from date</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\date</td>
+                                <td>$dateTo </td>
+                                <td><p>the to date</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$userID </td>
+                                <td><p>the user ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$data
+                                            &mdash; <p>jSON format for C3</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_topSearchHistToJson" name="method_topSearchHistToJson" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">topSearchHistToJson()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">topSearchHistToJson(integer  <span class="argument">$days</span>) : \$data</pre>
+                <p><em>Returns the top 10 most searched SKUs in JSON format for C3 processing</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$days </td>
+                                <td><p>number of days to look back</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$data
+                                            &mdash; <p>jSON format for C3</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_skuUpdateRequest" name="method_skuUpdateRequest" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">skuUpdateRequest()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">skuUpdateRequest(string  <span class="argument">$type</span>) : \$result</pre>
+                <p><em>Returns sku update request records based on $type</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>can be 'active', 'complete', 'sku#'</p>
+<ul>
+<li>'active' returns all records that not been updated yet</li>
+<li>'complete' returns all records that have been updated</li>
+<li>'sku#' returns results for selected sku only</li>
+</ul></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSkuUpdateRequestCount" name="method_getSkuUpdateRequestCount" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSkuUpdateRequestCount()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSkuUpdateRequestCount() : \$count</pre>
+                <p><em>Returns the amount of requested sku updates</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \$count
+                                            &mdash; <p>INT</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getMostSearchedSkuCount" name="method_getMostSearchedSkuCount" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getMostSearchedSkuCount()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getMostSearchedSkuCount(integer  <span class="argument">$days</span>) : \$result</pre>
+                <p><em>Returns most searched SKU by ID and Count</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$days </td>
+                                <td><p>number of days to look back</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \$result
+                                            &mdash; <p>array</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSkuData" name="method_setSkuData" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSkuData()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSkuData(string  <span class="argument">$sku</span>, string  <span class="argument">$sku_desc</span>, integer  <span class="argument">$unit_length</span>, integer  <span class="argument">$unit_width</span>, integer  <span class="argument">$unit_height</span>, integer  <span class="argument">$unit_weight</span>, integer  <span class="argument">$case_length</span>, integer  <span class="argument">$case_width</span>, integer  <span class="argument">$case_height</span>, integer  <span class="argument">$case_weight</span>, integer  <span class="argument">$case_qty</span>, integer  <span class="argument">$pallet_length</span>, integer  <span class="argument">$pallet_width</span>, integer  <span class="argument">$pallet_height</span>, integer  <span class="argument">$pallet_weight</span>, integer  <span class="argument">$pallet_qty</span>) : true</pre>
+                <p><em>Updates a SKUs data</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku_desc </td>
+                                <td><p>description of the SKU</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$unit_length </td>
+                                <td><p>unit length</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$unit_width </td>
+                                <td><p>unit width</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$unit_height </td>
+                                <td><p>unit height</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$unit_weight </td>
+                                <td><p>unit weight</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$case_length </td>
+                                <td><p>case length</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$case_width </td>
+                                <td><p>case width</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$case_height </td>
+                                <td><p>case height</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$case_weight </td>
+                                <td><p>case weight</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$case_qty </td>
+                                <td><p>case quantity</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pallet_length </td>
+                                <td><p>pallet length</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pallet_width </td>
+                                <td><p>pallet width</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pallet_height </td>
+                                <td><p>pallet height</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pallet_weight </td>
+                                <td><p>pallet weight</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pallet_qty </td>
+                                <td><p>pallet quantity</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    true
+                                            &mdash; <p>or false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setRequestUpdate" name="method_setRequestUpdate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setRequestUpdate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setRequestUpdate(string  <span class="argument">$sku</span>) : true</pre>
+                <p><em>Updates the sku update request to show completed</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    true
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_checkSku" name="method_checkSku" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">checkSku()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">checkSku(string  <span class="argument">$sku</span>) : true</pre>
+                <p><em>Checks if sku exists in the database</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>the sku ID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    true
+                                            &mdash; <p>or false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addSku" name="method_addSku" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addSku()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addSku(string  <span class="argument">$sku</span>, string  <span class="argument">$desc</span>) : true</pre>
+                <p><em>Adds a new sku to the database along with the description</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sku </td>
+                                <td><p>new sku ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$desc </td>
+                                <td><p>the new sku description</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\PDOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    true
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Ken Stanley <a href="mailto:ken@stanleysoft.org">ken@stanleysoft.org</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">class.visualdb.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/class\class.visualdb.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on April 17th, 2019 at 04:58.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

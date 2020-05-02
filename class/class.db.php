@@ -21,11 +21,11 @@ class DATABASE
      */
     private $host = "localhost";
     /** The database name*/
-    private $db_name = "stanle14_vpd";
+    private $db_name = "vpd";
     /** The database user name*/
-    private $username = "stanle14_vpd";
+    private $username = "vpd";
     /** The database password*/
-    private $password = "*#bOJJ@G7Kh?";
+    private $password = "vpd1234";
     /** The connection string */
     public $conn;
      
