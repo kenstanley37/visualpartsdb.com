@@ -17,7 +17,8 @@
     /**Load the database class*/
     use db\db;
 	use user\user;
-	use pdo;
+    use pdo;
+    use \Datetime;
     /**
      * VISUALDB handles all sku related methods
      *
@@ -549,8 +550,7 @@
         */
         public function mySearches($dateFrom, $dateTo, $userID)
         {
-           require_once('class.user.php');
-            $user = new USER;
+            $user = new user;
             
             if($user->accessCheck() != 'ADMIN'){
                 $userID = $_SESSION['user_id'];

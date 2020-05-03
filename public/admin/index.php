@@ -6,14 +6,13 @@
 * @license MIT
 */
 session_start();
-include("../inc/inc.path.php");
-require_once($path."class/class.user.php");
-require_once($path."class/class.visualdb.php");
-require_once($path."class/class.func.php");
+require_once(__DIR__.'../../vendor/autoload.php');
 
-$vpd = new VISUALDB;
-$vail = new VALIDATE;
-$user = new USER;
+use user\user;
+use sku\sku;
+
+$sku = new sku;
+$user = new user;
 
 
 if(!isset($_SESSION['user_id']))
@@ -30,13 +29,13 @@ if(!isset($_SESSION['user_id']))
 
 $regRequestCount = $user->getRegRequestCount();
 $pendingUser = $user->getUserPendingCount();
-$skuUpdateCount = $vpd->getSkuUpdateRequestCount();
+$skuUpdateCount = $sku->getSkuUpdateRequestCount();
 /*
 * @param INT is the number of days to look back
 */
-$mostSearched30 = $vpd->getMostSearchedSkuCount(30);
-$mostSearched7 = $vpd->getMostSearchedSkuCount(7);
-$mostSearched1 = $vpd->getMostSearchedSkuCount(1);
+$mostSearched30 = $sku->getMostSearchedSkuCount(30);
+$mostSearched7 = $sku->getMostSearchedSkuCount(7);
+$mostSearched1 = $sku->getMostSearchedSkuCount(1);
 
 
 ?>
@@ -44,15 +43,15 @@ $mostSearched1 = $vpd->getMostSearchedSkuCount(1);
 <html lang="en">
 <head>
     <title>Visual Parts Database: Admin Dashboard</title>
-    <?php include($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
+    <?php include(__DIR__."../../inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
     <div class="wrapper">
         <header>
-            <?php include($path."inc/inc.header.php"); ?>
+            <?php include(__DIR__."../../inc/inc.header.php"); ?>
         </header>
         <aside class="admin-nav-bar hidden">
-            <?php include($path."inc/inc.adminnavbar.php"); ?>
+            <?php include(__DIR__."../../inc/inc.adminnavbar.php"); ?>
         </aside>
         <main class="main">
             <section class="title">
@@ -121,7 +120,7 @@ $mostSearched1 = $vpd->getMostSearchedSkuCount(1);
             </div>
         </main>
         <footer>
-            <?php include($path."/inc/inc.footer.php"); ?>
+            <?php include(__DIR__."../../inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

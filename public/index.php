@@ -12,11 +12,6 @@ require_once($path.'/public/vendor/autoload.php');
 use user\user;
 use sku\sku;
 use sec\sec;
-//require_once($path."class/class.user.php");
-//require_once($path."class/class.visualdb.php");
-//require_once($path."class/class.func.php");
-
-
 
 $sku = new sku($path);
 $vail = new sec($path);

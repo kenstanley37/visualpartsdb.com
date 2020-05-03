@@ -6,14 +6,15 @@
 * @license MIT
 */
 session_start();
-include("../inc/inc.path.php");
-require_once($path."class/class.user.php");
-require_once($path."class/class.visualdb.php");
-require_once($path."class/class.func.php");
+require_once(__DIR__.'../../vendor/autoload.php');
 
-$vpd = new VISUALDB;
-$vail = new VALIDATE;
-$user = new USER;
+use user\user;
+use sku\sku;
+use sec\sec;
+
+$sku = new sku;
+$sec = new sec;
+$user = new user;
 $error='';
 
 if(isset($_SESSION['fname'])){
@@ -23,8 +24,8 @@ if(isset($_SESSION['fname'])){
 
 if(isset($_GET['code']))
 {
-    $recordID = $vail->sanitizeString($_GET['id']);
-    $recordCode = $vail->sanitizeString($_GET['code']);
+    $recordID = $sec->sanitizeString($_GET['id']);
+    $recordCode = $sec->sanitizeString($_GET['code']);
     $result = $user->checkVerify($recordID, $recordCode);
     //echo $result;
     if($result == 'true')
@@ -40,8 +41,8 @@ if(isset($_GET['code']))
 if(!isset($_GET['code'])){
     $result = '';
     if(isset($_POST['passwordupdate'])){
-        $password1 = $vail->sanitizeString($_POST['password1']);
-        $password2 = $vail->sanitizeString($_POST['password2']);
+        $password1 = $sec->sanitizeString($_POST['password1']);
+        $password2 = $sec->sanitizeString($_POST['password2']);
         
         if($password1 != $password2){
             $error = 'Passwords do no match';
@@ -63,18 +64,18 @@ if(!isset($_GET['code'])){
 <html lang="en">
 <head>
     <title>Visual Parts Database: Register</title>
-    <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
+    <?php require_once(__DIR__."../../inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
     <div class="wrapper">
         <header>
-            <?php include($path."inc/inc.header.php"); ?>
+            <?php include(__DIR__."../../inc/inc.header.php"); ?>
         </header>
         <aside class="admin-nav">
         <?php
         if($user->accessCheck() == "ADMIN")
         {
-            include($path."inc/inc.adminnavbar.php");
+            include(__DIR__."../../inc/inc.adminnavbar.php");
         }
        ?>
         </aside>
@@ -136,7 +137,7 @@ if(!isset($_GET['code'])){
             </section>    
         </main>
         <footer>
-            <?php include($path."inc/inc.footer.php"); ?>
+            <?php include(__DIR__."../../inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

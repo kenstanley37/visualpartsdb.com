@@ -7,14 +7,15 @@
 */
 session_start();
 
-include("../inc/inc.path.php");
-require_once($path."class/class.user.php");
-require_once($path."class/class.visualdb.php");
-require_once($path."class/class.func.php");
+require_once(__DIR__.'../../vendor/autoload.php');
 
-$vpd = new VISUALDB;
-$vail = new VALIDATE;
-$user = new USER;
+use user\user;
+use sku\sku;
+use sec\sec;
+
+$sku = new sku;
+$sec = new sec;
+$user = new user;
 
 if(!isset($_SESSION['user_id']))
 {
@@ -36,19 +37,19 @@ if(isset($_GET['mySearches']))
     $dateEnd = $_GET['dto'];
 } 
 $result = '';
-$searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
+$searchHist = $sku->mySearches($dateStart, $dateEnd, $userID);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Visual Parts Database : My Searches</title>
-    <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
+    <?php require_once(__DIR__."../../inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
     <div class="wrapper">
         <header>
-            <?php include($path."inc/inc.header.php");?>
+            <?php include(__DIR__."../../inc/inc.header.php");?>
             
         </header>
         <aside class="admin-nav-bar hidden">
@@ -56,7 +57,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
         if($user->accessCheck() == "ADMIN")
         {
         ?>
-            <?php include($path."inc/inc.adminnavbar.php"); ?>
+            <?php include(__DIR__."../../inc/inc.adminnavbar.php"); ?>
         <?php
         }
         ?>
@@ -132,7 +133,7 @@ $searchHist = $vpd->mySearches($dateStart, $dateEnd, $userID);
             <div class="my-search-foot"></div>
         </main>
         <footer>
-            <?php include($path."inc/inc.footer.php"); ?>
+            <?php include(__DIR__."../../inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>

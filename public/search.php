@@ -9,8 +9,8 @@ error_reporting(E_ALL);
 * @license MIT
 */
 session_start();
-include("inc/inc.path.php");
-require_once($path.'/vendor/autoload.php');
+
+require_once(__DIR__.'/vendor/autoload.php');
 use user\user;
 use sec\sec;
 use sku\sku;
@@ -47,18 +47,18 @@ if(isset($_GET['search']))
 
 
 if(isset($_GET['export'])){
-    $sku = $_GET['sku'];
+    $skunum = $_GET['sku'];
     $type = $_GET['export'];
-    $sku = $vail->sanitizeString($sku);
+    $skunum = $vail->sanitizeString($skunum);
     $type = $vail->sanitizeString($type);
-    $result = $sku->exportData($sku, $type);
+    $result = $sku->exportData($skunum, $type);
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Visual Parts Database: <?php if(isset($sku)){echo strtoupper($sku);} else {echo "Search";} ?></title>
+    <title>Visual Parts Database: <?php if(isset($skunum)){echo strtoupper($skunum);} else {echo "Search";} ?></title>
     <?php include("inc/inc.head.php"); ?> <!-- CSS and JavaScript -->
 </head>
 <body>
@@ -66,14 +66,14 @@ if(isset($_GET['export'])){
     
     <div class="wrapper">
         <header class="header">
-            <?php include($path."inc/inc.header.php"); ?>
+            <?php include(__DIR__."../inc/inc.header.php"); ?>
         </header>
         <aside class="admin-nav-bar hidden">
         <?php
         if($user->accessCheck() == "ADMIN")
         {
         ?>
-            <?php include($path."inc/inc.adminnavbar.php"); ?>
+            <?php include(__DIR__."../inc/inc.adminnavbar.php"); ?>
         <?php
         }
         ?>
@@ -109,7 +109,7 @@ if(isset($_GET['export'])){
                                                     if(isset($_SESSION['user_id']))
                                                     {
 
-                                                        if($user->requestUpdateCheck($sku))
+                                                        if($user->requestUpdateCheck($skunum))
                                                         {
                                                             ?>
                                                         <button class="active shadow" disabled>Update Requested</button>
@@ -168,7 +168,7 @@ if(isset($_GET['export'])){
 
                                                                 <input type="text" value="<?php echo $activelistID; ?>" name="listID" id="listID" hidden>
                                                                 <?php 
-                                                                    $skucheck = $user->myListSkuCheck($sku);
+                                                                    $skucheck = $user->myListSkuCheck($skunum);
                                                                     if($skucheck)
                                                                     {
                                                                         ?>
@@ -412,7 +412,7 @@ if(isset($_GET['export'])){
             <section class="form">
                 <section class="w600 shadow bg-white">
                     <h2 class="login-title">Not Found</h2>
-                    <p>Sorry, nothing was found for SKU "<i class="error"><?php echo $sku; ?></i>"</p>
+                    <p>Sorry, nothing was found for SKU "<i class="error"><?php echo $skunum; ?></i>"</p>
                     <p>Please try again!</p>
                 </section>
             </section>

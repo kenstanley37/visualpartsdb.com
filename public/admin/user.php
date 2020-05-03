@@ -6,14 +6,13 @@
 * @license MIT
 */
 session_start();
-include("../inc/inc.path.php");
-require_once($path."class/class.user.php");
-require_once($path."class/class.visualdb.php");
-require_once($path."class/class.func.php");
+require_once(__DIR__.'../../vendor/autoload.php');
 
-$vpd = new VISUALDB;
-$vail = new VALIDATE;
-$user = new USER;
+use user\user;
+use sec\sec;
+
+$sec = new sec;
+$user = new user;
 
 $checkID = ''; // set if the logged in user id = user list id
 
@@ -47,12 +46,12 @@ $pending = $user->userList('active');
 <html lang="en">
 <head>
     <title>Visual Parts Database: User Management</title>
-    <?php require_once($path."inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
+    <?php require_once(__DIR__."../../inc/inc.head.php"); ?> <!-- META, CSS, and JavaScript -->
 </head>
 <body>
     <div class="wrapper">
         <header>
-            <?php include($path."inc/inc.header.php"); ?>
+            <?php include(__DIR__."../../inc/inc.header.php"); ?>
         </header>
         <!-- USER SECTION -->
         <aside class="admin-nav-bar hidden">
@@ -60,7 +59,7 @@ $pending = $user->userList('active');
         if($user->accessCheck() == "ADMIN")
         {
         ?>
-            <?php include($path."inc/inc.adminnavbar.php"); ?>
+            <?php include(__DIR__."../../inc/inc.adminnavbar.php"); ?>
         <?php
         }
         ?>
@@ -197,7 +196,7 @@ $pending = $user->userList('active');
             </div>
         </main>
         <footer>
-        <?php include($path."inc/inc.footer.php"); ?>
+        <?php include(__DIR__."../../inc/inc.footer.php"); ?>
         </footer>
     </div> <!-- end container -->
 </body>
